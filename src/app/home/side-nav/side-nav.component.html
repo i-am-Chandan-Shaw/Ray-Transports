@@ -1,0 +1,18 @@
+
+<mat-sidenav-container [ngClass]="{'nav-opened':opened, 'nav-closed':!opened}">
+    <mat-sidenav  mode="side" opened>
+        <button mat-icon-button class="account-icon" color="primary" aria-label="account icon" (click)="toggleSidenav()">
+            <mat-icon>account_circle</mat-icon>
+        </button>
+        <div class="nav-items"  *ngFor="let item of sideNavItem">
+            <div class="item">
+                <mat-icon>{{item.iconName}}</mat-icon>
+            </div>
+        </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <app-dashboard></app-dashboard>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+

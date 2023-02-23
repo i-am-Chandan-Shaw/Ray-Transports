@@ -1,0 +1,142 @@
+<div class="dashboard-container">
+    <div class="list-section">
+        <div class="header-section">
+            <mat-toolbar>
+                <span>Dashboard</span>
+                <button mat-raised-button color="primary" (click)="addCustomer()">
+                    <span>Add Customer</span><mat-icon>add</mat-icon>
+                </button>
+            </mat-toolbar>
+            <mat-divider></mat-divider>
+            <!-- Account Summary -->
+            <mat-toolbar class="overview-section">
+                <div class="account-summary">
+                    <span>You'll Give: </span>
+                    <div>
+                        <div class="amount give">
+                            <span>₹34</span>
+                            <mat-icon color="warn">trending_up</mat-icon>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="account-summary">
+                    <span>You'll Get: </span>
+                    <div>
+                        <div class="amount get">
+                            <span>₹73634</span>
+                            <mat-icon>trending_down</mat-icon>
+                        </div>
+
+                    </div>
+                </div>
+                <button mat-stroked-button color="primary">
+                    <span>Report</span><mat-icon>summarize</mat-icon>
+                </button>
+            </mat-toolbar>
+            <mat-divider></mat-divider>
+            <!-- Filter -->
+            <mat-toolbar class="filter-section">
+                <div class="custom-input-field">
+                    <input type="text" placeholder="Name and Phone Number">
+                    <mat-icon>search</mat-icon>
+                </div>
+                <div class="select-box filter-select-box">
+                    <mat-form-field appearance="outline">
+                        <mat-select #filterBy placeholder="Filter By" [disableRipple]="true">
+                            <perfect-scrollbar class="fliter-height">
+                            <mat-option value="three">All</mat-option>
+                            <mat-option value="one">Active</mat-option>
+                            <mat-option value="two">Stopped</mat-option>
+                            <mat-option value="three">You'll Give</mat-option>
+                            <mat-option value="three">You'll Get</mat-option>
+                            <mat-option value="three">Settled</mat-option>
+                            </perfect-scrollbar>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="select-box">
+                    <mat-form-field appearance="outline">
+                        <mat-select #filterBy placeholder="Sort By" [disableRipple]="true" >
+                            <perfect-scrollbar class="fliter-height">
+                            <mat-option *ngFor="let option of filterOption"
+                                [value]="option.filterValue">{{option.name}}
+                            </mat-option>
+                        </perfect-scrollbar>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </mat-toolbar>
+            <mat-divider></mat-divider>
+        </div>
+        <div class="body-section">
+            <div class="customer-table">
+                <div class="table-header">
+                    <table>
+                        <tr>
+                            <th class="name-column">Name</th>
+                            <th class="status-column">Status</th>
+                            <th class="amount-column">Amount</th>
+                        </tr>
+                    </table>
+                </div>
+                <div class="table-body">
+                    <perfect-scrollbar class="height">
+                        <table>
+                            <tbody>
+                                <tr *ngFor="let customer of customerTableData">
+                                    <td class="name-column">
+                                        <div>
+                                            <div class="customer-name">{{customer.name}}</div>
+                                            <div class="created-date">{{customer.createdDate}}</div>
+                                        </div>
+                                    </td>
+                                    <td class="status-column">
+                                        <div class="status-icon active" *ngIf="customer.isActive" [autoPlacement]="true" tooltip="Active" [theme]="'light'" placement="top" >
+                                            <span>A</span>
+                                        </div>
+                                        <div class="status-icon inactive" *ngIf="!customer.isActive" [autoPlacement]="true" tooltip="Stopped" [theme]="'light'" placement="top">
+                                            <span>S</span>
+                                        </div>
+                                    </td>
+                                    <td class="amount-column">
+                                        <div class="amount">
+                                            <span class="rupee-symbol">₹ </span>
+                                            <span>{{myMath.abs(customer.amount)}}</span>
+                                        </div>
+                                        <div class="amount-desc"
+                                            [ngClass]="{'color-green':customer.amount<0, 'color-red':customer.amount>0}">
+                                            <span *ngIf="customer.amount>0">You will give</span>
+                                            <span *ngIf="customer.amount<0">You will get</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </perfect-scrollbar>
+                </div>
+            </div>
+        </div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="details-section">
+        <mat-toolbar>
+            <span>Customer Name</span>
+            <span class="example-spacer"></span>
+            <div class="align-center">
+                <button mat-raised-button color="primary" class="mr10">
+                    <span>Report</span><mat-icon>summarize</mat-icon>
+                </button>
+                <button mat-icon-button [matMenuTriggerFor]="customerMenu" color="primary" aria-label="Example icon button with a home icon">
+                    <mat-icon>more_vert</mat-icon>
+                    
+                </button>
+                <mat-menu #customerMenu="matMenu">
+                    <button mat-menu-item>Edit</button>
+                    <button mat-menu-item>Delete</button>
+                </mat-menu>
+            </div>
+        </mat-toolbar>
+        <mat-divider></mat-divider>
+    </div>
+</div>
