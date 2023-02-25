@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { SharedService } from 'src/app/shared.service';
+import { SharedService } from 'src/app/shared/sevices/shared.service';
 import { AddCustomerComponent } from 'src/app/dialog-boxes/add-customer/add-customer.component';
 
 @Component({
@@ -14,14 +14,29 @@ export class DashboardComponent implements OnInit{
     public dialog: MatDialog,
     private services:SharedService
     ) { }
+
+  public allCustomerData:any=[]
+
   ngOnInit(): void {
     this.getAllCustomer()
   }
 
+  data={
+    "id": "1",
+    "name": "rajib1",
+    "phone": "9062112981",
+    "address": "19/4 behari lal das pramnick lane",
+    "amount": "0",
+    "createdOn": "2023-02-14",
+    "isActive": true
+}
+
   private getAllCustomer(){
     this.services.getAllCustomer().subscribe({
       next:(res)=>{
-        console.log(res);
+       this.allCustomerData=res;
+       console.log(this.allCustomerData);
+       
       },
       error:(err)=>{
         console.log(err);

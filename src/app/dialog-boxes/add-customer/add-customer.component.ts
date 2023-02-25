@@ -1,6 +1,6 @@
 import { Component, SimpleChanges,OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { SharedService } from 'src/app/shared.service';
+import { SharedService } from 'src/app/shared/sevices/shared.service';
 import {MatSnackBar,MatSnackBarHorizontalPosition,MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 

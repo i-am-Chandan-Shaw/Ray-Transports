@@ -84,11 +84,11 @@
                     <perfect-scrollbar class="height">
                         <table>
                             <tbody>
-                                <tr *ngFor="let customer of customerTableData">
+                                <tr *ngFor="let customer of allCustomerData">
                                     <td class="name-column">
                                         <div>
                                             <div class="customer-name">{{customer.name}}</div>
-                                            <div class="created-date">{{customer.createdDate}}</div>
+                                            <div class="created-date">{{customer.createdOn}}</div>
                                         </div>
                                     </td>
                                     <td class="status-column">
