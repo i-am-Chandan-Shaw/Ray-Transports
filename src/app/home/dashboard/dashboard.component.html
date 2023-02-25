@@ -3,14 +3,15 @@
         <div class="header-section">
             <mat-toolbar>
                 <span>Dashboard</span>
-                <button mat-raised-button color="primary" (click)="addCustomer()">
-                    <span>Add Customer</span><mat-icon>add</mat-icon>
+                <button mat-raised-button class="add-customer-btn" color="primary" (click)="addCustomer()">
+                    <span>Add Customer</span>
                 </button>
             </mat-toolbar>
             <mat-divider></mat-divider>
             <!-- Account Summary -->
             <mat-toolbar class="overview-section">
-                <div class="account-summary">
+                <div class="overview-container">
+                    <div class="account-summary">
                     <span>You'll Give: </span>
                     <div>
                         <div class="amount give">
@@ -30,43 +31,43 @@
 
                     </div>
                 </div>
-                <button mat-stroked-button color="primary">
+                <button class="report-btn" mat-stroked-button color="primary">
                     <span>Report</span><mat-icon>summarize</mat-icon>
                 </button>
+                </div>
+                <!-- Filter -->
+                <div class="filter-section">
+                    <div class="custom-input-field">
+                        <input type="text" placeholder="Name and Phone Number">
+                        <mat-icon>search</mat-icon>
+                    </div>
+                    <div class="select-box filter-select-box">
+                        <mat-form-field appearance="outline">
+                            <mat-select #filterBy placeholder="Filter By" [disableRipple]="true">
+                                <perfect-scrollbar class="fliter-height">
+                                    <mat-option value="three">All</mat-option>
+                                    <mat-option value="one">Active</mat-option>
+                                    <mat-option value="two">Stopped</mat-option>
+                                    <mat-option value="three">You'll Give</mat-option>
+                                    <mat-option value="three">You'll Get</mat-option>
+                                    <mat-option value="three">Settled</mat-option>
+                                </perfect-scrollbar>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="select-box">
+                        <mat-form-field appearance="outline">
+                            <mat-select #filterBy placeholder="Sort By" [disableRipple]="true">
+                                <perfect-scrollbar class="fliter-height">
+                                    <mat-option *ngFor="let option of filterOption" [value]="option.filterValue">{{option.name}}
+                                    </mat-option>
+                                </perfect-scrollbar>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
             </mat-toolbar>
-            <mat-divider></mat-divider>
-            <!-- Filter -->
-            <mat-toolbar class="filter-section">
-                <div class="custom-input-field">
-                    <input type="text" placeholder="Name and Phone Number">
-                    <mat-icon>search</mat-icon>
-                </div>
-                <div class="select-box filter-select-box">
-                    <mat-form-field appearance="outline">
-                        <mat-select #filterBy placeholder="Filter By" [disableRipple]="true">
-                            <perfect-scrollbar class="fliter-height">
-                            <mat-option value="three">All</mat-option>
-                            <mat-option value="one">Active</mat-option>
-                            <mat-option value="two">Stopped</mat-option>
-                            <mat-option value="three">You'll Give</mat-option>
-                            <mat-option value="three">You'll Get</mat-option>
-                            <mat-option value="three">Settled</mat-option>
-                            </perfect-scrollbar>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                <div class="select-box">
-                    <mat-form-field appearance="outline">
-                        <mat-select #filterBy placeholder="Sort By" [disableRipple]="true" >
-                            <perfect-scrollbar class="fliter-height">
-                            <mat-option *ngFor="let option of filterOption"
-                                [value]="option.filterValue">{{option.name}}
-                            </mat-option>
-                        </perfect-scrollbar>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-            </mat-toolbar>
+            
             <mat-divider></mat-divider>
         </div>
         <div class="body-section">
@@ -120,7 +121,7 @@
     </div>
     <mat-divider [vertical]="true"></mat-divider>
     <div class="details-section">
-        <mat-toolbar>
+        <!-- <mat-toolbar>
             <span>Customer Name</span>
             <span class="example-spacer"></span>
             <div class="align-center">
@@ -137,6 +138,8 @@
                 </mat-menu>
             </div>
         </mat-toolbar>
-        <mat-divider></mat-divider>
+        <mat-divider></mat-divider> -->
+        <app-customer-details></app-customer-details>
+
     </div>
 </div>

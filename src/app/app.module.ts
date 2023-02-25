@@ -12,6 +12,7 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { TooltipModule } from 'ng2-tooltip-directive';
 import { HttpClientModule } from '@angular/common/http';
 import { DateToDaysPipe } from './shared/pipes/date-to-days.pipe';
+import { CustomerDetailsComponent } from './home/customer-details/customer-details.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { DateToDaysPipe } from './shared/pipes/date-to-days.pipe';
     SideNavComponent,
     DashboardComponent,
     AddCustomerComponent,
-    DateToDaysPipe
+    CustomerDetailsComponent
   ],
   imports: [
     BrowserModule,

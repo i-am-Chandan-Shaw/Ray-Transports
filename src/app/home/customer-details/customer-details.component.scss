@@ -1,0 +1,79 @@
+.customer-details-section {
+  //  header-section
+  .header {
+    background: #f5f5f5;
+    color: rgba(0,0,0,.87);
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 16px;
+    .left-container {
+        
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      .customer-name {
+        display: flex;
+        align-items: center;
+        .customer-name-icon {
+          font-size: 18px;
+          font-weight: bold;
+          border-radius: 30px;
+          width: 35px;
+          height: 35px;
+          border: 1px solid #3f51b5;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .customer-details {
+          // height: 40px;
+          margin: 0 10px;
+          .customer-name {
+            font-size: 16px;
+            font-weight: 800;
+          }
+          .customer-phone-number {
+            color: #51515e;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+          }
+        }
+      }
+    }
+    .right-container {
+      display: flex;
+      align-items: center;
+      .download-report {
+        margin: 0 10px;
+      }
+    }
+  }
+  // Net Balance Section
+  .balance-container {
+    .net-balance {
+        font-weight: bold;
+      padding: 8px 16px;
+      font-size: 14px;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      .header {
+        padding: 0 !important;
+        color: #51515e;
+      }
+      .amount-section {
+        margin: 0 10px;
+        color: #51515e;
+        .symbol {
+          font-family: Roboto;
+          color: red;
+        }
+        .amount{
+            color: red;
+
+        }
+      }
+    }
+  }
+}

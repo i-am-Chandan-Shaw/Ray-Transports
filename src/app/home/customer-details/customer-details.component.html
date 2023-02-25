@@ -1,0 +1,41 @@
+<!-- header-section  -->
+<div class="customer-details-section">
+    <div class="header">
+        <div class="left-container">
+            <div class="customer-name">
+                <div class="customer-name-icon">R</div>
+                <div class="customer-details">
+                    <div class="customer-name">Rajib</div>
+                    <div class="customer-phone-number">1234567890</div>
+                </div>
+            </div>
+        </div>
+        <div class="right-container">
+            <div class="download-report">
+                <button class="report-btn" mat-stroked-button color="primary">
+                    <span>Report</span><mat-icon>summarize</mat-icon>
+                </button>
+            </div>
+            <div class="more-button">
+                <button mat-icon-button [matMenuTriggerFor]="customerMenu" color="primary"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>more_vert</mat-icon>
+                
+                </button>
+                <mat-menu #customerMenu="matMenu">
+                    <button mat-menu-item>Edit</button>
+                    <button mat-menu-item>Delete</button>
+                </mat-menu>
+            </div>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+    <!-- Net Balance Section  -->
+    <div class="balance-container">
+        <div class="net-balance">
+            <div class="header">NET BALANCE:</div>
+            <div class="amount-section" >You'll Get: <span class="symbol">₹</span ><span class="amount">3,443</span></div>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+</div>
