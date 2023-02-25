@@ -11,6 +11,7 @@ import { AddCustomerComponent } from './dialog-boxes/add-customer/add-customer.c
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';  
 import { TooltipModule } from 'ng2-tooltip-directive';
 import { HttpClientModule } from '@angular/common/http';
+import { CustomerDetailsComponent } from './home/customer-details/customer-details.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
     HomeComponent,
     SideNavComponent,
     DashboardComponent,
-    AddCustomerComponent
+    AddCustomerComponent,
+    CustomerDetailsComponent
   ],
   imports: [
     BrowserModule,

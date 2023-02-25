@@ -1,12 +1,15 @@
-
 <mat-sidenav-container [ngClass]="{'nav-opened':opened, 'nav-closed':!opened}">
-    <mat-sidenav  mode="side" opened>
-        <button mat-icon-button class="account-icon" color="primary" aria-label="account icon" (click)="toggleSidenav()">
-            <mat-icon>account_circle</mat-icon>
-        </button>
-        <div class="nav-items"  *ngFor="let item of sideNavItem">
-            <div class="item">
-                <mat-icon>{{item.iconName}}</mat-icon>
+    <mat-sidenav mode="side" opened>
+        <div class="header">
+            <button mat-icon-button class="account-icon" color="primary" aria-label="account icon"
+                (click)="toggleSidenav()">
+                <mat-icon>account_circle</mat-icon>
+            </button><span class="header-name">Ray Transports</span>
+        </div>
+        <div class="nav-items" *ngFor="let item of sideNavItem">
+            <div class="item" [ngClass]="{'active':item.isSelected}" (click)="onSeleted(item)">
+                <mat-icon>{{item.iconName}} </mat-icon>
+                <span class="item-name">{{item.displayName}} </span>
             </div>
         </div>
     </mat-sidenav>
@@ -15,4 +18,3 @@
         <app-dashboard></app-dashboard>
     </mat-sidenav-content>
 </mat-sidenav-container>
-
