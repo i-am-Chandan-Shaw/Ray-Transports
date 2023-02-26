@@ -21,15 +21,38 @@ export class DashboardComponent implements OnInit{
     this.getAllCustomer()
   }
 
-  data={
-    "id": "1",
-    "name": "rajib1",
-    "phone": "9062112981",
-    "address": "19/4 behari lal das pramnick lane",
-    "amount": "0",
-    "createdOn": "2023-02-14",
-    "isActive": true
-}
+  public filterList=[
+    {
+      id:0,
+      filterName:'All',
+      filterValue:'all'
+    },
+    {
+      id:1,
+      filterName:'Active',
+      filterValue:'active'
+    },
+    {
+      id:2,
+      filterName:'Stopped',
+      filterValue:'stopped'
+    },
+    {
+      id:3,
+      filterName:'You\'ll Give',
+      filterValue:'give'
+    },
+    {
+      id:4,
+      filterName:'You\'ll Get',
+      filterValue:'get'
+    },
+    {
+      id:5,
+      filterName:'Setteled',
+      filterValue:'settled'
+    },
+  ]
 
   private getAllCustomer(){
     this.services.getAllCustomer().subscribe({
@@ -46,7 +69,7 @@ export class DashboardComponent implements OnInit{
   }
 
   public myMath = Math;
-  filterOption=[
+  sortOption=[
     {
       id:0,
       name:'Most Recent',
@@ -74,148 +97,6 @@ export class DashboardComponent implements OnInit{
     }
   ]
 
-  sortByOption = [
-    {
-      id: 0,
-      name: 'Most Recent',
-      filterValue: '1',
-    },
-    {
-      id: 1,
-      name: 'Highest Amount',
-      filterValue: '2',
-    },
-    {
-      id: 2,
-      name: 'Least Amount',
-      filterValue: '3',
-    },
-    {
-      id: 3,
-      name: 'By Name',
-      filterValue: '4',
-    },
-    {
-      id: 4,
-      name: 'Oldest',
-      filterValue: '5',
-    }
-  ]
-
-  customerTableData=[
-    {
-      id:0,
-      name:'Chandan Shaw',
-      amount:-1500,
-      createdDate:'6 days ago',
-      isActive:true
-    },
-    {
-      id: 0,
-      name: 'Rajib Koley',
-      amount: 200,
-      createdDate: '10 days ago',
-      isActive: false
-    },
-    {
-      id: 0,
-      name: 'Rahul Shaw',
-      amount: -500,
-      createdDate: '16 days ago',
-      isActive: true
-    },
-    {
-      id: 0,
-      name: 'Priti Singh',
-      amount: 2000,
-      createdDate: '19 days ago',
-      isActive: true
-    },
-    {
-      id: 0,
-      name: 'Chandan Shaw',
-      amount: -1500,
-      createdDate: '6 days ago',
-      isActive: true
-    },
-    {
-      id: 0,
-      name: 'Rajib Koley',
-      amount: 200,
-      createdDate: '10 days ago',
-      isActive: false
-    },
-    {
-      id: 0,
-      name: 'Rahul Shaw',
-      amount: -500,
-      createdDate: '16 days ago',
-      isActive: true
-    },
-    {
-      id: 0,
-      name: 'Priti Singh',
-      amount: 2000,
-      createdDate: '19 days ago',
-      isActive: true
-    },
-    {
-      id: 0,
-      name: 'Chandan Shaw',
-      amount: -1500,
-      createdDate: '6 days ago',
-      isActive: true
-    },
-    {
-      id: 0,
-      name: 'Rajib Koley',
-      amount: 200,
-      createdDate: '10 days ago',
-      isActive: false
-    },
-    {
-      id: 0,
-      name: 'Rahul Shaw',
-      amount: -500,
-      createdDate: '16 days ago',
-      isActive: true
-    },
-    {
-      id: 0,
-      name: 'Priti Singh',
-      amount: 2000,
-      createdDate: '19 days ago',
-      isActive: true
-    },
-    {
-      id: 0,
-      name: 'Chandan Shaw',
-      amount: -1500,
-      createdDate: '6 days ago',
-      isActive: true
-    },
-    {
-      id: 0,
-      name: 'Rajib Koley',
-      amount: 200,
-      createdDate: '10 days ago',
-      isActive: false
-    },
-    {
-      id: 0,
-      name: 'Rahul Shaw',
-      amount: -500,
-      createdDate: '16 days ago',
-      isActive: true
-    },
-    {
-      id: 0,
-      name: 'Priti Singh',
-      amount: 2000,
-      createdDate: '19 days ago',
-      isActive: true
-    },
-  ]
 
   
   public addCustomer(){
@@ -223,6 +104,13 @@ export class DashboardComponent implements OnInit{
       height: 'auto',
       width: '400px',
       disableClose:true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.getAllCustomer()
+      }
+      
     });
   }
 }

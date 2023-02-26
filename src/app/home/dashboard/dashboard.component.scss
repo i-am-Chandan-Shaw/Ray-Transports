@@ -1,29 +1,6 @@
 .dashboard-container {
   display: flex;
 
-  //common class
-
-  //width
-  .w20p {
-    width: 20%;
-  }
-
-  //margin padding
-
-  .mr5 {
-    margin-right: 5px;
-  }
-
-  .mr10 {
-    margin-right: 10px;
-  }
-
-  //alignment
-
-  .align-center {
-    display: flex;
-    align-items: center;
-  }
 
   .list-section {
     width: 50%;
@@ -166,10 +143,10 @@
     .body-section {
       .customer-table {
         padding: 15px;
+        padding-bottom: 0;
         .table-body {
-          border-left: 1px solid rgba(0, 0, 0, 0.12);
-          border-right: 1px solid rgba(0, 0, 0, 0.12);
-          border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+          border: 1px solid #d6d6d6;
+          border-top: 0;
         }
         table {
           width: 100%;
@@ -192,9 +169,7 @@
             font-size: 16px;
           }
           th {
-            background-color: #3f51b5;
-            color: #fff;
-            // font-size: 16px !important;
+            background-color: #c9e5f3;
             font-weight: 500;
           }
           td {
@@ -240,7 +215,7 @@
             text-align: right;
             // font-size: 18px;
             font-size: calc(0.9em + 0.5vmin);
-            width: 20%;
+            width: 21%;
             .amount-desc {
               // font-size: 14px;
               font-size: calc(0.7em + 0.5vmin);
@@ -267,7 +242,7 @@
           }
         }
         .height {
-          height: calc(100vh - 235px);
+          height: calc(100vh - 220px);
           .table {
             border-left: 1px solid #d6d6d6;
             border-right: 1px solid #d6d6d6;

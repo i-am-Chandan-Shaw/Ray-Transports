@@ -45,12 +45,7 @@
                         <mat-form-field appearance="outline">
                             <mat-select #filterBy placeholder="Filter By" [disableRipple]="true">
                                 <perfect-scrollbar class="fliter-height">
-                                    <mat-option value="three">All</mat-option>
-                                    <mat-option value="one">Active</mat-option>
-                                    <mat-option value="two">Stopped</mat-option>
-                                    <mat-option value="three">You'll Give</mat-option>
-                                    <mat-option value="three">You'll Get</mat-option>
-                                    <mat-option value="three">Settled</mat-option>
+                                    <mat-option value="{{filter.filterValue}}" *ngFor="let filter of filterList"> {{filter.filterName}} </mat-option>
                                 </perfect-scrollbar>
                             </mat-select>
                         </mat-form-field>
@@ -59,7 +54,7 @@
                         <mat-form-field appearance="outline">
                             <mat-select #filterBy placeholder="Sort By" [disableRipple]="true">
                                 <perfect-scrollbar class="fliter-height">
-                                    <mat-option *ngFor="let option of filterOption" [value]="option.filterValue">{{option.name}}
+                                    <mat-option *ngFor="let option of sortOption" [value]="option.filterValue">{{option.name}}
                                     </mat-option>
                                 </perfect-scrollbar>
                             </mat-select>
@@ -121,24 +116,6 @@
     </div>
     <mat-divider [vertical]="true"></mat-divider>
     <div class="details-section">
-        <!-- <mat-toolbar>
-            <span>Customer Name</span>
-            <span class="example-spacer"></span>
-            <div class="align-center">
-                <button mat-raised-button color="primary" class="mr10">
-                    <span>Report</span><mat-icon>summarize</mat-icon>
-                </button>
-                <button mat-icon-button [matMenuTriggerFor]="customerMenu" color="primary" aria-label="Example icon button with a home icon">
-                    <mat-icon>more_vert</mat-icon>
-                    
-                </button>
-                <mat-menu #customerMenu="matMenu">
-                    <button mat-menu-item>Edit</button>
-                    <button mat-menu-item>Delete</button>
-                </mat-menu>
-            </div>
-        </mat-toolbar>
-        <mat-divider></mat-divider> -->
         <app-customer-details></app-customer-details>
 
     </div>

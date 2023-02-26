@@ -1,8 +1,7 @@
-import { Component, SimpleChanges,OnInit } from '@angular/core';
+import { Component, SimpleChanges,OnInit, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SharedService } from 'src/app/shared/sevices/shared.service';
-import {MatSnackBar,MatSnackBarHorizontalPosition,MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-customer',
@@ -12,7 +11,7 @@ import {MatSnackBar,MatSnackBarHorizontalPosition,MatSnackBarVerticalPosition,
 export class AddCustomerComponent implements OnInit{
   constructor(
     private services: SharedService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
   ) { }
   ngOnInit(): void {
   }
@@ -36,6 +35,7 @@ export class AddCustomerComponent implements OnInit{
 
   public addCustomer(){
     console.log(this.form);
+    let payLoad = this.form.value
     this.services.addCustomer(this.form.value).subscribe({
       next:(res)=>{
         console.log(res);
@@ -45,12 +45,14 @@ export class AddCustomerComponent implements OnInit{
       }
     })
     this.openSnackBar()
+    
   }
 
   openSnackBar() {
-    this.snackBar.open('Customer added successfuly', 'Ok', {
+    this.snackBar.open('Customer Added Successfuly', 'OK', {
       horizontalPosition: 'end',
       verticalPosition: 'bottom',
+      duration:2000,
       panelClass: ['success-snackbar']
     });
   }
