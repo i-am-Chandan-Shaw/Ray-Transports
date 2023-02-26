@@ -186,7 +186,7 @@
       }
     }
     .table-body{
-      height: 338px;
+      height: calc(100vh - 217px);
       position: relative;
       table{
         border: 1px solid #d6d6d6;
