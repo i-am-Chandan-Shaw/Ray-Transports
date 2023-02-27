@@ -8,6 +8,11 @@
     width: 20%;
   }
 
+  .w22p{
+    width: 22%;
+  }
+
+
   .success ::ng-deep .mat-mdc-raised-button:not(:disabled){
     background-color: #379237 !important;
     
@@ -103,10 +108,10 @@
         margin-left:10px;
         .symbol {
           font-family: Roboto;
-          color: red;
+          color: #379237;
         }
         .amount{
-            color: red;
+            color: #379237;
 
         }
       }
@@ -132,7 +137,7 @@
     padding-top: 15px;
     table{
       width: 100%;
-      font-size: 14px;
+      font-size: 16px;
       border-collapse: collapse;
       border-top-right-radius: 5px;
       border-top-left-radius: 5px;
@@ -147,9 +152,18 @@
         // border: 1px solid #a6bfcc;
       }
       td{
-        font-size: 12px;
+        font-size: 14px;
         padding: 8px;
         border-bottom: 1px solid #d6d6d6;
+        cursor: pointer;
+      }
+
+      tr:nth-child(even) td {
+        background-color: #f6fcff;
+      }
+
+      tbody tr:hover td {
+        background-color: #fff3e9 !important;
       }
 
       .transaction-metadata{

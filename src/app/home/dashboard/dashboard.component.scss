@@ -1,18 +1,20 @@
 .dashboard-container {
   display: flex;
 
-
   .list-section {
     width: 50%;
+
     .mat-toolbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
+
     .header-section {
       .add-customer-btn {
         font-size: 14px;
       }
+
       .overview-section {
         font-size: 14px;
         height: auto;
@@ -20,26 +22,31 @@
         color: #51515e;
         display: flex;
         flex-direction: column;
+
         .overview-container {
           margin-bottom: 10px;
           display: flex;
           justify-content: space-between;
           width: 100%;
+
           .account-summary {
             display: flex;
             align-items: center;
             justify-content: space-between;
+
             .amount {
               margin-left: 10px;
               font-size: 16px;
               color: #000;
               max-width: 80px;
               text-align: end;
+
               mat-icon {
                 font-size: 22px;
                 vertical-align: middle;
               }
             }
+
             .amount.get {
               mat-icon {
                 color: #379237;
@@ -57,52 +64,59 @@
         display: flex;
         justify-content: space-between;
         width: 100%;
+
         .fliter-height {
           position: relative;
           height: 200px;
         }
+
         .custom-input-field {
           display: flex;
           // width: 230px;
-          width: 200px;
+          width: 40%;
           align-items: center;
           flex-direction: row-reverse;
           justify-content: start;
           border-radius: 5px;
-          padding: 4px 2px;
+          padding: 4px 0px;
           // padding: 4px 8px;
 
           border: 1px solid rgba($color: #000000, $alpha: 0.38);
           background-color: #fff;
           // height: 30px;
           height: 22px;
+
           input {
             border: 0;
             outline: 0;
             // font-size: 16px;
             font-size: 14px;
-            width: 170px;
+            width: 100%;
             padding-left: 6px;
           }
-          input:focus + mat-icon {
+
+          input:focus+mat-icon {
             display: none;
           }
+
           input::placeholder {
             opacity: 0.5;
             font-weight: 400;
           }
+
           input:focus {
             border-color: #3f51b5;
           }
+
           mat-icon {
             // font-size: 24px;
             font-size: 20px;
-
             vertical-align: middle;
             color: #d6d6d6;
-            margin: 3px 0px 0 3px;
+            margin: 3px 0px 0 2px;
           }
         }
+
         .custom-input-field:has(> input:focus) {
           border-color: #3f51b5;
         }
@@ -115,22 +129,16 @@
         ::ng-deep .mat-mdc-text-field-wrapper.mdc-text-field--outlined {
           // height: 40px;
           height: 31px;
-          width: 170px;
-          min-width: 140px;
+          width: 140px;
         }
 
-        ::ng-deep
-          .filter-select-box
-          .mat-mdc-text-field-wrapper.mdc-text-field--outlined {
+        ::ng-deep .filter-select-box .mat-mdc-text-field-wrapper.mdc-text-field--outlined {
           // height: 40px;
           height: 31px;
-          width: 130px;
-          min-width: 100px;
+          // width: 50%;
         }
 
-        ::ng-deep
-          .mat-mdc-text-field-wrapper.mdc-text-field--outlined
-          .mat-mdc-form-field-infix {
+        ::ng-deep .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
           padding: 0;
           // padding-top: 10px;
           padding-top: 3px;
@@ -144,10 +152,12 @@
       .customer-table {
         padding: 15px;
         padding-bottom: 0;
+
         .table-body {
           border: 1px solid #d6d6d6;
           border-top: 0;
         }
+
         table {
           width: 100%;
           text-align: left;
@@ -157,9 +167,11 @@
           border-top-right-radius: 5px;
 
           overflow: hidden;
+
           tr:nth-child(even) td {
             background-color: #f6fcff;
           }
+
           th,
           td {
             height: 40px;
@@ -168,12 +180,14 @@
             border-bottom: 1px solid #ddd;
             font-size: 16px;
           }
+
           th {
             background-color: #c9e5f3;
-            font-weight: 500;
+            font-weight: 600;
           }
+
           td {
-            height: 65px;
+            height: 55px;
             border-bottom: 1px solid #ddd;
             cursor: pointer;
           }
@@ -181,14 +195,17 @@
           tbody tr:hover td {
             background-color: #fff3e9 !important;
           }
+
           .name-column {
             // width: 60%;
             width: auto;
           }
+
           .status-column {
             text-align: center;
             // width: 11%;
             width: 14%;
+
             .status-icon {
               width: 25px;
               height: 25px;
@@ -211,38 +228,47 @@
               background-color: #f44336;
             }
           }
+
           .amount-column {
             text-align: right;
             // font-size: 18px;
             font-size: calc(0.9em + 0.5vmin);
             width: 21%;
+
             .amount-desc {
               // font-size: 14px;
               font-size: calc(0.7em + 0.5vmin);
             }
+
             .rupee-symbol {
               font-family: roboto;
             }
+
             .color-green {
               color: #379237;
             }
+
             .color-red {
               color: #f44336;
             }
           }
+
           .customer-name {
             // font-size: 18px;
-            font-size: calc(0.9em + 0.5vmin);
+            font-size: calc(0.8em + 0.5vmin);
           }
+
           .created-date {
             // font-size: 14px;
             // font-size: 11px;
-            font-size: calc(0.7em + 0.5vmin);
+            font-size: calc(0.6em + 0.5vmin);
             color: #525960;
           }
         }
+
         .height {
           height: calc(100vh - 225px);
+
           .table {
             border-left: 1px solid #d6d6d6;
             border-right: 1px solid #d6d6d6;
@@ -251,8 +277,10 @@
       }
     }
   }
+
   .details-section {
     width: 50%;
+
     .mat-toolbar {
       display: flex;
       justify-content: space-between;
@@ -274,17 +302,154 @@
   background-color: #fff3e9 !important;
 }
 
-::ng-deep
-  .mat-primary
-  .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled)
-  .mdc-list-item__primary-text {
+::ng-deep .mat-primary .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
   font-weight: 500;
 }
 
 ::ng-deep .mat-mdc-select-value {
   font-size: 14px !important;
 }
+
 ::ng-deep .mat-mdc-option.mdc-list-item {
   font-size: 14px;
   min-height: 30px;
+}
+
+@media(max-width:1025px) {
+  .dashboard-container {
+    .list-section {
+      .header-section {
+        .overview-section {
+          .filter-section {
+
+
+            .fliter-height {}
+
+            .custom-input-field {
+
+
+
+
+              input {}
+
+              input:focus+mat-icon {}
+
+              input::placeholder {}
+
+              input:focus {}
+
+              mat-icon {}
+            }
+
+            .custom-input-field:has(> input:focus) {}
+
+            .select-box {}
+
+            ::ng-deep .select-box.filter-select-box .mat-mdc-text-field-wrapper.mdc-text-field--outlined {
+              height: 31px;
+              width: 101px;
+            }
+
+            ::ng-deep .filter-select-box .mat-mdc-text-field-wrapper.mdc-text-field--outlined {
+              height: 31px;
+            }
+
+            ::ng-deep .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {}
+          }
+        }
+      }
+    }
+
+
+
+    // body-section
+
+    .body-section {
+
+
+      .customer-table {
+
+
+        .table-body {}
+
+        table {
+
+
+          overflow: hidden;
+
+          tr:nth-child(even) td {}
+
+          th,
+          td {
+
+            // font-size: 16px;
+          }
+
+          th {}
+
+          td {}
+
+          tbody tr:hover td {}
+
+          .name-column {}
+
+          .status-column {
+            text-align: center;
+            // width: 11%;
+            width: 14%;
+
+            .status-icon {
+              width: 25px;
+              height: 25px;
+              font-size: 16px;
+              font-weight: 500;
+            }
+
+            .status-icon.active {}
+
+            .status-icon.inactive {}
+          }
+
+          .amount-column {
+            text-align: right;
+            // font-size: 18px;
+            font-size: calc(0.9em + 0.5vmin);
+            width: 21%;
+
+            .amount-desc {
+
+              font-size: calc(0.7em + 0.5vmin);
+            }
+
+            .rupee-symbol {
+              font-family: roboto;
+            }
+
+            .color-green {}
+
+            .color-red {}
+          }
+
+          .customer-name {
+            font-size: calc(0.8em + 0.5vmin);
+          }
+
+          .created-date {
+
+            font-size: calc(0.6em + 0.5vmin);
+            color: #525960;
+          }
+        }
+
+        .height {
+          height: calc(100vh - 225px);
+
+          .table {
+            border-left: 1px solid #d6d6d6;
+            border-right: 1px solid #d6d6d6;
+          }
+        }
+      }
+    }
+  }
 }
