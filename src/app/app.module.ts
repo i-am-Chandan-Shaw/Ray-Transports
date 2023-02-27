@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from './material/material.module';
+import { MaterialModule } from './shared/material/material.module';
 import { HomeComponent } from './home/home.component';
 import { SideNavComponent } from './home/side-nav/side-nav.component';
 import { DashboardComponent } from './home/dashboard/dashboard.component';
@@ -13,6 +13,7 @@ import { TooltipModule } from 'ng2-tooltip-directive';
 import { HttpClientModule } from '@angular/common/http';
 import { DateToDaysPipe } from './shared/pipes/date-to-days.pipe';
 import { CustomerDetailsComponent } from './home/customer-details/customer-details.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CustomerDetailsComponent } from './home/customer-details/customer-detai
     SideNavComponent,
     DashboardComponent,
     AddCustomerComponent,
-    CustomerDetailsComponent
+    CustomerDetailsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
