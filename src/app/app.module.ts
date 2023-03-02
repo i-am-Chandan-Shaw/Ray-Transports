@@ -14,6 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { DateToDaysPipe } from './shared/pipes/date-to-days.pipe';
 import { CustomerDetailsComponent } from './home/customer-details/customer-details.component';
 import { LoginComponent } from './login/login.component';
+import { AddTransactionComponent } from './dialog-boxes/add-transaction/add-transaction.component';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { LoginComponent } from './login/login.component';
     DashboardComponent,
     AddCustomerComponent,
     CustomerDetailsComponent,
-    LoginComponent
+    LoginComponent,
+    DateToDaysPipe,
+    AddTransactionComponent
   ],
   imports: [
     BrowserModule,

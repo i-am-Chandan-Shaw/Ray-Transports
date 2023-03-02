@@ -12,6 +12,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import {MatMenuModule} from '@angular/material/menu';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
         MatDialogModule,
         MatInputModule,
         MatMenuModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatAutocompleteModule,
+        MatBottomSheetModule
     ]
 
 }) export class MaterialModule { }

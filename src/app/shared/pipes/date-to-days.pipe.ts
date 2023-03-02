@@ -7,9 +7,14 @@ export class DateToDaysPipe implements PipeTransform {
 
   public date:string=''
   transform(value: string, ...args: unknown[]): unknown {
-    let currentDate = Date()
+    const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"]
+    console.log(value);
 
-    return null
+    let date = new Date(value.replace('/','-'))
+    let result = date.getDay()+' '+ month[date.getMonth()]+' '+date.getFullYear();
+     
+
+    return result
   }
 
 }

@@ -2,6 +2,8 @@ import { Component, SimpleChanges,OnInit, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SharedService } from 'src/app/shared/sevices/shared.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-customer',
@@ -9,17 +11,29 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   styleUrls: ['./add-customer.component.scss']
 })
 export class AddCustomerComponent implements OnInit{
+  myControl = new FormControl('');
+  options: string[] = ['Shibpur', 'Esplanade', 'Sarkar Bazar','Salkia','central'];
+  filteredOptions: Observable<string[]> | undefined;
   constructor(
     private services: SharedService,
     private snackBar: MatSnackBar,
   ) { }
   ngOnInit(): void {
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || '')),
+    );
+  }
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   form = new FormGroup({
     name : new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z ]{2,30}$/)]),
-    phone: new FormControl('', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$"), Validators.min(10)]),
-    address : new FormControl()
+    phone: new FormControl(),
+    address : new FormControl('',[Validators.required])
   })
   
 
@@ -29,8 +43,8 @@ export class AddCustomerComponent implements OnInit{
   get phone(): any {
     return this.form.get('phone');
   }
-  get address(): any {
-    return this.form.get('address');
+  get locality(): any {
+    return this.form.get('locality');
   }
 
   public addCustomer(){

@@ -1,7 +1,13 @@
 <!-- header-section  -->
-<div class="customer-details-section">
-    <div class="header">
-        <div class="left-container">
+
+
+<div class="side-nav">
+    <mat-sidenav-container class="example-container">
+        <mat-sidenav #sidenav position="end" mode="over" [(opened)]="opened">
+            <div class="header space-between pl20 pr20">
+                <h3>Party Name</h3>
+                <button>X</button>
+            </div>
             <div class="customer-name">
                 <div class="customer-name-icon">R</div>
                 <div class="customer-details">
@@ -9,151 +15,113 @@
                     <div class="customer-phone-number">9847821233</div>
                 </div>
             </div>
-        </div>
-        <div class="right-container">
-            <div class="download-report">
-                <button class="report-btn" mat-stroked-button color="primary">
-                    <span>Report</span><mat-icon>summarize</mat-icon>
-                </button>
-            </div>
-            <div class="more-button">
-                <button mat-icon-button [matMenuTriggerFor]="customerMenu" color="primary"
-                    aria-label="Example icon button with a home icon">
-                <mat-icon>more_vert</mat-icon>
-                
-                </button>
-                <mat-menu #customerMenu="matMenu">
-                    <button mat-menu-item>Edit</button>
-                    <button mat-menu-item>Delete</button>
-                </mat-menu>
-            </div>
-        </div>
-    </div>
-    <mat-divider></mat-divider>
-    <!-- Net Balance Section  -->
-    <div class="sub-header">
-        <div class="net-balance">
-            <div class="header">NET BALANCE:</div>
-            <div class="amount-section" >You'll Get: <span class="symbol"> ₹ </span ><span class="amount">3,443</span></div>
-        </div>
-        <button class="custom-btn">Add Vehicle</button>
-    </div>
-    <mat-divider></mat-divider>
-    <div class="transaction-table">
-        <table class="table-header">
-            <thead>
-                <tr>
-                    <th class="text-left">Entries</th>
-                    <th class="text-center w22p">You Gave</th>
-                    <th class="text-center w22p">You Got</th>
-                </tr>
-            </thead>
-        </table>
-        <perfect-scrollbar class="table-body">
-            <table>
-                <tbody>
-                    <tr>
-                        <td class="">
-                            <div class="transaction-metadata">
-                                <div class="date-time"> 
-                                    <span class="date">22 Feb 2023</span> • <span class="time">04:50 PM</span>
-                                </div>
-                                <div class="amount">Balance: <span class="balance">-3,226</span></div>
-                            </div>
-                            <div class="transaction-details">
-                                There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form,
-                                 by injected humour, or randomised words which don't look even slightly believable.
-                            </div>
-                        </td>
-                        <td class="w22p amount-gave"> 3,433</td>
-                        <td class="w22p amount-got"> - </td>
-                    </tr>
-                    <tr>
-                        <td class="">
-                            <div class="transaction-metadata">
-                                <div class="date-time"> 
-                                    <span class="date">22 Feb 2023</span> • <span class="time">04:50 PM</span>
-                                </div>
-                                <div class="amount">Balance: <span class="balance">-2,500</span></div>
-                            </div>
-                            <div class="transaction-details">
-                                There are many variations.
-                            </div>
-                        </td>
-                        <td class="w22p amount-gave"> 3,500</td>
-                        <td class="w22p amount-got"> - </td>
-                    </tr>
-                    <tr>
-                        <td class="">
-                            <div class="transaction-metadata">
-                                <div class="date-time"> 
-                                    <span class="date">12 Feb 2023</span> • <span class="time">10:35 AM</span>
-                                </div>
-                                <div class="amount">Balance: <span class="balance">1,000</span></div>
-                            </div>
-                            <div class="transaction-details">
-                                There are many variations of passages of Lorem Ipsum available, but the majority have suffered.
-                            </div>
-                        </td>
-                        <td class="w22p amount-gave"> -</td>
-                        <td class="w22p amount-got"> 500 </td>
-                    </tr>
-                    <tr>
-                        <td class="">
-                            <div class="transaction-metadata">
-                                <div class="date-time"> 
-                                    <span class="date">09 Feb 2023</span> • <span class="time">07:51 PM</span>
-                                </div>
-                                <div class="amount">Balance: <span class="balance">1,500</span></div>
-                            </div>
-                            <div class="transaction-details">
-                                There are many variations of passages.
-                            </div>
-                        </td>
-                        <td class="w22p amount-gave"> 3,000</td>
-                        <td class="w22p amount-got"> - </td>
-                    </tr>
-                    <tr>
-                        <td class="">
-                            <div class="transaction-metadata">
-                                <div class="date-time"> 
-                                    <span class="date">02 Feb 2023</span> • <span class="time">12:23 PM</span>
-                                </div>
-                                <div class="amount">Balance: <span class="balance">-1500</span></div>
-                            </div>
-                            <div class="transaction-details">
-                                There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form,
-                                 by injected humour, or randomised words which don't look even slightly believable.
-                            </div>
-                        </td>
-                        <td class="w22p amount-gave"> - </td>
-                        <td class="w22p amount-got"> 1,000 </td>
-                    </tr>
-                    <tr>
-                        <td class="">
-                            <div class="transaction-metadata">
-                                <div class="date-time"> 
-                                    <span class="date">29 Jan 2023</span> • <span class="time">02:10 PM</span>
-                                </div>
-                                <div class="amount">Balance: <span class="balance">-500</span></div>
-                            </div>
-                            <div class="transaction-details">
-                                There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.
-                            </div>
-                        </td>
-                        <td class="w22p amount-gave"> -</td>
-                        <td class="w22p amount-got"> 500 </td>
-                    </tr>
+            <mat-divider></mat-divider>
+        </mat-sidenav>
 
-                </tbody>
-            </table>
-            
-        </perfect-scrollbar>
+        <mat-sidenav-content>
+            <div class="customer-details-section">
+                <div class="header">
+                    <div class="left-container">
+                        <div class="customer-name">
+                            <div class="customer-name-icon">R</div>
+                            <div class="customer-details">
+                                <div class="customer-name">Rajib</div>
+                                <div class="customer-phone-number">9847821233</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right-container">
+                        <div class="download-report">
+                            <button class="report-btn" mat-stroked-button color="primary">
+                                <span>Report</span><mat-icon>summarize</mat-icon>
+                            </button>
+                        </div>
+                        <div class="more-button">
+                            <button mat-icon-button [matMenuTriggerFor]="customerMenu" color="primary"
+                                aria-label="Example icon button with a home icon">
+                                <mat-icon>more_vert</mat-icon>
 
-    </div>
-    <mat-divider></mat-divider>
-    <div class="initiate-transaction-section">
-        <button mat-raised-button color="warn">You Gave</button>
-        <button mat-raised-button class="success">You Got</button>
-    </div>
+                            </button>
+                            <mat-menu #customerMenu="matMenu">
+                                <button mat-menu-item (click)="sidenav.toggle()">Edit<mat-icon
+                                        class="icon-16">edit</mat-icon> </button>
+                                <button mat-menu-item>Delete<mat-icon class="icon-16">delete</mat-icon> </button>
+                            </mat-menu>
+                        </div>
+
+                    </div>
+                </div>
+                <mat-divider></mat-divider>
+                <!-- Net Balance Section  -->
+                <div class="sub-header">
+                    <div class="net-balance">
+                        <div class="header">NET BALANCE:</div>
+                        <div class="amount-section">{{customerDetails.netAmount > 0 ?"You'll Get:" : "You'll Give:"}}
+                            <span class="symbol"> ₹ </span><span class="amount">{{customerDetails.netAmount}}</span>
+                        </div>
+                    </div>
+                    <div class="align-center">
+                        <button mat-icon-button color="primary" class="mr10"
+                            aria-label="Example icon button with a heart icon">
+                            <mat-icon>agriculture</mat-icon>
+                        </button>
+                        <button class="btn-primary">Add Vehicle</button>
+                    </div>
+                </div>
+                <mat-divider></mat-divider>
+
+                <div class="customer-table simple-table transaction-table">
+                    <div class="main-table">
+                        <table class="table-header">
+                            <thead class="border-left">
+                                <tr>
+                                    <th class="text-left">Entries</th>
+                                    <th class="text-center w16p">You Gave</th>
+                                    <th class="text-center w16p">You Got</th>
+                                </tr>
+                            </thead>
+                        </table>
+                        <perfect-scrollbar class="table-body">
+                            <table>
+                                <tbody>
+                                    <tr *ngFor="let item of customerDetails['transaction']">
+                                        <td>
+                                            <div class="transaction-metadata">
+                                                <div class="date-time">
+                                                    <span class="date">{{item.date | dateToDays}}</span> • <span
+                                                        class="time">{{item.time}}</span>
+                                                </div>
+                                                <div class="amount">Balance: <span class="balance">-3,226</span></div>
+                                            </div>
+                                            <div class="transaction-details">
+                                                {{item.comment}}
+                                            </div>
+                                        </td>
+                                        <td class="w16p amount-gave"> {{item.amount<0? myMath.abs(item.amount)
+                                                :'-'}}</td>
+                                        <td class="w16p amount-got"> {{item.amount>0? item.amount :'-'}} </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </perfect-scrollbar>
+                    </div>
+
+                </div>
+
+                <mat-divider></mat-divider>
+                <div class="initiate-transaction-section">
+                    <button mat-raised-button color="warn" (click)="openBottomSheet()">You Gave</button>
+                    <button mat-raised-button class="success">You Got</button>
+                </div>
+            </div>
+
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+
+
 </div>
+
+<!-- <ng-template #HtmlContent>
+    <p>Hello i'm a <strong>bold</strong> text!</p>
+  </ng-template> -->

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SharedService } from 'src/app/shared/sevices/shared.service';
 import { AddCustomerComponent } from 'src/app/dialog-boxes/add-customer/add-customer.component';
@@ -9,16 +9,31 @@ import { AddCustomerComponent } from 'src/app/dialog-boxes/add-customer/add-cust
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit{
+  @ViewChild('customerDetails') customerDetails!: ElementRef;
+  customerDetailsSize:any
+//   interface customerDetailsSize {
+//     width:number
+//  }
 
   constructor(
     public dialog: MatDialog,
-    private services:SharedService
-    ) { }
+    private services:SharedService    ) { }
 
   public allCustomerData:any=[]
 
   ngOnInit(): void {
     this.getAllCustomer()
+    setTimeout(() => {
+      if(this.customerDetails.nativeElement){
+        // console.log(this.customerDetails.nativeElement.getBoundingClientRect())
+        this.customerDetailsSize =this.customerDetails.nativeElement.getBoundingClientRect()
+        console.log(this.customerDetailsSize);
+        
+      }
+     }, 0);
+  }
+  ngAfterViewInit(){
+    
   }
 
   public filterList=[
@@ -102,7 +117,7 @@ export class DashboardComponent implements OnInit{
   public addCustomer(){
     const dialogRef = this.dialog.open(AddCustomerComponent,{
       height: 'auto',
-      width: '400px',
+      width: '300px',
       disableClose:true
     });
 

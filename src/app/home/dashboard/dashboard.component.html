@@ -2,10 +2,8 @@
     <div class="list-section">
         <div class="header-section">
             <mat-toolbar>
-                <span>Dashboard</span>
-                <button mat-raised-button class="add-customer-btn" color="primary" (click)="addCustomer()">
-                    <span>Add Customer</span>
-                </button>
+                <span class="header-text">Dashboard</span>
+                <button (click)="addCustomer()" class="btn-primary">Add Customer</button>
             </mat-toolbar>
             <mat-divider></mat-divider>
             <!-- Account Summary -->
@@ -44,19 +42,15 @@
                     <div class="select-box filter-select-box">
                         <mat-form-field appearance="outline">
                             <mat-select #filterBy placeholder="Filter By" [disableRipple]="true">
-                                <perfect-scrollbar class="fliter-height">
-                                    <mat-option value="{{filter.filterValue}}" *ngFor="let filter of filterList"> {{filter.filterName}} </mat-option>
-                                </perfect-scrollbar>
+                                <mat-option value="{{filter.filterValue}}" *ngFor="let filter of filterList"> {{filter.filterName}} </mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
                     <div class="select-box">
                         <mat-form-field appearance="outline">
                             <mat-select #filterBy placeholder="Sort By" [disableRipple]="true">
-                                <perfect-scrollbar class="fliter-height">
                                     <mat-option *ngFor="let option of sortOption" [value]="option.filterValue">{{option.name}}
                                     </mat-option>
-                                </perfect-scrollbar>
                             </mat-select>
                         </mat-form-field>
                     </div>
@@ -66,28 +60,28 @@
             <mat-divider></mat-divider>
         </div>
         <div class="body-section">
-            <div class="customer-table">
-                <div class="table-header">
-                    <table>
-                        <tr>
-                            <th class="name-column">Name</th>
-                            <th class="status-column">Status</th>
-                            <th class="amount-column">Amount</th>
-                        </tr>
+            <div class="customer-table simple-table">
+                <div class="main-table">
+                    <table class="table-header">
+                        <thead class="border-left">
+                            <tr>
+                                <th class="text-left">Name</th>
+                                <th class="text-center w18p">Status</th>
+                                <th class="text-right w20p">Amount</th>
+                            </tr>
+                        </thead>
                     </table>
-                </div>
-                <div class="table-body">
-                    <perfect-scrollbar class="height">
+                    <perfect-scrollbar class="table-body">
                         <table>
                             <tbody>
                                 <tr *ngFor="let customer of allCustomerData">
                                     <td class="name-column">
                                         <div>
                                             <div class="customer-name">{{customer.name}}</div>
-                                            <div class="created-date">{{customer.createdOn}}</div>
+                                            <div class="locality">{{customer.address}}</div>
                                         </div>
                                     </td>
-                                    <td class="status-column">
+                                    <td class="status-column w18p">
                                         <div class="status-icon active" *ngIf="customer.isActive" [autoPlacement]="true" tooltip="Active" [theme]="'light'" placement="top" >
                                             <span>A</span>
                                         </div>
@@ -95,7 +89,7 @@
                                             <span>S</span>
                                         </div>
                                     </td>
-                                    <td class="amount-column">
+                                    <td class="amount-column text-right w20p">
                                         <div class="amount">
                                             <span class="rupee-symbol">₹ </span>
                                             <span>{{myMath.abs(customer.amount)}}</span>
@@ -109,14 +103,16 @@
                                 </tr>
                             </tbody>
                         </table>
+                        
                     </perfect-scrollbar>
                 </div>
+        
             </div>
         </div>
     </div>
     <mat-divider [vertical]="true"></mat-divider>
-    <div class="details-section">
-        <app-customer-details></app-customer-details>
+    <div class="details-section" #customerDetails>
+        <app-customer-details [customerDetailsSize]="this.customerDetailsSize"></app-customer-details>
 
     </div>
 </div>
