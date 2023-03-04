@@ -45,7 +45,7 @@ export class LoginComponent {
 
     if(this.form.value.userId=='admin' && this.form.value.password=='1234'){
       localStorage.setItem('token','demoToken')
-      this.router.navigate([''])
+      this.router.navigate(['home/customer-dashboard'])
     }
     
     

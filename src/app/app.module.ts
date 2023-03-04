@@ -15,6 +15,11 @@ import { DateToDaysPipe } from './shared/pipes/date-to-days.pipe';
 import { CustomerDetailsComponent } from './home/customer-details/customer-details.component';
 import { LoginComponent } from './login/login.component';
 import { AddTransactionComponent } from './dialog-boxes/add-transaction/add-transaction.component';
+import { CustomerDashboardComponent } from './home/customer-dashboard/customer-dashboard.component';
+import { TransactionsComponent } from './home/transactions/transactions.component';
+import { VehicleComponent } from './home/vehicle/vehicle.component';
+import { ReportsComponent } from './home/reports/reports.component';
+import { SettingsComponent } from './home/settings/settings.component';
 
 
 @NgModule({
@@ -27,7 +32,12 @@ import { AddTransactionComponent } from './dialog-boxes/add-transaction/add-tran
     CustomerDetailsComponent,
     LoginComponent,
     DateToDaysPipe,
-    AddTransactionComponent
+    AddTransactionComponent,
+    CustomerDashboardComponent,
+    TransactionsComponent,
+    VehicleComponent,
+    ReportsComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

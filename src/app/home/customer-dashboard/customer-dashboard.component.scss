@@ -1,0 +1,265 @@
+.dashboard-container {
+  display: flex;
+
+  .list-section {
+    width: 50%;
+
+    .mat-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-section {
+      .add-customer-btn {
+        font-size: var(--fnt-regular);
+      }
+
+      .overview-section {
+        font-size: var(--fnt-regular);
+        height: auto;
+        padding: 10px 16px;
+        color: var(--fnt-secondary-color);
+        display: flex;
+        flex-direction: column;
+
+        .overview-container {
+          margin-bottom: 10px;
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+
+          .account-summary {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .amount {
+              margin-left: 10px;
+              font-size: var(--fnt-medium);
+              color: #000;
+              max-width: 80px;
+              text-align: end;
+
+              mat-icon {
+                font-size: 22px;
+                vertical-align: middle;
+              }
+            }
+
+            .amount.get {
+              mat-icon {
+                color: var(--success-color);
+              }
+            }
+          }
+        }
+
+        .report-btn {
+          height: 30px;
+        }
+      }
+
+      .filter-section {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        .custom-input-field {
+          display: flex;
+          width: 40%;
+          align-items: center;
+          flex-direction: row-reverse;
+          justify-content: start;
+          border-radius: 5px;
+          padding: 4px 0px;
+          border: 1px solid rgba($color: #000000, $alpha: 0.38);
+          background-color: #fff;
+          height: 22px;
+
+          input {
+            border: 0;
+            outline: 0;
+            font-size: var(--fnt-regular);
+            width: 100%;
+            padding-left: 6px;
+          }
+
+          input:focus+mat-icon {
+            display: none;
+          }
+
+          input::placeholder {
+            opacity: 0.5;
+            font-weight: var(--fnt);
+          }
+
+          input:focus {
+            border-color: #3f51b5;
+          }
+
+          mat-icon {
+
+            font-size: 20px;
+            vertical-align: middle;
+            color: #d6d6d6;
+            margin: 3px 0px 0 2px;
+          }
+        }
+
+        .custom-input-field:has(> input:focus) {
+          border-color: #3f51b5;
+        }
+
+        .select-box {
+
+          height: 36px;
+        }
+
+        ::ng-deep .mat-mdc-text-field-wrapper.mdc-text-field--outlined {
+
+          height: 31px;
+          width: 140px;
+        }
+
+        ::ng-deep .filter-select-box .mat-mdc-text-field-wrapper.mdc-text-field--outlined {
+
+          height: 31px;
+
+        }
+
+        ::ng-deep .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+          padding: 0;
+
+          padding-top: 3px;
+        }
+      }
+    }
+
+    .body-section {
+      .customer-table {
+        padding: 0 16px;
+        padding-top: 15px;
+
+        .status-column {
+          text-align: center;
+
+          .status-icon {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #d6d6d6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: var(--fnt-small);
+            font-weight: 500;
+            margin: 0 auto;
+            font-family: roboto;
+          }
+
+          .status-icon.active {
+            background-color: var(--success-color);
+          }
+
+          .status-icon.inactive {
+            background-color: #f44336;
+          }
+        }
+
+        .name-column {
+          font-size: var(--fnt-regular);
+
+          .locality {
+            font-size: var(--fnt-small);
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            color: var(--fnt-secondary-color);
+          }
+        }
+
+        .amount-column {
+          text-align: right;
+          font-size: var(--fnt-regular);
+          width: 21%;
+
+          .amount-desc {
+            font-size: var(--fnt-small);
+            color: var(--success-color)
+          }
+
+          .rupee-symbol {
+            font-family: roboto;
+          }
+        }
+
+        .table-body {
+          height: calc(100vh - 220px);
+          position: relative;
+        }
+      }
+    }
+  }
+
+  .details-section {
+    width: 50%;
+
+    .mat-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .single-btn.mat-mdc-button {
+    width: 25px;
+  }
+}
+
+::ng-deep .mat-mdc-option:focus:not(.mdc-list-item--disabled),
+::ng-deep .mat-mdc-option.mat-mdc-option-active {
+  background-color: #fff !important;
+}
+
+::ng-deep .mat-mdc-option:hover:not(.mdc-list-item--disabled) {
+  background-color: #fff3e9 !important;
+}
+
+::ng-deep .mat-primary .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+  font-weight: 500;
+}
+
+::ng-deep .mat-mdc-select-value {
+  font-size: var(--fnt-regular) !important;
+}
+
+::ng-deep .mat-mdc-option.mdc-list-item {
+  font-size: var(--fnt-regular);
+  min-height: 30px;
+}
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface{
+  width: 60vw;
+}
+
+@media(max-width:1025px) {
+  .dashboard-container {
+    .list-section {
+      .header-section {
+        .overview-section {
+          .filter-section {
+            ::ng-deep .select-box.filter-select-box .mat-mdc-text-field-wrapper.mdc-text-field--outlined {
+              height: 31px;
+              width: 101px;
+            }
+
+            ::ng-deep .filter-select-box .mat-mdc-text-field-wrapper.mdc-text-field--outlined {
+              height: 31px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

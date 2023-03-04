@@ -4,7 +4,7 @@
             <button mat-icon-button class="account-icon" color="primary" aria-label="account icon"
                 (click)="toggleSidenav()">
                 <mat-icon>account_circle</mat-icon>
-            </button><span class="header-name">Ray Transports</span>
+            </button><span class="header-name">Admin</span>
         </div>
         <div class="nav-items" *ngFor="let item of sideNavItem">
             <div class="item" [ngClass]="{'active':item.isSelected}" (click)="onSeleted(item)">
@@ -13,8 +13,7 @@
             </div>
         </div>
     </mat-sidenav>
-
     <mat-sidenav-content>
-        <app-dashboard></app-dashboard>
+        <app-dashboard [selectedTab]="selectedTab['routePath']"></app-dashboard>
     </mat-sidenav-content>
 </mat-sidenav-container>

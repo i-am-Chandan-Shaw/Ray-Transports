@@ -8,7 +8,7 @@
             <label for="">Name: </label>
             <mat-form-field appearance="outline" class="mr10">
                 <input matInput [formControl]="name" required placeholder="Enter customer name">
-                <mat-error *ngIf="name.invalid">{{getErrorMessage('name')}}</mat-error>
+                <mat-error *ngIf="name.invalid">**{{getErrorMessage('name')}}</mat-error>
             </mat-form-field>
         </div>
         <form>
@@ -31,7 +31,7 @@
             <mat-form-field class="w97p" appearance="outline">
                 <input matInput #input maxlength="10" placeholder="Enter phone no." [formControl]="phone" required=""
                     placeholder="0000-000-000">
-                <mat-error *ngIf="phone.invalid">{{getErrorMessage('phone')}}</mat-error>
+                <mat-error *ngIf="phone.invalid">**{{getErrorMessage('phone')}}</mat-error>
             </mat-form-field>
         </div>
     
