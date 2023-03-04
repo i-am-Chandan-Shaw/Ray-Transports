@@ -21,6 +21,7 @@
     --warn-color: #f44336;
     --success-color: #379237;
     --stroked-color: #3f51b5;
+    --btn-secondary:#e1e1e1;
 
 }
 
@@ -674,6 +675,16 @@ justify-content: space-between;
     background-color: #fff;
 }
 
+// Inputs
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+
 // Buttons
 
 .btn-primary {
@@ -707,6 +718,10 @@ justify-content: space-between;
   }
 
   // icons
+
+  mat-icon{
+    cursor: pointer;
+  }
 
   .icon-16{
     font-size: 16px;
