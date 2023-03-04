@@ -1,8 +1,196 @@
-.wrapper{
-    .container{
-        .header{
-            display: flex;
-            justify-content: space-between;
+.container {
+    .header {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 16px !important;
+
+
+    }
+
+    .wrapper {
+        display: flex;
+        padding: 10px 15px;
+        justify-content: space-between;
+        height: 60px;
+
+        .amount-section {
+            width: 40%;
+
+            .label {
+                color: var(--stroked-color);
+                font-size: var(--fnt-regular);
+            }
+
+            .custom-input-field {
+                display: flex;
+                align-items: center;
+                flex-direction: row-reverse;
+                justify-content: start;
+                border-radius: 5px;
+                padding: 4px 8px;
+                border: 1px solid rgba($color: #000000, $alpha: 0.38);
+                background-color: #fff;
+                height: 22px;
+                margin: 8px 0;
+
+                input {
+                    border: 0;
+                    outline: 0;
+                    font-size: var(--fnt-regular);
+                    padding-left: 6px;
+                    width: 100%;
+                }
+
+                input::placeholder {
+                    opacity: 0.5;
+                    font-weight: var(--fnt);
+                }
+
+                input:focus {
+                    border-color: #3f51b5;
+                }
+            }
+
+            .custom-input-field:has(> input:focus) {
+                border-color: #3f51b5;
+            }
+
+        }
+
+        .date-section {
+            width: 40%;
         }
     }
+
+    .description-section {
+        padding: 10px 15px;
+
+        Textarea {
+            width: 97%;
+            margin: 8px 0;
+            height: 100px;
+            border-radius: 5px;
+            padding: 8px;
+            resize: none;
+            outline: none;
+        }
+    }
+
+    .initiate-transaction-section {
+        padding: 8px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        button {
+            width: 48%;
+        }
+
+        .reset {
+            background-color: var(--btn-secondary);
+            color: #000000;
+        }
+
+        ::ng-deep .success {
+            background: var(--success-color);
+            color: #fff;
+
+        }
+    }
+}
+
+::ng-deep .mat-bottom-sheet-container {
+    position: relative;
+    left: 60%;
+    min-width: calc(45vw) !important;
+    padding: 0 !important;
+}
+
+::ng-deep .mat-bottom-sheet-container-medium {
+    min-width: calc(44vw) !important;
+
+}
+
+::ng-deep .mat-bottom-sheet-container-large {
+    min-width: calc(44.2vw) !important;
+
+}
+
+::ng-deep .mat-bottom-sheet-container-xlarge {
+    min-width: calc(43vw) !important;
+
+}
+
+
+:host {
+
+    ::ng-deep .mat-toolbar {
+        font-weight: normal;
+        font-size: var(--fnt-medium);
+        height: 45px !important;
+
+    }
+
+    ::ng-deep .mat-mdc-form-field {
+        margin: 8px 0;
+        width: 100%;
+        font-size: var(--fnt-regular);
+        font-weight: var(--fnt);
+    }
+
+    ::ng-deep .mat-mdc-icon-button.mat-mdc-button-base {
+        width: 30px !important;
+        height: 30px !important;
+        padding: 4px !important;
+    }
+
+    ::ng-deep .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
+    ::ng-deep .mat-mdc-icon-button .mat-mdc-button-touch-target {
+        height: 30px;
+        width: 30px;
+    }
+
+    ::ng-deep .mdc-text-field--no-label:not(.mdc-text-field--textarea) .mat-mdc-form-field-input-control.mdc-text-field__input,
+    .mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control {
+        padding: 4px 8px;
+        font-size: var(--fnt-regular);
+    }
+
+    ::ng-deep .mdc-text-field {
+        padding: 0;
+    }
+
+    ::ng-deep .mat-mdc-form-field-infix {
+        min-height: 30px !important;
+        width: 100%;
+    }
+
+
+}
+
+::ng-deep .mat-datepicker-content {
+    display: block;
+    border-radius: 4px;
+    margin: 7px 0 !important;
+}
+
+::ng-deep .mat-datepicker-content .mat-calendar {
+    width: 240px !important;
+    max-height: 294px !important;
+    min-height: 270px !important;
+
+}
+
+::ng-deep .mat-calendar-controls {
+    display: flex;
+    align-items: center;
+    margin: 2% calc(4.7142857143% - 16px) !important;
+}
+
+::ng-deep .mat-calendar-header {
+    padding: 8px !important;
 }

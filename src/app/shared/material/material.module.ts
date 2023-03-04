@@ -14,8 +14,8 @@ import {MatMenuModule} from '@angular/material/menu';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
-
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 @NgModule({
     exports:[
         BrowserAnimationsModule,
@@ -32,7 +32,9 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
         MatMenuModule,
         MatSnackBarModule,
         MatAutocompleteModule,
-        MatBottomSheetModule
+        MatBottomSheetModule,
+        MatDatepickerModule,
+        MatNativeDateModule
     ]
 
 }) export class MaterialModule { }

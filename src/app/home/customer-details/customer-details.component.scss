@@ -179,22 +179,3 @@
 ::ng-deep .mat-drawer.mat-drawer-end{
   width: 75%;
 }
-
-::ng-deep .mat-bottom-sheet-container{
- border: 1px solid red;
- position: relative;
- left: 60%;
- min-width: calc(45vw) !important;
-}
-::ng-deep .mat-bottom-sheet-container-medium{
-  min-width:calc(44.5vw) !important;
-  
-}
-::ng-deep .mat-bottom-sheet-container-large{
-  min-width:calc(44vw) !important;
-}
-
-::ng-deep .mat-bottom-sheet-container-xlarge{
-  min-width:calc(43vw) !important;
-
-}

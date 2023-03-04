@@ -1,15 +1,36 @@
-<div class="wrapper">
-    <div class="container">
-        <mat-toolbar class="header warn" >
-            <span>Add New Entry</span>
-            <span (click)="onCloseClick()">X</span>
-        </mat-toolbar>
-        <mat-divider></mat-divider>
+<div class="container nopadding ">
+    <mat-toolbar class="header warn nopadding nomargin" color="warn">
+        <span>Add New Entry</span>
+        <mat-icon mat-dialog-close class="mr0" (click)="onCloseClick()">close</mat-icon>
+    </mat-toolbar>
+    <mat-divider></mat-divider>
+    <div class="wrapper">
         <div class="amount-section">
-            
+            <div class="lable">Amount</div>
+            <div class="custom-input-field">
+                <input type="number" placeholder="Enter Amount">
+                <span>₹</span>
+            </div>
         </div>
-        <div class="date-section"></div>
-        <div class="description-section"></div>
-        
-    </div>
+        <div class="date-section">
+            <div class="label">Date</div>
+            <div class="date">
+                <mat-form-field appearance="outline"  >
+                    <input matInput [matDatepicker]="picker" placeholder="MM/DD/YYYY">
+                    <mat-datepicker-toggle matIconSuffix  [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker ></mat-datepicker>
+                  </mat-form-field>
+            </div>
+        </div></div>
+        <div class="description-section">
+            <div class="lable">Description</div>
+            <Textarea></Textarea>
+        </div>
+        <mat-divider></mat-divider>
+                <div class="initiate-transaction-section">
+                    <button mat-raised-button color="warn">Add</button>
+                    <button mat-raised-button class="success reset">Reset</button>
+                </div>
+    
+
 </div>
