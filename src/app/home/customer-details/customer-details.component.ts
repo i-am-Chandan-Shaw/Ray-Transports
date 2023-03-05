@@ -26,7 +26,7 @@ export class CustomerDetailsComponent {
     "name":"Rajib Koley",
     "phone":"98493849389",
     "locality":"New Market",
-    "netAmount":3324,
+    "netAmount":50,
     "vehicle":[
         {
             "id":"232",
@@ -44,59 +44,45 @@ export class CustomerDetailsComponent {
             "id":"23",
             "date":"2023-02-14",
             "time":"04:50 PM",
-            "comment":"This is a demo comment for transcation",
-            "amount": -2500
+            "comment":"This transaction is added by vehcle no 123",
+            "amount": -50,
+            "balance":-50,
+            "vehicleNo":"123",
+            "addedBy":"auto"
         },
         {
-            "id":"3",
-            "date":"2023-01-07",
-            "time":"10:14 AM",
-            "comment":"This is a demo comment for transcation",
-            "amount": 1800
-        },
-        {
-          "id":"23",
-          "date":"2023-02-14",
+          "id":"24",
+          "date":"2023-02-15",
           "time":"04:50 PM",
-          "comment":"This is a demo comment for transcation",
-          "amount": -2500
+          "comment":"This transaction is added by vehcle no 123",
+          "amount": -50,
+          "balance":-100,
+          "vehicleNo":"123",
+          "addedBy":"auto"
+          
       },
       {
-          "id":"3",
-          "date":"2023-01-07",
-          "time":"10:14 AM",
-          "comment":"This is a demo comment for transcation",
-          "amount": 1800
-      },
-      {
-        "id":"23",
-        "date":"2023-02-14",
+        "id":"24",
+        "date":"2023-02-16",
         "time":"04:50 PM",
-        "comment":"This is a demo comment for transcation",
-        "amount": -2500
+        "comment":"This transaction is added by vehcle no 123",
+        "amount": -50,
+        "balance":-150,
+        "vehicleNo":"123",
+        "addedBy":"auto"
     },
-    {
-        "id":"3",
-        "date":"2023-01-07",
-        "time":"10:14 AM",
-        "comment":"This is a demo comment for transcation",
-        "amount": 1800
-    },
-    {
-      "id":"23",
-      "date":"2023-02-14",
-      "time":"04:50 PM",
-      "comment":"This is a demo comment for transcation",
-      "amount": -2500
-  },
-  {
-      "id":"3",
-      "date":"2023-01-07",
-      "time":"10:14 AM",
-      "comment":"This is a demo comment for transcation",
-      "amount": 1800
-  },
 
+    {
+      "id":"24",
+      "date":"2023-02-16",
+      "time":"04:50 PM",
+      "comment":"Amount collected",
+      "amount": 100,
+      "balance":-50,
+      "vehicleNo":"",
+      "addedBy":"chandan@gmail.com"
+  },
+        
     ]
   }
   openBottomSheet(): void {

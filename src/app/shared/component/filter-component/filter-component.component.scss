@@ -1,0 +1,32 @@
+::ng-deep .mat-mdc-text-field-wrapper.mdc-text-field--outlined {
+
+    height: 31px;
+    width: 140px;
+}
+
+::ng-deep .filter-select-box .mat-mdc-text-field-wrapper.mdc-text-field--outlined {
+
+    height: 31px;
+
+}
+
+::ng-deep .mat-mdc-form-field-subscript-wrapper{
+    height: 0;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+    padding: 0;
+
+    padding-top: 3px;
+}
+
+@media(max-width:1025px) {
+    ::ng-deep .select-box.filter-select-box .mat-mdc-text-field-wrapper.mdc-text-field--outlined {
+        height: 31px;
+        width: 101px;
+    }
+
+    ::ng-deep .filter-select-box .mat-mdc-text-field-wrapper.mdc-text-field--outlined {
+        height: 31px;
+    }
+}

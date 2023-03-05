@@ -56,7 +56,7 @@
                 <div class="sub-header">
                     <div class="net-balance">
                         <div class="header">NET BALANCE:</div>
-                        <div class="amount-section">{{customerDetails.netAmount > 0 ?"You'll Get:" : "You'll Give:"}}
+                        <div class="amount-section" ngClass="{customerDetails.netAmount > 0 ?'amount-gave':'amount-got}" >{{customerDetails.netAmount > 0 ?"You'll Get:" : "You'll Give:"}}
                             <span class="symbol"> ₹ </span><span class="amount">{{customerDetails.netAmount}}</span>
                         </div>
                     </div>
@@ -91,7 +91,7 @@
                                                     <span class="date">{{item.date | dateToDays}}</span> • <span
                                                         class="time">{{item.time}}</span>
                                                 </div>
-                                                <div class="amount">Balance: <span class="balance">-3,226</span></div>
+                                                <div class="amount">Balance: <span class="balance">{{item.balance}}</span></div>
                                             </div>
                                             <div class="transaction-details">
                                                 {{item.comment}}

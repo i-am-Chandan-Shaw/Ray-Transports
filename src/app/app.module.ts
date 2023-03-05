@@ -20,6 +20,7 @@ import { TransactionsComponent } from './home/transactions/transactions.componen
 import { VehicleComponent } from './home/vehicle/vehicle.component';
 import { ReportsComponent } from './home/reports/reports.component';
 import { SettingsComponent } from './home/settings/settings.component';
+import { FilterComponentComponent } from './shared/component/filter-component/filter-component.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { SettingsComponent } from './home/settings/settings.component';
     TransactionsComponent,
     VehicleComponent,
     ReportsComponent,
-    SettingsComponent
+    SettingsComponent,
+    FilterComponentComponent
   ],
   imports: [
     BrowserModule,

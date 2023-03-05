@@ -233,7 +233,7 @@ body {
 
 
 .w10p {
-    width: 100% !important;
+    width: 10% !important;
 }
 
 .w11p {
@@ -346,12 +346,28 @@ body {
     margin-right: 2px !important;
 }
 
+.mr10{
+    margin-right: 10px !important;
+}
+
 .mt2 {
     margin-top: 2px !important;
 }
 
 .mb2 {
     margin-bottom: 2px !important;
+}
+
+.mb10{
+    margin-bottom: 10px !important;
+}
+
+.mb15{
+    margin-bottom: 15px;
+}
+
+.mb20{
+    margin-bottom: 20px !important;
 }
 
 .ml5 {
@@ -755,6 +771,9 @@ input[type=number]::-webkit-outer-spin-button {
         th,
         td {
             padding: 4px 16px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         th {
@@ -793,3 +812,6 @@ input[type=number]::-webkit-outer-spin-button {
     }
 
 }
+
+
+// Angular material styling
