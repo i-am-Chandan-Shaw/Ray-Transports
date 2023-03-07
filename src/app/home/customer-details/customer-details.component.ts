@@ -85,8 +85,13 @@ export class CustomerDetailsComponent {
         
     ]
   }
-  openBottomSheet(): void {
-    this._bottomSheet.open(AddTransactionComponent);
+  onYouGaveClicked(): void {
+    this._bottomSheet.open(AddTransactionComponent, { data: 'onYouGaveClicked'}
+ );
+    panelClass: 'custom-class'
+  }
+  onYouGotClicked(): void {
+    this._bottomSheet.open(AddTransactionComponent,{ data: 'onYouGotClicked'});
     panelClass: 'custom-class'
   }
 }

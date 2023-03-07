@@ -119,4 +119,10 @@ export class CustomerDashboardComponent {
       }
     });
   }
+
+  onValueSelected(value:any){
+    console.log(value);
+    
+
+  }
 }

@@ -1,7 +1,7 @@
 <div class="container nopadding ">
-    <mat-toolbar class="header warn nopadding nomargin" color="warn">
+    <mat-toolbar class="header nopadding nomargin" [style.background]="color">
         <span>Add New Entry</span>
-        <mat-icon mat-dialog-close class="mr0" (click)="onCloseClick()">close</mat-icon>
+        <mat-icon mat-dialog-close class="mr0" (click)="onCloseClick($event)">close</mat-icon>
     </mat-toolbar>
     <mat-divider></mat-divider>
     <div class="wrapper">
@@ -28,7 +28,7 @@
         </div>
         <mat-divider></mat-divider>
                 <div class="initiate-transaction-section">
-                    <button mat-raised-button color="warn">Add</button>
+                    <button mat-raised-button [style.background]="color">Add</button>
                     <button mat-raised-button class="success reset">Reset</button>
                 </div>
     

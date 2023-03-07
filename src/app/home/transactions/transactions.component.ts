@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 
 @Component({
   selector: 'app-transactions',
@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./transactions.component.scss']
 })
 export class TransactionsComponent {
+
 
   public filterList = [
     {

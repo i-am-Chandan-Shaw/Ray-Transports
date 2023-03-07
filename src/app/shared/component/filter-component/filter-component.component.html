@@ -1,6 +1,6 @@
 <div class="select-box filter-select-box">
     <mat-form-field appearance="outline">
-        <mat-select #filterBy placeholder="Filter By" [disableRipple]="true">
+        <mat-select #filterBy placeholder="Filter By" [disableRipple]="true" (selectionChange)="onSelectionChange($event)" >
             <mat-option value="{{filter.filterValue}}" *ngFor="let filter of filterList">
                 {{filter.filterName}} </mat-option>
         </mat-select>

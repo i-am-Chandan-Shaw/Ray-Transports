@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-filter-component',
@@ -7,4 +8,11 @@ import { Component, Input } from '@angular/core';
 })
 export class FilterComponentComponent {
   @Input('filterList')filterList:any
+
+  @Output() valueSelected = new EventEmitter<string>()
+
+
+  onSelectionChange(e:MatSelectChange){
+    this.valueSelected.emit(e.value)
+  }
 }
