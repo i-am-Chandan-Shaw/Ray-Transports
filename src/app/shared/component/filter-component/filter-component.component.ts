@@ -4,15 +4,15 @@ import { MatSelectChange } from '@angular/material/select';
 @Component({
   selector: 'app-filter-component',
   templateUrl: './filter-component.component.html',
-  styleUrls: ['./filter-component.component.scss']
+  styleUrls: ['./filter-component.component.scss'],
 })
 export class FilterComponentComponent {
-  @Input('filterList')filterList:any
+  @Input('optionList') optionList: any;
+  @Input('selectMultipleValue') selectMultipleValue!: boolean;
+  @Output('valueSelected') valueSelected = new EventEmitter();
 
-  @Output() valueSelected = new EventEmitter<string>()
-
-
-  onSelectionChange(e:MatSelectChange){
-    this.valueSelected.emit(e.value)
+  sendValue(e: any) {
+    this.valueSelected.emit(e);
+    // console.log(e);
   }
 }

@@ -1,22 +1,43 @@
 <!-- header-section  -->
 
-
-<div class="side-nav">
+<div class="wrapper">
     <mat-sidenav-container class="example-container">
         <mat-sidenav #sidenav position="end" mode="over" [(opened)]="opened">
-            <div class="header space-between pl20 pr20">
-                <h3>Party Name</h3>
-                <button>X</button>
-            </div>
-            <div class="customer-name">
-                <div class="customer-name-icon">R</div>
-                <div class="customer-details">
-                    <div class="customer-name">Rajib</div>
-                    <div class="customer-phone-number">9847821233</div>
-                </div>
+            <div class="header align-center pl20 pr20">
+                <span class="close-sidenav" (click)="closeSideNav()" >&lt;</span>
+                <h3 class="ml15">Edit Party Name</h3>
             </div>
             <mat-divider></mat-divider>
+            <div class="container p20">
+                <div class="custom party-name">
+                    <label for="">Party Name</label>
+                    <div class="custom-input-field">
+                        <input type="number" placeholder="Enter Name" [(ngModel)]="party_name">
+                    </div>
+                </div>
+                <div class="custom phone-no">
+                    <label for="">Phone No</label> <span>(optional)</span>
+                    <div class="custom-input-field">
+                        <input type="number" placeholder="Enter phone No" [(ngModel)]="party_ph_no">
+                        <span>+91</span>
+                    </div>
+                </div>
+
+                <div class="custom locality">
+                    <label for="">Locality</label> <span>(optional)</span>
+                    <div class="custom-input-field">
+                        <input type="text" placeholder="Locality" [(ngModel)]="party_locality">
+                    </div>
+                </div>
+            </div>
+            <div class="party-btn pl20 pr20">
+                <button mat-raised-button color="primary">Edit</button>
+                <button mat-raised-button class="success reset">Reset</button>
+            </div>
+
         </mat-sidenav>
+
+
 
         <mat-sidenav-content>
             <div class="customer-details-section">
@@ -56,7 +77,9 @@
                 <div class="sub-header">
                     <div class="net-balance">
                         <div class="header">NET BALANCE:</div>
-                        <div class="amount-section" ngClass="{customerDetails.netAmount > 0 ?'amount-gave':'amount-got}" >{{customerDetails.netAmount > 0 ?"You'll Get:" : "You'll Give:"}}
+                        <div class="amount-section"
+                            ngClass="{customerDetails.netAmount > 0 ?'amount-gave':'amount-got}">
+                            {{customerDetails.netAmount > 0 ?"You'll Get:" : "You'll Give:"}}
                             <span class="symbol"> ₹ </span><span class="amount">{{customerDetails.netAmount}}</span>
                         </div>
                     </div>
@@ -91,7 +114,8 @@
                                                     <span class="date">{{item.date | dateToDays}}</span> • <span
                                                         class="time">{{item.time}}</span>
                                                 </div>
-                                                <div class="amount">Balance: <span class="balance">{{item.balance}}</span></div>
+                                                <div class="amount">Balance: <span
+                                                        class="balance">{{item.balance}}</span></div>
                                             </div>
                                             <div class="transaction-details">
                                                 {{item.comment}}
@@ -111,8 +135,8 @@
 
                 <mat-divider></mat-divider>
                 <div class="initiate-transaction-section">
-                    <button mat-raised-button color="warn" (click)="onYouGaveClicked()">You Gave</button>
-                    <button mat-raised-button class="success" (click)="onYouGotClicked()">You Got</button>
+                    <button mat-raised-button color="warn" (click)="initiateTransaction('gave')">You Gave</button>
+                    <button mat-raised-button class="success" (click)="initiateTransaction('got')">You Got</button>
                 </div>
             </div>
 

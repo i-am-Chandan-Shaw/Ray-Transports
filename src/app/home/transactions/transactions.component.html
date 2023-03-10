@@ -4,28 +4,9 @@
        
     </mat-toolbar>
     <mat-divider></mat-divider>
-    <!-- <mat-toolbar>
-        <div class="filter-section">
-            <div class="filter">
-                <span class="fliter-name">Search</span>
-                <div class="custom-input-field">
-                    <input type="text" placeholder="Name and Locality">
-                    <mat-icon>search</mat-icon>
-                </div>
-            </div>
-            <div class="select-box filter-select-box">
-                <mat-form-field appearance="outline">
-                    <mat-select #filterBy placeholder="Filter By" [disableRipple]="true">
-                        <mat-option value="{{filter.filterValue}}" *ngFor="let filter of filterList">
-                            {{filter.filterName}} </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-        </div>
-    </mat-toolbar> -->
     <div class="fliter-name mb15" >
         <div >
-            <app-filter-component  [filterList]="filterList"></app-filter-component>
+            <app-filter-component  [optionList]="filterList"></app-filter-component>
         </div>
     </div>
     <div class="transaction-table">

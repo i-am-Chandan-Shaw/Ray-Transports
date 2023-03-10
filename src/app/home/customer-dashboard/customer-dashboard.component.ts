@@ -11,9 +11,7 @@ import { AddCustomerComponent } from 'src/app/dialog-boxes/add-customer/add-cust
 export class CustomerDashboardComponent {
   @ViewChild('customerDetails') customerDetails!: ElementRef;
   customerDetailsSize: any;
-  //   interface customerDetailsSize {
-  //     width:number
-  //  }
+  selectMultipleValue:boolean=false
 
   constructor(public dialog: MatDialog, private services: SharedService) {}
 
@@ -120,9 +118,7 @@ export class CustomerDashboardComponent {
     });
   }
 
-  onValueSelected(value:any){
+  onValueSelected(value: any) {
     console.log(value);
-    
-
   }
 }

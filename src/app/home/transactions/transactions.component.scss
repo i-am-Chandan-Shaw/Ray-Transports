@@ -1,146 +1,150 @@
 .transaction-wrapper {
-    .fliter-name {
-        padding: 16px 16px 0 16px;
+  .fliter-name {
+    padding: 16px 16px 0 16px;
+  }
+
+  .transaction-table {
+    padding: 0 16px;
+
+    .table-body {
+      position: relative;
+      height: calc(100vh - 170px);
+    }
+    th {
+      font-size: var(--fnt-small);
+    }
+    td {
+      font-size: var(--fnt-small);
     }
 
-    .transaction-table{
-        padding: 0 16px;
-
-        .table-body{
-            position: relative;
-            height: calc(100vh - 170px);
-        }
-        th{
-            font-size: var(--fnt-small);
-        }
-        td{
-            font-size: var(--fnt-small);
-        }
-
-        .show-on-hover{
-            visibility: hidden;
-        }
-        tr:hover .show-on-hover{
-            visibility: visible;
-        }
-
-        .mat-icon:hover{
-            color: var(----stroked-color );
-        }
-        .amount-gave {
-            text-align: center;
-            font-weight: var(--fnt-semibold);
-            color: #f44336;
-          }
-      
-          .amount-got {
-            text-align: center;
-            font-weight: var(--fnt-semibold);
-            color: var(--success-color);
-          }
+    .show-on-hover {
+      visibility: hidden;
+    }
+    tr:hover .show-on-hover {
+      visibility: visible;
     }
 
-    .filter-section {
+    .mat-icon:hover {
+      color: var(----stroked-color);
+    }
+    .amount-gave {
+      text-align: center;
+      font-weight: var(--fnt-semibold);
+      color: #f44336;
+    }
+
+    .amount-got {
+      text-align: center;
+      font-weight: var(--fnt-semibold);
+      color: var(--success-color);
+    }
+  }
+
+  .filter-section {
+    display: flex;
+    .filter {
+      display: flex;
+      width: 100%;
+
+      .custom-input-field {
         display: flex;
-        .filter {
-            display: flex;
-            width: 100%;
+        min-width: 200px;
+        width: 200px;
+        align-items: center;
+        flex-direction: row-reverse;
+        justify-content: start;
+        border-radius: 5px;
+        padding: 4px 0px;
+        border: 1px solid rgba($color: #000000, $alpha: 0.38);
+        background-color: #fff;
+        height: 22px;
 
-            .custom-input-field {
-                display: flex;
-                min-width: 200px;
-                width: 200px;
-                align-items: center;
-                flex-direction: row-reverse;
-                justify-content: start;
-                border-radius: 5px;
-                padding: 4px 0px;
-                border: 1px solid rgba($color: #000000, $alpha: 0.38);
-                background-color: #fff;
-                height: 22px;
-
-                input {
-                    border: 0;
-                    outline: 0;
-                    font-size: var(--fnt-regular);
-                    width: 100%;
-                    padding-left: 6px;
-                }
-
-                input:focus+mat-icon {
-                    display: none;
-                }
-
-                input::placeholder {
-                    opacity: 0.5;
-                    font-weight: var(--fnt);
-                }
-
-                input:focus {
-                    border-color: #3f51b5;
-                }
-
-                mat-icon {
-
-                    font-size: 20px;
-                    vertical-align: middle;
-                    color: #d6d6d6;
-                    margin: 3px 0px 0 2px;
-                }
-            }
-
-            .custom-input-field:has(> input:focus) {
-                border-color: #3f51b5;
-            }
-
-            .select-box {
-                height: 36px;
-            }
-
-            ::ng-deep .mat-mdc-text-field-wrapper.mdc-text-field--outlined {
-
-                height: 31px;
-                width: 140px;
-            }
-
-            ::ng-deep .filter-select-box .mat-mdc-text-field-wrapper.mdc-text-field--outlined {
-
-                height: 31px;
-
-            }
-
-            ::ng-deep .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
-                padding: 0;
-
-                padding-top: 3px;
-            }
+        input {
+          border: 0;
+          outline: 0;
+          font-size: var(--fnt-regular);
+          width: 100%;
+          padding-left: 6px;
         }
-    }
-}
 
+        input:focus + mat-icon {
+          display: none;
+        }
+
+        input::placeholder {
+          opacity: 0.5;
+          font-weight: var(--fnt);
+        }
+
+        input:focus {
+          border-color: #3f51b5;
+        }
+
+        mat-icon {
+          font-size: 20px;
+          vertical-align: middle;
+          color: #d6d6d6;
+          margin: 3px 0px 0 2px;
+        }
+      }
+
+      .custom-input-field:has(> input:focus) {
+        border-color: #3f51b5;
+      }
+
+      .select-box {
+        height: 36px;
+      }
+
+      ::ng-deep .mat-mdc-text-field-wrapper.mdc-text-field--outlined {
+        :host {
+          height: 31px;
+          width: 140px;
+        }
+
+        ::ng-deep
+          .filter-select-box
+          .mat-mdc-text-field-wrapper.mdc-text-field--outlined {
+          height: 31px;
+        }
+
+        ::ng-deep
+          .mat-mdc-text-field-wrapper.mdc-text-field--outlined
+          .mat-mdc-form-field-infix {
+          padding: 0;
+
+          padding-top: 3px;
+        }
+      }
+    }
+  }
+}
 
 ::ng-deep .mat-mdc-option:focus:not(.mdc-list-item--disabled),
 ::ng-deep .mat-mdc-option.mat-mdc-option-active {
-    background-color: #fff !important;
+  background-color: #fff !important;
 }
 
 ::ng-deep .mat-mdc-option:hover:not(.mdc-list-item--disabled) {
-    background-color: #fff3e9 !important;
+  background-color: #fff3e9 !important;
 }
 
-::ng-deep .mat-primary .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
-    font-weight: 500;
+::ng-deep
+  .mat-primary
+  .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled)
+  .mdc-list-item__primary-text {
+  font-weight: 500;
 }
 
 ::ng-deep .mat-mdc-select-value {
-    font-size: var(--fnt-regular) !important;
+  font-size: var(--fnt-regular) !important;
 }
 
 ::ng-deep .mat-mdc-option.mdc-list-item {
-    font-size: var(--fnt-regular);
-    min-height: 30px;
+  font-size: var(--fnt-regular);
+  min-height: 30px;
 }
 
 ::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
-    width: 60vw;
+  width: 60vw;
 }

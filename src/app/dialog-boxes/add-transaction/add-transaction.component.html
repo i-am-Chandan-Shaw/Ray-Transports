@@ -8,29 +8,28 @@
         <div class="amount-section">
             <div class="lable">Amount</div>
             <div class="custom-input-field">
-                <input type="number" placeholder="Enter Amount">
+                <input type="number" placeholder="Enter Amount" [(ngModel)]="amount">
                 <span>₹</span>
             </div>
         </div>
         <div class="date-section">
             <div class="label">Date</div>
             <div class="date">
-                <mat-form-field appearance="outline"  >
-                    <input matInput [matDatepicker]="picker" placeholder="MM/DD/YYYY">
-                    <mat-datepicker-toggle matIconSuffix  [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker ></mat-datepicker>
-                  </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <input matInput [matDatepicker]="picker" placeholder="MM/DD/YYYY" [value]="today" (dateChange)="onDateChange($event)" >
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
             </div>
-        </div></div>
-        <div class="description-section">
-            <div class="lable">Description</div>
-            <Textarea></Textarea>
         </div>
-        <mat-divider></mat-divider>
-                <div class="initiate-transaction-section">
-                    <button mat-raised-button [style.background]="color">Add</button>
-                    <button mat-raised-button class="success reset">Reset</button>
-                </div>
-    
-
+    </div>
+    <div class="description-section">
+        <div class="lable">Description</div>
+        <textarea [(ngModel)]="description"></textarea>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="initiate-transaction-section">
+        <button mat-raised-button [style.background]="color" (click)="addEntry()">Add</button>
+        <button mat-raised-button class="success reset">Reset</button>
+    </div>
 </div>

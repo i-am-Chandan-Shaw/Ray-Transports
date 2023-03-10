@@ -1,15 +1,54 @@
-.customer-details-section {
+.wrapper {
+  .close-sidenav{
+    font-size: 25px;
+    font-weight: var(--fnt-bold);
+    color: var(--stroked-color);
+    cursor: pointer;
+  }
+  .close-sidenav:hover{
+    color: var(--fnt-secondary-color);
+    
+  }
+  .container {
+    font-size: var(--fnt-medium);
+    color: #000;
+    height: calc(100% - 160px);
+    .custom{
+      margin-bottom: 25px;
+    }
+  }
+  .party-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
 
+    button {
+      width: 48%;
+      color: #fff;
+    }
+
+    .reset {
+      background-color: var(--btn-secondary);
+      color: #000000;
+    }
+
+    ::ng-deep .success {
+      background: var(--success-color);
+      color: #fff;
+    }
+  }
+}
+.customer-details-section {
   position: relative;
 
   .success ::ng-deep .mat-mdc-raised-button:not(:disabled) {
     background-color: var(--success-color) !important;
-
   }
 
   .header {
     background: #f5f5f5;
-    color: rgba(0, 0, 0, .87);
+    color: rgba(0, 0, 0, 0.87);
     display: flex;
     justify-content: space-between;
     padding: 8px 16px;
@@ -94,13 +133,9 @@
 
         .amount {
           color: var(--success-color);
-
         }
       }
     }
-
-
-
   }
 
   .transaction-table {
@@ -118,23 +153,17 @@
       overflow: hidden;
       color: var(--fnt-secondary-color);
       font-size: var(--fnt-small);
-
-
     }
 
     .transaction-metadata {
       .date-time {
         font-weight: var(--fnt-semibold);
         font-size: var(--fnt-small);
-
-
       }
 
       .amount {
         color: var(--fnt-secondary-color);
         font-size: var(--fnt-small);
-
-
       }
     }
 
@@ -171,11 +200,49 @@
     ::ng-deep .success {
       background: var(--success-color);
       color: #fff;
-
     }
   }
 }
 
-::ng-deep .mat-drawer.mat-drawer-end{
-  width: 75%;
+// INPUT FIELD
+
+:host {
+  .custom-input-field {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    justify-content: start;
+    border-radius: 5px;
+    padding: 4px 8px;
+    border: 1px solid rgba($color: #000000, $alpha: 0.38);
+    background-color: #fff;
+    height: 22px;
+    margin: 8px 0;
+
+    input {
+      border: 0;
+      outline: 0;
+      font-size: var(--fnt-regular);
+      padding-left: 6px;
+      width: 100%;
+    }
+
+    input::placeholder {
+      opacity: 0.5;
+      font-weight: var(--fnt);
+    }
+
+    input:focus {
+      border-color: #3f51b5;
+    }
+  }
+}
+
+.custom-input-field:has(> input:focus) {
+  border-color: #3f51b5;
+}
+:host {
+  ::ng-deep .mat-drawer.mat-drawer-end {
+    width: 60%;
+  }
 }

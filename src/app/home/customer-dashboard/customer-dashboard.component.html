@@ -47,7 +47,7 @@
                             </mat-select>
                         </mat-form-field>
                     </div> -->
-                    <app-filter-component [filterList]="filterList" (valueSelected)="onValueSelected($event)"></app-filter-component>
+                    <app-filter-component [optionList]="filterList" [selectMultipleValue]="selectMultipleValue" (valueSelected)="onValueSelected($event)"></app-filter-component>
                     <div class="select-box">
                         <mat-form-field appearance="outline">
                             <mat-select #filterBy placeholder="Sort By" [disableRipple]="true">
