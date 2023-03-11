@@ -3,39 +3,37 @@
 <div class="wrapper">
     <mat-sidenav-container class="example-container">
         <mat-sidenav #sidenav position="end" mode="over" [(opened)]="opened">
-            <div class="header align-center pl20 pr20">
-                <span class="close-sidenav" (click)="closeSideNav()" >&lt;</span>
-                <h3 class="ml15">Edit Party Name</h3>
-            </div>
-            <mat-divider></mat-divider>
-            <div class="container p20">
-                <div class="custom party-name">
-                    <label for="">Party Name</label>
-                    <div class="custom-input-field">
-                        <input type="number" placeholder="Enter Name" [(ngModel)]="party_name">
-                    </div>
+                <div class="header align-center pl20 pr20">
+                    <span class="close-sidenav" (click)="closeSideNav()">&lt;</span>
+                    <h3 class="ml15">Edit Customer Details</h3>
                 </div>
-                <div class="custom phone-no">
-                    <label for="">Phone No</label> <span>(optional)</span>
-                    <div class="custom-input-field">
-                        <input type="number" placeholder="Enter phone No" [(ngModel)]="party_ph_no">
-                        <span>+91</span>
+                <mat-divider></mat-divider>
+                <form >
+                <div class="container p20">
+                    <div class="custom party-name">
+                        <label for="">Customer Name</label>
+                        <div class="custom-input-field">
+                            <input type="number" placeholder="Enter Name" [(ngModel)]="party_name">
+                        </div>
                     </div>
-                </div>
+                    <div class="custom phone-no">
+                        <label for="">Phone No</label>
+                        <div class="custom-input-field">
+                            <input type="number" placeholder="Enter phone No" [(ngModel)]="party_ph_no">
+                        </div>
+                    </div>
 
-                <div class="custom locality">
-                    <label for="">Locality</label> <span>(optional)</span>
-                    <div class="custom-input-field">
-                        <input type="text" placeholder="Locality" [(ngModel)]="party_locality">
+                    <div class="custom locality">
+                        <label for="">Locality</label>
+                        <app-auto-complete class="custom-input-field autocomplete" [options]="options"
+                            (selectedOptions)="onSelectedOption($event)"></app-auto-complete>
                     </div>
                 </div>
-            </div>
-            <div class="party-btn pl20 pr20">
-                <button mat-raised-button color="primary">Edit</button>
-                <button mat-raised-button class="success reset">Reset</button>
-            </div>
-
-        </mat-sidenav>
+                <div class="party-btn pl20 pr20">
+                    <button mat-raised-button color="primary">Update</button>
+                    <button mat-raised-button class="success reset">Reset</button>
+                </div></form>
+            </mat-sidenav>
 
 
 
@@ -84,10 +82,16 @@
                         </div>
                     </div>
                     <div class="align-center">
-                        <button mat-icon-button color="primary" class="mr10"
+                        <!-- <button mat-icon-button color="primary" class="mr10"
                             aria-label="Example icon button with a heart icon">
                             <mat-icon>agriculture</mat-icon>
-                        </button>
+                        </button> -->
+                        <button color="primary" class="mr10" mat-icon-button
+                            [matMenuTriggerFor]="beforeMenu"><mat-icon>agriculture</mat-icon></button>
+                        <mat-menu #beforeMenu="matMenu" xPosition="before">
+                            <button mat-menu-item>Item 1</button>
+                            <button mat-menu-item>Item 2</button>
+                        </mat-menu>
                         <button class="btn-primary">Add Vehicle</button>
                     </div>
                 </div>

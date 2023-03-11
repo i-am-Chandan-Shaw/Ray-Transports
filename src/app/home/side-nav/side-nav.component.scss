@@ -37,6 +37,19 @@ mat-sidenav {
       font-size: 16px;
     }
   }
+  .progress-bar{
+    content:'';
+      height:2px;
+    width:0;
+      background:var(--stroked-color);
+    transition:width 0.5s ease-in-out ;
+  }
+  .progress-bar:hover{
+    width:100%;
+  }
+}
+.nav-items:hover .progress-bar{
+  width: 100%;
 }
 
 .item.active {
@@ -68,6 +81,7 @@ mat-sidenav-container.nav-opened {
         display: block;
       }
     }
+
   }
 }
 
@@ -91,7 +105,23 @@ mat-sidenav-container.nav-closed {
         display: none;
       }
     }
+    .progress-bar{
+      content:'';
+        height:2px;
+      width:0;
+      background:var(--stroked-color);
+
+      transition:width 0.2s ease-in-out ;
+    }
+    .progress-bar:hover{
+      width:100%;
+    }
+
   }
+  .nav-items:hover .progress-bar{
+    width: 100%;
+  }
+
 }
 
 .account-icon {

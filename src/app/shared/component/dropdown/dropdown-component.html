@@ -1,8 +1,8 @@
 <div class="select-box filter-select-box">
     <mat-form-field appearance="outline">
-        <mat-select #filterBy placeholder="Filter By" [multiple]="selectMultipleValue" [disableRipple]="true">
+        <mat-select #filterBy [placeholder]="placeholder" [multiple]="selectMultipleValue" [disableRipple]="true">
             <mat-option value="{{filter.id}}" *ngFor="let filter of optionList" (click)="sendValue(filter)">
-                {{filter.filterName}} </mat-option>
+                {{filter.name}} </mat-option>
         </mat-select>
     </mat-form-field>
 </div>

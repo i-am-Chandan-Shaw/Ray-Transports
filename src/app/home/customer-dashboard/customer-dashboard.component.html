@@ -39,24 +39,8 @@
                         <input type="text" placeholder="Name and Locality">
                         <mat-icon>search</mat-icon>
                     </div>
-                    <!-- <div class="select-box filter-select-box">
-                        <mat-form-field appearance="outline">
-                            <mat-select #filterBy placeholder="Filter By" [disableRipple]="true">
-                                <mat-option value="{{filter.filterValue}}" *ngFor="let filter of filterList">
-                                    {{filter.filterName}} </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div> -->
-                    <app-filter-component [optionList]="filterList" [selectMultipleValue]="selectMultipleValue" (valueSelected)="onValueSelected($event)"></app-filter-component>
-                    <div class="select-box">
-                        <mat-form-field appearance="outline">
-                            <mat-select #filterBy placeholder="Sort By" [disableRipple]="true">
-                                <mat-option *ngFor="let option of sortOption"
-                                    [value]="option.filterValue">{{option.name}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
+                    <app-dropdown-component [optionList]="filterList" [placeholder]="'Filter By'" [selectMultipleValue]="selectMultipleValue" (valueSelected)="onValueSelected($event)"></app-dropdown-component>
+                    <app-dropdown-component [optionList]="sortOption" [placeholder]="'Sort By'" [selectMultipleValue]="selectMultipleValue" (valueSelected)="onValueSelected($event)"></app-dropdown-component>
                 </div>
             </mat-toolbar>
 

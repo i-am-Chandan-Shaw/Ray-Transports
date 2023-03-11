@@ -1,35 +1,41 @@
-.input-form-container {
-    padding: 15px;
-    // margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-
-    .input-fields {
-        display: flex;
-        flex-direction: column;
-        // margin-bottom: 10px;
-        height: 81px;
-
-        label {
-            margin-bottom: 10px;
+.main-contianer{
+    height: 100%;
+    // border: 1px solid red;
+    form{
+        .input-form-container {
+            padding: 15px;
+            // margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+        
+            .input-fields {
+                display: flex;
+                flex-direction: column;
+                // margin-bottom: 10px;
+                height: 81px;
+        
+                label {
+                    margin-bottom: 10px;
+                }
+            }
+        
+            .w97p {
+                width: 97% !important;
+            }
+        
+        
+            .mr0 {
+                margin-right: 0;
+            }
+        
+        
+            mat-icon {
+                cursor: pointer;
+            }
         }
     }
-
-    .w97p {
-        width: 97% !important;
-    }
-
-
-    .mr0 {
-        margin-right: 0;
-    }
-
-
-    mat-icon {
-        cursor: pointer;
-    }
+    
 }
-
 mat-form-field.mat-form-field.mat-form-field-appearance-outline>div.mat-form-field-wrapper>div.mat-form-field-flex>div.mat-form-field-infix {
     padding: 0.4em 0px
 }
@@ -80,6 +86,8 @@ mat-form-field.mat-form-field.mat-form-field-appearance-outline>div.mat-form-fie
     position: relative;
     top: 17px;
 }
+
+
 
 ::ng-deep .mat-mdc-form-field-error-wrapper {
     padding: 0 !important;

@@ -20,7 +20,9 @@ import { TransactionsComponent } from './home/transactions/transactions.componen
 import { VehicleComponent } from './home/vehicle/vehicle.component';
 import { ReportsComponent } from './home/reports/reports.component';
 import { SettingsComponent } from './home/settings/settings.component';
-import { FilterComponentComponent } from './shared/component/filter-component/filter-component.component';
+import { DropdownComponent } from './shared/component/dropdown/dropdown-component';
+import { InputComponent } from './shared/component/input/input.component';
+import { AutoCompleteComponent } from './shared/component/auto-complete/auto-complete.component'
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import { FilterComponentComponent } from './shared/component/filter-component/fi
     VehicleComponent,
     ReportsComponent,
     SettingsComponent,
-    FilterComponentComponent
+    DropdownComponent,
+    InputComponent,
+    AutoCompleteComponent
   ],
   imports: [
     BrowserModule,

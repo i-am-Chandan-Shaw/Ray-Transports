@@ -2,6 +2,10 @@ import { Component, Input, ViewChild } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatSidenav } from '@angular/material/sidenav';
 import { AddTransactionComponent } from 'src/app/dialog-boxes/add-transaction/add-transaction.component';
+// import {Observable} from 'rxjs';
+// import {map, startWith} from 'rxjs/operators';
+// import { FormControl, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-customer-details',
@@ -11,6 +15,11 @@ import { AddTransactionComponent } from 'src/app/dialog-boxes/add-transaction/ad
 export class CustomerDetailsComponent {
   @Input('customerDetailsSize') customerDetailsSize!: number;
   @ViewChild('sidenav') sidenav!: MatSidenav;
+  options: string[] = ['Shibpur', 'Esplanade', 'Sarkar Bazar','Salkia','Central']
+  selectedOption:string=''
+  // filteredOptions: Observable<string[]> | undefined;
+  // options: string[] = ['Shibpur', 'Esplanade', 'Sarkar Bazar','Salkia','Central'];
+  // myControl = new FormControl('');
   party_name = '';
   party_ph_no = '';
   party_locality = '';
@@ -22,7 +31,35 @@ export class CustomerDetailsComponent {
       this.prop = this.customerDetailsSize;
       console.log('prop===>', this.prop.width);
     }, 0);
+
+    // this.filteredOptions = this.myControl.valueChanges.pipe(
+    //   startWith(''),
+    //   map(value => this._filter(value || '')),
+    // );
   }
+
+  onSelectedOption(option:string){
+    this.selectedOption=option;
+    console.log('this.selectedOption==>>',this.selectedOption);
+    console.log('this.selectedOption==>>',typeof(option));
+    
+    
+  }
+  // private _filter(value: string): string[] {
+  //   const filterValue = value.toLowerCase();
+
+  //   return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  // }
+  // form = new FormGroup({
+  //   name : new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z ]{2,30}$/)]),
+  //   phone: new FormControl(),
+  //   address : new FormControl('',[Validators.required])
+  // })
+  // get locality(): any {
+  //   return this.form.get('locality');
+  // }
+
+  
   opened: boolean = false;
   public myMath = Math;
   customerDetails = {
@@ -98,7 +135,7 @@ export class CustomerDetailsComponent {
         data: 'onYouGaveClicked',
       });
       bottomSheetRef.afterDismissed().subscribe((addNewEntry) => {
-        if (addNewEntry.amount) {
+        if (addNewEntry) {
           addNewEntry.amount = parseInt('-' + addNewEntry.amount);
         }
         console.log(addNewEntry);
@@ -109,7 +146,7 @@ export class CustomerDetailsComponent {
         data: 'onYouGotClicked',
       });
       bottomSheetRef.afterDismissed().subscribe((addNewEntry) => {
-        if (addNewEntry.amount) {
+        if (addNewEntry) {
           addNewEntry.amount = parseInt('+' + addNewEntry.amount);
         }
         console.log(addNewEntry);

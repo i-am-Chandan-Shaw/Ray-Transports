@@ -1,21 +1,22 @@
-<ng-container>
-    <mat-toolbar  color="primary" class="space-between">
+<div class="main-contianer">
+    <mat-toolbar color="primary" class="space-between">
         <span>Add New Customer</span>
         <mat-icon mat-dialog-close class="mr0">close</mat-icon>
     </mat-toolbar>
-    <div class="input-form-container">
-        <div class="input-fields">
-            <label for="">Name: </label>
-            <mat-form-field appearance="outline" class="mr10">
-                <input matInput [formControl]="name" required placeholder="Enter customer name">
-                <mat-error *ngIf="name.invalid">**{{getErrorMessage('name')}}</mat-error>
-            </mat-form-field>
-        </div>
-        <form>
+    <form>
+        <div class="input-form-container">
+            <div class="input-fields">
+                <label for="">Name: </label>
+                <mat-form-field appearance="outline" class="mr10">
+                    <input matInput [formControl]="name" required placeholder="Enter customer name">
+                    <mat-error *ngIf="name.invalid">**{{getErrorMessage('name')}}</mat-error>
+                </mat-form-field>
+            </div>
             <div class="input-fields">
                 <label for="">Locality: </label>
                 <mat-form-field appearance="outline" class="mr10">
-                    <input matInput [formControl]="locality" placeholder="Enter address" [matAutocomplete]="auto" [formControl]="myControl">
+                    <input matInput [formControl]="locality" required placeholder="Enter address" [matAutocomplete]="auto">
+                    <mat-error *ngIf="locality.invalid">**{{getErrorMessage('locality')}}</mat-error>
                 </mat-form-field>
                 <mat-autocomplete #auto="matAutocomplete">
                     <perfect-scrollbar>
@@ -24,20 +25,21 @@
                         </mat-option>
                     </perfect-scrollbar>
                 </mat-autocomplete>
+                
             </div>
-        </form>
-        <div class="input-fields">
-            <label for="">Phone: </label>
-            <mat-form-field class="w97p" appearance="outline">
-                <input matInput #input maxlength="10" placeholder="Enter phone no." [formControl]="phone" required=""
-                    placeholder="0000-000-000">
-                <mat-error *ngIf="phone.invalid">**{{getErrorMessage('phone')}}</mat-error>
-            </mat-form-field>
+            <div class="input-fields">
+                <label for="">Phone: </label>
+                <mat-form-field class="w97p" appearance="outline">
+                    <input matInput #input maxlength="10" placeholder="Enter phone no." [formControl]="phone"
+                         placeholder="0000-000-000">
+                    <mat-error *ngIf="phone.invalid">**{{getErrorMessage('phone')}}</mat-error>
+                </mat-form-field>
+            </div>
+
+
+            <button mat-raised-button class="w97p" style="margin-top: 95px;" color="primary" (click)="addCustomer()" [mat-dialog-close]="true"
+                [disabled]="!form.valid ">Add Customer</button>
+
         </div>
-    
-    
-        <button mat-raised-button color="primary" (click)="addCustomer()" [mat-dialog-close]="true"
-            [disabled]="!form.valid ">Add Customer</button>
-    
-    </div>
-</ng-container>
+    </form>
+</div>

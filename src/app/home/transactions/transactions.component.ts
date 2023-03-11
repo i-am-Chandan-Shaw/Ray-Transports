@@ -1,4 +1,7 @@
 import { Component, Inject } from '@angular/core';
+import { filterList } from 'src/app/shared/utils/filter-utils';
+import{filter} from 'src/app/shared/interface/filter-interface'
+
 
 @Component({
   selector: 'app-transactions',
@@ -8,39 +11,7 @@ import { Component, Inject } from '@angular/core';
 export class TransactionsComponent {
 
 
-  public filterList = [
-    {
-      id: 0,
-      filterName: 'All',
-      filterValue: 'all',
-    },
-    {
-      id: 1,
-      filterName: 'Active',
-      filterValue: 'active',
-    },
-    {
-      id: 2,
-      filterName: 'Stopped',
-      filterValue: 'stopped',
-    },
-    {
-      id: 3,
-      filterName: "You'll Give",
-      filterValue: 'give',
-    },
-    {
-      id: 4,
-      filterName: "You'll Get",
-      filterValue: 'get',
-    },
-    {
-      id: 5,
-      filterName: 'Setteled',
-      filterValue: 'settled',
-    },
-  ];
-
+  public filterList:filter[] = filterList
   public myMath = Math;
 
   transactionDetails=[

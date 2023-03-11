@@ -2,6 +2,8 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SharedService } from 'src/app/shared/sevices/shared.service';
 import { AddCustomerComponent } from 'src/app/dialog-boxes/add-customer/add-customer.component';
+import { filterList,sortOption } from 'src/app/shared/utils/filter-utils';
+import{filter} from 'src/app/shared/interface/filter-interface'
 
 @Component({
   selector: 'app-customer-dashboard',
@@ -10,6 +12,8 @@ import { AddCustomerComponent } from 'src/app/dialog-boxes/add-customer/add-cust
 })
 export class CustomerDashboardComponent {
   @ViewChild('customerDetails') customerDetails!: ElementRef;
+  public filterList:filter[] = filterList
+  public sortOption:filter[] = sortOption
   customerDetailsSize: any;
   selectMultipleValue:boolean=false
 
@@ -30,38 +34,7 @@ export class CustomerDashboardComponent {
   }
   ngAfterViewInit() {}
 
-  public filterList = [
-    {
-      id: 0,
-      filterName: 'All',
-      filterValue: 'all',
-    },
-    {
-      id: 1,
-      filterName: 'Active',
-      filterValue: 'active',
-    },
-    {
-      id: 2,
-      filterName: 'Stopped',
-      filterValue: 'stopped',
-    },
-    {
-      id: 3,
-      filterName: "You'll Give",
-      filterValue: 'give',
-    },
-    {
-      id: 4,
-      filterName: "You'll Get",
-      filterValue: 'get',
-    },
-    {
-      id: 5,
-      filterName: 'Setteled',
-      filterValue: 'settled',
-    },
-  ];
+
 
   private getAllCustomer() {
     this.services.getAllCustomer().subscribe({
@@ -76,38 +49,12 @@ export class CustomerDashboardComponent {
   }
 
   public myMath = Math;
-  sortOption = [
-    {
-      id: 0,
-      name: 'Most Recent',
-      filterValue: '1',
-    },
-    {
-      id: 1,
-      name: 'Highest Amount',
-      filterValue: '2',
-    },
-    {
-      id: 2,
-      name: 'Least Amount',
-      filterValue: '3',
-    },
-    {
-      id: 3,
-      name: 'By Name',
-      filterValue: '4',
-    },
-    {
-      id: 4,
-      name: 'Oldest',
-      filterValue: '5',
-    },
-  ];
+
 
   public addCustomer() {
     const dialogRef = this.dialog.open(AddCustomerComponent, {
-      height: 'auto',
-      width: '300px',
+      height: '450px',
+      width: '350px',
       disableClose: true,
     });
 
