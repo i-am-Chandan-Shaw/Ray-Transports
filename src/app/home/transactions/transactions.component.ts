@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { filterList } from 'src/app/shared/utils/filter-utils';
+import { filterList, sortOption } from 'src/app/shared/utils/filter-utils';
 import{filter} from 'src/app/shared/interface/filter-interface'
 
 
@@ -10,8 +10,30 @@ import{filter} from 'src/app/shared/interface/filter-interface'
 })
 export class TransactionsComponent {
 
-
+  public userList=[
+    {
+      id:0,
+      name:'John',
+      email:'john@gmail.com'
+    },
+    {
+      id:2,
+      name:'Mark',
+      email:'mark@gmail.com'
+    },
+    {
+      id:3,
+      name:'Sam',
+      email:'samb@gmail.com'
+    },
+    {
+      id:4,
+      name:'Lilly',
+      email:'lilly@gmail.com'
+    },
+  ]
   public filterList:filter[] = filterList
+  public sortList:filter[]=sortOption
   public myMath = Math;
 
   transactionDetails=[

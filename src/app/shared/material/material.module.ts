@@ -15,7 +15,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_LOCALE  } from '@angular/material/core';
 @NgModule({
     exports:[
         BrowserAnimationsModule,
@@ -35,6 +35,7 @@ import { MatNativeDateModule } from '@angular/material/core';
         MatBottomSheetModule,
         MatDatepickerModule,
         MatNativeDateModule
-    ]
+    ],
+    providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }]
 
 }) export class MaterialModule { }

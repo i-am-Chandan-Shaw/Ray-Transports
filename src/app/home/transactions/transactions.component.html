@@ -4,9 +4,19 @@
        
     </mat-toolbar>
     <mat-divider></mat-divider>
-    <div class="fliter-name mb15" >
-        <div >
-            <app-dropdown-component [optionList]="filterList"></app-dropdown-component>
+    <div class="fliter mb15" >
+        <div class="dropdown align-center w25p mr10">
+            <label for="" class="mr10">User</label>
+            <app-dropdown-component [placeholder]="'Select User'" [optionList]="userList"></app-dropdown-component>
+        </div>
+        <div class="dropdown w25p align-center">
+            <label for="" class="mr10">Filter By</label>
+            <app-dropdown-component [placeholder]="'Filter By'" [optionList]="filterList"></app-dropdown-component>
+        </div>
+
+        <div class="dropdown w25p align-center">
+            <label for="" class="mr10">Sort By</label>
+            <app-dropdown-component [placeholder]="'Sort By'" [optionList]="sortList"></app-dropdown-component>
         </div>
     </div>
     <div class="transaction-table">

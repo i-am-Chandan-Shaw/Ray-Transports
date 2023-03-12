@@ -1,6 +1,13 @@
 .transaction-wrapper {
-  .fliter-name {
+  .fliter {
     padding: 16px 16px 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    label{
+      font-size: var(--fnt-regular);
+      font-weight: var(--fnt-semibold);
+    }
   }
 
   .transaction-table {

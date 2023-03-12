@@ -6,12 +6,11 @@
                 <mat-icon>account_circle</mat-icon>
             </button><span class="header-name">Admin</span>
         </div>
-        <div class="nav-items" *ngFor="let item of sideNavItem">
+        <div class="nav-items" [ngClass]="{'active':item.isSelected}" *ngFor="let item of sideNavItem">
             <div class="item" [ngClass]="{'active':item.isSelected}" (click)="onSeleted(item)">
                 <mat-icon>{{item.iconName}} </mat-icon>
                 <span class="item-name">{{item.displayName}} </span>
             </div>
-            <div class="progress-bar"></div>
         </div>
     </mat-sidenav>
     <mat-sidenav-content>

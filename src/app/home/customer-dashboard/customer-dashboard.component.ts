@@ -51,7 +51,6 @@ export class CustomerDashboardComponent {
     this.services.getCustomerDetails(customer.id).subscribe({
       next: (res) => {
         this.customerData = res;
-        console.log(this.customerData);
       },
       error: (err) => {
         console.log(err);
