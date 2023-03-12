@@ -14,8 +14,10 @@ export class CustomerDashboardComponent {
   @ViewChild('customerDetails') customerDetails!: ElementRef;
   public filterList:filter[] = filterList
   public sortOption:filter[] = sortOption
+  public customerData:any=null
   customerDetailsSize: any;
-  selectMultipleValue:boolean=false
+  selectMultipleValue:boolean=false;
+  public myMath = Math;
 
   constructor(public dialog: MatDialog, private services: SharedService) {}
 
@@ -24,11 +26,9 @@ export class CustomerDashboardComponent {
   ngOnInit(): void {
     this.getAllCustomer();
     setTimeout(() => {
-      if (this.customerDetails.nativeElement) {
-        // console.log(this.customerDetails.nativeElement.getBoundingClientRect())
+      if (this.customerDetails) {
         this.customerDetailsSize =
           this.customerDetails.nativeElement.getBoundingClientRect();
-        console.log(this.customerDetailsSize);
       }
     }, 0);
   }
@@ -40,7 +40,6 @@ export class CustomerDashboardComponent {
     this.services.getAllCustomer().subscribe({
       next: (res) => {
         this.allCustomerData = res;
-        console.log(this.allCustomerData);
       },
       error: (err) => {
         console.log(err);
@@ -48,7 +47,40 @@ export class CustomerDashboardComponent {
     });
   }
 
-  public myMath = Math;
+  public getCustomerDetails(customer:any){
+    this.services.getCustomerDetails(customer.id).subscribe({
+      next: (res) => {
+        this.customerData = res;
+        console.log(this.customerData);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    })
+  }
+
+  public filterCustomer(filter:any){
+    
+    this.services.filterCustomers(filter.value).subscribe({
+      next: (res) => {
+        this.allCustomerData = res;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  public sortCustomer(filter:any){
+    this.services.sortCustomer(filter.value).subscribe({
+      next: (res) => {
+        this.allCustomerData = res;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
 
 
   public addCustomer() {
@@ -65,7 +97,12 @@ export class CustomerDashboardComponent {
     });
   }
 
-  onValueSelected(value: any) {
+  public onValueSelected(value: any) {
     console.log(value);
+  }
+
+  public closeDetailsSection(e:boolean){
+    if(e)
+      this.customerData=null
   }
 }

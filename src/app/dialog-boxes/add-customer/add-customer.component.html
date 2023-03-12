@@ -6,16 +6,16 @@
     <form>
         <div class="input-form-container">
             <div class="input-fields">
-                <label for="">Name: </label>
+                <label for="firstName">Name: </label>
                 <mat-form-field appearance="outline" class="mr10">
-                    <input matInput [formControl]="name" required placeholder="Enter customer name">
+                    <input matInput [formControl]="name" name="firstName" required placeholder="Enter customer name">
                     <mat-error *ngIf="name.invalid">**{{getErrorMessage('name')}}</mat-error>
                 </mat-form-field>
             </div>
             <div class="input-fields">
-                <label for="">Locality: </label>
+                <label for="locality">Locality: </label>
                 <mat-form-field appearance="outline" class="mr10">
-                    <input matInput [formControl]="locality" required placeholder="Enter address" [matAutocomplete]="auto">
+                    <input matInput name="locality" [formControl]="locality" required placeholder="Enter address" [matAutocomplete]="auto">
                     <mat-error *ngIf="locality.invalid">**{{getErrorMessage('locality')}}</mat-error>
                 </mat-form-field>
                 <mat-autocomplete #auto="matAutocomplete">
@@ -28,9 +28,9 @@
                 
             </div>
             <div class="input-fields">
-                <label for="">Phone: </label>
+                <label for="phoneNo">Phone: </label>
                 <mat-form-field class="w97p" appearance="outline">
-                    <input matInput #input maxlength="10" placeholder="Enter phone no." [formControl]="phone"
+                    <input matInput #input maxlength="10" name="phoneNo" placeholder="Enter phone no." [formControl]="phone"
                          placeholder="0000-000-000">
                     <mat-error *ngIf="phone.invalid">**{{getErrorMessage('phone')}}</mat-error>
                 </mat-form-field>

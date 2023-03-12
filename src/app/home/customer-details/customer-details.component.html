@@ -13,13 +13,13 @@
                     <div class="custom party-name">
                         <label for="">Customer Name</label>
                         <div class="custom-input-field">
-                            <input type="number" placeholder="Enter Name" [(ngModel)]="party_name">
+                            <input type="number" name="name" placeholder="Enter Name" [(ngModel)]="party_name">
                         </div>
                     </div>
                     <div class="custom phone-no">
                         <label for="">Phone No</label>
                         <div class="custom-input-field">
-                            <input type="number" placeholder="Enter phone No" [(ngModel)]="party_ph_no">
+                            <input type="number" name="phone" placeholder="Enter phone No" [(ngModel)]="party_ph_no">
                         </div>
                     </div>
 
@@ -66,6 +66,7 @@
                                         class="icon-16">edit</mat-icon> </button>
                                 <button mat-menu-item>Delete<mat-icon class="icon-16">delete</mat-icon> </button>
                             </mat-menu>
+                            <mat-icon color="primary" (click)="closeSection()" class="mr0">close</mat-icon>
                         </div>
 
                     </div>
@@ -111,7 +112,7 @@
                         <perfect-scrollbar class="table-body">
                             <table>
                                 <tbody>
-                                    <tr *ngFor="let item of customerDetails['transaction']">
+                                    <tr *ngFor="let item of customerDetail['transaction']">
                                         <td>
                                             <div class="transaction-metadata">
                                                 <div class="date-time">

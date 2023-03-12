@@ -26,7 +26,7 @@ export const filterList=[
     },
     {
       id: 5,
-      name: 'Setteled',
+      name: 'Settled',
       value: 'settled',
     },
   ];
@@ -35,26 +35,26 @@ export const sortOption = [
     {
       id: 0,
       name: 'Most Recent',
-      value: '1',
+      value: 'mostrecent',
     },
     {
       id: 1,
       name: 'Highest Amount',
-      value: '2',
+      value: 'highestamount',
     },
     {
       id: 2,
       name: 'Least Amount',
-      value: '3',
+      value: 'leastamount',
     },
     {
       id: 3,
       name: 'By Name',
-      value: '4',
+      value: 'name',
     },
     {
       id: 4,
       name: 'Oldest',
-      value: '5',
+      value: 'oldest',
     },
   ];

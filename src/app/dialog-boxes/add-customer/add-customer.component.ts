@@ -50,7 +50,6 @@ export class AddCustomerComponent implements OnInit {
   }
 
   public addCustomer() {
-    console.log(this.form);
     let payLoad = this.form.value
     this.services.addCustomer(this.form.value).subscribe({
       next: (res) => {

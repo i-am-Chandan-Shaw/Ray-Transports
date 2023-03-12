@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatSidenav } from '@angular/material/sidenav';
 import { AddTransactionComponent } from 'src/app/dialog-boxes/add-transaction/add-transaction.component';
@@ -14,7 +14,14 @@ import { AddTransactionComponent } from 'src/app/dialog-boxes/add-transaction/ad
 })
 export class CustomerDetailsComponent {
   @Input('customerDetailsSize') customerDetailsSize!: number;
+  @Input('customerDetails') customerDetails!:any;
+
+  @Output('closeDeatilsSection') closeDeatilsSection=new EventEmitter<boolean>()
+
   @ViewChild('sidenav') sidenav!: MatSidenav;
+
+
+
   options: string[] = ['Shibpur', 'Esplanade', 'Sarkar Bazar','Salkia','Central']
   selectedOption:string=''
   // filteredOptions: Observable<string[]> | undefined;
@@ -27,10 +34,10 @@ export class CustomerDetailsComponent {
   prop: any;
   ngOnInit() {
     setTimeout(() => {
-      console.log('customerDetailsSize', this.customerDetailsSize);
       this.prop = this.customerDetailsSize;
-      console.log('prop===>', this.prop.width);
     }, 0);
+
+    
 
     // this.filteredOptions = this.myControl.valueChanges.pipe(
     //   startWith(''),
@@ -62,24 +69,7 @@ export class CustomerDetailsComponent {
   
   opened: boolean = false;
   public myMath = Math;
-  customerDetails = {
-    id: 1,
-    name: 'Rajib Koley',
-    phone: '98493849389',
-    locality: 'New Market',
-    netAmount: 50,
-    vehicle: [
-      {
-        id: '232',
-        vehicleNo: 'WB203033',
-        vehicleType: 'van',
-      },
-      {
-        id: '212',
-        vehicleNo: 'WB2035343',
-        vehicleType: 'van',
-      },
-    ],
+  public customerDetail:any={
     transaction: [
       {
         id: '23',
@@ -123,10 +113,15 @@ export class CustomerDetailsComponent {
         addedBy: 'chandan@gmail.com',
       },
     ],
-  };
+  }
+  
 
   closeSideNav() {
     this.sidenav.close()
+  }
+
+  public closeSection(){
+    this.closeDeatilsSection.emit(true)
   }
 
   initiateTransaction(transactionType: string) {

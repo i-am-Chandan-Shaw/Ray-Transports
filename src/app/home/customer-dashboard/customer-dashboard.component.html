@@ -1,5 +1,5 @@
 <div class="dashboard-container">
-    <div class="list-section">
+    <div class="list-section" [ngClass]="{'w100p':customerData==null}">
         <div class="header-section">
             <mat-toolbar>
                 <span class="header-text">Dashboard</span>
@@ -39,8 +39,8 @@
                         <input type="text" placeholder="Name and Locality">
                         <mat-icon>search</mat-icon>
                     </div>
-                    <app-dropdown-component [optionList]="filterList" [placeholder]="'Filter By'" [selectMultipleValue]="selectMultipleValue" (valueSelected)="onValueSelected($event)"></app-dropdown-component>
-                    <app-dropdown-component [optionList]="sortOption" [placeholder]="'Sort By'" [selectMultipleValue]="selectMultipleValue" (valueSelected)="onValueSelected($event)"></app-dropdown-component>
+                    <app-dropdown-component [optionList]="filterList" [placeholder]="'Filter By'" [selectMultipleValue]="selectMultipleValue" (valueSelected)="filterCustomer($event)"></app-dropdown-component>
+                    <app-dropdown-component [optionList]="sortOption" [placeholder]="'Sort By'" [selectMultipleValue]="selectMultipleValue" (valueSelected)="sortCustomer($event)"></app-dropdown-component>
                 </div>
             </mat-toolbar>
 
@@ -61,7 +61,7 @@
                     <perfect-scrollbar class="table-body">
                         <table>
                             <tbody>
-                                <tr *ngFor="let customer of allCustomerData">
+                                <tr *ngFor="let customer of allCustomerData" (click)="getCustomerDetails(customer)">
                                     <td class="name-column">
                                         <div>
                                             <div class="customer-name">{{customer.name}}</div>
@@ -100,8 +100,8 @@
         </div>
     </div>
     <mat-divider [vertical]="true"></mat-divider>
-    <div class="details-section" #customerDetails>
-        <app-customer-details [customerDetailsSize]="this.customerDetailsSize"></app-customer-details>
+    <div class="details-section" #customerDetails *ngIf="customerData !=null">
+        <app-customer-details (closeDeatilsSection)="closeDetailsSection($event)" [customerDetails]="customerData" [customerDetailsSize]="this.customerDetailsSize"></app-customer-details>
 
     </div>
 </div>

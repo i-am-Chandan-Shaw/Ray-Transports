@@ -10,13 +10,30 @@ export class SharedService {
 
    }
 
+  private apiString = `https://raytransports.com/raytransports/`;
+
   public getAllCustomer() {
-    const api = `https://raytransports.com/raytransports/getCustomer.php`;
+    const api= this.apiString+`getCustomer.php`
     return this.http.get(api);
   }
 
   public addCustomer(payload:any){
-    const api = `https://raytransports.com/raytransports/postcustomer.php`;
+    const api = this.apiString + `postcustomer.php`;
     return this.http.post(api,payload);
+  }
+
+  public getCustomerDetails(id:number){
+    const api= this.apiString+`getCustomerDetails.php?id=`+id;
+    return this.http.get(api);
+  }
+
+  public filterCustomers(filterBy:string){
+    const api= this.apiString+`getCustomer.php?filter=` + filterBy;
+    return this.http.get(api);
+  }
+
+  public sortCustomer(sortBy:string){
+    const api= this.apiString+`getCustomer.php?sort=` + sortBy;
+    return this.http.get(api);
   }
 }
