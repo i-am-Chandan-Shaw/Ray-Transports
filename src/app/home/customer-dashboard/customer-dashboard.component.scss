@@ -63,10 +63,12 @@
       .filter-section {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         width: 100%;
         .custom-input-field {
           display: flex;
           width: 40%;
+          min-width: 160px;
           align-items: center;
           flex-direction: row-reverse;
           justify-content: start;
@@ -103,6 +105,9 @@
             color: #d6d6d6;
             margin: 3px 0px 0 2px;
           }
+        }
+        .dropdown{
+          width: 25%;
         }
 
         .custom-input-field:has(> input:focus) {
@@ -194,7 +199,6 @@
     width: 25px;
   }
 }
-
 ::ng-deep .mat-mdc-option:focus:not(.mdc-list-item--disabled),
 ::ng-deep .mat-mdc-option.mat-mdc-option-active {
   background-color: #fff !important;

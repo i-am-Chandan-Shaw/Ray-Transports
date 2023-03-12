@@ -39,8 +39,13 @@
                         <input type="text" placeholder="Name and Locality">
                         <mat-icon>search</mat-icon>
                     </div>
-                    <app-dropdown-component [optionList]="filterList" [placeholder]="'Filter By'" [selectMultipleValue]="selectMultipleValue" (valueSelected)="filterCustomer($event)"></app-dropdown-component>
-                    <app-dropdown-component [optionList]="sortOption" [placeholder]="'Sort By'" [selectMultipleValue]="selectMultipleValue" (valueSelected)="sortCustomer($event)"></app-dropdown-component>
+                    <div class="dropdown">
+                        <app-dropdown-component  [optionList]="filterList" [placeholder]="'Filter By'" [selectMultipleValue]="true" (valueSelected)="filterCustomer($event)"></app-dropdown-component>
+                    </div>
+                    <div class="dropdown">
+                        <app-dropdown-component [optionList]="sortOption" [placeholder]="'Sort By'" [selectMultipleValue]="selectMultipleValue" (valueSelected)="sortCustomer($event)"></app-dropdown-component>
+                    </div>
+                    
                 </div>
             </mat-toolbar>
 
