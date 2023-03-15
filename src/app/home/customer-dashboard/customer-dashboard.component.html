@@ -66,7 +66,7 @@
                     <perfect-scrollbar class="table-body">
                         <table>
                             <tbody>
-                                <tr *ngFor="let customer of allCustomerData" (click)="getCustomerDetails(customer)">
+                                <tr *ngFor="let customer of allCustomerData" (click)="setCustomerDetails(customer)">
                                     <td class="name-column">
                                         <div>
                                             <div class="customer-name">{{customer.name}}</div>
@@ -106,7 +106,7 @@
     </div>
     <mat-divider [vertical]="true"></mat-divider>
     <div class="details-section" #customerDetails *ngIf="customerData !=null">
-        <app-customer-details (closeDeatilsSection)="closeDetailsSection($event)" [customerDetails]="customerData" [customerDetailsSize]="this.customerDetailsSize"></app-customer-details>
+        <app-customer-details (customerDetailsUpdated)="updatedTable()"  (closeDeatilsSection)="closeDetailsSection($event)" [customerDetails]="customerData" [customerDetailsSize]="this.customerDetailsSize"></app-customer-details>
 
     </div>
 </div>

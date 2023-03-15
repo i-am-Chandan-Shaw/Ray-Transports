@@ -1,0 +1,34 @@
+<div class="edit-customer-wrapper">
+    <div class="header align-center pl20 pr20">
+        <span class="close-sidenav" (click)="closeSideNav()">&lt;</span>
+        <div class="header-text ml15">Edit Customer Details</div>
+    </div>
+    <mat-divider></mat-divider>
+    <form>
+        <div class="container p20">
+            <div class="custom party-name">
+                <label for="">Customer Name</label>
+                <div class="custom-input-field">
+                    <input  type="text" name="name"  placeholder="Enter Name" [(ngModel)]="customerDetailsCopy.name">
+                </div>
+            </div>
+            <div class="custom phone-no">
+                <label for="">Phone No</label>
+                <div class="custom-input-field">
+                    <input  type="number" name="phone"   placeholder="Enter Phone No" [(ngModel)]="customerDetailsCopy.phone">
+                </div>
+            </div>
+
+            <div class="custom locality">
+                <label for="">Locality</label>
+                <app-auto-complete class="custom-input-field autocomplete" [options]="options"
+                    (selectedOptions)="onSelectedOption($event)"></app-auto-complete>
+            </div>
+        </div>
+        <div class="party-btn pl20 pr20">
+            <button mat-raised-button color="primary" (click)="updateCustomer()">Update</button>
+            <button mat-raised-button class="success reset">Reset</button>
+        </div>
+
+    </form>
+</div>

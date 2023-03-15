@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatSidenav } from '@angular/material/sidenav';
 import { AddTransactionComponent } from 'src/app/dialog-boxes/add-transaction/add-transaction.component';
+import { SharedService } from 'src/app/shared/sevices/shared.service';
 // import {Observable} from 'rxjs';
 // import {map, startWith} from 'rxjs/operators';
 // import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -17,58 +18,52 @@ export class CustomerDetailsComponent {
   @Input('customerDetails') customerDetails!:any;
 
   @Output('closeDeatilsSection') closeDeatilsSection=new EventEmitter<boolean>()
+  @Output('customerDetailsUpdated') customerDetailsUpdated=new EventEmitter<boolean>()
 
   @ViewChild('sidenav') sidenav!: MatSidenav;
 
 
+  public opened: boolean = false;
+  public myMath = Math;
+  public customerTransactions:any=[]
 
-  options: string[] = ['Shibpur', 'Esplanade', 'Sarkar Bazar','Salkia','Central']
-  selectedOption:string=''
-  // filteredOptions: Observable<string[]> | undefined;
-  // options: string[] = ['Shibpur', 'Esplanade', 'Sarkar Bazar','Salkia','Central'];
-  // myControl = new FormControl('');
-  party_name = '';
-  party_ph_no = '';
-  party_locality = '';
-  constructor(private _bottomSheet: MatBottomSheet) {}
+
+  constructor(private _bottomSheet: MatBottomSheet, private services:SharedService ) {}
   prop: any;
   ngOnInit() {
+
     setTimeout(() => {
       this.prop = this.customerDetailsSize;
-    }, 0);
+    }, 300);
 
-    
-
-    // this.filteredOptions = this.myControl.valueChanges.pipe(
-    //   startWith(''),
-    //   map(value => this._filter(value || '')),
-    // );
   }
 
-  onSelectedOption(option:string){
-    this.selectedOption=option;
-    console.log('this.selectedOption==>>',this.selectedOption);
-    console.log('this.selectedOption==>>',typeof(option));
-    
-    
+  ngOnChanges(changes: SimpleChanges) {
+    if(changes['customerDetails'].currentValue)
+    this.getIndividualTransaction(this.customerDetail)
   }
-  // private _filter(value: string): string[] {
-  //   const filterValue = value.toLowerCase();
 
-  //   return this.options.filter(option => option.toLowerCase().includes(filterValue));
-  // }
-  // form = new FormGroup({
-  //   name : new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z ]{2,30}$/)]),
-  //   phone: new FormControl(),
-  //   address : new FormControl('',[Validators.required])
-  // })
-  // get locality(): any {
-  //   return this.form.get('locality');
-  // }
+  public detailsUpdated(data:any){
+    this.customerDetails=data
+    this.customerDetailsUpdated.emit(true)
+  }
+
+  private getIndividualTransaction(customer:any){
+    this.services.getIndividualTransaction(customer.id).subscribe({
+      next:(res)=>{
+        this.customerTransactions=res;
+        console.log(this.customerTransactions);
+        
+      },
+      error:(err)=>{
+        console.log(err);
+        
+      }
+    })
+  }
 
   
-  opened: boolean = false;
-  public myMath = Math;
+
   public customerDetail:any={
     transaction: [
       {

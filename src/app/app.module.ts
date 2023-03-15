@@ -22,7 +22,8 @@ import { ReportsComponent } from './home/reports/reports.component';
 import { SettingsComponent } from './home/settings/settings.component';
 import { DropdownComponent } from './shared/component/dropdown/dropdown-component';
 import { InputComponent } from './shared/component/input/input.component';
-import { AutoCompleteComponent } from './shared/component/auto-complete/auto-complete.component'
+import { AutoCompleteComponent } from './shared/component/auto-complete/auto-complete.component';
+import { EditCustomerComponent } from './home/edit-customer/edit-customer.component'
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { AutoCompleteComponent } from './shared/component/auto-complete/auto-com
     SettingsComponent,
     DropdownComponent,
     InputComponent,
-    AutoCompleteComponent
+    AutoCompleteComponent,
+    EditCustomerComponent
   ],
   imports: [
     BrowserModule,

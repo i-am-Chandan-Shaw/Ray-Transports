@@ -17,9 +17,25 @@ export class SharedService {
     return this.http.get(api);
   }
 
+  public getAllVehicle() {
+    const api= this.apiString+`getVehicle.php`
+    return this.http.get(api);
+  }
+
+  public getIndividualTransaction(customerId:number) {
+    const api= this.apiString+`getTransactions.php?customerId=${customerId}`
+    return this.http.get(api);
+  }
+
+
   public addCustomer(payload:any){
     const api = this.apiString + `postcustomer.php`;
     return this.http.post(api,payload);
+  }
+
+  public updateCustomer(payload:any, id:number){
+    const api = this.apiString + `updateCustomer.php?id=`+id;
+    return this.http.patch(api,payload);
   }
 
   public getCustomerDetails(id:number){
@@ -36,4 +52,8 @@ export class SharedService {
     const api= this.apiString+`getCustomer.php?sort=` + sortBy;
     return this.http.get(api);
   }
+
+  
+
+
 }

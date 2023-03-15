@@ -34,6 +34,9 @@ export class CustomerDashboardComponent {
   }
   ngAfterViewInit() {}
 
+  public updatedTable(){
+    this.ngOnInit()
+  }
 
 
   private getAllCustomer() {
@@ -47,15 +50,8 @@ export class CustomerDashboardComponent {
     });
   }
 
-  public getCustomerDetails(customer:any){
-    this.services.getCustomerDetails(customer.id).subscribe({
-      next: (res) => {
-        this.customerData = res;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    })
+  public setCustomerDetails(customer:any){
+   this.customerData=customer
   }
 
   public filterCustomer(filter:any){

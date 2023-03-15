@@ -8,6 +8,7 @@ import { TransactionsComponent } from './home/transactions/transactions.componen
 import { VehicleComponent } from './home/vehicle/vehicle.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './shared/auth/auth.guard';
+import {HashLocationStrategy, LocationStrategy} from '@angular/common'
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -28,6 +29,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers:[{provide: LocationStrategy, useClass: HashLocationStrategy}]
 })
 export class AppRoutingModule { }

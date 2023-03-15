@@ -3,49 +3,17 @@
 <div class="wrapper">
     <mat-sidenav-container class="example-container">
         <mat-sidenav #sidenav position="end" mode="over" [(opened)]="opened">
-                <div class="header align-center pl20 pr20">
-                    <span class="close-sidenav" (click)="closeSideNav()">&lt;</span>
-                    <h3 class="ml15">Edit Customer Details</h3>
-                </div>
-                <mat-divider></mat-divider>
-                <form >
-                <div class="container p20">
-                    <div class="custom party-name">
-                        <label for="">Customer Name</label>
-                        <div class="custom-input-field">
-                            <input type="number" name="name" placeholder="Enter Name" [(ngModel)]="party_name">
-                        </div>
-                    </div>
-                    <div class="custom phone-no">
-                        <label for="">Phone No</label>
-                        <div class="custom-input-field">
-                            <input type="number" name="phone" placeholder="Enter Phone No" [(ngModel)]="party_ph_no">
-                        </div>
-                    </div>
-
-                    <div class="custom locality">
-                        <label for="">Locality</label>
-                        <app-auto-complete class="custom-input-field autocomplete" [options]="options"
-                            (selectedOptions)="onSelectedOption($event)"></app-auto-complete>
-                    </div>
-                </div>
-                <div class="party-btn pl20 pr20">
-                    <button mat-raised-button color="primary">Update</button>
-                    <button mat-raised-button class="success reset">Reset</button>
-                </div></form>
-            </mat-sidenav>
-
-
-
+                <app-edit-customer (detailsUpdated)="detailsUpdated($event)" [customerDetails]="customerDetails" (closeEditNav)="closeSideNav()"></app-edit-customer>
+        </mat-sidenav>
         <mat-sidenav-content>
             <div class="customer-details-section">
                 <div class="header">
                     <div class="left-container">
                         <div class="customer-name">
-                            <div class="customer-name-icon">{{customerDetails[0].name[0]}}</div>
+                            <div class="customer-name-icon">{{customerDetails.name[0]}}</div>
                             <div class="customer-details">
-                                <div class="customer-name">{{customerDetails[0].name}}</div>
-                                <div class="customer-phone-number">{{customerDetails[0].phone}}</div>
+                                <div class="customer-name">{{customerDetails.name}}</div>
+                                <div class="customer-phone-number">{{customerDetails.phone}}</div>
                             </div>
                         </div>
                     </div>
@@ -78,8 +46,8 @@
                         <div class="header">NET BALANCE:</div>
                         <div class="amount-section"
                             ngClass="{customerDetails.netAmount > 0 ?'amount-gave':'amount-got}">
-                            {{customerDetails.netAmount > 0 ?"You'll Get:" : "You'll Give:"}}
-                            <span class="symbol"> ₹ </span><span class="amount">{{customerDetails.netAmount}}</span>
+                            {{customerDetails.amount < 0 ?"You'll Get:" : "You'll Give:"}}
+                            <span class="symbol"> ₹ </span><span class="amount">{{myMath.abs(customerDetails.amount)}}</span>
                         </div>
                     </div>
                     <div class="align-center">
@@ -112,18 +80,18 @@
                         <perfect-scrollbar class="table-body">
                             <table>
                                 <tbody>
-                                    <tr *ngFor="let item of customerDetail['transaction']">
+                                    <tr *ngFor="let item of customerTransactions">
                                         <td>
                                             <div class="transaction-metadata">
                                                 <div class="date-time">
-                                                    <span class="date">{{item.date | dateToDays}}</span> • <span
-                                                        class="time">{{item.time}}</span>
+                                                    <span class="date">{{item.date}}</span> • <span
+                                                        class="time">{{item.time?item.time:'12:00 A.M'}}</span>
                                                 </div>
                                                 <div class="amount">Balance: <span
-                                                        class="balance">{{item.balance}}</span></div>
+                                                        class="balance">{{item.balance?item.balance:'200'}}</span></div>
                                             </div>
                                             <div class="transaction-details">
-                                                {{item.comment}}
+                                                {{item.description? item.description:'System generated transaction'}}
                                             </div>
                                         </td>
                                         <td class="w16p amount-gave"> {{item.amount<0? myMath.abs(item.amount)

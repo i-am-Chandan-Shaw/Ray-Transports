@@ -1,1 +1,120 @@
-<p>reports work</p>
+<div class="report-wrapper">
+    <div class="report-container">
+        <div class="header p15">
+            <div class="align-center">
+                <span class="transaction-logo">
+                    <img src="../../../assets/img/transaction.png" alt="">
+                </span>
+                <div class="title ml15">Transactions Report</div>
+            </div>
+            <div class="download-btn">
+                <button class="report-btn" mat-stroked-button color="primary">
+                    <span>Report</span><mat-icon>download</mat-icon>
+                </button>
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="sub-header p15">
+            <div class="customer-name">
+                <label>Customer Name</label>
+                <app-input [placeholder]="'Search'"></app-input>
+            </div>
+            <div class="period">
+                <label>Period</label>
+                <app-dropdown-component [optionList]="periodList"></app-dropdown-component>
+            </div>
+            <div class="calender">
+                <div class="start">
+                    <label for="">Start</label>
+                    <div class="date">
+                        <mat-form-field appearance="outline">
+                            <input matInput [matDatepicker]="startDatePicker" placeholder="MM/DD/YYYY">
+                            <mat-datepicker-toggle matIconSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+                            <mat-datepicker #startDatePicker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+
+                <div class="end">
+                    <label for="">Start</label>
+                    <div class="date">
+                        <mat-form-field appearance="outline">
+                            <input matInput [matDatepicker]="endDatePicker" placeholder="MM/DD/YYYY">
+                            <mat-datepicker-toggle matIconSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                            <mat-datepicker #endDatePicker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+        <mat-divider></mat-divider>
+
+
+        <div class="overview-section p15">
+            <label for="">Total 3 entries</label>
+            <div class="card mt10">
+                <div class="card-details">
+                    <div class="amount">₹73634</div>
+                    <label>You Gave</label>
+                </div>
+                <div class="card-details">
+                    <div class="amount">₹73634</div>
+                    <label>You Got</label>
+
+                </div>
+                <div class="card-details">
+                    <div class="amount">₹73634</div>
+                    <label>Net Balance</label>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="report-table p15">
+            <div class="customer-table simple-table">
+            <div class="main-table">
+                <table class="table-header">
+                    <thead class="border-left">
+                        <tr>
+                            <th class="w5p text-left">Date</th>
+                            <th class="w8p text-left">Customer Name</th>
+                            <th class="w10p text-left">Description</th>
+                            <th class="w7p text-left">Added By</th>
+                            <th class="text-center w4p">You Gave</th>
+                            <th class="text-center w4p">You Got</th>
+                            <th class="w4p text-right">Options</th>
+                        </tr>
+                    </thead>
+                </table>
+                <perfect-scrollbar class="table-body">
+                    <table>
+                        <tbody>
+                            <tr *ngFor="let item of transactionDetails">
+                                <td class="w5p text-left">{{item.createdDate | dateToDays}}</td>
+                                <td class="w8p text-left">{{item.customerName}}</td>
+                                <td class="w10p text-left">{{item.description}}</td>
+                                <td class="w7p text-left">{{item.addedBy}}</td>
+                                <td class="w4p text-center amount-gave"> {{item.amount<0? myMath.abs(item.amount) :'-'}}</td>
+                            <td class="w4p text-center amount-got"> {{item.amount>0? item.amount :'-'}} </td>
+                                <td class="w4p text-right">
+                                    <div class="show-on-hover">
+                                        <mat-icon class="icon-16 mr10" [autoPlacement]="true"tooltip="Edit transaction" [theme]="'light'" placement="top">edit</mat-icon>
+                                        <mat-icon class="icon-16" [autoPlacement]="true" tooltip="Delete transaction" [theme]="'light'" placement="top">delete</mat-icon>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+    
+                </perfect-scrollbar>
+            </div>
+    
+        </div>
+        </div>
+
+
+    </div>
