@@ -24,6 +24,8 @@ export class AutoCompleteComponent implements OnInit {
 
   onSelectedOptions(option:string){    
     this.selectedOptions.emit(option)
+    // console.log(option);
+    
   }
 
   private _filter(value: string): string[] {
@@ -31,14 +33,14 @@ export class AutoCompleteComponent implements OnInit {
 
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
-  form = new FormGroup({
-    name : new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z ]{2,30}$/)]),
-    phone: new FormControl(),
-    address : new FormControl('',[Validators.required])
-  })
-  get locality(): any {
-    return this.form.get('locality');
-  }
+  // form = new FormGroup({
+  //   name : new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z ]{2,30}$/)]),
+  //   phone: new FormControl(),
+  //   address : new FormControl('',[Validators.required])
+  // })
+  // get locality(): any {
+  //   return this.form.get('locality');
+  // }
 
 
   

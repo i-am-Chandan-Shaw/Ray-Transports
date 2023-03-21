@@ -624,7 +624,7 @@ body {
 }
 
 .pr10 {
-    margin-right: 10px !important;
+    padding-right: 10px !important;
 }
 
 .pt10 {
@@ -687,6 +687,27 @@ body {
 
 .d-flex {
     display: flex;
+}
+
+.d-flex-gap10{
+    display: flex;
+    gap: 10px;
+}
+.d-flex-gap15{
+    display: flex;
+    gap: 15px;
+}
+.d-flex-gap20{
+    display: flex;
+    gap: 20px;
+}
+.d-flex-gap30{
+    display: flex;
+    gap: 30px;
+}
+.d-flex-gap50{
+    display: flex;
+    gap: 30px;
 }
 
 .justify-center {

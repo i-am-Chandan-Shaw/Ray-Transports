@@ -4,29 +4,33 @@
         <div class="header-text ml15">Edit Customer Details</div>
     </div>
     <mat-divider></mat-divider>
-    <form>
+    <form >
         <div class="container p20">
             <div class="custom party-name">
-                <label for="">Customer Name</label>
-                <div class="custom-input-field">
-                    <input  type="text" name="name"  placeholder="Enter Name" [(ngModel)]="customerDetailsCopy.name">
+                <label for="name">Customer Name</label>
+                <div class="custom-input-field " >
+                    <input type="text"  name="name" [formControl]="customerName" placeholder="Enter Name" [(ngModel)]="customerDetailsCopy.name">
                 </div>
+                <span class="invalid" *ngIf="customerName.invalid">**Please provide customer name</span>
+                
             </div>
             <div class="custom phone-no">
-                <label for="">Phone No</label>
+                <label for="phone">Phone No</label>
                 <div class="custom-input-field">
-                    <input  type="number" name="phone"   placeholder="Enter Phone No" [(ngModel)]="customerDetailsCopy.phone">
+                    <input  type="number" name="phone" [formControl]="phoneNo"  placeholder="Enter Phone No" [(ngModel)]="customerDetailsCopy.phone">
                 </div>
+                <span class="invalid" *ngIf="phoneNo.invalid">**Please provide Phone Number</span>
             </div>
 
             <div class="custom locality">
                 <label for="">Locality</label>
                 <app-auto-complete class="custom-input-field autocomplete" [options]="options"
-                    (selectedOptions)="onSelectedOption($event)"></app-auto-complete>
+                    (selectedOptions)="onSelectedOption($event)" formControlName="locality"></app-auto-complete>
+                    <span [ngClass]="selectedOption ==''?'invalid':''" *ngIf="selectedOption ==''">**Please provide Locality Name</span>
             </div>
         </div>
         <div class="party-btn pl20 pr20">
-            <button mat-raised-button color="primary" (click)="updateCustomer()">Update</button>
+            <button mat-raised-button color="primary" [disabled]="selectedOption && !editForm.invalid" (click)="updateCustomer()">Update</button>
             <button mat-raised-button class="success reset">Reset</button>
         </div>
 

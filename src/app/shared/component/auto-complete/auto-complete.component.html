@@ -1,10 +1,10 @@
 <div class="autocomplete nopadding">
     <mat-form-field appearance="outline" class="mr10">
-        <input matInput [formControl]="locality" placeholder="Enter address" [matAutocomplete]="auto" [formControl]="myControl">
+        <input matInput placeholder="Enter address" [matAutocomplete]="auto" [formControl]="myControl">
     </mat-form-field>
     <mat-autocomplete class="height-of-auocomplete" #auto="matAutocomplete"><perfect-scrollbar>
             <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                <div (click)="onSelectedOptions(option)">{{option}}</div>
+                <div class="option" (click)="onSelectedOptions(option)">{{option}}</div>
             </mat-option></perfect-scrollbar>
     </mat-autocomplete>
 </div>

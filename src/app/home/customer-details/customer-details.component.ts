@@ -53,7 +53,6 @@ export class CustomerDetailsComponent {
       next:(res)=>{
         this.customerTransactions=res;
         console.log(this.customerTransactions);
-        
       },
       error:(err)=>{
         console.log(err);

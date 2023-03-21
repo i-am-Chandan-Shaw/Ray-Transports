@@ -50,6 +50,12 @@
     }
   }
 
+  .invalid{
+    font-size: var(--fnt-small);
+    color:red;
+    float:right;
+    margin-top: -5px;
+  }
 
   :host {
     .custom-input-field {
