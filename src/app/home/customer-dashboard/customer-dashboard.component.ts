@@ -4,6 +4,7 @@ import { SharedService } from 'src/app/shared/sevices/shared.service';
 import { AddCustomerComponent } from 'src/app/dialog-boxes/add-customer/add-customer.component';
 import { filterList,sortOption } from 'src/app/shared/utils/filter-utils';
 import{filter} from 'src/app/shared/interface/filter-interface'
+import { CustomerVehiclesComponent } from 'src/app/dialog-boxes/customer-vehicles/customer-vehicles.component';
 
 @Component({
   selector: 'app-customer-dashboard',
@@ -77,9 +78,12 @@ export class CustomerDashboardComponent {
     });
   }
 
+ 
+
 
   public addCustomer() {
     const dialogRef = this.dialog.open(AddCustomerComponent, {
+      autoFocus: false,
       height: '450px',
       width: '350px',
       disableClose: true,

@@ -47,7 +47,7 @@ export class SideNavComponent implements OnInit {
       routePath: 'home/settings',
     },
   ];
-  public selectedTab= this.sideNavItem[2];
+  public selectedTab= this.sideNavItem[0];
   ngOnInit(): void {
     
     

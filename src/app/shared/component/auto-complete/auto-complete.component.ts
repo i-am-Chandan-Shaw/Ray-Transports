@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import { In_options } from '../../interface/In_options';
 
 
 @Component({
@@ -10,37 +11,39 @@ import {map, startWith} from 'rxjs/operators';
   styleUrls: ['./auto-complete.component.scss']
 })
 export class AutoCompleteComponent implements OnInit {
+  @Input()placeholder:any
   myControl = new FormControl('');
-  filteredOptions: Observable<string[]> | undefined;
-  @Input('options')options!: string[]
-  @Output('selectedOptions')selectedOptions=new EventEmitter<string>()
+  filteredOptions: Observable<In_options[]> | undefined;
+  @Input('options')options!: In_options[]
+  @Output('selectedOptions') selectedOptions = new EventEmitter<any>()
+  
+  public temp:any;
 
-  ngOnInit(){
+  ngOnInit() {
+    console.log("filter");
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
-      map(value => this._filter(value || '')),
+      map((value:any) => {
+        const name = typeof value === 'string' ? value : value?.displayName;
+        return name ? this._filter(name as string) : this.options.slice();
+      })
     );
-  }
-
-  onSelectedOptions(option:string){    
-    this.selectedOptions.emit(option)
-    // console.log(option);
+    this.temp = this.options[0]
+    console.log(this.temp);
     
   }
 
-  private _filter(value: string): string[] {
+  onSelectedOptions(option:In_options){    
+    this.selectedOptions.emit(option)
+  }
+
+  private _filter(value: any):any[] {
+    console.log(value);
+   
     const filterValue = value.toLowerCase();
 
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    return this.options.filter(option => option.displayName.toLowerCase().includes(filterValue));
   }
-  // form = new FormGroup({
-  //   name : new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z ]{2,30}$/)]),
-  //   phone: new FormControl(),
-  //   address : new FormControl('',[Validators.required])
-  // })
-  // get locality(): any {
-  //   return this.form.get('locality');
-  // }
 
 
   

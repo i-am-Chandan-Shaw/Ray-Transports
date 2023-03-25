@@ -3,7 +3,8 @@
 <div class="wrapper">
     <mat-sidenav-container class="example-container">
         <mat-sidenav #sidenav position="end" mode="over" [(opened)]="opened">
-                <app-edit-customer (detailsUpdated)="detailsUpdated($event)" [customerDetails]="customerDetails" (closeEditNav)="closeSideNav()"></app-edit-customer>
+            <app-edit-customer (detailsUpdated)="detailsUpdated($event)" [customerDetails]="customerDetails"
+                (closeEditNav)="closeSideNav()"></app-edit-customer>
         </mat-sidenav>
         <mat-sidenav-content>
             <div class="customer-details-section">
@@ -46,22 +47,41 @@
                         <div class="header">NET BALANCE:</div>
                         <div class="amount-section"
                             ngClass="{customerDetails.netAmount > 0 ?'amount-gave':'amount-got}">
-                            {{customerDetails.amount < 0 ?"You'll Get:" : "You'll Give:"}}
-                            <span class="symbol"> ₹ </span><span class="amount">{{myMath.abs(customerDetails.amount)}}</span>
+                            {{customerDetails.amount < 0 ?"You'll Get:" : "You'll Give:" }} <span class="symbol"> ₹
+                                </span><span class="amount">{{myMath.abs(customerDetails.amount)}}</span>
                         </div>
                     </div>
                     <div class="align-center">
-                        <!-- <button mat-icon-button color="primary" class="mr10"
-                            aria-label="Example icon button with a heart icon">
-                            <mat-icon>agriculture</mat-icon>
-                        </button> -->
                         <button color="primary" class="mr10" mat-icon-button
-                            [matMenuTriggerFor]="beforeMenu"><mat-icon>agriculture</mat-icon></button>
-                        <mat-menu #beforeMenu="matMenu" xPosition="before">
-                            <button mat-menu-item>Item 1</button>
-                            <button mat-menu-item>Item 2</button>
+                            (click)="openVehicleDialog()"><mat-icon>local_shipping</mat-icon></button>
+
+                        <button class="btn-primary" [matMenuTriggerFor]="addVehicle">Add Vehicle</button>
+                        <mat-menu #addVehicle="matMenu" class="mt5" xPosition="before">
+                            <div class="add-vehicle-container">
+                                <mat-toolbar (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
+                                    Add New Vehicle
+                                </mat-toolbar>
+                                <div class="main-container" (click)="$event.stopPropagation()"
+                                    (keydown)="$event.stopPropagation()">
+                                    <div class="input-container mr5">
+                                        <label for="" class="mb10">Vehicle Number</label>
+                                        <label for="">Rate</label>
+                                    </div>
+                                    <div class="input-container">
+                                        <app-auto-complete (selectedOptions)="onSelectedOption($event)"
+                                            [options]="options" [placeholder]="'Vehicle Name'" ></app-auto-complete>
+                                        <div class="custom-input-field">
+                                            <input matInput type="text" name="vehicleRate" required autocomplete="off"
+                                                placeholder="Enter Vehicle Number" type="number">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <button class="btn-primary mr10">Add</button>
+                                    <button class="btn-secondary">Cancel</button>
+                                </div>
+                            </div>
                         </mat-menu>
-                        <button class="btn-primary">Add Vehicle</button>
                     </div>
                 </div>
                 <mat-divider></mat-divider>

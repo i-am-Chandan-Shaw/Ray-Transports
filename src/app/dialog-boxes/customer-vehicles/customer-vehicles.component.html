@@ -1,0 +1,44 @@
+<div class="customer-vehicle-wrapper">
+    <mat-toolbar class="header" color="primary">
+        <span>Added Vehicles</span>
+        <mat-icon mat-dialog-close class="mr0">close</mat-icon>
+    </mat-toolbar>
+    <div class="customer-table simple-table user-vehicle-table">
+        <div class="main-table">
+            <table class="table-header">
+                <thead class="border-left">
+                    <tr>
+                        <th class="w20p text-left">Vehicle No</th>
+                        <th class="w30p text-left">Assigned Date</th>
+                        <th class="w10p text-center">Status</th>
+                        <th class="w10p text-right">Rate</th>
+                        <th class="w20p text-right">Options</th>
+                    </tr>
+                </thead>
+            </table>
+            <perfect-scrollbar (suppressScrollX)="true" class="table-body">
+                <table>
+                    <tbody>
+                        <tr *ngFor="let vehicle of customerVehicles">
+                            <td class="w20p text-left">{{vehicle.vehicleNumber}}</td>
+                            <td class="w30p text-left"> {{vehicle.createdDate}} </td>
+                            <td class="w10p text-center">
+                                <div class="status-icon active" *ngIf="vehicle.isActive" [autoPlacement]="true"
+                                    tooltip="Active" [theme]="'light'" placement="top">
+                                    <span>A</span>
+                                </div>
+                                <div class="status-icon inactive" *ngIf="!vehicle.isActive" [autoPlacement]="true"
+                                    tooltip="Stopped" [theme]="'light'" placement="top">
+                                    <span>S</span>
+                                </div>
+                            </td>
+                            <td class="w10p text-right"> {{vehicle.rate}} </td>
+                            <td class="w20p text-right" *ngIf="vehicle.isActive"><mat-icon color="warn">block</mat-icon></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </perfect-scrollbar>
+        </div>
+    </div>
+</div>

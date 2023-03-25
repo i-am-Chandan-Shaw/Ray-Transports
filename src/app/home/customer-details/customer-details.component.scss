@@ -1,30 +1,28 @@
 .wrapper {
-  .close-sidenav{
+  .close-sidenav {
     font-size: 25px;
     font-weight: var(--fnt-bold);
     color: var(--stroked-color);
     cursor: pointer;
   }
-  .close-sidenav:hover{
+  .close-sidenav:hover {
     color: var(--fnt-secondary-color);
-    
   }
-form{
-  height: calc(100% - 67px);
-  .container {
-    font-size: var(--fnt-medium);
-    color: #000;
-    height: calc(100% - 85px);
-    .custom{
-      margin-bottom: 25px;
+  form {
+    height: calc(100% - 67px);
+    .container {
+      font-size: var(--fnt-medium);
+      color: #000;
+      height: calc(100% - 85px);
+      .custom {
+        margin-bottom: 25px;
+      }
     }
   }
-}
   .party-btn {
     display: flex;
     align-items: center;
     justify-content: space-between;
-  
 
     button {
       width: 48%;
@@ -139,6 +137,7 @@ form{
         }
       }
     }
+
   }
 
   .transaction-table {
@@ -207,9 +206,65 @@ form{
   }
 }
 
+
+//Add Vehicle Popup
+
+
+.add-vehicle-container{
+  mat-toolbar{
+    height: 30px;
+    padding: 10px !important;
+    font-size: var(--fnt-medium);
+    background-color: #c9e5f3;
+  }
+  .main-container{
+    padding: 10px;
+    display: flex;
+    font-size: var(--fnt-regular);
+    .input-container{
+      display: flex;
+      flex-direction: column;
+      justify-content:space-evenly ;
+    }
+  }
+
+  .footer{
+    padding: 10px;
+    padding-top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+  }
+  
+}
+
+
+::ng-deep .input-form-container .mat-mdc-text-field-wrapper {
+    height: 30px !important;
+}
+
+::ng-deep .input-form-container .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+    padding: 3px 0px;
+    font-size: var(--fnt-regular);
+}
+
+::ng-deep .input-form-container .mat-mdc-form-field .mat-mdc-floating-label.mdc-floating-label {
+    font-size: 13px;
+}
+
+::ng-deep .input-form-container .mat-mdc-form-field .mat-mdc-floating-label.mdc-floating-label {
+    line-height: normal;
+    pointer-events: all;
+    position: relative;
+    top: 17px;
+}
+
+
+
+
 // INPUT FIELD
 
-:host {
+
   .custom-input-field {
     display: flex;
     align-items: center;
@@ -239,35 +294,28 @@ form{
       border-color: #3f51b5;
     }
   }
-  .custom-input-field.autocomplete{
+  .custom-input-field.autocomplete {
     padding: 4px 0;
   }
-  // .custom-input-field.locality{
-  //   height: auto !important;
-    
-  // }
-//   ::ng-deep .mat-mdc-form-field{
-//     width: 100%;margin: 0 !important;
-//   }
-//   ::ng-deep .mat-mdc-text-field-wrapper.mdc-text-field--outlined {
-//     width:100%;
-//   }
 
-}
-// ::ng-deep .cdk-overlay-pane:not(.mat-mdc-autocomplete-panel-above) .mdc-menu-surface.mat-mdc-autocomplete-panel{
-//   max-height: 100%;
-  
-// }
 
-// .custom-input-field:has(> input:focus) {
-//   border-color: #3f51b5;
-// }
 :host {
   ::ng-deep .mat-drawer.mat-drawer-end {
     width: 60%;
   }
 }
-
-::ng-deep .cdk-overlay-pane:not(.mat-mdc-autocomplete-panel-above) .mdc-menu-surface.mat-mdc-autocomplete-panel.height-of-auocomplete {
+::ng-deep .mat-mdc-menu-panel.mat-mdc-menu-panel {
+  max-width: 500px !important;
+}
+::ng-deep .mat-mdc-menu-content {
+  padding: 0 !important;
+  overflow-x: hidden;
+}
+::ng-deep .ps--active-x > .ps__rail-x {
+  display: none;
+}
+::ng-deep
+  .cdk-overlay-pane:not(.mat-mdc-autocomplete-panel-above)
+  .mdc-menu-surface.mat-mdc-autocomplete-panel.height-of-auocomplete {
   max-height: 100%;
 }

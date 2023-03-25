@@ -1,0 +1,51 @@
+.customer-vehicle-wrapper{
+    mat-toolbar{
+        height: 35px;
+        font-weight: normal;
+        font-size: var(--fnt-medium);
+    }
+    .header{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .user-vehicle-table {
+        padding: 15px;
+        font-size: var(--fnt-regular) !important;
+
+        .status-icon {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #d6d6d6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: var(--fnt-small);
+            font-weight: 500;
+            margin: 0 auto;
+            font-family: roboto;
+            line-height: normal;
+        }
+
+        table tr td{
+            font-size: var(--fnt-regular) !important;
+        }
+
+        table tr th{
+            font-size: var(--fnt-regular) !important;
+            font-weight: 500 !important
+        }
+
+        .status-icon.active {
+            background-color: var(--success-color);
+        }
+
+        .status-icon.inactive {
+            background-color: #f44336;
+        }
+        }
+    
+}

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { In_options } from 'src/app/shared/interface/In_options';
 import { SharedService } from 'src/app/shared/sevices/shared.service';
 
 @Component({
@@ -7,20 +8,53 @@ import { SharedService } from 'src/app/shared/sevices/shared.service';
   templateUrl: './edit-customer.component.html',
   styleUrls: ['./edit-customer.component.scss'],
 })
-export class EditCustomerComponent implements OnInit,OnChanges {
+export class EditCustomerComponent implements OnInit, OnChanges {
   @Input('customerDetails') customerDetails!: any;
 
   @Output('closeEditNav') closeEditNav = new EventEmitter<boolean>();
   @Output('detailsUpdated') detailsUpdated = new EventEmitter<any>();
 
-  public options: string[] = [
-    'Shibpur',
-    'Esplanade',
-    'Sarkar Bazar',
-    'Salkia',
-    'Central',
+  // public options: string[] = [
+  //   'Shibpur',
+  //   'Esplanade',
+  //   'Sarkar Bazar',
+  //   'Salkia',
+  //   'Central',
+  // ];
+
+  public options: In_options[] = [
+    {
+      id: 1,
+      displayName: 'Shibpur',
+      value: 'shibpur',
+    },
+    {
+      id: 2,
+      displayName: 'Esplanade',
+      value: 'esplanade',
+    },
+    {
+      id: 3,
+      displayName: 'Sarkar Bazar',
+      value: 'sarkarBazar',
+    },
+    {
+      id: 4,
+      displayName: 'Salkia',
+      value: 'salkia',
+    },
+    {
+      id: 5,
+      displayName: 'Central',
+      value: 'central',
+    },
+    {
+      id: 6,
+      displayName: 'Chandani',
+      value: 'chandani',
+    },
   ];
-  public selectedOption: string = '';
+  public selectedOption?: In_options;
   public customerDetailsCopy: any;
 
   editForm = new FormGroup({
@@ -44,13 +78,11 @@ export class EditCustomerComponent implements OnInit,OnChanges {
 
   constructor(private services: SharedService) {}
 
-  ngOnInit(): void { }
-  
+  ngOnInit(): void {}
 
-  onSelectedOption(option: string) {
+  onSelectedOption(option: In_options) {
     this.selectedOption = option;
-    console.log(this.selectedOption);
-    
+    this.customerDetailsCopy.address=option.displayName
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -58,10 +90,11 @@ export class EditCustomerComponent implements OnInit,OnChanges {
       this.customerDetailsCopy = JSON.parse(
         JSON.stringify(this.customerDetails)
       );
+    console.log(this.customerDetailsCopy);
     
+
     if (changes['selectedOption']) {
       console.log(changes['selectedOption']);
-      
     }
   }
 
@@ -70,7 +103,6 @@ export class EditCustomerComponent implements OnInit,OnChanges {
       .updateCustomer(this.customerDetailsCopy, this.customerDetails.id)
       .subscribe({
         next: (res) => {
-          console.log(res);
           this.detailsUpdated.emit(this.customerDetailsCopy);
           this.closeEditNav.emit(true);
         },
