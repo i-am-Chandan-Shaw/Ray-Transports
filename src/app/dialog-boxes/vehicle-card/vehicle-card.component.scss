@@ -1,0 +1,41 @@
+   .vehicle-cards {
+        width: 100%;
+        // display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+
+        // justify-content: space-around;
+
+        .card {
+            font-size: var(--fnt-small);
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            border-radius: 5px;
+            display: flex;
+            flex: 1;
+            // max-width: 350px;
+            // width: 23%;
+            cursor: pointer;
+            // min-width: 250px;
+            background-color: #F9FAFC;
+            // transition: transform 0.2s ease-in-out;
+
+            .label {
+                font-weight: var(--fnt-semibold);
+
+                div {
+                    margin: 3px 0;
+                }
+            }
+
+            .details {
+                div {
+                    margin: 3px 0;
+                }
+            }
+
+        }
+
+        // .card:hover {
+        //     transform: scale(1.05);
+        // }
+    }

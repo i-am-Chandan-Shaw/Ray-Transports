@@ -18,7 +18,7 @@
     <div class="p15">
         <div class="vehicle-cards">
             <ng-container *ngFor="let item of cardsDetails">
-            <div class="card pt10 pb10 p15" [ngClass]="item.isActive ? 'active-border' : 'stopped-border'" >
+            <div class="card pt10 pb10 p15" [ngClass]="item.isActive ? 'active-border' : 'stopped-border'" (click)="onVehicleClicked(item)">
                     <div class="label">
                         <div>Name:</div>
                         <div>Locality:</div>

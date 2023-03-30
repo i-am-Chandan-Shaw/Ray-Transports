@@ -26,6 +26,8 @@ import { InputComponent } from './shared/component/input/input.component';
 import { AutoCompleteComponent } from './shared/component/auto-complete/auto-complete.component';
 import { EditCustomerComponent } from './home/edit-customer/edit-customer.component';
 import { CustomerVehiclesComponent } from './dialog-boxes/customer-vehicles/customer-vehicles.component';
+import { VehicleCardComponent } from './dialog-boxes/vehicle-card/vehicle-card.component';
+import { AddVehicleComponent } from './dialog-boxes/add-vehicle/add-vehicle.component';
 
 
 @NgModule({
@@ -49,6 +51,8 @@ import { CustomerVehiclesComponent } from './dialog-boxes/customer-vehicles/cust
     AutoCompleteComponent,
     EditCustomerComponent,
     CustomerVehiclesComponent,
+    VehicleCardComponent,
+    AddVehicleComponent,
   ],
   imports: [
     BrowserModule,

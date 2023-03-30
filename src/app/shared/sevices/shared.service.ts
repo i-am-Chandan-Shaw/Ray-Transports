@@ -29,6 +29,16 @@ export class SharedService {
     return this.http.get(api);
   }
 
+  public getAllTransactionDetails() {
+    const api = this.apiString + `getTransactions.php`;
+    return this.http.get(api);
+  }
+
+  public addNewVehicle(payload: any) {
+    const api = this.apiString + `postVehicle.php`;
+    return this.http.post(api, payload);
+  }
+
   public addCustomer(payload: any) {
     const api = this.apiString + `postcustomer.php`;
     return this.http.post(api, payload);

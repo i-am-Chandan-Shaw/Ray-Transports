@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { In_options } from 'src/app/shared/interface/In_options';
 import { SharedService } from 'src/app/shared/sevices/shared.service';
@@ -8,7 +8,7 @@ import { SharedService } from 'src/app/shared/sevices/shared.service';
   templateUrl: './edit-customer.component.html',
   styleUrls: ['./edit-customer.component.scss'],
 })
-export class EditCustomerComponent implements OnInit, OnChanges {
+export class EditCustomerComponent implements OnChanges {
   @Input('customerDetails') customerDetails!: any;
 
   @Output('closeEditNav') closeEditNav = new EventEmitter<boolean>();
@@ -77,8 +77,6 @@ export class EditCustomerComponent implements OnInit, OnChanges {
   }
 
   constructor(private services: SharedService) {}
-
-  ngOnInit(): void {}
 
   onSelectedOption(option: In_options) {
     this.selectedOption = option;

@@ -1,0 +1,24 @@
+
+    <div class="vehicle-cards">
+        <ng-container >
+            <div class="card pt10 pb10 p15" [ngClass]="data.isActive ? 'active-border' : 'stopped-border'">
+                <div class="label">
+                    <div>Name:</div>
+                    <div>Locality:</div>
+                    <div>Vehicle Name:</div>
+                    <div>Vehicle Number:</div>
+                    <div>Vehicle Owner</div>
+                    <div>Status</div>
+                </div>
+                <div class="details marginauto pl15 ">
+    
+                    <div>{{data.name? data.name :'---'}}</div>
+                    <div>{{data.locality? data.locality :'---'}}</div>
+                    <div>{{data.vehicleModel? data.vehicleModel :'---'}}</div>
+                    <div>{{data.vehicleNumber? data.vehicleNumber :'---'}}</div>
+                    <div>{{data.vehicleOwner? data.vehicleOwner :'---'}}</div>
+                    <div [ngClass]="data.isActive ? 'active' : 'stopped'">{{data.isActive ? 'Active' : 'Stopped'}}</div>
+                </div>
+            </div>
+        </ng-container>
+    </div>

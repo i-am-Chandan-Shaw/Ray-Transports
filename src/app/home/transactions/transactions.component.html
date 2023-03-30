@@ -39,7 +39,7 @@
                 <table>
                     <tbody>
                         <tr *ngFor="let item of transactionDetails">
-                            <td class="w5p text-left">{{item.createdDate | dateToDays}}</td>
+                            <td class="w5p text-left">{{item.date}}</td>
                             <td class="w8p text-left">{{item.customerName}}</td>
                             <td class="w10p text-left">{{item.description}}</td>
                             <td class="w7p text-left">{{item.addedBy}}</td>

@@ -1,0 +1,40 @@
+<div class="main-contianer">
+    <mat-toolbar color="primary" class="space-between">
+        <span>Add New Vehicle</span>
+        <mat-icon mat-dialog-close class="mr0">close</mat-icon>
+    </mat-toolbar>
+    <form [formGroup]="addVehicleForm">
+        <div class="input-form-container">
+            <div class="input-fields">
+                <label for="firstName">Vehicle Owner: </label>
+                <mat-form-field appearance="outline" class="mr10">
+                    <input matInput formControlName="vehicleOwner" name="vehicleOwner" autocomplete="off"
+                        placeholder="Enter Owner name">
+                    <mat-error *ngIf="vehicleOwner.invalid">**Owner Name Required</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="input-fields">
+                <label for="address">Vehicle Model </label>
+                <mat-form-field appearance="outline" class="mr10">
+                    <input matInput name="vehicleModel" formControlName="vehicleModel"  autocomplete="off" placeholder="Enter Model Number">
+                    <mat-error *ngIf="vehicleModel.invalid">**Model Number Required</mat-error>
+                </mat-form-field>
+
+
+            </div>
+            <div class="input-fields">
+                <label for="phoneNo">Vehicle Number</label>
+                <mat-form-field class="w97p" appearance="outline">
+                    <input matInput formControlName="vehicleNo"  name="vehicleNo" autocomplete="off"
+                        placeholder="Enter Vehicle Number.">
+                    <mat-error *ngIf="vehicleNo.invalid">**Vehicle Number Required</mat-error>
+                </mat-form-field>
+            </div>
+
+
+            <button mat-raised-button class="w97p" style="margin-top: 95px;" color="primary" (click)="addVehicle()"
+                [mat-dialog-close]="true" [disabled]="!addVehicleForm.valid ">Add Vehicle</button>
+
+        </div>
+    </form>
+</div>
