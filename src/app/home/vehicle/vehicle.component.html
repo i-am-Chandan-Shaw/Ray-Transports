@@ -11,7 +11,7 @@
         </div>
         <div class="period">
             <label >Filter By</label>
-            <app-dropdown-component [optionList]="statusList"></app-dropdown-component>
+            <app-dropdown-component (valueSelected)="filterVehicle($event)" [optionList]="statusList"></app-dropdown-component>
         </div>
     </div>
     <mat-divider></mat-divider>

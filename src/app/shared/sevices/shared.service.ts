@@ -34,6 +34,11 @@ export class SharedService {
     return this.http.get(api);
   }
 
+  public addIndividualTransaction(payload: any) {
+    const api = this.apiString + ``;
+    return this.http.post(api, payload);
+  }
+
   public addNewVehicle(payload: any) {
     const api = this.apiString + `postVehicle.php`;
     return this.http.post(api, payload);
@@ -61,6 +66,11 @@ export class SharedService {
 
   public sortCustomer(sortBy: string) {
     const api = this.apiString + `getCustomer.php?sort=` + sortBy;
+    return this.http.get(api);
+  }
+
+  public filterVehicle(filterBy: string) {
+     const api = this.apiString + `getVehicle.php?filter=` + filterBy;
     return this.http.get(api);
   }
 }

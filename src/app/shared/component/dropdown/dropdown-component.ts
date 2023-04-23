@@ -11,10 +11,18 @@ export class DropdownComponent {
   @Input('selectMultipleValue') selectMultipleValue!: boolean;
   @Output('valueSelected') valueSelected = new EventEmitter();
   @Input('placeholder')placeholder:string='Select'
+  selectedFilters: any[] = [];
   
-
+  
   sendValue(e: any) {
+    // for (let i = 0; i < this.optionList.length; i++) {
+    //   this.optionList[i].isSelected = false;
+    // }
+    // for (let selectedFilter of this.selectedFilters) {
+    //   const index = parseInt(selectedFilter);
+    //   this.optionList[index].isSelected = true;
+    // }
+    // console.log(this.optionList, 'this.optionList');
     this.valueSelected.emit(e);
-    // console.log(e);
   }
 }

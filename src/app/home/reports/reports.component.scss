@@ -20,6 +20,9 @@
 
             .period {
                 width: 200px;
+                ::ng-deep .mat-mdc-select {
+                    padding: 0 10px ;
+                }
             }
 
             .calender {

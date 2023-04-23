@@ -21,22 +21,23 @@ export class VehicleComponent implements OnInit {
   }
 
   public addVehicle() {
-        const dialogRef = this.dialog.open(AddVehicleComponent, {
-          autoFocus: false,
-          height: '450px',
-          width: '350px',
-          disableClose: true,
-        });
+    const dialogRef = this.dialog.open(AddVehicleComponent, {
+      autoFocus: false,
+      height: '450px',
+      width: '350px',
+      disableClose: true,
+    });
 
-        dialogRef.afterClosed().subscribe((result) => {
-          console.log(`dialog closed with result: ${result}`);
-        });
+    dialogRef.afterClosed().subscribe((result) => {
+      // console.log(`dialog closed with result: ${result}`);
+      this.getAllVehicle();
+    });
   }
 
   private getAllVehicle() {
     this.services.getAllVehicle().subscribe({
       next: (res) => {
-        console.log(res);
+        // console.log(res);
         this.cardsDetails = res;
       },
       error: (err) => {
@@ -46,15 +47,24 @@ export class VehicleComponent implements OnInit {
   }
 
   onVehicleClicked(item: any) {
-    console.log('item+>>', item);
-    const dialogRef = this.dialog.open(VehicleCardComponent, {
-      width: '500px',
-      height:'400px',
-      data: item,
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`dialog closed with result: ${result}`);
-    });
+    // console.log('item+>>', item);
+    // const dialogRef = this.dialog.open(VehicleCardComponent, {
+    //   height: '150px',
+    //   width: '350px',
+    //   data: item,
+    // });
+    // dialogRef.afterClosed().subscribe((result) => {
+    //   console.log(`dialog closed with result: ${result}`);
+    // });
+  }
+  filterVehicle(filter:any) {
+    this.services.filterVehicle(filter.value).subscribe({
+      next: (res) => {
+       console.log(res)
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    })
   }
 }
