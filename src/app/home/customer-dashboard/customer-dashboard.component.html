@@ -40,12 +40,16 @@
                         <mat-icon>search</mat-icon>
                     </div>
                     <div class="dropdown">
-                        <app-dropdown-component  [optionList]="filterList" [placeholder]="'Filter By'" [selectMultipleValue]="true" (valueSelected)="filterCustomer($event)"></app-dropdown-component>
+                        <app-dropdown-component [optionList]="filterList" [placeholder]="'Filter By'"
+                            [selectMultipleValue]="true"
+                            (sendMultipleValue)="filterCustomer($event)"></app-dropdown-component>
                     </div>
                     <div class="dropdown">
-                        <app-dropdown-component [optionList]="sortOption" [placeholder]="'Sort By'" [selectMultipleValue]="selectMultipleValue" (valueSelected)="sortCustomer($event)"></app-dropdown-component>
+                        <app-dropdown-component [optionList]="sortOption" [placeholder]="'Sort By'"
+                            [selectMultipleValue]="selectMultipleValue"
+                            (valueSelected)="sortCustomer($event)"></app-dropdown-component>
                     </div>
-                    
+
                 </div>
             </mat-toolbar>
 
@@ -106,7 +110,9 @@
     </div>
     <mat-divider [vertical]="true"></mat-divider>
     <div class="details-section" #customerDetails *ngIf="customerData !=null">
-        <app-customer-details (customerDetailsUpdated)="updatedTable()"  (closeDeatilsSection)="closeDetailsSection($event)" [customerDetails]="customerData" [customerDetailsSize]="this.customerDetailsSize"></app-customer-details>
+        <app-customer-details (customerDetailsUpdated)="updatedTable()"
+            (closeDeatilsSection)="closeDetailsSection($event)" [customerDetails]="customerData"
+            [customerDetailsSize]="this.customerDetailsSize"></app-customer-details>
 
     </div>
 </div>

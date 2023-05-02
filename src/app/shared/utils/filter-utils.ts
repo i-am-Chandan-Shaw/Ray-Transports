@@ -19,13 +19,13 @@ export const filterList = [
   },
   {
     id: 3,
-    name: "You'll Give",
+    name: "You'll Get",
     value: '4',
     isSelected: false,
   },
   {
     id: 4,
-    name: "You'll Get",
+    name: "You'll Give",
     value: '5',
     isSelected: false,
   },
@@ -73,45 +73,43 @@ export const sortOption = [
 export const periodList = [
   {
     id: 1,
-    name: 'Today'
-    
+    name: 'Today',
   },
   {
     id: 2,
-    name: 'Yesterday'
+    name: 'Yesterday',
   },
   {
     id: 3,
-    name: 'This Week'
+    name: 'This Week',
   },
   {
     id: 4,
-    name: 'Last Week'
+    name: 'Last Week',
   },
   {
     id: 5,
-    name: 'This Month'
+    name: 'This Month',
   },
   {
     id: 6,
-    name: 'Last Month'
+    name: 'Last Month',
   },
   {
     id: 7,
-    name: 'This Quarter'
+    name: 'This Quarter',
   },
   {
     id: 8,
-    name: 'Last Quarter'
+    name: 'Last Quarter',
   },
   {
     id: 9,
-    name: 'Custom'
+    name: 'Custom',
   },
-  
-]
+];
 
-export const statusList=[
+export const statusList = [
   {
     id: 1,
     name: 'Active',
@@ -121,5 +119,5 @@ export const statusList=[
     id: 2,
     name: 'Inactive',
     value: '2',
-  }
-]
+  },
+];
