@@ -57,9 +57,10 @@ export class VehicleComponent implements OnInit {
     //   console.log(`dialog closed with result: ${result}`);
     // });
   }
-  filterVehicle(filter:any) {
+  filterVehicle(filter: any) {
     this.services.filterVehicle(filter.value).subscribe({
       next: (res) => {
+        this.cardsDetails = res
        console.log(res)
       },
       error: (err) => {
