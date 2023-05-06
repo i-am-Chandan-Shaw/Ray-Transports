@@ -131,10 +131,11 @@ export class CustomerDetailsComponent {
   }
   onAddVehicleToCustomer() {
     let temp = {
-      customerId: this.customerDetails.id,
+      customerId: parseInt(this.customerDetails.id),
       vehicleId: this.selectedOption?.id,
       amount: parseInt(this.vehicleRate),
     };
+    console.log(temp)
     this.services.addVehicleToCustomer(temp).subscribe({
       next: (res) => {
         // console.log(res);
