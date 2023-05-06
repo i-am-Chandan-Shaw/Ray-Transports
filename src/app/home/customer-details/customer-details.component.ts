@@ -9,6 +9,7 @@ import { AddTransactionComponent } from 'src/app/dialog-boxes/add-transaction/ad
 import { CustomerVehiclesComponent } from 'src/app/dialog-boxes/customer-vehicles/customer-vehicles.component';
 import { SharedService } from 'src/app/shared/sevices/shared.service';
 import { In_options } from 'src/app/shared/interface/In_options';
+import { vehicleNumber } from 'src/app/shared/utils/filter-utils'
 
 
 @Component({
@@ -33,38 +34,8 @@ export class CustomerDetailsComponent {
   public customerTransactions: any = [];
   public customerVehicles: any = [];
   prop: any;
-  public options: In_options[] = [
-    {
-      id: 1,
-      displayName: 'Shibpur',
-      value: 'shibpur',
-    },
-    {
-      id: 2,
-      displayName: 'Esplanade',
-      value: 'esplanade',
-    },
-    {
-      id: 3,
-      displayName: 'Sarkar Bazar',
-      value: 'sarkarBazar',
-    },
-    {
-      id: 4,
-      displayName: 'Salkia',
-      value: 'salkia',
-    },
-    {
-      id: 5,
-      displayName: 'Central',
-      value: 'central',
-    },
-    {
-      id: 6,
-      displayName: 'Chandani',
-      value: 'chandani',
-    },
-  ];
+  public vehicleNumberOptions: In_options[] = vehicleNumber;
+  public vehicleRate:any
 
   constructor(
     private _bottomSheet: MatBottomSheet,
@@ -73,6 +44,7 @@ export class CustomerDetailsComponent {
   ) {}
 
   ngOnInit() {
+    // console.log('this.customerDetails==', this.customerDetails);
     setTimeout(() => {
       this.prop = this.customerDetailsSize;
     }, 300);
@@ -122,7 +94,6 @@ export class CustomerDetailsComponent {
   }
   onSelectedOption(option: In_options) {
     this.selectedOption = option;
-    console.log("selectedOptions from customerdetails component",this.selectedOption);
   }
 
   closeSideNav() {
@@ -153,9 +124,24 @@ export class CustomerDetailsComponent {
         if (addNewEntry) {
           addNewEntry.amount = parseInt('+' + addNewEntry.amount);
         }
-        console.log(addNewEntry);
+        // console.log(addNewEntry);
       });
       panelClass: 'custom-class';
     }
+  }
+  onAddVehicleToCustomer() {
+    let temp = {
+      customerId: this.customerDetails.id,
+      vehicleId: this.selectedOption?.id,
+      amount: parseInt(this.vehicleRate),
+    };
+    this.services.addVehicleToCustomer(temp).subscribe({
+      next: (res) => {
+        // console.log(res);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }

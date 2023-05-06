@@ -7,7 +7,7 @@
     <div class="sub-header p15">
         <div class="vehicle-name mr10">
             <label>Vehicle Name</label>
-            <app-input [placeholder]="'Search'"></app-input>
+            <app-input [placeholder]="'Search'" (emitSearchValue)="onSearchVehicle($event)"></app-input>
         </div>
         <div class="period">
             <label >Filter By</label>
@@ -17,7 +17,7 @@
     <mat-divider></mat-divider>
     <div class="p15">
         <div class="vehicle-cards">
-            <ng-container *ngFor="let item of cardsDetails">
+            <ng-container *ngFor="let item of searchedVehicle">
             <div class="card pt10 pb10 p15" [ngClass]="item.isActive ? 'active-border' : 'stopped-border'" (click)="onVehicleClicked(item)">
                     <div class="label">
                         <div>Name:</div>

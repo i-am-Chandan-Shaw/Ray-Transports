@@ -1,131 +1,132 @@
 .report-wrapper {
-    .report-container {
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+  .report-container {
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-            span img {
-                width: 40px;
-                height: 40px;
-                background-color: rgb(141, 77, 201);
-                border-radius: 50%;
-            }
-
-        }
-
-        .sub-header {
-            display: flex;
-            justify-content: space-between;
-
-            .period {
-                width: 200px;
-                ::ng-deep .mat-mdc-select {
-                    padding: 0 10px ;
-                }
-            }
-
-            .calender {
-                display: flex;
-                width: 50%;
-                justify-content: space-between;
-
-            }
-
-        }
-
-        .overview-section{
-            font-family: Roboto;
-            .card{
-                display: flex;
-                gap: 20px;
-
-                .card-details{
-                    width: 120px;
-                    height: 70px;
-                    border: 1px solid red;
-                    display: grid;
-                    place-items: center;
-                    align-content: center;
-                    border-radius: 5px;
-                    gap: 5px;
-                    box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
-                }
-            }
-        }
+      span img {
+        width: 40px;
+        height: 40px;
+        background-color: rgb(141, 77, 201);
+        border-radius: 50%;
+      }
     }
+
+    .sub-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: var(--fnt-regular);
+      font-weight: var(--fnt-semibold);
+      font-family: roboto;
+
+      .period {
+        width: 200px;
+        ::ng-deep .mat-mdc-select {
+          padding: 0 10px;
+        }
+      }
+
+      .calender {
+        display: flex;
+        width: 50%;
+        justify-content: space-between;
+      }
+    }
+
+    .overview-section {
+      font-family: Roboto;
+      .card {
+        display: flex;
+        gap: 20px;
+
+        .card-details {
+          width: 120px;
+          height: 70px;
+          border: 1px solid red;
+          display: grid;
+          place-items: center;
+          align-content: center;
+          border-radius: 5px;
+          gap: 5px;
+          box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+        }
+      }
+    }
+  }
 }
 
 //Date Picker Start
 
 :host {
+  ::ng-deep .mat-mdc-form-field {
+    margin: 8px 0;
+    width: 100%;
+    font-size: var(--fnt-regular);
+    font-weight: var(--fnt);
+  }
 
-    ::ng-deep .mat-mdc-form-field {
-        margin: 8px 0;
-        width: 100%;
-        font-size: var(--fnt-regular);
-        font-weight: var(--fnt);
-    }
+  ::ng-deep .mat-mdc-icon-button.mat-mdc-button-base {
+    width: 30px !important;
+    height: 30px !important;
+    padding: 4px !important;
+  }
 
-    ::ng-deep .mat-mdc-icon-button.mat-mdc-button-base {
-        width: 30px !important;
-        height: 30px !important;
-        padding: 4px !important;
-    }
+  ::ng-deep
+    .mat-mdc-text-field-wrapper.mdc-text-field--outlined
+    .mat-mdc-form-field-infix {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
 
-    ::ng-deep .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
-        padding-top: 0px;
-        padding-bottom: 0px;
-    }
+  ::ng-deep
+    .mdc-text-field--no-label:not(.mdc-text-field--textarea)
+    .mat-mdc-form-field-input-control.mdc-text-field__input,
+  .mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control {
+    padding: 4px 8px;
+    font-size: var(--fnt-regular);
+  }
 
-    ::ng-deep .mdc-text-field--no-label:not(.mdc-text-field--textarea) .mat-mdc-form-field-input-control.mdc-text-field__input,
-    .mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control {
-        padding: 4px 8px;
-        font-size: var(--fnt-regular);
-    }
+  ::ng-deep .mdc-text-field {
+    padding: 0;
+  }
 
-    ::ng-deep .mdc-text-field {
-        padding: 0;
-    }
-
-    ::ng-deep .mat-mdc-form-field-infix {
-        min-height: 30px !important;
-        width: 100%;
-    }
-
-
+  ::ng-deep .mat-mdc-form-field-infix {
+    min-height: 30px !important;
+    width: 100%;
+  }
 }
 
-
 ::ng-deep .mat-datepicker-content {
-    display: block;
-    border-radius: 4px;
-    margin: 7px 0 !important;
+  display: block;
+  border-radius: 4px;
+  margin: 7px 0 !important;
 }
 
 ::ng-deep .mat-datepicker-content .mat-calendar {
-    width: 240px !important;
-    max-height: 294px !important;
-    min-height: 270px !important;
-
+  width: 240px !important;
+  max-height: 294px !important;
+  min-height: 270px !important;
 }
 
 ::ng-deep .mat-calendar-controls {
-    display: flex;
-    align-items: center;
-    margin: 2% calc(4.7142857143% - 16px) !important;
+  display: flex;
+  align-items: center;
+  margin: 2% calc(4.7142857143% - 16px) !important;
 }
 
 ::ng-deep .mat-calendar-header {
-    padding: 8px !important;
+  padding: 8px !important;
 }
 
-// drop-down 
-:host{
-    ::ng-deep .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
-        display: flex;
-        align-items: center;
-        padding: 0 5px;
-    }
+// drop-down
+:host {
+  ::ng-deep
+    .mat-mdc-text-field-wrapper.mdc-text-field--outlined
+    .mat-mdc-form-field-infix {
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+  }
 }
 //Date Picker End

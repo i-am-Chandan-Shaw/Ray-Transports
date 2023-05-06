@@ -64,21 +64,24 @@
                                 <div class="main-container" (click)="$event.stopPropagation()"
                                     (keydown)="$event.stopPropagation()">
                                     <div class="input-container mr5">
-                                        <label for="" class="mb10">Vehicle Number</label>
-                                        <label for="">Rate</label>
+                                        <label for="" class="mb10 mt10">Rate</label>
+                                        <label for="" >Vehicle Number</label>
                                     </div>
                                     <div class="input-container">
-                                        <app-auto-complete (selectedOptions)="onSelectedOption($event)"
-                                            [options]="options" [placeholder]="'Vehicle Name'" ></app-auto-complete>
-                                        <div class="custom-input-field">
-                                            <input matInput type="text" name="vehicleRate" required autocomplete="off"
-                                                placeholder="Enter Vehicle Number" type="number">
+
+                                        <div class="custom-input-field mt10">
+                                            <input matInput type="text" [(ngModel)]='vehicleRate' name="vehicleRate"
+                                                required autocomplete="off" placeholder="Enter Vehicle Number"
+                                                type="number">
                                         </div>
+                                        <app-auto-complete class="auto-complete" (selectedOptions)="onSelectedOption($event)"
+                                            [options]="vehicleNumberOptions"
+                                            [placeholder]="'Vehicle Name'"></app-auto-complete>
                                     </div>
                                 </div>
                                 <div class="footer">
-                                    <button class="btn-primary mr10">Add</button>
-                                    <button class="btn-secondary">Cancel</button>
+                                    <button class="btn-primary mr10" style="width:80px" (click)="onAddVehicleToCustomer()">Add</button>
+                                    <button class="btn-secondary" style="width:80px">Cancel</button>
                                 </div>
                             </div>
                         </mat-menu>

@@ -70,7 +70,12 @@ export class SharedService {
   }
 
   public filterVehicle(filterBy: string) {
-     const api = this.apiString + `getVehicle.php?filter=` + filterBy;
+    const api = this.apiString + `getVehicle.php?filter=` + filterBy;
     return this.http.get(api);
+  }
+  public addVehicleToCustomer(payload: any) {
+    console.log('=>>',payload)
+    const api = this.apiString + `addVehicletoCustomer.php`;
+    return this.http.post(api, payload);
   }
 }

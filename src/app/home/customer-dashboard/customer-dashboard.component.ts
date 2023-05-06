@@ -19,6 +19,10 @@ export class CustomerDashboardComponent {
   customerDetailsSize: any;
   selectMultipleValue: boolean = false;
   public myMath = Math;
+  searchedCustomerData: any = null
+  youWillGet: any
+  youWillGive: any
+  
 
   constructor(public dialog: MatDialog, private services: SharedService) {}
 
@@ -43,6 +47,32 @@ export class CustomerDashboardComponent {
     this.services.getAllCustomer().subscribe({
       next: (res) => {
         this.allCustomerData = res;
+        this.searchedCustomerData = this.allCustomerData;
+        // console.log(this.searchedCustomerData);
+        let count = 0;
+
+        // YouWillGive 
+        for (let item of this.searchedCustomerData) {
+          if (item.amount !=null && item.amount.includes('-')) {
+            // console.log('item=', item);
+            count = count + parseInt(item.amount)
+          }
+          // console.log('count',count)
+        }
+        this.youWillGive = count
+
+        count = 0
+         for (let item of this.searchedCustomerData) {
+           if (item.amount != null && !item.amount.includes('-')) {
+            //  console.log('item=', item);
+             count = count + parseInt(item.amount);
+           }
+          //  console.log('count', count);
+         }
+         this.youWillGet = count;
+        
+        
+
       },
       error: (err) => {
         console.log(err);
@@ -97,5 +127,18 @@ export class CustomerDashboardComponent {
 
   public closeDetailsSection(e: boolean) {
     if (e) this.customerData = null;
+  }
+
+  onSearchNameLocality(searchItem: any) {
+    // console.log(this.allCustomerData);
+    this.searchedCustomerData = []
+    for (let customer of this.allCustomerData) {
+      if (
+        customer.name.toLowerCase().includes(searchItem.toLowerCase()) ||
+        customer.address.toLowerCase().includes(searchItem.toLowerCase())
+      ) {
+        this.searchedCustomerData.push(customer);
+      }
+    }
   }
 }

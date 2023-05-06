@@ -111,6 +111,11 @@ export const periodList = [
 
 export const statusList = [
   {
+    id: 0,
+    name: 'All',
+    value: '0',
+  },
+  {
     id: 1,
     name: 'Active',
     value: '1',
@@ -119,5 +124,33 @@ export const statusList = [
     id: 2,
     name: 'Inactive',
     value: '2',
+  },
+];
+
+export const vehicleNumber = [
+  {
+    id: 1,
+    displayName: 'Bolero',
+    value: '1',
+  },
+  {
+    id: 2,
+    displayName: 'Tata Ace',
+    value: '2',
+  },
+  {
+    id: 3,
+    displayName: 'Chota Hati',
+    value: '3',
+  },
+  {
+    id: 4,
+    displayName: 'Yamaha',
+    value: '4',
+  },
+  {
+    id: 5,
+    displayName: 'Hero Honda',
+    value: '5',
   },
 ];

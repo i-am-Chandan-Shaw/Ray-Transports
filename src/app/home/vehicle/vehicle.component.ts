@@ -12,6 +12,7 @@ import { statusList } from 'src/app/shared/utils/filter-utils';
 })
 export class VehicleComponent implements OnInit {
   public cardsDetails: any = [];
+  searchedVehicle: any;
 
   public statusList = statusList;
 
@@ -39,6 +40,7 @@ export class VehicleComponent implements OnInit {
       next: (res) => {
         // console.log(res);
         this.cardsDetails = res;
+        this.searchedVehicle = this.cardsDetails;
       },
       error: (err) => {
         console.log(err);
@@ -60,12 +62,23 @@ export class VehicleComponent implements OnInit {
   filterVehicle(filter: any) {
     this.services.filterVehicle(filter.value).subscribe({
       next: (res) => {
-        this.cardsDetails = res
-       console.log(res)
+        this.cardsDetails = res;
+        this.searchedVehicle = this.cardsDetails;
+        // console.log(res);
       },
       error: (err) => {
         console.log(err);
       },
-    })
+    });
+  }
+
+  onSearchVehicle(searchValue: any) {
+    this.searchedVehicle = [];
+    // console.log(this.cardsDetails);
+    for (let cardDetail of this.cardsDetails) {
+      if (cardDetail.vehicleModel.toLowerCase().includes(searchValue.toLowerCase())) {
+        this.searchedVehicle.push(cardDetail);
+      }
+    }
   }
 }

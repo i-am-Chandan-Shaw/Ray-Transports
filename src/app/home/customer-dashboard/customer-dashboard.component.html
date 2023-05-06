@@ -13,7 +13,7 @@
                         <span>You'll Give: </span>
                         <div>
                             <div class="amount give">
-                                <span>₹34</span>
+                                <span>{{youWillGive}}</span>
                                 <mat-icon color="warn">trending_up</mat-icon>
                             </div>
 
@@ -23,7 +23,7 @@
                         <span>You'll Get: </span>
                         <div>
                             <div class="amount get">
-                                <span>₹73634</span>
+                                <span>{{youWillGet}}</span>
                                 <mat-icon>trending_down</mat-icon>
                             </div>
 
@@ -36,7 +36,7 @@
                 <!-- Filter -->
                 <div class="filter-section">
                     <div class="custom-input-field">
-                        <input type="text" placeholder="Name and Locality">
+                        <input #searchNameLocality type="text" placeholder="Name and Locality" (keyup)="onSearchNameLocality(searchNameLocality.value)" >
                         <mat-icon>search</mat-icon>
                     </div>
                     <div class="dropdown">
@@ -70,7 +70,7 @@
                     <perfect-scrollbar class="table-body">
                         <table>
                             <tbody>
-                                <tr *ngFor="let customer of allCustomerData" (click)="setCustomerDetails(customer)">
+                                <tr *ngFor="let customer of searchedCustomerData" (click)="setCustomerDetails(customer)">
                                     <td class="name-column">
                                         <div>
                                             <div class="customer-name">{{customer.name}}</div>
