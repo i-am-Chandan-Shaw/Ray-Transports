@@ -19,10 +19,9 @@ export class CustomerDashboardComponent {
   customerDetailsSize: any;
   selectMultipleValue: boolean = false;
   public myMath = Math;
-  searchedCustomerData: any = null
-  youWillGet: any
-  youWillGive: any
-  
+  searchedCustomerData: any = null;
+  youWillGet: any;
+  youWillGive: any;
 
   constructor(public dialog: MatDialog, private services: SharedService) {}
 
@@ -51,28 +50,25 @@ export class CustomerDashboardComponent {
         // console.log(this.searchedCustomerData);
         let count = 0;
 
-        // YouWillGive 
+        // YouWillGive
         for (let item of this.searchedCustomerData) {
-          if (item.amount !=null && item.amount.includes('-')) {
+          if (item.amount != null && item.amount.includes('-')) {
             // console.log('item=', item);
-            count = count + parseInt(item.amount)
+            count = count + parseInt(item.amount);
           }
           // console.log('count',count)
         }
-        this.youWillGive = count
+        this.youWillGive = count;
 
-        count = 0
-         for (let item of this.searchedCustomerData) {
-           if (item.amount != null && !item.amount.includes('-')) {
+        count = 0;
+        for (let item of this.searchedCustomerData) {
+          if (item.amount != null && !item.amount.includes('-')) {
             //  console.log('item=', item);
-             count = count + parseInt(item.amount);
-           }
+            count = count + parseInt(item.amount);
+          }
           //  console.log('count', count);
-         }
-         this.youWillGet = count;
-        
-        
-
+        }
+        this.youWillGet = count;
       },
       error: (err) => {
         console.log(err);
@@ -85,9 +81,11 @@ export class CustomerDashboardComponent {
   }
 
   public filterCustomer(filter: any) {
+    console.log(filter);
     this.services.filterCustomers(filter).subscribe({
       next: (res) => {
         this.allCustomerData = res;
+        this.searchedCustomerData = this.allCustomerData;
       },
       error: (err) => {
         console.log(err);
@@ -99,6 +97,7 @@ export class CustomerDashboardComponent {
     this.services.sortCustomer(filter.value).subscribe({
       next: (res) => {
         this.allCustomerData = res;
+        this.searchedCustomerData = this.allCustomerData;
       },
       error: (err) => {
         console.log(err);
@@ -131,7 +130,7 @@ export class CustomerDashboardComponent {
 
   onSearchNameLocality(searchItem: any) {
     // console.log(this.allCustomerData);
-    this.searchedCustomerData = []
+    this.searchedCustomerData = [];
     for (let customer of this.allCustomerData) {
       if (
         customer.name.toLowerCase().includes(searchItem.toLowerCase()) ||
