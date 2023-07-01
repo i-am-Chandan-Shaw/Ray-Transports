@@ -74,8 +74,17 @@ export class SharedService {
     return this.http.get(api);
   }
   public addVehicleToCustomer(payload: any) {
-    console.log('=>>',payload)
     const api = this.apiString + `addVehicletoCustomer.php`;
     return this.http.post(api, payload);
+  }
+
+  public onDeleteCustomer(id: string) {
+    const api = this.apiString + `deleteCustomer.php?id=` + id;
+    return this.http.delete(api);
+  }
+
+  public stopIndividualVehicle(payload: any, id: number) {
+    const api = this.apiString + `stopVehicle.php?transactionId=` + id;
+    return this.http.delete(api);
   }
 }

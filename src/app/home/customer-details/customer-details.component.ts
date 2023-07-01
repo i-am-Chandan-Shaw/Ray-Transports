@@ -29,13 +29,14 @@ export class CustomerDetailsComponent {
   @ViewChild('sidenav') sidenav!: MatSidenav;
 
   public selectedOption?: In_options;
+  public menuHasBackdrop = false;
   public opened: boolean = false;
   public myMath = Math;
   public customerTransactions: any = [];
   public customerVehicles: any = [];
   prop: any;
   public vehicleNumberOptions: In_options[] = vehicleNumber;
-  public vehicleRate:any
+  public vehicleRate: any;
 
   constructor(
     private _bottomSheet: MatBottomSheet,
@@ -44,15 +45,14 @@ export class CustomerDetailsComponent {
   ) {}
 
   ngOnInit() {
-    // console.log('this.customerDetails==', this.customerDetails);
     setTimeout(() => {
       this.prop = this.customerDetailsSize;
     }, 300);
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['customerDetails'].currentValue) {
-      this.getIndividualTransaction(this.customerDetails);
+    if (changes['customerDetails'] && changes['customerDetails'].currentValue) {
+        this.getIndividualTransaction(this.customerDetails);
     }
   }
 
@@ -135,7 +135,7 @@ export class CustomerDetailsComponent {
       vehicleId: this.selectedOption?.id,
       amount: parseInt(this.vehicleRate),
     };
-    console.log(temp)
+
     this.services.addVehicleToCustomer(temp).subscribe({
       next: (res) => {
         // console.log(res);
@@ -144,5 +144,10 @@ export class CustomerDetailsComponent {
         console.log(err);
       },
     });
+  }
+  onDeleteCustomer(customerId:any) {
+    this.services.onDeleteCustomer(customerId).subscribe((res) => {
+    });
+    this.customerDetailsUpdated.emit(true);
   }
 }

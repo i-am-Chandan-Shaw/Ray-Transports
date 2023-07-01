@@ -33,7 +33,7 @@
                             <mat-menu #customerMenu="matMenu">
                                 <button mat-menu-item (click)="sidenav.toggle()">Edit<mat-icon
                                         class="icon-16">edit</mat-icon> </button>
-                                <button mat-menu-item>Delete<mat-icon class="icon-16">delete</mat-icon> </button>
+                                <button mat-menu-item (click)="onDeleteCustomer(customerDetails.id)">Delete<mat-icon class="icon-16">delete</mat-icon> </button>
                             </mat-menu>
                             <mat-icon color="primary" (click)="closeSection()" class="mr0">close</mat-icon>
                         </div>
@@ -55,8 +55,8 @@
                         <button color="primary" class="mr10" mat-icon-button
                             (click)="openVehicleDialog()"><mat-icon>local_shipping</mat-icon></button>
 
-                        <button class="btn-primary" [matMenuTriggerFor]="addVehicle">Add Vehicle</button>
-                        <mat-menu #addVehicle="matMenu" class="mt5" xPosition="before">
+                        <button class="btn-primary" [matMenuTriggerFor]="addVehicle" (click)="menuHasBackdrop = true">Add Vehicle</button>
+                        <mat-menu #addVehicle="matMenu" class="mt5" xPosition="before" [hasBackdrop]="menuHasBackdrop" (closed)="menuHasBackdrop = false">
                             <div class="add-vehicle-container">
                                 <mat-toolbar (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
                                     Add New Vehicle
@@ -75,12 +75,12 @@
                                                 type="number">
                                         </div>
                                         <app-auto-complete class="auto-complete" (selectedOptions)="onSelectedOption($event)"
-                                            [options]="vehicleNumberOptions"
+                                            [options]="vehicleNumberOptions" [providedOption]="vehicleNumberOptions[0].displayName"
                                             [placeholder]="'Vehicle Name'"></app-auto-complete>
                                     </div>
                                 </div>
                                 <div class="footer">
-                                    <button class="btn-primary mr10" style="width:80px" (click)="onAddVehicleToCustomer()">Add</button>
+                                    <button class="btn-primary mr10" style="width:80px" [ngStyle]="vehicleRate==undefined || vehicleRate=='' ? {'opacity': '0.5', 'cursor': 'not-allowed'}:{}"  [disabled]="vehicleRate==undefined || vehicleRate==''" (click)="onAddVehicleToCustomer()">Add</button>
                                     <button class="btn-secondary" style="width:80px">Cancel</button>
                                 </div>
                             </div>

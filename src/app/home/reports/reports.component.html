@@ -8,7 +8,7 @@
                 <div class="title ml15">Transactions Report</div>
             </div>
             <div class="download-btn">
-                <button class="report-btn" mat-stroked-button color="primary">
+                <button class="report-btn" mat-stroked-button color="primary" (click)="exportTable()">
                     <span>Report</span><mat-icon>download</mat-icon>
                 </button>
             </div>
@@ -17,11 +17,11 @@
         <div class="sub-header p15">
             <div class="customer-name">
                 <label>Customer Name</label>
-                <app-input [placeholder]="'Search'"></app-input>
+                <app-input [placeholder]="'Search'" (emitSearchValue)="onSearchVehicle($event)"></app-input>
             </div>
             <div class="period">
                 <label>Period</label>
-                <app-dropdown-component [optionList]="periodList"></app-dropdown-component>
+                <app-dropdown-component [optionList]="periodList" (valueSelected)="filterList($event)"></app-dropdown-component>
             </div>
             <div class="calender">
                 <div class="start">
@@ -76,7 +76,7 @@
 
         <div class="report-table p15">
             <div class="customer-table simple-table">
-            <div class="main-table">
+            <div class="main-table" id="transaction-table">
                 <table class="table-header">
                     <thead class="border-left">
                         <tr>
@@ -93,8 +93,8 @@
                 <perfect-scrollbar class="table-body">
                     <table>
                         <tbody>
-                            <tr *ngFor="let item of transactionDetails">
-                                <td class="w5p text-left">{{item.createdDate | dateToDays}}</td>
+                            <tr *ngFor="let item of searchedTransactionDetails">
+                                <td class="w5p text-left">{{item.createdDate }}</td>
                                 <td class="w8p text-left">{{item.customerName}}</td>
                                 <td class="w10p text-left">{{item.description}}</td>
                                 <td class="w7p text-left">{{item.addedBy}}</td>

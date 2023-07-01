@@ -15,8 +15,8 @@
             <div class="input-fields">
                 <label for="address">Locality: </label>
                 <mat-form-field appearance="outline" class="mr10">
-                    <input matInput name="address" [formControl]="locality" required placeholder="Enter address" [matAutocomplete]="auto">
-                    <mat-error *ngIf="locality.invalid">**{{getErrorMessage('locality')}}</mat-error>
+                    <input matInput name="address" [formControl]="address" required placeholder="Enter address" [matAutocomplete]="auto">
+                    <mat-error *ngIf="address.invalid">**{{getErrorMessage('address')}}</mat-error>
                 </mat-form-field>
                 <mat-autocomplete #auto="matAutocomplete">
                     <perfect-scrollbar>

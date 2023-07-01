@@ -26,7 +26,7 @@ export class AddVehicleComponent {
     return this.addVehicleForm.get('vehicleNo');
   }
   addVehicle() {
-    console.log('formValue', this.addVehicleForm.value);
+    // console.log('formValue', this.addVehicleForm.value);
     let temp = {
       vehicleNumber: this.addVehicleForm.value.vehicleNo,
       vehicleModel: this.addVehicleForm.value.vehicleModel,

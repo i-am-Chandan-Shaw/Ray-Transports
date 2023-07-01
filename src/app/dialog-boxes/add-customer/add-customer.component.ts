@@ -33,7 +33,7 @@ export class AddCustomerComponent implements OnInit {
   form = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z ]{2,30}$/)]),
     phone: new FormControl(),
-    locality: new FormControl('', [
+    address: new FormControl('', [
       Validators.required,
     ])
   })
@@ -45,8 +45,8 @@ export class AddCustomerComponent implements OnInit {
   get phone(): any {
     return this.form.get('phone');
   }
-  get locality(): any {
-    return this.form.get('locality');
+  get address(): any {
+    return this.form.get('address');
   }
 
   public addCustomer() {
@@ -80,11 +80,11 @@ export class AddCustomerComponent implements OnInit {
           return 'You must enter a value';
         }
         return this.name.hasError('pattern') ? 'Not a valid name' : '';
-      case 'locality':
-        if (this.locality.hasError('required')) {
+      case 'address':
+        if (this.address.hasError('required')) {
           return 'You must enter a value';
         }
-        return this.locality.hasError('') ? 'Not a valid Locality name' : '';
+        return this.address.hasError('') ? 'Not a valid Locality name' : '';
       case 'phone':
         if (this.phone.hasError('required')) {
           return 'You must enter a value';

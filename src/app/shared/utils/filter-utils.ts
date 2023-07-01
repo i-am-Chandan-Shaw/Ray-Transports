@@ -130,27 +130,84 @@ export const statusList = [
 export const vehicleNumber = [
   {
     id: 1,
-    displayName: 'Bolero',
+    displayName: 'WAUUL68E25A915071',
     value: '1',
   },
   {
     id: 2,
-    displayName: 'Tata Ace',
+    displayName: '5J8TB4H39FL346425',
     value: '2',
   },
   {
     id: 3,
-    displayName: 'Chota Hati',
+    displayName: '1FTEX1CM5BK273770',
     value: '3',
   },
   {
     id: 4,
-    displayName: 'Yamaha',
+    displayName: 'WA1LMBFE6CD056242',
     value: '4',
   },
   {
     id: 5,
-    displayName: 'Hero Honda',
+    displayName: '5J8TB1H24AA593118',
     value: '5',
+  },
+  {
+    id: 6,
+    displayName: '1N6AF0KX8FN032443',
+    value: '6',
+  },
+  {
+    id: 7,
+    displayName: '1GKKRNED5CJ105496',
+    value: '7',
+  },
+  {
+    id: 8,
+    displayName: '5BZBF0AA8FN158385',
+    value: '8',
+  },
+  {
+    id: 9,
+    displayName: '19UYA42652A714942',
+    value: '9',
+  },
+  {
+    id: 10,
+    displayName: 'WAUKH98E67A651091',
+    value: '10',
+  },
+];
+export const locality = [
+  {
+    id: 1,
+    displayName: 'Shibpur',
+    value: 'shibpur',
+  },
+  {
+    id: 2,
+    displayName: 'Esplanade',
+    value: 'esplanade',
+  },
+  {
+    id: 3,
+    displayName: 'Sarkar Bazar',
+    value: 'sarkarBazar',
+  },
+  {
+    id: 4,
+    displayName: 'Salkia',
+    value: 'salkia',
+  },
+  {
+    id: 5,
+    displayName: 'Central',
+    value: 'central',
+  },
+  {
+    id: 6,
+    displayName: 'Chandani',
+    value: 'chandani',
   },
 ];

@@ -47,7 +47,7 @@ export class CustomerDashboardComponent {
       next: (res) => {
         this.allCustomerData = res;
         this.searchedCustomerData = this.allCustomerData;
-        // console.log(this.searchedCustomerData);
+        console.log(this.searchedCustomerData);
         let count = 0;
 
         // YouWillGive
@@ -81,7 +81,7 @@ export class CustomerDashboardComponent {
   }
 
   public filterCustomer(filter: any) {
-    console.log(filter);
+
     this.services.filterCustomers(filter).subscribe({
       next: (res) => {
         this.allCustomerData = res;
@@ -121,7 +121,6 @@ export class CustomerDashboardComponent {
   }
 
   public onValueSelected(value: any) {
-    console.log(value);
   }
 
   public closeDetailsSection(e: boolean) {

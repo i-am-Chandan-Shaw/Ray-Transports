@@ -9,29 +9,29 @@
             <div class="custom party-name">
                 <label for="name">Customer Name</label>
                 <div class="custom-input-field " >
-                    <input type="text"  name="name" [formControl]="customerName" placeholder="Enter Name" [(ngModel)]="customerDetailsCopy.name">
+                    <input type="text"  name="name" placeholder="Enter Name" formControlName="customerName" >
                 </div>
-                <span class="invalid" *ngIf="customerName.invalid">**Please provide customer name</span>
+                <span class="invalid" *ngIf="editForm.get('customerName')?.errors && editForm.get('customerName')?.touched">**Please provide customer name</span>
                 
             </div>
             <div class="custom phone-no">
                 <label for="phone">Phone No</label>
                 <div class="custom-input-field">
-                    <input  type="number" name="phone" [formControl]="phoneNo"  placeholder="Enter Phone No" [(ngModel)]="customerDetailsCopy.phone">
+                    <input  type="number" name="phoneNo" formControlName="phoneNo"  placeholder="Enter Phone No" >
                 </div>
-                <span class="invalid" *ngIf="phoneNo.invalid">**Please provide Phone Number</span>
+                <span class="invalid" *ngIf="editForm.get('phoneNo')?.errors && editForm.get('phoneNo')?.touched">**Please provide Phone Number</span>
             </div>
 
             <div class="custom locality">
                 <label for="">Locality</label>
-                <input style="display: none;" type="text" formControlName="locality" value="selectedOption?.displayName">
-                <app-auto-complete class="custom-input-field autocomplete" [options]="options"
-                    (selectedOptions)="onSelectedOption($event)" [placeholder]="'Locality Name'" ></app-auto-complete>
-                    <span [ngClass]="selectedOption ==undefined?'invalid':''" *ngIf="selectedOption==undefined">**Please provide Locality Name</span>
+                <!-- <input style="display: none;" type="text" value="selectedOption?.displayName"> -->
+                <app-auto-complete class="custom-input-field autocomplete" [providedOption]="customerDetailsCopy.address"  [options]="options"
+                    (selectedOptions)="onSelectedOption($event)" (inputValue)="autoCompleteOutputValue($event)" [placeholder]="'Locality Name'" ></app-auto-complete>
+                    <span class="invalid" *ngIf="!checkAutoCompleteValue" >**Please provide Locality Name from the options</span>
             </div>
         </div>
         <div class="party-btn pl20 pr20">
-            <button mat-raised-button color="primary" [disabled]="selectedOption && !editForm.invalid" (click)="updateCustomer()">Update</button>
+            <button mat-raised-button color="primary" [disabled]="editForm.invalid || !checkAutoCompleteValue" (click)="updateCustomer()">Update</button>
             <button mat-raised-button class="success reset">Reset</button>
         </div>
 
