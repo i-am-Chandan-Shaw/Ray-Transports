@@ -20,7 +20,7 @@
                     </div>
                     <div class="right-container">
                         <div class="download-report">
-                            <button class="report-btn" mat-stroked-button color="primary">
+                            <button class="report-btn" mat-stroked-button color="primary" (click)="exportTable()">
                                 <span>Report</span><mat-icon>summarize</mat-icon>
                             </button>
                         </div>
@@ -90,7 +90,7 @@
                 <mat-divider></mat-divider>
 
                 <div class="customer-table simple-table transaction-table">
-                    <div class="main-table">
+                    <div class="main-table" id="customer-table">
                         <table class="table-header">
                             <thead class="border-left">
                                 <tr>

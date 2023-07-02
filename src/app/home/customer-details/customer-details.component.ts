@@ -10,6 +10,7 @@ import { CustomerVehiclesComponent } from 'src/app/dialog-boxes/customer-vehicle
 import { SharedService } from 'src/app/shared/sevices/shared.service';
 import { In_options } from 'src/app/shared/interface/In_options';
 import { vehicleNumber } from 'src/app/shared/utils/filter-utils'
+import * as XLSX from 'xlsx';
 
 
 @Component({
@@ -27,6 +28,7 @@ export class CustomerDetailsComponent {
     new EventEmitter<boolean>();
 
   @ViewChild('sidenav') sidenav!: MatSidenav;
+  fileName: any = 'Customer-Report.xlsx';
 
   public selectedOption?: In_options;
   public menuHasBackdrop = false;
@@ -52,7 +54,7 @@ export class CustomerDetailsComponent {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['customerDetails'] && changes['customerDetails'].currentValue) {
-        this.getIndividualTransaction(this.customerDetails);
+      this.getIndividualTransaction(this.customerDetails);
     }
   }
 
@@ -145,9 +147,18 @@ export class CustomerDetailsComponent {
       },
     });
   }
-  onDeleteCustomer(customerId:any) {
-    this.services.onDeleteCustomer(customerId).subscribe((res) => {
-    });
+  onDeleteCustomer(customerId: any) {
+    this.services.onDeleteCustomer(customerId).subscribe((res) => {});
     this.customerDetailsUpdated.emit(true);
+  }
+
+  exportTable() {
+    let element = document.getElementById('customer-table');
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    XLSX.writeFile(wb, this.fileName);
   }
 }
