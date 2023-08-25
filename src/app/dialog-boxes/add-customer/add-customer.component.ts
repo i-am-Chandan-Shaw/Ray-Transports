@@ -1,5 +1,5 @@
 import { Component, SimpleChanges, OnInit, Inject } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SharedService } from 'src/app/shared/sevices/shared.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
@@ -11,47 +11,43 @@ import { map, startWith } from 'rxjs/operators';
   styleUrls: ['./add-customer.component.scss']
 })
 export class AddCustomerComponent implements OnInit {
-  myControl = new FormControl('');
+
+  addCustomerForm! : FormGroup
   options: string[] = ['Shibpur', 'Esplanade', 'Sarkar Bazar', 'Salkia', 'central'];
   filteredOptions: Observable<string[]> | undefined;
+
   constructor(
     private services: SharedService,
     private snackBar: MatSnackBar,
+    public fb : FormBuilder
   ) { }
+
   ngOnInit(): void {
-    this.filteredOptions = this.myControl.valueChanges.pipe(
+    this.addCustomerForm = this.fb.group({
+      name:['',[Validators.required,Validators.pattern(/^[a-zA-Z ]{2,30}$/)]],
+      locality:['',Validators.required],
+      phone:['',[Validators.required,Validators.min(1000000000), Validators.max(9999999999)]]
+    })
+    this.filteredOptions = this.addCustomerForm.get('locality')?.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '')),
     );
   }
+
+  get gf(){
+    return this.addCustomerForm.controls
+  }
+
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
-  form = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z ]{2,30}$/)]),
-    phone: new FormControl(),
-    locality: new FormControl('', [
-      Validators.required,
-    ])
-  })
-
-
-  get name(): any {
-    return this.form.get('name');
-  }
-  get phone(): any {
-    return this.form.get('phone');
-  }
-  get locality(): any {
-    return this.form.get('locality');
-  }
-
   public addCustomer() {
-    let payLoad = this.form.value
-    this.services.addCustomer(this.form.value).subscribe({
+    console.log(this.addCustomerForm)
+    let payLoad = this.addCustomerForm.value
+    this.services.addCustomer(payLoad).subscribe({
       next: (res) => {
         console.log(res);
       },
@@ -70,30 +66,5 @@ export class AddCustomerComponent implements OnInit {
       duration: 2000,
       panelClass: ['success-snackbar']
     });
-  }
-
-
-  public getErrorMessage(value: string) {
-    switch (value) {
-      case 'name':
-        if (this.name.hasError('required')) {
-          return 'You must enter a value';
-        }
-        return this.name.hasError('pattern') ? 'Not a valid name' : '';
-      case 'locality':
-        if (this.locality.hasError('required')) {
-          return 'You must enter a value';
-        }
-        return this.locality.hasError('') ? 'Not a valid Locality name' : '';
-      case 'phone':
-        if (this.phone.hasError('required')) {
-          return 'You must enter a value';
-        } else if (this.phone.hasError('min')) {
-          return 'Enter only 10 digits';
-        }
-        return this.phone.hasError('pattern') ? 'Not a valid number' : '';
-      default:
-        return
-    }
   }
 }

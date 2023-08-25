@@ -3,22 +3,35 @@
         <span>Add New Customer</span>
         <mat-icon mat-dialog-close class="mr0">close</mat-icon>
     </mat-toolbar>
-    <form>
+    <form [formGroup]="addCustomerForm">
         <div class="input-form-container">
             <div class="input-fields">
                 <label for="firstName">Name: </label>
                 <mat-form-field appearance="outline" class="mr10">
-                    <input matInput [formControl]="name" name="firstName" required autocomplete="off"
-                        placeholder="Enter customer name">
-                    <mat-error *ngIf="name.invalid">**{{getErrorMessage('name')}}</mat-error>
+                    <input matInput name="firstName" formControlName="name" autocomplete="off"
+                        placeholder="Enter customer name" >
+                        <mat-error *ngIf="gf['name'].hasError('pattern') && gf['name'].value">
+                            Name should not contain numbers or special characters.
+                        </mat-error>
+                        <mat-error *ngIf="gf['name'].hasError('minlength')">
+                            Name should be greater than 1 character.
+                        </mat-error>
+                        <mat-error *ngIf="gf['name'].hasError('required')">
+                            You must enter a value.
+                        </mat-error>
                 </mat-form-field>
             </div>
             <div class="input-fields">
                 <label for="locality">Locality: </label>
                 <mat-form-field appearance="outline" class="mr10">
-                    <input matInput name="locality" [formControl]="myControl" required placeholder="Enter locality"
+                    <input matInput name="locality"  formControlName="locality" placeholder="Enter locality"
                         [matAutocomplete]="auto">
-                    <mat-error *ngIf="locality.invalid">**{{getErrorMessage('locality')}}</mat-error>
+                        <mat-error *ngIf="gf['locality'].hasError('pattern')">
+                            Not a valid locality name
+                        </mat-error>
+                        <mat-error *ngIf="gf['locality'].touched && !gf['locality'].value">
+                            You must enter a value
+                        </mat-error>
                 </mat-form-field>
                 <mat-autocomplete #auto="matAutocomplete">
                     <perfect-scrollbar>
@@ -32,15 +45,22 @@
             <div class="input-fields">
                 <label for="phoneNo">Phone: </label>
                 <mat-form-field class="w97p" appearance="outline">
-                    <input matInput #input maxlength="10" name="phoneNo" autocomplete="off"
-                        placeholder="Enter phone no." [formControl]="phone" placeholder="0000-000-000">
-                    <mat-error *ngIf="phone.invalid">**{{getErrorMessage('phone')}}</mat-error>
+                    <input type="number" matInput #input name="phoneNo" autocomplete="off" placeholder="Enter phone no." formControlName="phone">
+                    <mat-error *ngIf="gf['phone'].hasError('required')">
+                        You must enter a value.
+                    </mat-error>
+                    <mat-error *ngIf="gf['phone'].hasError('min')">
+                        Phone number should be at least 10 characters.
+                    </mat-error>
+                    <mat-error *ngIf="gf['phone'].hasError('max')">
+                        Phone number should not exceed 10 characters.
+                    </mat-error>
                 </mat-form-field>
             </div>
 
 
             <button mat-raised-button class="w97p" style="margin-top: 95px;" color="primary" (click)="addCustomer()"
-                [mat-dialog-close]="true" [disabled]="!form.valid ">Add Customer</button>
+                [mat-dialog-close]="true" [disabled]="addCustomerForm.invalid" >Add Customer</button>
 
         </div>
     </form>
