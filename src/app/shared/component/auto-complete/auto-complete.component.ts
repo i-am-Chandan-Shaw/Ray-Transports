@@ -8,43 +8,48 @@ import { In_options } from '../../interface/In_options';
 @Component({
   selector: 'app-auto-complete',
   templateUrl: './auto-complete.component.html',
-  styleUrls: ['./auto-complete.component.scss']
+  styleUrls: ['./auto-complete.component.scss'],
 })
+  
 export class AutoCompleteComponent implements OnInit {
-  @Input()placeholder:any
+  @Input() placeholder: any;
+  @Input() providedOption?: any;
   myControl = new FormControl('');
   filteredOptions: Observable<In_options[]> | undefined;
-  @Input('options')options!: In_options[]
-  @Output('selectedOptions') selectedOptions = new EventEmitter<any>()
-  
-  public temp:any;
+  @Input('options') options!: In_options[];
+  @Output('selectedOptions') selectedOptions = new EventEmitter<any>();
+  @Output('inputValue') inputValue = new EventEmitter<any>();
+
+  public temp: any;
 
   ngOnInit() {
-    console.log("filter");
+    // console.log('providedOption', this.providedOption);
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
-      map((value:any) => {
+      map((value: any) => {
         const name = typeof value === 'string' ? value : value?.displayName;
         return name ? this._filter(name as string) : this.options.slice();
       })
     );
-    this.temp = this.options[0]
+    this.temp = this.options[0];
     console.log(this.temp);
-    
+  }
+  onInput(e: any) {
+    this.inputValue.emit(e.target.value);
   }
 
-  onSelectedOptions(option:In_options){    
-    this.selectedOptions.emit(option)
+  onSelectedOptions(option: In_options) {
+    this.providedOption = option;
+    this.inputValue.emit(option);
+    this.selectedOptions.emit(option);
   }
 
-  private _filter(value: any):any[] {
+  private _filter(value: any): any[] {
     console.log(value);
-   
     const filterValue = value.toLowerCase();
 
-    return this.options.filter(option => option.displayName.toLowerCase().includes(filterValue));
+    return this.options.filter((option) =>
+      option.displayName.toLowerCase().includes(filterValue)
+    );
   }
-
-
-  
 }

@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Inject, Input, Output, SimpleChanges } from '@angular/core';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { DatepickerDropdownPositionX, MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { SharedService } from 'src/app/shared/sevices/shared.service';
+
 @Component({
   selector: 'app-add-transaction',
   templateUrl: './add-transaction.component.html',
@@ -15,6 +17,7 @@ export class AddTransactionComponent {
   today:Date=new Date()
 
   constructor(
+    private services: SharedService,
     private _bottomSheetRef: MatBottomSheetRef<AddTransactionComponent>,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any
   ) {}
@@ -42,6 +45,14 @@ export class AddTransactionComponent {
       date: this.selectedDate,
       description: this.description,
     };
+    // this.services.addIndividualTransaction(this.addNewEntry).subscribe({
+    //   next: (res) => {
+    //     console.log(res);
+    //   },
+    //   error: (err) => {
+    //     console.log(err);
+    //   },
+    // });
     this._bottomSheetRef.dismiss(this.addNewEntry);
   
   }

@@ -20,7 +20,7 @@
                     </div>
                     <div class="right-container">
                         <div class="download-report">
-                            <button class="report-btn" mat-stroked-button color="primary">
+                            <button class="report-btn" mat-stroked-button color="primary" (click)="exportTable()">
                                 <span>Report</span><mat-icon>summarize</mat-icon>
                             </button>
                         </div>
@@ -33,7 +33,7 @@
                             <mat-menu #customerMenu="matMenu">
                                 <button mat-menu-item (click)="sidenav.toggle()">Edit<mat-icon
                                         class="icon-16">edit</mat-icon> </button>
-                                <button mat-menu-item>Delete<mat-icon class="icon-16">delete</mat-icon> </button>
+                                <button mat-menu-item (click)="onDeleteCustomer(customerDetails.id)">Delete<mat-icon class="icon-16">delete</mat-icon> </button>
                             </mat-menu>
                             <mat-icon color="primary" (click)="closeSection()" class="mr0">close</mat-icon>
                         </div>
@@ -55,8 +55,8 @@
                         <button color="primary" class="mr10" mat-icon-button
                             (click)="openVehicleDialog()"><mat-icon>local_shipping</mat-icon></button>
 
-                        <button class="btn-primary" [matMenuTriggerFor]="addVehicle">Add Vehicle</button>
-                        <mat-menu #addVehicle="matMenu" class="mt5" xPosition="before">
+                        <button class="btn-primary" [matMenuTriggerFor]="addVehicle" (click)="menuHasBackdrop = true">Add Vehicle</button>
+                        <mat-menu #addVehicle="matMenu" class="mt5" xPosition="before" [hasBackdrop]="menuHasBackdrop" (closed)="menuHasBackdrop = false">
                             <div class="add-vehicle-container">
                                 <mat-toolbar (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
                                     Add New Vehicle
@@ -64,21 +64,24 @@
                                 <div class="main-container" (click)="$event.stopPropagation()"
                                     (keydown)="$event.stopPropagation()">
                                     <div class="input-container mr5">
-                                        <label for="" class="mb10">Vehicle Number</label>
-                                        <label for="">Rate</label>
+                                        <label for="" class="mb10 mt10">Rate</label>
+                                        <label for="" >Vehicle Number</label>
                                     </div>
                                     <div class="input-container">
-                                        <app-auto-complete (selectedOptions)="onSelectedOption($event)"
-                                            [options]="options" [placeholder]="'Vehicle Name'" ></app-auto-complete>
-                                        <div class="custom-input-field">
-                                            <input matInput type="text" name="vehicleRate" required autocomplete="off"
-                                                placeholder="Enter Vehicle Number" type="number">
+
+                                        <div class="custom-input-field mt10">
+                                            <input matInput type="text" [(ngModel)]='vehicleRate' name="vehicleRate"
+                                                required autocomplete="off" placeholder="Enter Vehicle Number"
+                                                type="number">
                                         </div>
+                                        <app-auto-complete class="auto-complete" (selectedOptions)="onSelectedOption($event)"
+                                            [options]="vehicleNumberOptions" [providedOption]="vehicleNumberOptions[0].displayName"
+                                            [placeholder]="'Vehicle Name'"></app-auto-complete>
                                     </div>
                                 </div>
                                 <div class="footer">
-                                    <button class="btn-primary mr10">Add</button>
-                                    <button class="btn-secondary">Cancel</button>
+                                    <button class="btn-primary mr10" style="width:80px" [ngStyle]="vehicleRate==undefined || vehicleRate=='' ? {'opacity': '0.5', 'cursor': 'not-allowed'}:{}"  [disabled]="vehicleRate==undefined || vehicleRate==''" (click)="onAddVehicleToCustomer()">Add</button>
+                                    <button class="btn-secondary" style="width:80px">Cancel</button>
                                 </div>
                             </div>
                         </mat-menu>
@@ -87,7 +90,7 @@
                 <mat-divider></mat-divider>
 
                 <div class="customer-table simple-table transaction-table">
-                    <div class="main-table">
+                    <div class="main-table" id="customer-table">
                         <table class="table-header">
                             <thead class="border-left">
                                 <tr>

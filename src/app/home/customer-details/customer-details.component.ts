@@ -9,6 +9,8 @@ import { AddTransactionComponent } from 'src/app/dialog-boxes/add-transaction/ad
 import { CustomerVehiclesComponent } from 'src/app/dialog-boxes/customer-vehicles/customer-vehicles.component';
 import { SharedService } from 'src/app/shared/sevices/shared.service';
 import { In_options } from 'src/app/shared/interface/In_options';
+import { vehicleNumber } from 'src/app/shared/utils/filter-utils'
+import * as XLSX from 'xlsx';
 
 
 @Component({
@@ -26,45 +28,17 @@ export class CustomerDetailsComponent {
     new EventEmitter<boolean>();
 
   @ViewChild('sidenav') sidenav!: MatSidenav;
+  fileName: any = 'Customer-Report.xlsx';
 
   public selectedOption?: In_options;
+  public menuHasBackdrop = false;
   public opened: boolean = false;
   public myMath = Math;
   public customerTransactions: any = [];
   public customerVehicles: any = [];
   prop: any;
-  public options: In_options[] = [
-    {
-      id: 1,
-      displayName: 'Shibpur',
-      value: 'shibpur',
-    },
-    {
-      id: 2,
-      displayName: 'Esplanade',
-      value: 'esplanade',
-    },
-    {
-      id: 3,
-      displayName: 'Sarkar Bazar',
-      value: 'sarkarBazar',
-    },
-    {
-      id: 4,
-      displayName: 'Salkia',
-      value: 'salkia',
-    },
-    {
-      id: 5,
-      displayName: 'Central',
-      value: 'central',
-    },
-    {
-      id: 6,
-      displayName: 'Chandani',
-      value: 'chandani',
-    },
-  ];
+  public vehicleNumberOptions: In_options[] = vehicleNumber;
+  public vehicleRate: any;
 
   constructor(
     private _bottomSheet: MatBottomSheet,
@@ -79,7 +53,7 @@ export class CustomerDetailsComponent {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['customerDetails'].currentValue) {
+    if (changes['customerDetails'] && changes['customerDetails'].currentValue) {
       this.getIndividualTransaction(this.customerDetails);
     }
   }
@@ -122,7 +96,6 @@ export class CustomerDetailsComponent {
   }
   onSelectedOption(option: In_options) {
     this.selectedOption = option;
-    console.log("selectedOptions from customerdetails component",this.selectedOption);
   }
 
   closeSideNav() {
@@ -153,9 +126,39 @@ export class CustomerDetailsComponent {
         if (addNewEntry) {
           addNewEntry.amount = parseInt('+' + addNewEntry.amount);
         }
-        console.log(addNewEntry);
+        // console.log(addNewEntry);
       });
       panelClass: 'custom-class';
     }
+  }
+  onAddVehicleToCustomer() {
+    let temp = {
+      customerId: parseInt(this.customerDetails.id),
+      vehicleId: this.selectedOption?.id,
+      amount: parseInt(this.vehicleRate),
+    };
+
+    this.services.addVehicleToCustomer(temp).subscribe({
+      next: (res) => {
+        // console.log(res);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+  onDeleteCustomer(customerId: any) {
+    this.services.onDeleteCustomer(customerId).subscribe((res) => {});
+    this.customerDetailsUpdated.emit(true);
+  }
+
+  exportTable() {
+    let element = document.getElementById('customer-table');
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    XLSX.writeFile(wb, this.fileName);
   }
 }

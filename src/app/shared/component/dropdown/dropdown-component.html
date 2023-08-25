@@ -1,9 +1,10 @@
 <div class="select-box filter-select-box">
     <mat-form-field appearance="outline">
-        <mat-select #filterBy [placeholder]="placeholder" [multiple]="selectMultipleValue" [disableRipple]="true">
+        <mat-select #filterBy [placeholder]="placeholder" [multiple]="selectMultipleValue"
+            (openedChange)="onClickSendMultipleValue()" [(ngModel)]="selectedFilters" [disableRipple]="true">
             <perfect-scrollbar>
-            <mat-option value="{{filter.id}}" *ngFor="let filter of optionList" (click)="sendValue(filter)">
-                {{filter.name}} </mat-option></perfect-scrollbar>
+                <mat-option value="{{filter.id}}" *ngFor="let filter of optionList" (click)="sendValue(filter)">
+                    {{filter.name}} </mat-option></perfect-scrollbar>
         </mat-select>
     </mat-form-field>
 </div>

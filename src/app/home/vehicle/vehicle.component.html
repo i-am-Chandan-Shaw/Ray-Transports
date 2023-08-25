@@ -1,23 +1,23 @@
 <div class="vehicle-wrapper">
     <mat-toolbar class="header-section">
-        <span class="header-text">Vehicle Dasboard</span>
+        <span class="header-text">Vehicle Dashboard</span>
         <button (click)="addVehicle()" class="btn-primary">Add Vehicle</button>
     </mat-toolbar>
     <mat-divider></mat-divider>
     <div class="sub-header p15">
         <div class="vehicle-name mr10">
             <label>Vehicle Name</label>
-            <app-input [placeholder]="'Search'"></app-input>
+            <app-input [placeholder]="'Search'" (emitSearchValue)="onSearchVehicle($event)"></app-input>
         </div>
         <div class="period">
             <label >Filter By</label>
-            <app-dropdown-component [optionList]="statusList"></app-dropdown-component>
+            <app-dropdown-component (valueSelected)="filterVehicle($event)" [optionList]="statusList"></app-dropdown-component>
         </div>
     </div>
     <mat-divider></mat-divider>
     <div class="p15">
         <div class="vehicle-cards">
-            <ng-container *ngFor="let item of cardsDetails">
+            <ng-container *ngFor="let item of searchedVehicle">
             <div class="card pt10 pb10 p15" [ngClass]="item.isActive ? 'active-border' : 'stopped-border'" (click)="onVehicleClicked(item)">
                     <div class="label">
                         <div>Name:</div>

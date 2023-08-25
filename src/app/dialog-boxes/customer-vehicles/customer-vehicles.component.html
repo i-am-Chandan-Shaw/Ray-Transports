@@ -23,17 +23,13 @@
                             <td class="w20p text-left">{{vehicle.vehicleNumber}}</td>
                             <td class="w30p text-left"> {{vehicle.createdDate}} </td>
                             <td class="w10p text-center">
-                                <div class="status-icon active" *ngIf="vehicle.isActive" [autoPlacement]="true"
-                                    tooltip="Active" [theme]="'light'" placement="top">
-                                    <span>A</span>
-                                </div>
-                                <div class="status-icon inactive" *ngIf="!vehicle.isActive" [autoPlacement]="true"
-                                    tooltip="Stopped" [theme]="'light'" placement="top">
-                                    <span>S</span>
+                                <div class="status-icon active" [autoPlacement]="true" [tooltip]="vehicle.isActive?'Active':'Stopped'" [theme]="'light'"
+                                    placement="top">
+                                    <span >{{vehicle.isActive?'A':'S'}}</span>
                                 </div>
                             </td>
                             <td class="w10p text-right"> {{vehicle.rate}} </td>
-                            <td class="w20p text-right" *ngIf="vehicle.isActive"><mat-icon color="warn">block</mat-icon></td>
+                            <td class="w20p text-right"><mat-icon [tooltip]="'Stop Vehicle'" color="warn" (click)="onStatusClicked(vehicle,vehicle.transactionId)">block</mat-icon></td>
                         </tr>
                     </tbody>
                 </table>

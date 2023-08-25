@@ -1,102 +1,93 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { In_options } from 'src/app/shared/interface/In_options';
 import { SharedService } from 'src/app/shared/sevices/shared.service';
-
+import { locality } from 'src/app/shared/utils/filter-utils';
 @Component({
   selector: 'app-edit-customer',
   templateUrl: './edit-customer.component.html',
   styleUrls: ['./edit-customer.component.scss'],
 })
-export class EditCustomerComponent implements OnChanges {
-  @Input('customerDetails') customerDetails!: any;
+export class EditCustomerComponent implements OnInit, OnChanges {
+  @Input('customerDetails') customerDetails?: any;
 
   @Output('closeEditNav') closeEditNav = new EventEmitter<boolean>();
   @Output('detailsUpdated') detailsUpdated = new EventEmitter<any>();
 
-  // public options: string[] = [
-  //   'Shibpur',
-  //   'Esplanade',
-  //   'Sarkar Bazar',
-  //   'Salkia',
-  //   'Central',
-  // ];
+  checkAutoCompleteValue!: boolean;
 
-  public options: In_options[] = [
-    {
-      id: 1,
-      displayName: 'Shibpur',
-      value: 'shibpur',
-    },
-    {
-      id: 2,
-      displayName: 'Esplanade',
-      value: 'esplanade',
-    },
-    {
-      id: 3,
-      displayName: 'Sarkar Bazar',
-      value: 'sarkarBazar',
-    },
-    {
-      id: 4,
-      displayName: 'Salkia',
-      value: 'salkia',
-    },
-    {
-      id: 5,
-      displayName: 'Central',
-      value: 'central',
-    },
-    {
-      id: 6,
-      displayName: 'Chandani',
-      value: 'chandani',
-    },
-  ];
-  public selectedOption?: In_options;
-  public customerDetailsCopy: any;
-
-  editForm = new FormGroup({
-    customerName: new FormControl('', Validators.required),
-    phoneNo: new FormControl('', [
-      Validators.required,
-      Validators.pattern(/^[0-9]{10}$/),
-    ]),
-    locality: new FormControl('', [Validators.required]),
+  editForm = this.fb.group({
+    customerName: ['', Validators.required],
+    phoneNo: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+    address: ['', Validators.required],
   });
 
-  get customerName(): any {
-    return this.editForm.get('customerName');
-  }
-  get phoneNo(): any {
-    return this.editForm.get('phoneNo');
-  }
-  get locality() {
-    return this.editForm.get('locality');
-  }
+  public options: In_options[] = locality;
+  public selectedOption?: In_options;
+  public customerDetailsCopy!: any;
 
-  constructor(private services: SharedService) {}
+  constructor(private services: SharedService, private fb: FormBuilder) {}
+  ngOnInit(): void {
+    if (this.editForm.value && this.editForm.value.address) {
+      this.checkAutoCompleteValue = true;
+    }
+  }
 
   onSelectedOption(option: In_options) {
-    this.selectedOption = option;
-    this.customerDetailsCopy.address=option.displayName
+    this.editForm.patchValue({ address: option.displayName });
+    // console.log('editForm',this.editForm.value);
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['customerDetails'].currentValue)
-      this.customerDetailsCopy = JSON.parse(
-        JSON.stringify(this.customerDetails)
-      );
-    console.log(this.customerDetailsCopy);
-    
-
-    if (changes['selectedOption']) {
-      console.log(changes['selectedOption']);
+    if (changes['customerDetails'].currentValue != undefined) {
+      if (changes['customerDetails'].currentValue) {
+        this.customerDetailsCopy = JSON.parse(
+          JSON.stringify(this.customerDetails)
+        );
+        this.editForm.patchValue({
+          customerName: this.customerDetailsCopy.name,
+          phoneNo: this.customerDetailsCopy.phone,
+          address: this.customerDetailsCopy.address,
+        });
+      }
+    }
+  }
+  autoCompleteOutputValue(e: any) {
+    // this.checkAutoCompleteValue = e
+    if (this.editForm.value && this.editForm.value.address !== '') {
+      this.checkAutoCompleteValue = false;
+    }
+    for (let option of this.options) {
+      let temp = option.value.toLowerCase();
+      let tempInput = e.value.toLowerCase();
+      if (temp == tempInput) {
+        this.checkAutoCompleteValue = true;
+        break;
+      } else {
+        this.checkAutoCompleteValue = false;
+      }
     }
   }
 
   public updateCustomer() {
+    this.customerDetailsCopy.name = this.editForm.value.customerName;
+    this.customerDetailsCopy.address = this.editForm.value.address;
+    this.customerDetailsCopy.phone = this.editForm.value.phoneNo;
+
     this.services
       .updateCustomer(this.customerDetailsCopy, this.customerDetails.id)
       .subscribe({

@@ -26,11 +26,11 @@ export class AddVehicleComponent {
     return this.addVehicleForm.get('vehicleNo');
   }
   addVehicle() {
-    console.log('formValue', this.addVehicleForm.value);
+    // console.log('formValue', this.addVehicleForm.value);
     let temp = {
-      vehiclenumber: this.addVehicleForm.value.vehicleNo,
-      vehiclemodel: this.addVehicleForm.value.vehicleModel,
-      vehicleowner: this.addVehicleForm.value.vehicleOwner,
+      vehicleNumber: this.addVehicleForm.value.vehicleNo,
+      vehicleModel: this.addVehicleForm.value.vehicleModel,
+      vehicleOwner: this.addVehicleForm.value.vehicleOwner,
     }
 
     this.services.addNewVehicle(temp).subscribe({

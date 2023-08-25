@@ -44,7 +44,7 @@ export class TransactionsComponent implements OnInit {
   ngOnInit(): void {
     this.services.getAllTransactionDetails().subscribe({
       next: (res) => {
-        this.transactionDetails=res
+        this.transactionDetails = res
       },error: (err) => {
         console.log(err);
         
