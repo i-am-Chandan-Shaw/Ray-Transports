@@ -47,7 +47,8 @@ export class AddCustomerComponent implements OnInit {
   public addCustomer() {
     console.log(this.addCustomerForm)
     let payLoad = this.addCustomerForm.value
-    this.services.addCustomer(payLoad).subscribe({
+    payLoad.phone = payLoad.phone.toString()
+    this.services.addCustomer(JSON.stringify(payLoad)).subscribe({
       next: (res) => {
         console.log(res);
       },
