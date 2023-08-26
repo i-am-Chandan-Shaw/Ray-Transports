@@ -25,14 +25,14 @@
             <div class="custom locality">
                 <label for="">Locality</label>
                 <!-- <input style="display: none;" type="text" value="selectedOption?.displayName"> -->
-                <app-auto-complete class="custom-input-field autocomplete" [providedOption]="customerDetailsCopy.address"  [options]="options"
+                <app-auto-complete class="custom-input-field autocomplete" [providedOption]="this.providedOption[0]?this.providedOption[0]:[]"  [options]="options"
                     (selectedOptions)="onSelectedOption($event)" (inputValue)="autoCompleteOutputValue($event)" [placeholder]="'Locality Name'" ></app-auto-complete>
                     <span class="invalid" *ngIf="!checkAutoCompleteValue" >**Please provide Locality Name from the options</span>
             </div>
         </div>
         <div class="party-btn pl20 pr20">
             <button mat-raised-button color="primary" [disabled]="editForm.invalid || !checkAutoCompleteValue" (click)="updateCustomer()">Update</button>
-            <button mat-raised-button class="success reset">Reset</button>
+            <button mat-raised-button class="success reset" (click)="onResetForm()">Reset</button>
         </div>
 
     </form>

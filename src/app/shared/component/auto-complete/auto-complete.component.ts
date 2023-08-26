@@ -23,7 +23,7 @@ export class AutoCompleteComponent implements OnInit {
   public temp: any;
 
   ngOnInit() {
-    // console.log('providedOption', this.providedOption);
+    this.myControl.patchValue(this.providedOption.displayName)
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map((value: any) => {
@@ -32,20 +32,20 @@ export class AutoCompleteComponent implements OnInit {
       })
     );
     this.temp = this.options[0];
-    console.log(this.temp);
+    // console.log(this.temp);
   }
   onInput(e: any) {
-    this.inputValue.emit(e.target.value);
+    this.inputValue.emit(e.target?.value);
   }
 
   onSelectedOptions(option: In_options) {
     this.providedOption = option;
+    this.myControl.patchValue(this.providedOption.displayName)
     this.inputValue.emit(option);
     this.selectedOptions.emit(option);
   }
 
   private _filter(value: any): any[] {
-    console.log(value);
     const filterValue = value.toLowerCase();
 
     return this.options.filter((option) =>
