@@ -39,9 +39,11 @@ export class EditCustomerComponent implements OnInit, OnChanges {
   public options: In_options[] = locality;
   public selectedOption?: In_options;
   public customerDetailsCopy!: any;
+  providedOption:any
 
   constructor(private services: SharedService, private fb: FormBuilder) {}
   ngOnInit(): void {
+    this.providedOption = this.options.filter(item=>item?.displayName.toLocaleLowerCase() == this.customerDetails?.address.toLocaleLowerCase())
     if (this.editForm.value && this.editForm.value.address) {
       this.checkAutoCompleteValue = true;
     }
@@ -72,8 +74,8 @@ export class EditCustomerComponent implements OnInit, OnChanges {
       this.checkAutoCompleteValue = false;
     }
     for (let option of this.options) {
-      let temp = option.value.toLowerCase();
-      let tempInput = e.value.toLowerCase();
+      let temp = option.value?.toLowerCase();
+      let tempInput = e.value?.toLowerCase();
       if (temp == tempInput) {
         this.checkAutoCompleteValue = true;
         break;
@@ -103,6 +105,13 @@ export class EditCustomerComponent implements OnInit, OnChanges {
 
   public closeSideNav() {
     this.closeEditNav.emit(true);
+  }
+
+  onResetForm(){
+    
+    this.editForm.reset()
+    this.customerDetails = null
+    this.ngOnInit()
   }
 }
 
