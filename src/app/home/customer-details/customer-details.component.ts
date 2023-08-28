@@ -44,12 +44,13 @@ export class CustomerDetailsComponent {
     private _bottomSheet: MatBottomSheet,
     private services: SharedService,
     public dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit() {
     setTimeout(() => {
       this.prop = this.customerDetailsSize;
     }, 300);
+    this.selectedOption = this.vehicleNumberOptions[0]
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -132,13 +133,13 @@ export class CustomerDetailsComponent {
     }
   }
   onAddVehicleToCustomer() {
-    let temp = {
+    let payload = {
       customerId: parseInt(this.customerDetails.id),
       vehicleId: this.selectedOption?.id,
       amount: parseInt(this.vehicleRate),
     };
 
-    this.services.addVehicleToCustomer(temp).subscribe({
+    this.services.addVehicleToCustomer(payload).subscribe({
       next: (res) => {
         // console.log(res);
       },
@@ -148,7 +149,7 @@ export class CustomerDetailsComponent {
     });
   }
   onDeleteCustomer(customerId: any) {
-    this.services.onDeleteCustomer(customerId).subscribe((res) => {});
+    this.services.onDeleteCustomer(customerId).subscribe((res) => { });
     this.customerDetailsUpdated.emit(true);
   }
 
