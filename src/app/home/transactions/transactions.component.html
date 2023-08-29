@@ -7,7 +7,7 @@
     <div class="fliter mb15" >
         <div class="dropdown align-center">
             <label for="" >User</label>
-            <app-dropdown-component [placeholder]="'Select User'" [optionList]="userList"></app-dropdown-component>
+            <app-dropdown-component [placeholder]="'Select User'" [optionList]="userList" (valueSelected)="onValueSelected($event)"></app-dropdown-component>
         </div>
         <div class="dropdown align-center">
             <label for="" >Filter By</label>
