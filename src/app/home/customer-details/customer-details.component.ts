@@ -110,7 +110,7 @@ export class CustomerDetailsComponent {
   initiateTransaction(transactionType: string) {
     if (transactionType == 'gave') {
       let bottomSheetRef = this._bottomSheet.open(AddTransactionComponent, {
-        data: 'onYouGaveClicked',
+        data: {transactionType:'onYouGaveClicked',customerDetails:this.customerDetails},
       });
       bottomSheetRef.afterDismissed().subscribe((addNewEntry) => {
         if (addNewEntry) {
@@ -121,7 +121,7 @@ export class CustomerDetailsComponent {
       panelClass: 'custom-class';
     } else {
       let bottomSheetRef = this._bottomSheet.open(AddTransactionComponent, {
-        data: 'onYouGotClicked',
+        data: {transactionType:'onYouGotClicked',customerDetails:this.customerDetails},
       });
       bottomSheetRef.afterDismissed().subscribe((addNewEntry) => {
         if (addNewEntry) {
