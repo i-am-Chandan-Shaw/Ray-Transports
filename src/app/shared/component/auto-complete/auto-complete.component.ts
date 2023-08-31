@@ -23,7 +23,7 @@ export class AutoCompleteComponent implements OnInit {
   public temp: any;
 
   ngOnInit() {
-    this.myControl.patchValue(this.providedOption.displayName)
+    this.myControl.patchValue(this.providedOption?.displayName)
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map((value: any) => {

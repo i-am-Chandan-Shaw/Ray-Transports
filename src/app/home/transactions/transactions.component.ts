@@ -29,7 +29,8 @@ export class TransactionsComponent implements OnInit {
         for(let item of this.transactionDetails){
           this.userList.push({
             id:item.customerId,
-            name:item.customerName,
+            displayName:item.customerName,
+            value:item.customerName
           })
         }
         
@@ -42,10 +43,12 @@ export class TransactionsComponent implements OnInit {
     })
     }
 
-    onValueSelected(e:any){
+
+    autoCompleteInputValue(e:any){
       this.transactionDetails = []
       for(let item of this.transactionDetailsList){
-        if(e.name == item.customerName){
+        const targetDisplayName = typeof e === 'string' ? e.toLowerCase() : e?.displayName.toLowerCase();
+        if(item.customerName.toLowerCase().includes(targetDisplayName)){
           this.transactionDetails.push(item)
         }
       }
