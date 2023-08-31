@@ -23,10 +23,10 @@ export class AddTransactionComponent {
   ) {}
 
   ngOnInit() {
-    if (this.data == 'onYouGaveClicked') {
+    if (this.data.transactionType == 'onYouGaveClicked') {
       this.color = '#f44336';
     }
-    if (this.data == 'onYouGotClicked') {
+    if (this.data.transactionType == 'onYouGotClicked') {
       this.color = '#379237';
     }
   }
@@ -41,18 +41,19 @@ export class AddTransactionComponent {
   }
   addEntry() {
     this.addNewEntry = {
-      amount: this.amount,
+      customerId:this.data.customerDetails.id,
+      amount:this.data.transactionType == 'onYouGaveClicked'? "-"+this.amount : "+"+this.amount,
       date: this.selectedDate,
       description: this.description,
     };
-    // this.services.addIndividualTransaction(this.addNewEntry).subscribe({
-    //   next: (res) => {
-    //     console.log(res);
-    //   },
-    //   error: (err) => {
-    //     console.log(err);
-    //   },
-    // });
+    this.services.addIndividualTransaction(this.addNewEntry).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
     this._bottomSheetRef.dismiss(this.addNewEntry);
   
   }

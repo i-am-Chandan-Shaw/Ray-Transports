@@ -1,65 +1,89 @@
 <div class="transaction-wrapper">
-    <mat-toolbar class="header-section">
-        <span class="header-text">Transactions Dasboard</span>
-       
-    </mat-toolbar>
-    <mat-divider></mat-divider>
-    <div class="fliter mb15" >
-        <div class="dropdown align-center">
-            <label for="" >User</label>
-            <app-dropdown-component [placeholder]="'Select User'" [optionList]="userList"></app-dropdown-component>
-        </div>
-        <div class="dropdown align-center">
-            <label for="" >Filter By</label>
-            <app-dropdown-component [placeholder]="'Filter By'" [optionList]="filterList"></app-dropdown-component>
-        </div>
-
-        <div class="dropdown align-center">
-            <label for="" >Sort By</label>
-            <app-dropdown-component [placeholder]="'Sort By'" [optionList]="sortList"></app-dropdown-component>
-        </div>
+  <mat-toolbar class="header-section">
+    <span class="header-text">Transactions Dasboard</span>
+  </mat-toolbar>
+  <mat-divider></mat-divider>
+  <div class="fliter mb15">
+    <div class="dropdown align-center">
+      <label for="">User</label>
+      <app-auto-complete 
+        class="mt8 mb8"
+        (inputValue)="autoCompleteInputValue($event)"
+        [options]="userList"
+        [placeholder]="'Customer Name'"
+      ></app-auto-complete>
     </div>
-    <div class="transaction-table">
-        <div class="customer-table simple-table">
-        <div class="main-table">
-            <table class="table-header">
-                <thead class="border-left">
-                    <tr>
-                        <th class="w5p text-left">Date</th>
-                        <th class="w8p text-left">Customer Name</th>
-                        <th class="w10p text-left">Description</th>
-                        <th class="w7p text-left">Added By</th>
-                        <th class="text-center w4p">You Gave</th>
-                        <th class="text-center w4p">You Got</th>
-                        <th class="w4p text-right">Options</th>
-                    </tr>
-                </thead>
-            </table>
-            <perfect-scrollbar class="table-body">
-                <table>
-                    <tbody>
-                        <tr *ngFor="let item of transactionDetails">
-                            <td class="w5p text-left">{{item.date}}</td>
-                            <td class="w8p text-left">{{item.customerName}}</td>
-                            <td class="w10p text-left">{{item.description}}</td>
-                            <td class="w7p text-left">{{item.addedBy}}</td>
-                            <td class="w4p text-center amount-gave"> {{item.amount<0? myMath.abs(item.amount) :'-'}}</td>
-                        <td class="w4p text-center amount-got"> {{item.amount>0? item.amount :'-'}} </td>
-                            <td class="w4p text-right">
-                                <div class="show-on-hover">
-                                    <mat-icon class="icon-16 mr10" [autoPlacement]="true"tooltip="Edit transaction" [theme]="'light'" placement="top">edit</mat-icon>
-                                    <mat-icon class="icon-16" [autoPlacement]="true" tooltip="Delete transaction" [theme]="'light'" placement="top">delete</mat-icon>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-            </perfect-scrollbar>
-        </div>
-
-    </div>
+    <div class="dropdown align-center">
+      <label for="">Filter By</label>
+      <app-dropdown-component
+        [placeholder]="'Filter By'"
+        [optionList]="filterList"
+      ></app-dropdown-component>
     </div>
 
-    
+    <div class="dropdown align-center">
+      <label for="">Sort By</label>
+      <app-dropdown-component
+        [placeholder]="'Sort By'"
+        [optionList]="sortList"
+      ></app-dropdown-component>
+    </div>
+  </div>
+  <div class="transaction-table">
+    <div class="customer-table simple-table">
+      <div class="main-table">
+        <table class="table-header">
+          <thead class="border-left">
+            <tr>
+              <th class="w5p text-left">Date</th>
+              <th class="w8p text-left">Customer Name</th>
+              <th class="w10p text-left">Description</th>
+              <th class="w7p text-left">Added By</th>
+              <th class="text-center w4p">You Gave</th>
+              <th class="text-center w4p">You Got</th>
+              <th class="w4p text-right">Options</th>
+            </tr>
+          </thead>
+        </table>
+        <perfect-scrollbar class="table-body">
+          <table>
+            <tbody>
+              <tr *ngFor="let item of transactionDetails">
+                <td class="w5p text-left">{{ item.date }}</td>
+                <td class="w8p text-left">{{ item.customerName }}</td>
+                <td class="w10p text-left">{{ item.description }}</td>
+                <td class="w7p text-left">{{ item.addedBy }}</td>
+                <td class="w4p text-center amount-gave">
+                  {{ item.amount < 0 ? myMath.abs(item.amount) : "-" }}
+                </td>
+                <td class="w4p text-center amount-got">
+                  {{ item.amount > 0 ? item.amount : "-" }}
+                </td>
+                <td class="w4p text-right">
+                  <div class="show-on-hover">
+                    <mat-icon
+                      class="icon-16 mr10"
+                      [autoPlacement]="true"
+                      tooltip="Edit transaction"
+                      [theme]="'light'"
+                      placement="top"
+                      >edit</mat-icon
+                    >
+                    <mat-icon
+                      class="icon-16"
+                      [autoPlacement]="true"
+                      tooltip="Delete transaction"
+                      [theme]="'light'"
+                      placement="top"
+                      >delete</mat-icon
+                    >
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </perfect-scrollbar>
+      </div>
+    </div>
+  </div>
 </div>
