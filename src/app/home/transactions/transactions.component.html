@@ -83,6 +83,16 @@
             </tbody>
           </table>
         </perfect-scrollbar>
+        <mat-paginator *ngIf="transactionDetails.length"  #paginator
+               class="demo-paginator"
+               (page)="handlePageEvent($event)"
+               [length]="10"
+               [pageSize]="10"
+               [showFirstLastButtons]="true"
+               [pageSizeOptions]="[5,10,15,]"
+               [pageIndex]="0"
+               aria-label="Select page">
+</mat-paginator>
       </div>
     </div>
   </div>

@@ -23,6 +23,7 @@ export class AddTransactionComponent {
   ) {}
 
   ngOnInit() {
+    this.selectedDate=this.today;
     if (this.data.transactionType == 'onYouGaveClicked') {
       this.color = '#f44336';
     }

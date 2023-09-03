@@ -16,6 +16,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE  } from '@angular/material/core';
+import { MatPaginatorModule} from '@angular/material/paginator';
 @NgModule({
     exports:[
         BrowserAnimationsModule,
@@ -34,7 +35,8 @@ import { MatNativeDateModule, MAT_DATE_LOCALE  } from '@angular/material/core';
         MatAutocompleteModule,
         MatBottomSheetModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        MatPaginatorModule
     ],
     providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }]
 
