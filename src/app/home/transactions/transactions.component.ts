@@ -10,7 +10,6 @@ import { SharedService } from 'src/app/shared/sevices/shared.service';
   styleUrls: ['./transactions.component.scss']
 })
 export class TransactionsComponent implements OnInit {
-
   constructor(private services:SharedService){}
 
   public userList:any[]=[]
@@ -26,6 +25,14 @@ export class TransactionsComponent implements OnInit {
       next: (res) => {
         this.transactionDetails = res
         this.transactionDetailsList = JSON.parse(JSON.stringify(this.transactionDetails))
+
+        this.handlePageEvent({
+          previousPageIndex: 0,
+          pageIndex: 0,
+          pageSize: 10,
+          length: this.transactionDetailsList.length
+        });
+        
         for(let item of this.transactionDetails){
           this.userList.push({
             id:item.customerId,
@@ -34,7 +41,7 @@ export class TransactionsComponent implements OnInit {
           })
         }
         
-        //this is how we filter out array of object
+        //this is how we filter out dublicate array of object
         this.userList=this.userList.filter((v,i,a)=>a.findIndex(v2=>(v2.id===v.id))===i)
       },error: (err) => {
         console.log(err);
@@ -52,6 +59,16 @@ export class TransactionsComponent implements OnInit {
           this.transactionDetails.push(item)
         }
       }
+    }
+
+    handlePageEvent(e: any) {
+      this.transactionDetails = []
+      console.log(e);
+    
+      const startIndex = e.pageIndex * e.pageSize;
+      const endIndex = startIndex + e.pageSize;
+    
+      this.transactionDetails = this.transactionDetailsList.slice(startIndex, endIndex);
     }
   }
 

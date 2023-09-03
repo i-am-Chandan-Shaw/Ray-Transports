@@ -35,7 +35,7 @@ export class SharedService {
   }
 
   public addIndividualTransaction(payload: any) {
-    const api = this.apiString + ``;
+    const api = this.apiString + `postTransaction.php`;
     return this.http.post(api, payload);
   }
 
