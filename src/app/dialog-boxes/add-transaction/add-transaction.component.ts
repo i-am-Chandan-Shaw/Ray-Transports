@@ -47,7 +47,7 @@ export class AddTransactionComponent {
       date: this.selectedDate,
       description: this.description,
     };
-    this.services.addIndividualTransaction(this.addNewEntry).subscribe({
+    this.services.addIndividualTransaction(JSON.stringify(this.addNewEntry)).subscribe({
       next: (res) => {
         console.log(res);
       },

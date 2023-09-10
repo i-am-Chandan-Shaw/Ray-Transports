@@ -16,6 +16,9 @@ export class TransactionsComponent implements OnInit {
   public filterList:filter[] = filterList
   public sortList:filter[]=sortOption
   public myMath = Math;
+  pageSize=10;
+  pageIndex=0;
+  totalLength!:number
 
   transactionDetails:any=[]
   transactionDetailsList:any[]=[]
@@ -23,15 +26,12 @@ export class TransactionsComponent implements OnInit {
   ngOnInit(): void {
     this.services.getAllTransactionDetails().subscribe({
       next: (res) => {
-        this.transactionDetails = res
-        this.transactionDetailsList = JSON.parse(JSON.stringify(this.transactionDetails))
+        console.log(res)
 
-        this.handlePageEvent({
-          previousPageIndex: 0,
-          pageIndex: 0,
-          pageSize: 10,
-          length: this.transactionDetailsList.length
-        });
+          this.transactionDetails = res
+          this.totalLength = this.transactionDetails.totalCount
+          this.transactionDetails = this.transactionDetails.data
+        this.transactionDetailsList = JSON.parse(JSON.stringify(this.transactionDetails))
         
         for(let item of this.transactionDetails){
           this.userList.push({
@@ -62,13 +62,13 @@ export class TransactionsComponent implements OnInit {
     }
 
     handlePageEvent(e: any) {
-      this.transactionDetails = []
-      console.log(e);
+      this.pageSize = e.pageSize;
+      this.pageIndex = e.pageIndex
     
-      const startIndex = e.pageIndex * e.pageSize;
-      const endIndex = startIndex + e.pageSize;
-    
-      this.transactionDetails = this.transactionDetailsList.slice(startIndex, endIndex);
+      this.services.getAllTransactionDetailsPagination(this.pageSize,this.pageIndex).subscribe((res)=>{
+        this.transactionDetails = res
+        this.transactionDetails = this.transactionDetails.data
+      })
     }
   }
 
