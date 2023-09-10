@@ -34,6 +34,11 @@ export class SharedService {
     return this.http.get(api);
   }
 
+  public getAllTransactionDetailsPagination(pageSize:number,page:number) {
+    const api = this.apiString + `getTransactions.php?pageSize=${pageSize}&page=${page}`;
+    return this.http.get(api);
+  }
+
   public addIndividualTransaction(payload: any) {
     const api = this.apiString + `postTransaction.php`;
     return this.http.post(api, payload);
