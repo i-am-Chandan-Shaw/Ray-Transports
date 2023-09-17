@@ -23,13 +23,11 @@ export class TransactionsComponent implements OnInit {
   transactionDetails:any=[]
   transactionDetailsList:any[]=[]
   screenHeight:any
-  screenWidth:any
 
 
   @HostListener('window:resize', ['$event'])
   onResize() {
     this.screenHeight = window.innerHeight;
-    this.screenWidth = window.innerWidth;
     this.pageSize = Math.floor((this.screenHeight - 230)/30)
   }
 
