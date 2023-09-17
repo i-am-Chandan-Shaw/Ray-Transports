@@ -155,6 +155,7 @@ export class CustomerDetailsComponent {
   onDeleteCustomer(customerId: any) {
     this.services.onDeleteCustomer(customerId).subscribe((res) => { });
     this.customerDetailsUpdated.emit(true);
+    this.closeSection()
   }
 
   exportTable() {
