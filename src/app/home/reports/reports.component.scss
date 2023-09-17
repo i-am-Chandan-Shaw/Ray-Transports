@@ -56,6 +56,11 @@
   }
 }
 
+.table-body{
+  height: calc(100vh - 375px);
+    position: relative;
+}
+
 //Date Picker Start
 
 :host {

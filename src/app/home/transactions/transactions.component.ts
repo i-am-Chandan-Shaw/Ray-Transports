@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, HostListener, Inject, OnInit } from '@angular/core';
 import { filterList, sortOption } from 'src/app/shared/utils/filter-utils';
 import{filter} from 'src/app/shared/interface/filter-interface'
 import { SharedService } from 'src/app/shared/sevices/shared.service';
@@ -22,9 +22,18 @@ export class TransactionsComponent implements OnInit {
 
   transactionDetails:any=[]
   transactionDetailsList:any[]=[]
+  screenHeight:any
+
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.screenHeight = window.innerHeight;
+    this.pageSize = Math.floor((this.screenHeight - 230)/30)
+  }
 
   ngOnInit(): void {
-    this.services.getAllTransactionDetails().subscribe({
+    this.onResize();
+    this.services.getAllTransactionDetailsPagination(this.pageSize,this.pageIndex).subscribe({
       next: (res) => {
         console.log(res)
 
@@ -70,6 +79,7 @@ export class TransactionsComponent implements OnInit {
     }
 
     handlePageEvent(e: any) {
+      console.log(e)
       this.pageSize = e.pageSize;
       this.pageIndex = e.pageIndex
     
