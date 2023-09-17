@@ -26,7 +26,8 @@
         .overview-container {
           margin-bottom: 10px;
           display: flex;
-          justify-content: space-between;
+          // justify-content: space-between;
+          gap: 5%;
           width: 100%;
 
           .account-summary {

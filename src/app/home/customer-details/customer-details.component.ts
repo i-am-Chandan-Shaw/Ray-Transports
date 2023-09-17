@@ -78,8 +78,12 @@ export class CustomerDetailsComponent {
 
   private getIndividualTransaction(customer: any) {
     this.services.getIndividualTransaction(customer.id).subscribe({
-      next: (res) => {
-        this.customerTransactions = res;
+      next: (res:any) => {
+        if(res){
+          this.customerTransactions = res.data
+        }else{
+          this.customerTransactions = []
+        }
       },
       error: (err) => {
         console.log(err);
