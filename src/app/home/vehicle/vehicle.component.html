@@ -14,8 +14,9 @@
             <app-dropdown-component (valueSelected)="filterVehicle($event)" [optionList]="statusList"></app-dropdown-component>
         </div>
     </div>
-    <mat-divider></mat-divider>
+    <mat-divider></mat-divider><perfect-scrollbar class="perfect-scrollbar">
     <div class="p15">
+        
         <div class="vehicle-cards">
             <ng-container *ngFor="let item of searchedVehicle">
             <div class="card pt10 pb10 p15" [ngClass]="item.isActive ? 'active-border' : 'stopped-border'" (click)="onVehicleClicked(item)">
@@ -39,5 +40,5 @@
                 </div>
             </ng-container>
         </div>
-    </div>
+    </div></perfect-scrollbar>
 </div>
