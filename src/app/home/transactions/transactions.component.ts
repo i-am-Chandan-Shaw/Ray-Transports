@@ -60,6 +60,14 @@ export class TransactionsComponent implements OnInit {
         }
       }
     }
+    onSelectUserInputValue(e:any){
+      console.log(e)
+      this.services.getTransactionByCustomerName(e.displayName).subscribe((res:any)=>{
+        console.log(res.data)
+        this.transactionDetails = res.data
+        this.totalLength = res.totalCount
+      })
+    }
 
     handlePageEvent(e: any) {
       this.pageSize = e.pageSize;

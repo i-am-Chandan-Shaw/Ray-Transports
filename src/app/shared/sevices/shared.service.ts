@@ -20,7 +20,12 @@ export class SharedService {
   }
 
   public getIndividualTransaction(customerId: number) {
-    const api = this.apiString + `getTransactions.php?customerId=${customerId}`;
+    const api = this.apiString + `getTransactions.php?customerId=${customerId}&pageSize=1000&page=0`;
+    return this.http.get(api);
+  }
+
+  public getTransactionByCustomerName(customerName:string){
+    const api = this.apiString + `getTransactions.php?customerName=${customerName}`;
     return this.http.get(api);
   }
 

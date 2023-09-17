@@ -9,6 +9,7 @@
       <app-auto-complete 
         class="mt8 mb8"
         (inputValue)="autoCompleteInputValue($event)"
+        (selectedOptions)="onSelectUserInputValue($event)"
         [options]="userList"
         [placeholder]="'Customer Name'"
       ></app-auto-complete>
@@ -89,7 +90,7 @@
                [length]="this.totalLength"
                [pageSize]="pageSize"
                [showFirstLastButtons]="false"
-               [pageSizeOptions]="[5,10,15,]"
+               
                aria-label="Select page">
 </mat-paginator>
       </div>

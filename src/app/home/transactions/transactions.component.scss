@@ -162,3 +162,7 @@
 ::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
   width: 60vw;
 }
+
+::ng-deep .mat-mdc-paginator-page-size{
+  display: none !important;
+}

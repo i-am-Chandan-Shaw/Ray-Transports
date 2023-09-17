@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
@@ -9,9 +16,8 @@ import { AddTransactionComponent } from 'src/app/dialog-boxes/add-transaction/ad
 import { CustomerVehiclesComponent } from 'src/app/dialog-boxes/customer-vehicles/customer-vehicles.component';
 import { SharedService } from 'src/app/shared/sevices/shared.service';
 import { In_options } from 'src/app/shared/interface/In_options';
-import { vehicleNumber } from 'src/app/shared/utils/filter-utils'
+import { vehicleNumber } from 'src/app/shared/utils/filter-utils';
 import * as XLSX from 'xlsx';
-
 
 @Component({
   selector: 'app-customer-details',
@@ -44,13 +50,13 @@ export class CustomerDetailsComponent {
     private _bottomSheet: MatBottomSheet,
     private services: SharedService,
     public dialog: MatDialog
-  ) { }
+  ) {}
 
   ngOnInit() {
     setTimeout(() => {
       this.prop = this.customerDetailsSize;
     }, 300);
-    this.selectedOption = this.vehicleNumberOptions[0]
+    this.selectedOption = this.vehicleNumberOptions[0];
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -78,8 +84,12 @@ export class CustomerDetailsComponent {
 
   private getIndividualTransaction(customer: any) {
     this.services.getIndividualTransaction(customer.id).subscribe({
-      next: (res) => {
-        this.customerTransactions = res;
+      next: (res: any) => {
+        if (res) {
+          this.customerTransactions = res.data;
+        } else {
+          this.customerTransactions = [];
+        }
       },
       error: (err) => {
         console.log(err);
@@ -110,22 +120,29 @@ export class CustomerDetailsComponent {
   initiateTransaction(transactionType: string) {
     if (transactionType == 'gave') {
       let bottomSheetRef = this._bottomSheet.open(AddTransactionComponent, {
-        data: {transactionType:'onYouGaveClicked',customerDetails:this.customerDetails},
+        data: {
+          transactionType: 'onYouGaveClicked',
+          customerDetails: this.customerDetails,
+        },
       });
       bottomSheetRef.afterDismissed().subscribe((addNewEntry) => {
         if (addNewEntry) {
           addNewEntry.amount = parseInt('-' + addNewEntry.amount);
+          this.getIndividualTransaction(this.customerDetails);
         }
-        console.log(addNewEntry);
       });
       panelClass: 'custom-class';
     } else {
       let bottomSheetRef = this._bottomSheet.open(AddTransactionComponent, {
-        data: {transactionType:'onYouGotClicked',customerDetails:this.customerDetails},
+        data: {
+          transactionType: 'onYouGotClicked',
+          customerDetails: this.customerDetails,
+        },
       });
       bottomSheetRef.afterDismissed().subscribe((addNewEntry) => {
         if (addNewEntry) {
           addNewEntry.amount = parseInt('+' + addNewEntry.amount);
+          this.getIndividualTransaction(this.customerDetails);
         }
         // console.log(addNewEntry);
       });
@@ -149,8 +166,9 @@ export class CustomerDetailsComponent {
     });
   }
   onDeleteCustomer(customerId: any) {
-    this.services.onDeleteCustomer(customerId).subscribe((res) => { });
+    this.services.onDeleteCustomer(customerId).subscribe((res) => {});
     this.customerDetailsUpdated.emit(true);
+    this.closeSection();
   }
 
   exportTable() {
