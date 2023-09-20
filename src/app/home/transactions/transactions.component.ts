@@ -28,7 +28,7 @@ export class TransactionsComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize() {
     this.screenHeight = window.innerHeight;
-    this.pageSize = Math.floor((this.screenHeight - 230)/30)
+    this.pageSize = Math.floor((this.screenHeight - 240)/30)
   }
 
   ngOnInit(): void {
