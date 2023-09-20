@@ -14,7 +14,7 @@
             </div>
         </div>
         <mat-divider></mat-divider>
-        <div class="sub-header p15">
+        <div class="sub-header p15" [formGroup]="reportForm">
             <div class="customer-name">
                 <label>Customer Name</label>
                 <app-input [placeholder]="'Search'" (emitSearchValue)="onSearchVehicle($event)"></app-input>
@@ -28,8 +28,8 @@
                     <label for="">Start</label>
                     <div class="date">
                         <mat-form-field appearance="outline">
-                            <input matInput [matDatepicker]="startDatePicker" placeholder="MM/DD/YYYY">
-                            <mat-datepicker-toggle matIconSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+                            <input matInput [matDatepicker]="startDatePicker" placeholder="MM/DD/YYYY" formControlName="startDate" >
+                            <mat-datepicker-toggle *ngIf="enableCalender" matIconSuffix [for]="startDatePicker"></mat-datepicker-toggle>
                             <mat-datepicker #startDatePicker></mat-datepicker>
                         </mat-form-field>
                     </div>
@@ -37,11 +37,11 @@
 
 
                 <div class="end">
-                    <label for="">Start</label>
+                    <label for="">End</label>
                     <div class="date">
                         <mat-form-field appearance="outline">
-                            <input matInput [matDatepicker]="endDatePicker" placeholder="MM/DD/YYYY">
-                            <mat-datepicker-toggle matIconSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                            <input matInput [matDatepicker]="endDatePicker" placeholder="MM/DD/YYYY"  formControlName="endDate" >
+                            <mat-datepicker-toggle *ngIf="enableCalender" matIconSuffix [for]="endDatePicker"></mat-datepicker-toggle>
                             <mat-datepicker #endDatePicker></mat-datepicker>
                         </mat-form-field>
                     </div>

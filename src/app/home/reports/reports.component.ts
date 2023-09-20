@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { periodList } from 'src/app/shared/utils/filter-utils';
 import * as XLSX from 'xlsx'
 
@@ -8,10 +9,12 @@ import * as XLSX from 'xlsx'
   styleUrls: ['./reports.component.scss'],
 })
 export class ReportsComponent implements OnInit {
+  enableCalender:boolean = false
   periodList = periodList;
   fileName:any = 'Transactions-Report.xlsx'
 
   public myMath = Math;
+  reportForm!: FormGroup;
 
   searchedTransactionDetails: any[] = [];
 
@@ -186,11 +189,24 @@ export class ReportsComponent implements OnInit {
     },
   ];
 
+  constructor(private fb: FormBuilder){}
+
   ngOnInit(): void {
     this.searchedTransactionDetails = this.transactionDetails;
+    this.reportForm = this.fb.group({
+      customerName: [''],
+      period: [''],
+      startDate: [{ value: '', disabled: true }],
+      endDate:[{ value: '', disabled: true }],
+    });
+  }
+
+  get gf(){
+    return this.reportForm.controls
   }
   onSearchVehicle(e: any) {
     this.searchedTransactionDetails = [];
+    this.reportForm.patchValue({customerName:e}) 
     for (let transaction of this.transactionDetails) {
       let temp = transaction.customerName.toLowerCase();
       if (temp.includes(e.toLowerCase())) {
@@ -200,6 +216,9 @@ export class ReportsComponent implements OnInit {
   }
 
   filterList(e: any) {
+    console.log(e)
+    this.reportForm.patchValue({period:e})
+    console.log(this.reportForm.value)
     this.searchedTransactionDetails = [];
     let date = new Date();
     if (e.name == 'Today') {
@@ -219,6 +238,18 @@ export class ReportsComponent implements OnInit {
       if (temp.includes(formattedDate)) {
         this.searchedTransactionDetails.push(transaction);
       }
+    }
+
+    if(e.name == 'Custom'){
+      this.enableCalender = true
+      this.gf['startDate'].enable();
+      this.gf['endDate'].enable();
+      
+    }else {
+      this.enableCalender = false
+      this.gf['startDate'].disable();
+      this.gf['endDate'].disable();
+      this.reportForm.patchValue({startDate:null,endDate:null})
     }
   }
 
