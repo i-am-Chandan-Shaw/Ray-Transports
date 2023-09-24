@@ -28,7 +28,7 @@ import { EditCustomerComponent } from './home/edit-customer/edit-customer.compon
 import { CustomerVehiclesComponent } from './dialog-boxes/customer-vehicles/customer-vehicles.component';
 import { VehicleCardComponent } from './dialog-boxes/vehicle-card/vehicle-card.component';
 import { AddVehicleComponent } from './dialog-boxes/add-vehicle/add-vehicle.component';
-
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @NgModule({
   declarations: [
@@ -55,6 +55,7 @@ import { AddVehicleComponent } from './dialog-boxes/add-vehicle/add-vehicle.comp
     AddVehicleComponent,
   ],
   imports: [
+    NgxSkeletonLoaderModule.forRoot({ animation: 'pulse', loadingText: 'This item is actually loading...' }),
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
