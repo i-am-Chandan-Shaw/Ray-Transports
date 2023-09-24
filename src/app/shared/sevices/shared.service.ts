@@ -19,6 +19,27 @@ export class SharedService {
     return this.http.get(api);
   }
 
+  public getTransactionReports() {
+    const api = this.apiString + `getTransactionsReport.php`;
+    return this.http.get(api);
+  }
+
+  public getTransactionReportsPagination(pageNo?:any,pageSize?:any) {
+    const api = this.apiString + `getTransactionsReport.php?pageSize=${pageSize}&page=${pageNo}`;
+    return this.http.get(api);
+  }
+
+  public getTransactionReportsFilterPagination(pageNo?:any,pageSize?:any,dateFilter?:any) {
+    const api = this.apiString + `getTransactionsReport.php?pageSize=${pageSize}&page=${pageNo}&dateFilter=${dateFilter}`;
+    return this.http.get(api);
+  }
+
+  public getTransactionReportsFilterDatePagination(pageNo?:any,pageSize?:any,dateFilter?:any,startDate?:any,endDate?:any) {
+    const api = this.apiString + `getTransactionsReport.php?pageSize=${pageSize}&page=${pageNo}&dateFilter=${dateFilter}&startDate=${startDate},&endDate=${endDate}`;
+    return this.http.get(api);
+  }
+
+
   public getIndividualTransaction(customerId: number) {
     const api = this.apiString + `getTransactions.php?customerId=${customerId}&pageSize=1000&page=0`;
     return this.http.get(api);

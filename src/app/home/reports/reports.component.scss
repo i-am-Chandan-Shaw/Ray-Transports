@@ -57,10 +57,12 @@
 }
 
 .table-body{
-  height: calc(100vh - 375px);
+  height: calc(100vh - 450px);
     position: relative;
 }
-
+::ng-deep .mat-mdc-paginator-page-size{
+  display: none !important;
+}
 //Date Picker Start
 
 :host {
