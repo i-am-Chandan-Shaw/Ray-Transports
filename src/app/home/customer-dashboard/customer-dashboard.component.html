@@ -110,7 +110,7 @@
     </div>
     <mat-divider [vertical]="true"></mat-divider>
     <div class="details-section" #customerDetails *ngIf="customerData !=null">
-        <app-customer-details (customerDetailsUpdated)="updatedTable()"
+        <app-customer-details (customerDetailsUpdated)="updatedTable()" [vehicleNumberOptions]="vehicleNumberOptions"
             (closeDeatilsSection)="closeDetailsSection($event)" [customerDetails]="customerData" (customerDetailsUpdated)="updatedTable()"
             [customerDetailsSize]="this.customerDetailsSize"></app-customer-details>
 
