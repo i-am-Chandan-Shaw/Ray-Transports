@@ -16,7 +16,6 @@ import { AddTransactionComponent } from 'src/app/dialog-boxes/add-transaction/ad
 import { CustomerVehiclesComponent } from 'src/app/dialog-boxes/customer-vehicles/customer-vehicles.component';
 import { SharedService } from 'src/app/shared/sevices/shared.service';
 import { In_options } from 'src/app/shared/interface/In_options';
-import { vehicleNumber } from 'src/app/shared/utils/filter-utils';
 import * as XLSX from 'xlsx';
 
 @Component({
@@ -43,7 +42,7 @@ export class CustomerDetailsComponent {
   public customerTransactions: any = [];
   public customerVehicles: any = [];
   prop: any;
-  public vehicleNumberOptions: In_options[] = vehicleNumber;
+  @Input()vehicleNumberOptions: any;
   public vehicleRate: any;
 
   constructor(
@@ -56,7 +55,6 @@ export class CustomerDetailsComponent {
     setTimeout(() => {
       this.prop = this.customerDetailsSize;
     }, 300);
-    this.selectedOption = this.vehicleNumberOptions[0];
   }
 
   ngOnChanges(changes: SimpleChanges) {

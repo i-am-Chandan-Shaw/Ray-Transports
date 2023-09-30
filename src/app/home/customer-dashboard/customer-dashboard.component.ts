@@ -22,12 +22,14 @@ export class CustomerDashboardComponent {
   searchedCustomerData: any = null;
   youWillGet: any;
   youWillGive: any;
+  vehicleNumberOptions:any= []
 
   constructor(public dialog: MatDialog, private services: SharedService) {}
 
   public allCustomerData: any = [];
 
   ngOnInit(): void {
+    this.getVehicle()
     this.getAllCustomer();
     setTimeout(() => {
       if (this.customerDetails) {
@@ -138,5 +140,13 @@ export class CustomerDashboardComponent {
         this.searchedCustomerData.push(customer);
       }
     }
+  }
+
+  getVehicle(){
+    this.services.filterVehicle('2').subscribe(res=>{
+      for(let item of res){
+        this.vehicleNumberOptions.push({id:item?.id,displayName:item?.vehicleNumber,value:item?.id})
+      }
+    })
   }
 }
