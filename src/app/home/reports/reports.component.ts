@@ -19,7 +19,8 @@ export class ReportsComponent implements OnInit {
   netBalance: any;
   totalGaveAmount: any;
   totalGotAmount: any;
-
+  // startDatevarialbe: any;
+  // endDate: any;
   public myMath = Math;
   reportForm!: FormGroup;
 
@@ -55,15 +56,17 @@ export class ReportsComponent implements OnInit {
       .getTransactionReportsPagination(this.pageIndex, this.pageSize)
       .subscribe(
         (res: any) => {
-          this.transactionDetails = res.data;
+          if (res && res.data) {
+            this.transactionDetails = res.data;
 
-          this.searchedTransactionDetails = JSON.parse(
-            JSON.stringify(this.transactionDetails)
-          );
-          this.netBalance = res.netBalance;
-          this.totalGaveAmount = res.totalGaveAmount;
-          this.totalGotAmount = res.totalGotAmount;
-          this.totalLength = res.totalCount;
+            this.searchedTransactionDetails = JSON.parse(
+              JSON.stringify(this.transactionDetails)
+            );
+            this.netBalance = res.netBalance;
+            this.totalGaveAmount = res.totalGaveAmount;
+            this.totalGotAmount = res.totalGotAmount;
+            this.totalLength = res.totalCount;
+          }
         },
         (error) => {
           console.log(error);
@@ -81,53 +84,61 @@ export class ReportsComponent implements OnInit {
     }
   }
 
-  filterList(e: any) {
-    console.log(e);
+  selectedStartDate(e: any) {
+    let temp = this.getFormatterDate(e.value)
+    this.reportForm.patchValue({ startDate: temp});
+  }
+  selectedEndDate(e: any) {
+    let temp = this.getFormatterDate(e.value)
+    this.reportForm.patchValue({ endDate: temp });
+    this.filterList();
+  }
+
+  selectedPeriod(e: any) {
     this.reportForm.patchValue({ period: e });
-    console.log(this.reportForm.value);
-
-
-    // let date = new Date();
-
-    // if (e.name == 'Yesterday') {
-    //   date.setDate(date.getDate() - 1);
-    // }
-
-    // const day = date.getDate().toString().padStart(2, '0'); // Ensure two digits for the day
-    // const month = date.toLocaleString('en-US', { month: 'short' });
-    // const year = date.getFullYear();
-
-    // const formattedDate = `${day} ${month} ${year}`;
-
-    // for (let transaction of this.transactionDetails) {
-    //   let temp = transaction.date;
-    //   if (temp.includes(formattedDate)) {
-    //     this.searchedTransactionDetails.push(transaction);
-    //   }
-    // }
- 
     if (e.name == 'Custom') {
       this.enableCalender = true;
       this.gf['startDate'].enable();
       this.gf['endDate'].enable();
-   
     } else {
-      this.searchedTransactionDetails = [];
       this.enableCalender = false;
       this.gf['startDate'].disable();
       this.gf['endDate'].disable();
       this.reportForm.patchValue({ startDate: null, endDate: null });
-
-      this.services
-      .getTransactionReportsFilterPagination(this.pageIndex, this.pageSize,e.id)
-      .subscribe((res: any) => {
-        this.transactionDetails = res.data;
-        this.searchedTransactionDetails = JSON.parse(
-          JSON.stringify(this.transactionDetails)
-        );
-      });
+      this.filterList();
     }
-    console.log(this.reportForm.value)
+  }
+  filterList() {
+    this.searchedTransactionDetails = [];
+    if (!this.enableCalender) {
+      this.services
+        .getTransactionReportsFilterPagination(
+          this.pageIndex,
+          this.pageSize,
+          this.gf['period'].value.id
+        )
+        .subscribe((res: any) => {
+          this.transactionDetails = res?.data;
+          this.searchedTransactionDetails = JSON.parse(
+            JSON.stringify(this.transactionDetails)
+          );
+        });
+    } else {
+      this.services
+        .getTransactionReportsFilterDatePagination(
+          this.pageIndex,
+          this.pageSize,
+          this.gf['period'].value.id,
+          this.gf['startDate'].value,
+          this.gf['endDate'].value
+        )
+        .subscribe((res: any) => {
+          this.transactionDetails = res?.data;
+          this.searchedTransactionDetails = JSON.parse(
+            JSON.stringify(this.transactionDetails)
+          );
+        });
+    }
   }
 
   exportTable() {
@@ -141,7 +152,6 @@ export class ReportsComponent implements OnInit {
   }
 
   handlePageEvent(e: any) {
-    console.log(e);
     this.pageSize = e.pageSize;
     this.pageIndex = e.pageIndex;
 
@@ -153,5 +163,15 @@ export class ReportsComponent implements OnInit {
           JSON.stringify(this.transactionDetails)
         );
       });
+  }
+
+  getFormatterDate(originalDateString: any) {
+    const originalDate = new Date(originalDateString);
+    const year = originalDate.getFullYear();
+    const month = String(originalDate.getMonth() + 1).padStart(2, '0');
+    const day = String(originalDate.getDate()).padStart(2, '0');
+
+    const formattedDate = `${year}-${month}-${day}`;
+    return formattedDate;
   }
 }

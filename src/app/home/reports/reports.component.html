@@ -21,30 +21,20 @@
             </div>
             <div class="period">
                 <label>Period</label>
-                <app-dropdown-component [optionList]="periodList" (valueSelected)="filterList($event)"></app-dropdown-component>
+                <app-dropdown-component [optionList]="periodList"
+                    (valueSelected)="selectedPeriod($event)"></app-dropdown-component>
             </div>
             <div class="calender" [ngStyle]="enableCalender?{'visibility': 'visible'}:{'visibility': 'hidden'}">
-                <div class="start">
-                    <label for="">Start</label>
-                    <div class="date">
-                        <mat-form-field appearance="outline">
-                            <input matInput [matDatepicker]="startDatePicker" placeholder="MM/DD/YYYY" formControlName="startDate">
-                            <mat-datepicker-toggle *ngIf="enableCalender" matIconSuffix [for]="startDatePicker" (dateChange)="filterList($event)"></mat-datepicker-toggle>
-                            <mat-datepicker #startDatePicker></mat-datepicker>
-                        </mat-form-field>
-                    </div>
-                </div>
-
-
-                <div class="end">
-                    <label for="">End</label>
-                    <div class="date">
-                        <mat-form-field appearance="outline">
-                            <input matInput [matDatepicker]="endDatePicker" placeholder="MM/DD/YYYY"  formControlName="endDate">
-                            <mat-datepicker-toggle *ngIf="enableCalender" matIconSuffix [for]="endDatePicker" (dateChange)="filterList($event)"></mat-datepicker-toggle>
-                            <mat-datepicker #endDatePicker></mat-datepicker>
-                        </mat-form-field>
-                    </div>
+                <div class="date">
+                    <label for="">Start/End Date</label>
+                    <mat-form-field>
+                        <mat-date-range-input [rangePicker]="picker">
+                            <input matStartDate placeholder="MM/DD/YYYY" (dateChange)="selectedStartDate($event)">
+                            <input matEndDate placeholder="MM/DD/YYYY" (dateChange)="selectedEndDate($event)">
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                    </mat-form-field>
                 </div>
 
             </div>
@@ -76,53 +66,53 @@
 
         <div class="report-table p15">
             <div class="customer-table simple-table">
-            <div class="main-table" id="transaction-table">
-                <table class="table-header">
-                    <thead class="border-left">
-                        <tr>
-                            <th class="w5p text-left">Date</th>
-                            <th class="w8p text-left">Customer Name</th>
-                            <th class="w10p text-left">Description</th>
-                            <th class="w7p text-left">Added By</th>
-                            <th class="text-center w4p">You Gave</th>
-                            <th class="text-center w4p">You Got</th>
-                            <th class="w4p text-right">Options</th>
-                        </tr>
-                    </thead>
-                </table>
-                <perfect-scrollbar class="table-body">
-                    <table>
-                        <tbody>
-                            <tr *ngFor="let item of searchedTransactionDetails">
-                                <td class="w5p text-left">{{item.date }}</td>
-                                <td class="w8p text-left">{{item.customerName}}</td>
-                                <td class="w10p text-left">{{item.description}}</td>
-                                <td class="w7p text-left">{{item.addedBy}}</td>
-                                <td class="w4p text-center amount-gave"> {{item.amount<0? myMath.abs(item.amount) :'-'}}</td>
-                            <td class="w4p text-center amount-got"> {{item.amount>0? item.amount :'-'}} </td>
-                                <td class="w4p text-right">
-                                    <div class="show-on-hover">
-                                        <mat-icon class="icon-16 mr10" [autoPlacement]="true"tooltip="Edit transaction" [theme]="'light'" placement="top">edit</mat-icon>
-                                        <mat-icon class="icon-16" [autoPlacement]="true" tooltip="Delete transaction" [theme]="'light'" placement="top">delete</mat-icon>
-                                    </div>
-                                </td>
+                <div class="main-table" id="transaction-table">
+                    <table class="table-header">
+                        <thead class="border-left">
+                            <tr>
+                                <th class="w5p text-left">Date</th>
+                                <th class="w8p text-left">Customer Name</th>
+                                <th class="w10p text-left">Description</th>
+                                <th class="w7p text-left">Added By</th>
+                                <th class="text-center w4p">You Gave</th>
+                                <th class="text-center w4p">You Got</th>
+                                <th class="w4p text-right">Options</th>
                             </tr>
-                        </tbody>
+                        </thead>
                     </table>
-    
-                </perfect-scrollbar>
-                <mat-paginator *ngIf="searchedTransactionDetails.length"  #paginator
-                class="demo-paginator"
-                (page)="handlePageEvent($event)"
-                [length]="this.totalLength"
-                [pageSize]="pageSize"
-                [showFirstLastButtons]="false"
-                
-                aria-label="Select page">
- </mat-paginator>
+                    <perfect-scrollbar class="table-body">
+                        <table>
+                            <tbody>
+                                <tr *ngFor="let item of searchedTransactionDetails">
+                                    <td class="w5p text-left">{{item.date }}</td>
+                                    <td class="w8p text-left">{{item.customerName}}</td>
+                                    <td class="w10p text-left">{{item.description}}</td>
+                                    <td class="w7p text-left">{{item.addedBy}}</td>
+                                    <td class="w4p text-center amount-gave"> {{item.amount<0? myMath.abs(item.amount)
+                                            :'-'}}</td>
+                                    <td class="w4p text-center amount-got"> {{item.amount>0? item.amount :'-'}} </td>
+                                    <td class="w4p text-right">
+                                        <div class="show-on-hover">
+                                            <mat-icon class="icon-16 mr10" [autoPlacement]="true"
+                                                tooltip="Edit transaction" [theme]="'light'"
+                                                placement="top">edit</mat-icon>
+                                            <mat-icon class="icon-16" [autoPlacement]="true"
+                                                tooltip="Delete transaction" [theme]="'light'"
+                                                placement="top">delete</mat-icon>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </perfect-scrollbar>
+                    <mat-paginator *ngIf="searchedTransactionDetails.length" #paginator class="demo-paginator"
+                        (page)="handlePageEvent($event)" [length]="this.totalLength" [pageSize]="pageSize"
+                        [showFirstLastButtons]="false" aria-label="Select page">
+                    </mat-paginator>
+                </div>
+
             </div>
-    
-        </div>
         </div>
 
 
