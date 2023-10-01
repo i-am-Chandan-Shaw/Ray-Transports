@@ -2,6 +2,8 @@ import { Component, HostListener, Inject, OnInit } from '@angular/core';
 import { filterList1, sortOption } from 'src/app/shared/utils/filter-utils';
 import{filter} from 'src/app/shared/interface/filter-interface'
 import { SharedService } from 'src/app/shared/sevices/shared.service';
+import { MatDialog } from '@angular/material/dialog';
+import { EditTransactionComponent } from './edit-transaction/edit-transaction.component';
 
 
 @Component({
@@ -10,7 +12,8 @@ import { SharedService } from 'src/app/shared/sevices/shared.service';
   styleUrls: ['./transactions.component.scss']
 })
 export class TransactionsComponent implements OnInit {
-  constructor(private services:SharedService){}
+  constructor(private services:SharedService,
+    public dialog: MatDialog){}
 
   public userList:any[]=[]
   public filterList:filter[] = filterList1
@@ -97,6 +100,19 @@ export class TransactionsComponent implements OnInit {
         this.transactionDetails = res
         this.transactionDetails = this.transactionDetails.data
         this.showLoader = false
+      })
+    }
+
+    public openEditTransactionDialog(selectedTransaction:any) {
+      const dialogRef = this.dialog.open(EditTransactionComponent, {
+        disableClose:true,
+        autoFocus: false,
+        height: '550px',
+        width: '650px',
+        data: selectedTransaction,
+      });
+      dialogRef.afterClosed().subscribe(updatedTransaction=> {
+        console.log("up",updatedTransaction)
       })
     }
   }

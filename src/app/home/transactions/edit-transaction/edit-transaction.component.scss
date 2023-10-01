@@ -1,0 +1,12 @@
+.edit-transaction-wrapper{
+    mat-toolbar{
+        height: 35px;
+        font-weight: normal;
+        font-size: var(--fnt-medium);
+    }
+    .header{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }    
+}
