@@ -27,7 +27,7 @@
             <div class="calender" [ngStyle]="enableCalender?{'visibility': 'visible'}:{'visibility': 'hidden'}">
                 <div class="date">
                     <label for="">Start/End Date</label>
-                    <mat-form-field>
+                    <mat-form-field class="datepicker">
                         <mat-date-range-input [rangePicker]="picker">
                             <input matStartDate placeholder="MM/DD/YYYY" (dateChange)="selectedStartDate($event)">
                             <input matEndDate placeholder="MM/DD/YYYY" (dateChange)="selectedEndDate($event)">

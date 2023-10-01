@@ -32,8 +32,17 @@
         width: 50%;
         justify-content: space-between;
 
-        .date{
+        .date {
           width: 250px;
+          .datepicker{
+            border: 1px solid rgba(0, 0, 0, 0.38);
+            padding: 0 16px;
+            border-radius: 5px;
+
+            ::ng-deep .mat-date-range-input-inner{
+              background-color: transparent !important;
+            }
+          }
         }
       }
     }
@@ -60,11 +69,11 @@
   }
 }
 
-.table-body{
+.table-body {
   height: calc(100vh - 450px);
-    position: relative;
+  position: relative;
 }
-::ng-deep .mat-mdc-paginator-page-size{
+::ng-deep .mat-mdc-paginator-page-size {
   display: none !important;
 }
 //Date Picker Start
@@ -107,38 +116,43 @@
     width: 100%;
   }
 
-  ::ng-deep .mat-mdc-text-field-wrapper:not(.mdc-text-field--outlined) .mat-mdc-form-field-infix{
+  ::ng-deep
+    .mat-mdc-text-field-wrapper:not(.mdc-text-field--outlined)
+    .mat-mdc-form-field-infix {
     padding-top: 0px;
     padding-bottom: 0px;
+    background: #fff;
   }
-  :ng-deep .mat-mdc-form-field .mat-mdc-floating-label.mdc-floating-label{
+  ::ng-deep .mat-mdc-form-field-icon-suffix, [dir=rtl] .mat-mdc-form-field-icon-prefix{
+    padding: 0 ;
+    background: #fff;
+  }
+  :ng-deep .mat-mdc-form-field .mat-mdc-floating-label.mdc-floating-label {
     display: none !important;
+  }
 
+  ::ng-deep .mat-datepicker-content {
+    display: block;
+    border-radius: 4px;
+    margin: 7px 0 !important;
+  }
+
+  ::ng-deep .mat-datepicker-content .mat-calendar {
+    width: 240px !important;
+    max-height: 294px !important;
+    min-height: 270px !important;
+  }
+
+  ::ng-deep .mat-calendar-controls {
+    display: flex;
+    align-items: center;
+    margin: 2% calc(4.7142857143% - 16px) !important;
+  }
+
+  ::ng-deep .mat-calendar-header {
+    padding: 8px !important;
   }
 }
-
-::ng-deep .mat-datepicker-content {
-  display: block;
-  border-radius: 4px;
-  margin: 7px 0 !important;
-}
-
-::ng-deep .mat-datepicker-content .mat-calendar {
-  width: 240px !important;
-  max-height: 294px !important;
-  min-height: 270px !important;
-}
-
-::ng-deep .mat-calendar-controls {
-  display: flex;
-  align-items: center;
-  margin: 2% calc(4.7142857143% - 16px) !important;
-}
-
-::ng-deep .mat-calendar-header {
-  padding: 8px !important;
-}
-
 // drop-down
 :host {
   ::ng-deep
