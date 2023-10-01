@@ -81,7 +81,7 @@
                         </thead>
                     </table>
                     <perfect-scrollbar class="table-body">
-                        <table>
+                        <table *ngIf="!showLoader">
                             <tbody>
                                 <tr *ngFor="let item of searchedTransactionDetails">
                                     <td class="w5p text-left">{{item.date }}</td>
@@ -104,6 +104,11 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <ngx-skeleton-loader *ngIf="showLoader" count="8" appearance="line" [theme]="{ 
+                            'height': '30px',
+                            'width':'100%',
+                            'margin':'0'
+                          }"></ngx-skeleton-loader>
 
                     </perfect-scrollbar>
                     <mat-paginator *ngIf="searchedTransactionDetails.length" #paginator class="demo-paginator"

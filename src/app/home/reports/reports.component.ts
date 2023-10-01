@@ -23,6 +23,7 @@ export class ReportsComponent implements OnInit {
   // endDate: any;
   public myMath = Math;
   reportForm!: FormGroup;
+  showLoader:boolean = false
 
   searchedTransactionDetails: any[] = [];
 
@@ -37,6 +38,7 @@ export class ReportsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.showLoader = true
     this.getTransactionsReport();
     this.reportForm = this.fb.group({
       customerName: [''],
@@ -66,6 +68,7 @@ export class ReportsComponent implements OnInit {
             this.totalGaveAmount = res.totalGaveAmount;
             this.totalGotAmount = res.totalGotAmount;
             this.totalLength = res.totalCount;
+            this.showLoader = false
           }
         },
         (error) => {
@@ -154,6 +157,7 @@ export class ReportsComponent implements OnInit {
   handlePageEvent(e: any) {
     this.pageSize = e.pageSize;
     this.pageIndex = e.pageIndex;
+    this.showLoader = true
 
     this.services
       .getTransactionReportsPagination(this.pageIndex, this.pageSize)
@@ -162,6 +166,7 @@ export class ReportsComponent implements OnInit {
         this.searchedTransactionDetails = JSON.parse(
           JSON.stringify(this.transactionDetails)
         );
+        this.showLoader = false
       });
   }
 
