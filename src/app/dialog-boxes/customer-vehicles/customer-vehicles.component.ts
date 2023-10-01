@@ -10,6 +10,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class CustomerVehiclesComponent implements OnInit {
   public customerVehicles: any = [];
+  showLoader:boolean = false
 
   constructor(
     private services: SharedService,
@@ -19,9 +20,11 @@ export class CustomerVehiclesComponent implements OnInit {
     this.getUserVehicles(this.customer);
   }
   private getUserVehicles(customer: any) {
+    this.showLoader = true
     this.services.getUserVehicle(customer.id).subscribe({
       next: (res) => {
         this.customerVehicles = res;
+        this.showLoader = false
         // console.log(this.customerVehicles);
       },
       error: (err) => {
