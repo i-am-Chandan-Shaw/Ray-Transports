@@ -37,6 +37,33 @@ export const filterList = [
   },
 ];
 
+export const filterList1 = [
+  {
+    id: 0,
+    name: 'All',
+    value: '1',
+    isSelected: false,
+  },
+  {
+    id: 1,
+    name: "You'll Get",
+    value: '4',
+    isSelected: false,
+  },
+  {
+    id: 2,
+    name: "You'll Give",
+    value: '5',
+    isSelected: false,
+  },
+  {
+    id: 3,
+    name: 'Settled',
+    value: '6',
+    isSelected: false,
+  },
+];
+
 export const sortOption = [
   {
     id: 0,

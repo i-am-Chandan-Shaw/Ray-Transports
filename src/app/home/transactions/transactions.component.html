@@ -23,10 +23,11 @@
     </div>
 
     <div class="dropdown align-center">
-      <label for="">Sort By</label>
+      <label for="">Added By</label>
       <app-dropdown-component
-        [placeholder]="'Sort By'"
-        [optionList]="sortList"
+      [selectMultipleValue]="true"
+        [placeholder]="'Added By'"
+        [optionList]="addedBy"
       ></app-dropdown-component>
     </div>
   </div>

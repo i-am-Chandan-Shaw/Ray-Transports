@@ -1,5 +1,5 @@
 import { Component, HostListener, Inject, OnInit } from '@angular/core';
-import { filterList, sortOption } from 'src/app/shared/utils/filter-utils';
+import { filterList1, sortOption } from 'src/app/shared/utils/filter-utils';
 import{filter} from 'src/app/shared/interface/filter-interface'
 import { SharedService } from 'src/app/shared/sevices/shared.service';
 
@@ -13,12 +13,12 @@ export class TransactionsComponent implements OnInit {
   constructor(private services:SharedService){}
 
   public userList:any[]=[]
-  public filterList:filter[] = filterList
-  public sortList:filter[]=sortOption
+  public filterList:filter[] = filterList1
   public myMath = Math;
   pageSize=10;
   pageIndex=0;
   totalLength!:number
+  addedBy:filter[]=[]
 
   transactionDetails:any=[]
   transactionDetailsList:any[]=[]
@@ -48,10 +48,18 @@ export class TransactionsComponent implements OnInit {
             displayName:item.customerName,
             value:item.customerName
           })
+          this.addedBy.push({
+            id:item.customerId,
+            name:item.addedBy,
+            value:item.addedBy,
+            isSelected:false
+          })
         }
         
         //this is how we filter out dublicate array of object
         this.userList=this.userList.filter((v,i,a)=>a.findIndex(v2=>(v2.id===v.id))===i)
+        this.addedBy = this.addedBy.filter((v,i,a)=>a.findIndex(v2=>(v2.name===v.name))===i)
+        console.log(this.addedBy)
       },error: (err) => {
         console.log(err);
         
