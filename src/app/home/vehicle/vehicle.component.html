@@ -17,7 +17,7 @@
     <mat-divider></mat-divider><perfect-scrollbar class="perfect-scrollbar">
     <div class="p15">
         
-        <div class="vehicle-cards">
+        <div class="vehicle-cards" *ngIf="!showLoader">
             <ng-container *ngFor="let item of searchedVehicle">
             <div class="card pt10 pb10 p15" [ngClass]="item.isActive ? 'active-border' : 'stopped-border'" (click)="onVehicleClicked(item)">
                     <div class="label">
@@ -40,5 +40,10 @@
                 </div>
             </ng-container>
         </div>
+        <ngx-skeleton-loader class="vehicle-cards" *ngIf="showLoader" count="8" appearance="line" [theme]="{ 
+            'height': '150px',
+            'width':'380px',
+            'margin':'0'
+          }"></ngx-skeleton-loader>
     </div></perfect-scrollbar>
 </div>

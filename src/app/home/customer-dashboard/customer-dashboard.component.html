@@ -68,7 +68,7 @@
                         </thead>
                     </table>
                     <perfect-scrollbar class="table-body">
-                        <table>
+                        <table *ngIf="!showLoader">
                             <tbody>
                                 <tr *ngFor="let customer of searchedCustomerData" (click)="setCustomerDetails(customer)">
                                     <td class="name-column">
@@ -101,6 +101,11 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <ngx-skeleton-loader *ngIf="showLoader" count="8" appearance="line" [theme]="{ 
+                            'height': '47px',
+                            'width':'100%',
+                            'margin':'0'
+                          }"></ngx-skeleton-loader>
 
                     </perfect-scrollbar>
                 </div>

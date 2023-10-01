@@ -23,6 +23,7 @@ export class CustomerDashboardComponent {
   youWillGet: any;
   youWillGive: any;
   vehicleNumberOptions:any= []
+  showLoader:boolean = false
 
   constructor(public dialog: MatDialog, private services: SharedService) {}
 
@@ -45,6 +46,7 @@ export class CustomerDashboardComponent {
   }
 
   private getAllCustomer() {
+    this.showLoader = true
     this.services.getAllCustomer().subscribe({
       next: (res) => {
         this.allCustomerData = res;
@@ -71,6 +73,7 @@ export class CustomerDashboardComponent {
           //  console.log('count', count);
         }
         this.youWillGet = count;
+        this.showLoader = false
       },
       error: (err) => {
         console.log(err);
@@ -83,11 +86,13 @@ export class CustomerDashboardComponent {
   }
 
   public filterCustomer(filter: any) {
+    this.showLoader = true
 
     this.services.filterCustomers(filter).subscribe({
       next: (res) => {
         this.allCustomerData = res;
         this.searchedCustomerData = this.allCustomerData;
+        this.showLoader = false
       },
       error: (err) => {
         console.log(err);
@@ -96,10 +101,12 @@ export class CustomerDashboardComponent {
   }
 
   public sortCustomer(filter: any) {
+    this.showLoader = true
     this.services.sortCustomer(filter.value).subscribe({
       next: (res) => {
         this.allCustomerData = res;
         this.searchedCustomerData = this.allCustomerData;
+        this.showLoader = false
       },
       error: (err) => {
         console.log(err);

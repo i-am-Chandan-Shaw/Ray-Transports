@@ -13,6 +13,7 @@ import { statusList } from 'src/app/shared/utils/filter-utils';
 export class VehicleComponent implements OnInit {
   public cardsDetails: any = [];
   searchedVehicle: any;
+  showLoader:boolean = false
 
   public statusList = statusList;
 
@@ -36,11 +37,13 @@ export class VehicleComponent implements OnInit {
   }
 
   private getAllVehicle() {
+    this.showLoader = true
     this.services.getAllVehicle().subscribe({
       next: (res) => {
         // console.log(res);
         this.cardsDetails = res;
         this.searchedVehicle = this.cardsDetails;
+        this.showLoader = false
       },
       error: (err) => {
         console.log(err);
@@ -60,11 +63,13 @@ export class VehicleComponent implements OnInit {
     // });
   }
   filterVehicle(filter: any) {
+    this.showLoader = true
     this.services.filterVehicle(filter.value).subscribe({
       next: (res) => {
         this.cardsDetails = res;
         this.searchedVehicle = this.cardsDetails;
         // console.log(res);
+        this.showLoader = false
       },
       error: (err) => {
         console.log(err);

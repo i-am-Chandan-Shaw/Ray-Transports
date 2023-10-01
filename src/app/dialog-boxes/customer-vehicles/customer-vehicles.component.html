@@ -17,7 +17,7 @@
                 </thead>
             </table>
             <perfect-scrollbar (suppressScrollX)="true" class="table-body">
-                <table>
+                <table *ngIf="!showLoader">
                     <tbody>
                         <tr *ngFor="let vehicle of customerVehicles">
                             <td class="w20p text-left">{{vehicle.vehicleNumber}}</td>
@@ -33,6 +33,11 @@
                         </tr>
                     </tbody>
                 </table>
+                <ngx-skeleton-loader *ngIf="showLoader" count="8" appearance="line" [theme]="{ 
+                    'height': '35px',
+                    'width':'100%',
+                    'margin':'0'
+                  }"></ngx-skeleton-loader>
 
             </perfect-scrollbar>
         </div>

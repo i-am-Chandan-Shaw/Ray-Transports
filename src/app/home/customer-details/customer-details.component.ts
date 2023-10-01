@@ -44,6 +44,7 @@ export class CustomerDetailsComponent {
   prop: any;
   @Input()vehicleNumberOptions: any;
   public vehicleRate: any;
+  showLoader:boolean = false
 
   constructor(
     private _bottomSheet: MatBottomSheet,
@@ -82,6 +83,7 @@ export class CustomerDetailsComponent {
   }
 
   private getIndividualTransaction(customer: any) {
+    this.showLoader = true
     this.services.getIndividualTransaction(customer.id).subscribe({
       next: (res: any) => {
         if (res) {
@@ -89,6 +91,7 @@ export class CustomerDetailsComponent {
         } else {
           this.customerTransactions = [];
         }
+        this.showLoader = false
       },
       error: (err) => {
         console.log(err);

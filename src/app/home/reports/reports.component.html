@@ -47,20 +47,35 @@
         <div class="overview-section p15">
             <label for="">Total 3 entries</label>
             <div class="card mt10">
-                <div class="card-details">
+                <div class="card-details" *ngIf="!showCardLoader" >
                     <div class="amount">{{'₹'+totalGaveAmount}}</div>
                     <label>You Gave</label>
                 </div>
-                <div class="card-details">
+                <ngx-skeleton-loader *ngIf="showCardLoader" class="card-details" style="border: transparent;"  count="1" appearance="line" [theme]="{ 
+                    'height': '67px',
+                    'width':'100%',
+                    'margin':'0'
+                  }"></ngx-skeleton-loader>
+                <div class="card-details" *ngIf="!showCardLoader" >
                     <div class="amount">{{'₹'+totalGotAmount}}</div>
                     <label>You Got</label>
 
                 </div>
-                <div class="card-details">
+                <ngx-skeleton-loader *ngIf="showCardLoader"  class="card-details" style="border: transparent;" count="1" appearance="line" [theme]="{ 
+                    'height': '68px',
+                    'width':'100%',
+                    'margin':'0'
+                  }"></ngx-skeleton-loader>
+                <div class="card-details" *ngIf="!showCardLoader" >
                     <div class="amount">{{'₹'+netBalance}}</div>
                     <label>Net Balance</label>
 
                 </div>
+                <ngx-skeleton-loader *ngIf="showCardLoader"  class="card-details" style="border: transparent;"  count="1" appearance="line" [theme]="{ 
+                    'height': '67px',
+                    'width':'100%',
+                    'margin':'0'
+                  }"></ngx-skeleton-loader>
             </div>
         </div>
 
@@ -76,12 +91,12 @@
                                 <th class="w7p text-left">Added By</th>
                                 <th class="text-center w4p">You Gave</th>
                                 <th class="text-center w4p">You Got</th>
-                                <th class="w4p text-right">Options</th>
+                                <!-- <th class="w4p text-right">Options</th> -->
                             </tr>
                         </thead>
                     </table>
                     <perfect-scrollbar class="table-body">
-                        <table>
+                        <table *ngIf="!showLoader">
                             <tbody>
                                 <tr *ngFor="let item of searchedTransactionDetails">
                                     <td class="w5p text-left">{{item.date }}</td>
@@ -91,7 +106,7 @@
                                     <td class="w4p text-center amount-gave"> {{item.amount<0? myMath.abs(item.amount)
                                             :'-'}}</td>
                                     <td class="w4p text-center amount-got"> {{item.amount>0? item.amount :'-'}} </td>
-                                    <td class="w4p text-right">
+                                    <!-- <td class="w4p text-right">
                                         <div class="show-on-hover">
                                             <mat-icon class="icon-16 mr10" [autoPlacement]="true"
                                                 tooltip="Edit transaction" [theme]="'light'"
@@ -100,10 +115,15 @@
                                                 tooltip="Delete transaction" [theme]="'light'"
                                                 placement="top">delete</mat-icon>
                                         </div>
-                                    </td>
+                                    </td> -->
                                 </tr>
                             </tbody>
                         </table>
+                        <ngx-skeleton-loader *ngIf="showLoader" count="8" appearance="line" [theme]="{ 
+                            'height': '30px',
+                            'width':'100%',
+                            'margin':'0'
+                          }"></ngx-skeleton-loader>
 
                     </perfect-scrollbar>
                     <mat-paginator *ngIf="searchedTransactionDetails.length" #paginator class="demo-paginator"

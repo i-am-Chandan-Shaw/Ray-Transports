@@ -1,7 +1,9 @@
 import { Component, HostListener, Inject, OnInit } from '@angular/core';
-import { filterList, sortOption } from 'src/app/shared/utils/filter-utils';
+import { filterList1, sortOption } from 'src/app/shared/utils/filter-utils';
 import{filter} from 'src/app/shared/interface/filter-interface'
 import { SharedService } from 'src/app/shared/sevices/shared.service';
+import { MatDialog } from '@angular/material/dialog';
+import { EditTransactionComponent } from './edit-transaction/edit-transaction.component';
 
 
 @Component({
@@ -10,15 +12,17 @@ import { SharedService } from 'src/app/shared/sevices/shared.service';
   styleUrls: ['./transactions.component.scss']
 })
 export class TransactionsComponent implements OnInit {
-  constructor(private services:SharedService){}
+  constructor(private services:SharedService,
+    public dialog: MatDialog){}
 
   public userList:any[]=[]
-  public filterList:filter[] = filterList
-  public sortList:filter[]=sortOption
+  public filterList:filter[] = filterList1
   public myMath = Math;
   pageSize=10;
   pageIndex=0;
   totalLength!:number
+  addedBy:filter[]=[]
+  showLoader:boolean = false
 
   transactionDetails:any=[]
   transactionDetailsList:any[]=[]
@@ -33,6 +37,7 @@ export class TransactionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.onResize();
+    this.showLoader = true
     this.services.getAllTransactionDetailsPagination(this.pageSize,this.pageIndex).subscribe({
       next: (res) => {
         console.log(res)
@@ -48,10 +53,18 @@ export class TransactionsComponent implements OnInit {
             displayName:item.customerName,
             value:item.customerName
           })
+          this.addedBy.push({
+            id:item.customerId,
+            name:item.addedBy,
+            value:item.addedBy,
+            isSelected:false
+          })
         }
         
         //this is how we filter out dublicate array of object
         this.userList=this.userList.filter((v,i,a)=>a.findIndex(v2=>(v2.id===v.id))===i)
+        this.addedBy = this.addedBy.filter((v,i,a)=>a.findIndex(v2=>(v2.name===v.name))===i)
+        this.showLoader = false
       },error: (err) => {
         console.log(err);
         
@@ -79,13 +92,27 @@ export class TransactionsComponent implements OnInit {
     }
 
     handlePageEvent(e: any) {
-      console.log(e)
       this.pageSize = e.pageSize;
       this.pageIndex = e.pageIndex
+      this.showLoader = true
     
       this.services.getAllTransactionDetailsPagination(this.pageSize,this.pageIndex).subscribe((res)=>{
         this.transactionDetails = res
         this.transactionDetails = this.transactionDetails.data
+        this.showLoader = false
+      })
+    }
+
+    public openEditTransactionDialog(selectedTransaction:any) {
+      const dialogRef = this.dialog.open(EditTransactionComponent, {
+        disableClose:true,
+        autoFocus: false,
+        height: '550px',
+        width: '650px',
+        data: selectedTransaction,
+      });
+      dialogRef.afterClosed().subscribe(updatedTransaction=> {
+        console.log("up",updatedTransaction)
       })
     }
   }
