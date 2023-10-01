@@ -19,6 +19,7 @@ export class TransactionsComponent implements OnInit {
   pageIndex=0;
   totalLength!:number
   addedBy:filter[]=[]
+  showLoader:boolean = false
 
   transactionDetails:any=[]
   transactionDetailsList:any[]=[]
@@ -33,6 +34,7 @@ export class TransactionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.onResize();
+    this.showLoader = true
     this.services.getAllTransactionDetailsPagination(this.pageSize,this.pageIndex).subscribe({
       next: (res) => {
         console.log(res)
@@ -59,7 +61,7 @@ export class TransactionsComponent implements OnInit {
         //this is how we filter out dublicate array of object
         this.userList=this.userList.filter((v,i,a)=>a.findIndex(v2=>(v2.id===v.id))===i)
         this.addedBy = this.addedBy.filter((v,i,a)=>a.findIndex(v2=>(v2.name===v.name))===i)
-        console.log(this.addedBy)
+        this.showLoader = false
       },error: (err) => {
         console.log(err);
         
@@ -87,13 +89,14 @@ export class TransactionsComponent implements OnInit {
     }
 
     handlePageEvent(e: any) {
-      console.log(e)
       this.pageSize = e.pageSize;
       this.pageIndex = e.pageIndex
+      this.showLoader = true
     
       this.services.getAllTransactionDetailsPagination(this.pageSize,this.pageIndex).subscribe((res)=>{
         this.transactionDetails = res
         this.transactionDetails = this.transactionDetails.data
+        this.showLoader = false
       })
     }
   }

@@ -6,29 +6,19 @@
   <div class="fliter mb15">
     <div class="dropdown align-center">
       <label for="">User</label>
-      <app-auto-complete 
-        class="mt8 mb8"
-        (inputValue)="autoCompleteInputValue($event)"
-        (selectedOptions)="onSelectUserInputValue($event)"
-        [options]="userList"
-        [placeholder]="'Customer Name'"
-      ></app-auto-complete>
+      <app-auto-complete class="mt8 mb8" (inputValue)="autoCompleteInputValue($event)"
+        (selectedOptions)="onSelectUserInputValue($event)" [options]="userList"
+        [placeholder]="'Customer Name'"></app-auto-complete>
     </div>
     <div class="dropdown align-center">
       <label for="">Filter By</label>
-      <app-dropdown-component
-        [placeholder]="'Filter By'"
-        [optionList]="filterList"
-      ></app-dropdown-component>
+      <app-dropdown-component [placeholder]="'Filter By'" [optionList]="filterList"></app-dropdown-component>
     </div>
 
     <div class="dropdown align-center">
       <label for="">Added By</label>
-      <app-dropdown-component
-      [selectMultipleValue]="true"
-        [placeholder]="'Added By'"
-        [optionList]="addedBy"
-      ></app-dropdown-component>
+      <app-dropdown-component [selectMultipleValue]="true" [placeholder]="'Added By'"
+        [optionList]="addedBy"></app-dropdown-component>
     </div>
   </div>
   <div class="transaction-table">
@@ -48,7 +38,7 @@
           </thead>
         </table>
         <perfect-scrollbar class="table-body">
-          <table>
+          <table *ngIf="!showLoader">
             <tbody>
               <tr *ngFor="let item of transactionDetails">
                 <td class="w5p text-left">{{ item.date }}</td>
@@ -56,44 +46,31 @@
                 <td class="w10p text-left">{{ item.description }}</td>
                 <td class="w7p text-left">{{ item.addedBy }}</td>
                 <td class="w4p text-center amount-gave">
-                  {{ item.amount < 0 ? myMath.abs(item.amount) : "-" }}
-                </td>
+                  {{ item.amount < 0 ? myMath.abs(item.amount) : "-" }} </td>
                 <td class="w4p text-center amount-got">
                   {{ item.amount > 0 ? item.amount : "-" }}
                 </td>
                 <td class="w4p text-right">
                   <div class="show-on-hover">
-                    <mat-icon
-                      class="icon-16 mr10"
-                      [autoPlacement]="true"
-                      tooltip="Edit transaction"
-                      [theme]="'light'"
-                      placement="top"
-                      >edit</mat-icon
-                    >
-                    <mat-icon
-                      class="icon-16"
-                      [autoPlacement]="true"
-                      tooltip="Delete transaction"
-                      [theme]="'light'"
-                      placement="top"
-                      >delete</mat-icon
-                    >
+                    <mat-icon class="icon-16 mr10" [autoPlacement]="true" tooltip="Edit transaction" [theme]="'light'"
+                      placement="top">edit</mat-icon>
+                    <mat-icon class="icon-16" [autoPlacement]="true" tooltip="Delete transaction" [theme]="'light'"
+                      placement="top">delete</mat-icon>
                   </div>
                 </td>
               </tr>
             </tbody>
           </table>
+          <ngx-skeleton-loader *ngIf="showLoader" count="8" appearance="line" [theme]="{ 
+            'height': '30px',
+            'width':'100%',
+            'margin':'0'
+          }"></ngx-skeleton-loader>
         </perfect-scrollbar>
-        <mat-paginator *ngIf="transactionDetails.length"  #paginator
-               class="demo-paginator"
-               (page)="handlePageEvent($event)"
-               [length]="this.totalLength"
-               [pageSize]="pageSize"
-               [showFirstLastButtons]="false"
-               
-               aria-label="Select page">
-</mat-paginator>
+        <mat-paginator *ngIf="transactionDetails.length" #paginator class="demo-paginator"
+          (page)="handlePageEvent($event)" [length]="this.totalLength" [pageSize]="pageSize"
+          [showFirstLastButtons]="false" aria-label="Select page">
+        </mat-paginator>
       </div>
     </div>
   </div>
