@@ -55,6 +55,7 @@ export class CustomerDetailsComponent {
     setTimeout(() => {
       this.prop = this.customerDetailsSize;
     }, 300);
+    this.selectedOption = this.vehicleNumberOptions[0]
   }
 
   ngOnChanges(changes: SimpleChanges) {
