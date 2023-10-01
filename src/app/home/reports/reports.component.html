@@ -47,20 +47,35 @@
         <div class="overview-section p15">
             <label for="">Total 3 entries</label>
             <div class="card mt10">
-                <div class="card-details">
+                <div class="card-details" *ngIf="!showCardLoader" >
                     <div class="amount">{{'₹'+totalGaveAmount}}</div>
                     <label>You Gave</label>
                 </div>
-                <div class="card-details">
+                <ngx-skeleton-loader *ngIf="showCardLoader" class="card-details" style="border: transparent;"  count="1" appearance="line" [theme]="{ 
+                    'height': '67px',
+                    'width':'100%',
+                    'margin':'0'
+                  }"></ngx-skeleton-loader>
+                <div class="card-details" *ngIf="!showCardLoader" >
                     <div class="amount">{{'₹'+totalGotAmount}}</div>
                     <label>You Got</label>
 
                 </div>
-                <div class="card-details">
+                <ngx-skeleton-loader *ngIf="showCardLoader"  class="card-details" style="border: transparent;" count="1" appearance="line" [theme]="{ 
+                    'height': '68px',
+                    'width':'100%',
+                    'margin':'0'
+                  }"></ngx-skeleton-loader>
+                <div class="card-details" *ngIf="!showCardLoader" >
                     <div class="amount">{{'₹'+netBalance}}</div>
                     <label>Net Balance</label>
 
                 </div>
+                <ngx-skeleton-loader *ngIf="showCardLoader"  class="card-details" style="border: transparent;"  count="1" appearance="line" [theme]="{ 
+                    'height': '67px',
+                    'width':'100%',
+                    'margin':'0'
+                  }"></ngx-skeleton-loader>
             </div>
         </div>
 

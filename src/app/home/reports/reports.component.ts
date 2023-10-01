@@ -24,6 +24,7 @@ export class ReportsComponent implements OnInit {
   public myMath = Math;
   reportForm!: FormGroup;
   showLoader:boolean = false
+  showCardLoader:boolean = false
 
   searchedTransactionDetails: any[] = [];
 
@@ -39,6 +40,7 @@ export class ReportsComponent implements OnInit {
 
   ngOnInit(): void {
     this.showLoader = true
+    this.showCardLoader = true
     this.getTransactionsReport();
     this.reportForm = this.fb.group({
       customerName: [''],
@@ -69,6 +71,7 @@ export class ReportsComponent implements OnInit {
             this.totalGotAmount = res.totalGotAmount;
             this.totalLength = res.totalCount;
             this.showLoader = false
+            this.showCardLoader = false
           }
         },
         (error) => {
