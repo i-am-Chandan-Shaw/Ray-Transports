@@ -107,8 +107,8 @@ export class TransactionsComponent implements OnInit {
       const dialogRef = this.dialog.open(EditTransactionComponent, {
         disableClose:true,
         autoFocus: false,
-        height: '550px',
-        width: '650px',
+        height: '450px',
+        width: '450px',
         data: selectedTransaction,
       });
       dialogRef.afterClosed().subscribe(updatedTransaction=> {

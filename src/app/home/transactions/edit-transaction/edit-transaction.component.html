@@ -2,4 +2,61 @@
     <mat-toolbar class="header" color="primary">
         <span>Edit Transaction</span>
         <mat-icon (click)="closeDialog()" class="mr0">close</mat-icon>
-    </mat-toolbar></div>
+    </mat-toolbar>
+    <form [formGroup]="editTransactionForm">
+        <div class="input-form-container">
+            <div class="input-fields">
+                <label for="customerName">Customer Name: </label>
+                <mat-form-field appearance="outline" >
+                    <input matInput formControlName="customerName" name="customerName" autocomplete="off"
+                        placeholder="Enter Customer Name">
+                    <mat-error *ngIf="gf['customerName'].invalid">**Customer Name is Required</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="input-fields">
+                <label for="addedBy">Added by</label>
+                <mat-form-field appearance="outline">
+                    <input matInput name="addedBy" formControlName="addedBy"  autocomplete="off" placeholder="Enter Value">
+                    <mat-error *ngIf="gf['addedBy'].invalid">**Added by Required</mat-error>
+                </mat-form-field>
+
+
+            </div>
+            <div class="t-container">
+                <div class="input-fields w45p">
+                    <label for="youGave">You Gave</label>
+                    <mat-form-field class="" appearance="outline">
+                        <input matInput formControlName="youGave"  name="youGave" autocomplete="off"
+                            placeholder="Enter Value.">
+                        <mat-error *ngIf="gf['youGave'].invalid">**You Gave is Required</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="input-fields w45p">
+                    <label for="youGot">You Got</label>
+                    <mat-form-field class="" appearance="outline">
+                        <input matInput formControlName="youGot"  name="youGot" autocomplete="off"
+                            placeholder="Enter Value.">
+                        <mat-error *ngIf="gf['youGot'].invalid">**You Got is Required</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="input-fields">
+                <label for="description">Description</label>
+                <mat-form-field class="" appearance="outline">
+                    <input matInput formControlName="description"  name="description" autocomplete="off"
+                        placeholder="Enter description.">
+                    <mat-error *ngIf="gf['description'].invalid">**Description is Required</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="action-btn">
+                <button mat-stroked-button class=""
+                [mat-dialog-close]="true" >Cancel</button>
+            <button mat-raised-button class="" color="primary" (click)="editTransaction()"
+                [disabled]="!editTransactionForm.valid ">Add Vehicle</button>
+            </div>
+
+        </div>
+    </form>
+</div>
