@@ -12,11 +12,11 @@ export class EditTransactionComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<EditTransactionComponent>,private fb:FormBuilder){
     console.log("data",data)
     this.editTransactionForm = this.fb.group({
-      customerName: ['', Validators.required],
-      addedBy: ['', Validators.required],
-      youGave: ['', Validators.required],
-      youGot: ['', Validators.required],
-      description: ['', Validators.required],
+      customerName: [data.customerName, Validators.required],
+      addedBy: [data.addedBy, Validators.required],
+      youGave: [data.amount<0?data.amount.replace('-',''):0, Validators.required],
+      youGot: [data.amount>0?data.amount:0, Validators.required],
+      description: [data.description, Validators.required],
     });
   }
 
@@ -28,6 +28,6 @@ export class EditTransactionComponent {
   }
 
   editTransaction(){
-
+    this.dialogRef.close(this.editTransactionForm.value)
   }
 }
