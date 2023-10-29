@@ -50,6 +50,16 @@ export class SharedService {
     return this.http.get(api);
   }
 
+  public updateTransaction(payload: any) {
+    const api = this.apiString + `patchTransaction.php`;
+    return this.http.patch(api, payload);
+  }
+
+  public onDeleteTransaction(id: string) {
+    const api = this.apiString + `deleteTransaction.php?id=` + id;
+    return this.http.delete(api);
+  }
+
   public getUserVehicle(customerId: number) {
     const api = this.apiString + `getVehicle.php?customerId=${customerId}`;
     return this.http.get(api);
