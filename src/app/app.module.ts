@@ -30,6 +30,7 @@ import { VehicleCardComponent } from './dialog-boxes/vehicle-card/vehicle-card.c
 import { AddVehicleComponent } from './dialog-boxes/add-vehicle/add-vehicle.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { EditTransactionComponent } from './home/transactions/edit-transaction/edit-transaction.component';
+import { ModelComponent } from './shared/component/model/model.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { EditTransactionComponent } from './home/transactions/edit-transaction/e
     VehicleCardComponent,
     AddVehicleComponent,
     EditTransactionComponent,
+    ModelComponent,
   ],
   imports: [
     NgxSkeletonLoaderModule.forRoot({ animation: 'pulse', loadingText: 'This item is actually loading...' }),

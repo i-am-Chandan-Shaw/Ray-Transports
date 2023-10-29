@@ -52,7 +52,7 @@
 
             <div class="action-btn">
                 <button mat-stroked-button class=""
-                [mat-dialog-close]="true" >Cancel</button>
+                (click)="closeDialog()" >Cancel</button>
             <button mat-raised-button class="" color="primary" (click)="editTransaction()"
                 [disabled]="!editTransactionForm.valid ">Save</button>
             </div>

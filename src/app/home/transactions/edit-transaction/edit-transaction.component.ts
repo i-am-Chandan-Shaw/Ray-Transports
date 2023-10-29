@@ -24,10 +24,20 @@ export class EditTransactionComponent {
     return this.editTransactionForm.controls
   }
   closeDialog(){
-    this.dialogRef.close(this.data)
+    this.dialogRef.close(false)
   }
 
   editTransaction(){
-    this.dialogRef.close(this.editTransactionForm.value)
+    let newRecord = {
+      customerId: this.data.customerId,
+      transactionId: this.data.transactionId,
+      date: this.data.date,
+      customerName: this.editTransactionForm.value.customerName,
+      description: this.editTransactionForm.value.description,
+      addedBy: this.editTransactionForm.value.addedBy,
+      amount: (this.editTransactionForm.value.youGot - this.editTransactionForm.value.youGave).toString(),
+      createdTime: this.data.createdTime
+    };
+    this.dialogRef.close(newRecord)
   }
 }
