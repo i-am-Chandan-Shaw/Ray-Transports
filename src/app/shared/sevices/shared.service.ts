@@ -111,7 +111,7 @@ export class SharedService {
   }
 
   public filterVehicle(filterBy: string) {
-    const api = this.apiString + `getVehicle.php?filter=` + filterBy;
+    const api = this.apiString + `getAllVehicle.php?filter=` + filterBy;
     return this.http.get<any[]>(api);
   }
   public addVehicleToCustomer(payload: any) {
