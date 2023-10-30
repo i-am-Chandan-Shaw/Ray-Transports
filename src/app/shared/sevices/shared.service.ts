@@ -15,7 +15,7 @@ export class SharedService {
   }
 
   public getAllVehicle() {
-    const api = this.apiString + `getVehicle.php`;
+    const api = this.apiString + `getAllVehicle.php`;
     return this.http.get(api);
   }
 

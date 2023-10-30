@@ -161,6 +161,7 @@ export class TransactionsComponent implements OnInit {
             console.log('delete_response',res)
           }
         })
+        this.totalLength = this.totalLength - 1
         this.openSuccessDialog()
       }
     });
