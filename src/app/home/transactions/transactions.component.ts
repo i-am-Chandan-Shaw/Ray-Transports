@@ -123,19 +123,21 @@ export class TransactionsComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((updatedTransaction) => {
       console.log('up', updatedTransaction);
-      for (let transaction of this.transactionDetails) {
-        if (transaction.transactionId == updatedTransaction.transactionId) {
-          transaction.customerName = updatedTransaction.customerName;
-          transaction.addedBy = updatedTransaction.addedBy;
-          transaction.amount = updatedTransaction.amount;
-          transaction.description = updatedTransaction.description;
+      if(updatedTransaction){
+        for (let transaction of this.transactionDetails) {
+          if (transaction.transactionId == updatedTransaction.transactionId) {
+            transaction.customerName = updatedTransaction.customerName;
+            transaction.addedBy = updatedTransaction.addedBy;
+            transaction.amount = updatedTransaction.amount;
+            transaction.description = updatedTransaction.description;
+          }
         }
+        this.services.updateTransaction(updatedTransaction).subscribe({
+          next: (res) => {
+            console.log('response=>>', res);
+          },
+        });
       }
-      this.services.updateTransaction(updatedTransaction).subscribe({
-        next: (res) => {
-          console.log('response=>>', res);
-        },
-      });
     });
   }
 
@@ -159,6 +161,7 @@ export class TransactionsComponent implements OnInit {
             console.log('delete_response',res)
           }
         })
+        this.totalLength = this.totalLength - 1
         this.openSuccessDialog()
       }
     });
