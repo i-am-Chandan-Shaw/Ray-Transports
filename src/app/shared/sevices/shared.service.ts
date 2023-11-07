@@ -35,7 +35,7 @@ export class SharedService {
   }
 
   public getTransactionReportsFilterDatePagination(pageNo?:any,pageSize?:any,dateFilter?:any,startDate?:any,endDate?:any) {
-    const api = this.apiString + `getTransactionsReport.php?pageSize=${pageSize}&page=${pageNo}&dateFilter=${dateFilter}&startDate=${startDate},&endDate=${endDate}`;
+    const api = this.apiString + `getTransactionsReport.php?pageSize=${pageSize}&page=${pageNo}&dateFilter=${dateFilter}&startDate=${startDate}&endDate=${endDate}`;
     return this.http.get(api);
   }
 
