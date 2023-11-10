@@ -1,7 +1,15 @@
 <div class="vehicle-wrapper">
     <mat-toolbar class="header-section">
         <span class="header-text">Vehicle Dashboard</span>
-        <button (click)="addVehicle()" class="btn-primary">Add Vehicle</button>
+        <span class="d-flex-gap15 align-center ">
+            <button class="report-btn" mat-stroked-button color="primary" (click)="exportTable()">
+                <span>Report</span><mat-icon>summarize</mat-icon>
+            </button>
+            <button (click)="addVehicle()" class="btn-primary m-button">Add Vehicle</button>
+
+
+        </span>
+
     </mat-toolbar>
     <mat-divider></mat-divider>
     <div class="sub-header p15">
@@ -10,40 +18,104 @@
             <app-input [placeholder]="'Search'" (emitSearchValue)="onSearchVehicle($event)"></app-input>
         </div>
         <div class="period">
-            <label >Filter By</label>
-            <app-dropdown-component (valueSelected)="filterVehicle($event)" [optionList]="statusList"></app-dropdown-component>
+            <label>Filter By</label>
+            <app-dropdown-component (valueSelected)="filterVehicle($event)"
+                [optionList]="statusList"></app-dropdown-component>
         </div>
     </div>
     <mat-divider></mat-divider><perfect-scrollbar class="perfect-scrollbar">
-    <div class="p15">
-        
-        <div class="vehicle-cards" *ngIf="!showLoader">
-            <ng-container *ngFor="let item of searchedVehicle">
-            <div class="card pt10 pb10 p15" [ngClass]="item.isActive ? 'active-border' : 'stopped-border'" (click)="onVehicleClicked(item)">
-                    <div class="label">
-                        <div>Name:</div>
-                        <div>Locality:</div>
-                        <div>Vehicle Name:</div>
-                        <div>Vehicle Number:</div>
-                        <div>Vehicle Owner</div>
-                        <div>Status</div>
-                    </div>
-                    <div class="details marginauto pl15 ">
+        <!-- <div class="p15">
 
-                        <div>{{item.name? item.name :'---'}}</div>
-                        <div>{{item.locality? item.locality :'---'}}</div>
-                        <div>{{item.vehicleModel? item.vehicleModel :'---'}}</div>
-                        <div>{{item.vehicleNumber? item.vehicleNumber :'---'}}</div>
-                        <div>{{item.vehicleOwner? item.vehicleOwner :'---'}}</div>
-                        <div [ngClass]="item.isActive ? 'active' : 'stopped'" >{{item.isActive ? 'Active' : 'Stopped'}}</div>
+            <div class="vehicle-cards" *ngIf="!showLoader">
+                <ng-container *ngFor="let item of searchedVehicle">
+                    <div class="card pt10 pb10 p15" [ngClass]="item.isActive ? 'active-border' : 'stopped-border'"
+                        (click)="onVehicleClicked(item)">
+                        <div class="label">
+                            <div>Name:</div>
+                            <div>Locality:</div>
+                            <div>Vehicle Name:</div>
+                            <div>Vehicle Number:</div>
+                            <div>Vehicle Owner</div>
+                            <div>Status</div>
+                        </div>
+                        <div class="details marginauto pl15 ">
+
+                            <div>{{item.name? item.name :'---'}}</div>
+                            <div>{{item.locality? item.locality :'---'}}</div>
+                            <div>{{item.vehicleModel? item.vehicleModel :'---'}}</div>
+                            <div>{{item.vehicleNumber? item.vehicleNumber :'---'}}</div>
+                            <div>{{item.vehicleOwner? item.vehicleOwner :'---'}}</div>
+                            <div [ngClass]="item.isActive ? 'active' : 'stopped'">{{item.isActive ? 'Running' :
+                                'Stopped'}}</div>
+                        </div>
                     </div>
-                </div>
-            </ng-container>
-        </div>
-        <ngx-skeleton-loader class="vehicle-cards" *ngIf="showLoader" count="8" appearance="line" [theme]="{ 
+                </ng-container>
+            </div>
+            <ngx-skeleton-loader class="vehicle-cards" *ngIf="showLoader" count="8" appearance="line" [theme]="{ 
             'height': '150px',
             'width':'380px',
             'margin':'0'
           }"></ngx-skeleton-loader>
-    </div></perfect-scrollbar>
+        </div> -->
+
+        <div class="pt15 pb15">
+            <div class="vehicle-table">
+                <div class="customer-table simple-table">
+                    <div class="main-table" id="vehicle-table">
+                        <table class="table-header">
+                            <thead class="border-left">
+                                <tr>
+                                    <th class="w5p text-left">Name</th>
+                                    <th class="w6p text-left">Locality</th>
+                                    <th class="w7p text-left">Vehicle Name</th>
+                                    <th class="w7p text-left">Vehicle Number</th>
+                                    <th class="text-center w7p">Vehicle Owner</th>
+                                    <th class="text-center w4p">Status</th>
+                                    <th class="w2p text-right">Options</th>
+                                </tr>
+                            </thead>
+                        </table>
+                        <perfect-scrollbar class="table-body">
+                            <table *ngIf="!showLoader">
+                                <tbody>
+                                    <tr *ngFor="let item of searchedVehicle">
+                                        <td class="w5p text-left">{{item.name? item.name :'---'}}</td>
+                                        <td class="w6p text-left">{{item.locality? item.locality :'---'}}</td>
+                                        <td class="w7p text-left">{{item.vehicleModel? item.vehicleModel :'---'}}</td>
+                                        <td class="w7p text-left">{{item.vehicleNumber? item.vehicleNumber :'---'}}</td>
+                                        <td class="w7p text-center">
+                                            {{item.vehicleOwner? item.vehicleOwner :'---'}} </td>
+                                        <td class="w4p text-center">
+                                            {{item.isActive ? 'Running' :
+                                            'Stopped'}}
+                                        </td>
+                                        <td class="w2p text-right">
+                                            <div class="show-on-hover">
+                                                <mat-icon class="icon-16 mr10" [autoPlacement]="true"
+                                                    tooltip="Edit transaction" [theme]="'light'" placement="top"
+                                                    (click)="openEditTransactionDialog(item)">edit</mat-icon>
+                                                <mat-icon class="icon-16" [autoPlacement]="true"
+                                                    tooltip="Delete transaction" [theme]="'light'" placement="top"
+                                                    (click)="openDeleteTransactionDialog(item)">delete</mat-icon>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <ngx-skeleton-loader *ngIf="showLoader" count="8" appearance="line" [theme]="{ 
+                        'height': '30px',
+                        'width':'100%',
+                        'margin':'0'
+                      }"></ngx-skeleton-loader>
+                        </perfect-scrollbar>
+                        <!-- <mat-paginator *ngIf="searchedVehicle.length" #paginator class="demo-paginator"
+                      (page)="handlePageEvent($event)" [length]="this.totalLength" [pageSize]="pageSize"
+                      [showFirstLastButtons]="false" aria-label="Select page">
+                    </mat-paginator> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </perfect-scrollbar>
 </div>

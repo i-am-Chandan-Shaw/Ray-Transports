@@ -3,6 +3,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    .m-button{
+      height: 36px;
+    }
   }
   .sub-header {
     display: flex;
@@ -21,47 +25,73 @@
     }
   }
 
-  .perfect-scrollbar{
-    height: calc(100vh - 160px);
-    .vehicle-cards {
-      width: 100%;
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
+  // .perfect-scrollbar{
+  //   height: calc(100vh - 160px);
+  //   .vehicle-cards {
+  //     width: 100%;
+  //     display: flex;
+  //     gap: 20px;
+  //     flex-wrap: wrap;
   
-      // justify-content: space-around;
+  //     // justify-content: space-around;
   
-      .card {
-        font-size: var(--fnt-small);
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-        border-radius: 5px;
-        display: flex;
-        flex: 1;
-        max-width: 350px;
-        width: 23%;
-        cursor: pointer;
-        min-width: 250px;
-        background-color: #f9fafc;
-        transition: transform 0.2s ease-in-out;
+  //     .card {
+  //       font-size: var(--fnt-small);
+  //       box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  //       border-radius: 5px;
+  //       display: flex;
+  //       flex: 1;
+  //       max-width: 350px;
+  //       width: 23%;
+  //       cursor: pointer;
+  //       min-width: 250px;
+  //       background-color: #f9fafc;
+  //       transition: transform 0.2s ease-in-out;
   
-        .label {
-          font-weight: var(--fnt-semibold);
+  //       .label {
+  //         font-weight: var(--fnt-semibold);
   
-          div {
-            margin: 3px 0;
-          }
-        }
+  //         div {
+  //           margin: 3px 0;
+  //         }
+  //       }
   
-        .details {
-          div {
-            margin: 3px 0;
-          }
-        }
-      }
+  //       .details {
+  //         div {
+  //           margin: 3px 0;
+  //         }
+  //       }
+  //     }
   
-      .card:hover {
-        transform: scale(1.05);
-      }
+  //     .card:hover {
+  //       transform: scale(1.05);
+  //     }
+  //   }
+  // }
+
+  .vehicle-table {
+    padding: 0 16px;
+
+    .table-body {
+      position: relative;
+      // height: calc(100vh - 170px);
+    }
+    th {
+      font-size: var(--fnt-small);
+    }
+    td {
+      font-size: var(--fnt-small);
+    }
+
+    .show-on-hover {
+      visibility: hidden;
+    }
+    tr:hover .show-on-hover {
+      visibility: visible;
+    }
+
+    .mat-icon:hover {
+      color: var(----stroked-color);
     }
   }
 }

@@ -4,6 +4,7 @@ import { AddVehicleComponent } from 'src/app/dialog-boxes/add-vehicle/add-vehicl
 import { VehicleCardComponent } from 'src/app/dialog-boxes/vehicle-card/vehicle-card.component';
 import { SharedService } from 'src/app/shared/sevices/shared.service';
 import { statusList } from 'src/app/shared/utils/filter-utils';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-vehicle',
@@ -11,12 +12,12 @@ import { statusList } from 'src/app/shared/utils/filter-utils';
   styleUrls: ['./vehicle.component.scss'],
 })
 export class VehicleComponent implements OnInit {
-  public cardsDetails: any = [];
+  public totalVehicles: any = [];
   searchedVehicle: any;
-  showLoader:boolean = false
+  showLoader: boolean = false;
 
   public statusList = statusList;
-
+  fileName:any
   constructor(private services: SharedService, private dialog: MatDialog) {}
   ngOnInit(): void {
     this.getAllVehicle();
@@ -37,13 +38,13 @@ export class VehicleComponent implements OnInit {
   }
 
   private getAllVehicle() {
-    this.showLoader = true
+    this.showLoader = true;
     this.services.getAllVehicle().subscribe({
       next: (res) => {
-        // console.log(res);
-        this.cardsDetails = res;
-        this.searchedVehicle = this.cardsDetails;
-        this.showLoader = false
+        console.log(res);
+        this.totalVehicles = res;
+        this.searchedVehicle = this.totalVehicles;
+        this.showLoader = false;
       },
       error: (err) => {
         console.log(err);
@@ -63,13 +64,13 @@ export class VehicleComponent implements OnInit {
     // });
   }
   filterVehicle(filter: any) {
-    this.showLoader = true
+    this.showLoader = true;
     this.services.filterVehicle(filter.value).subscribe({
       next: (res) => {
-        this.cardsDetails = res;
-        this.searchedVehicle = this.cardsDetails;
+        this.totalVehicles = res;
+        this.searchedVehicle = this.totalVehicles;
         // console.log(res);
-        this.showLoader = false
+        this.showLoader = false;
       },
       error: (err) => {
         console.log(err);
@@ -79,11 +80,59 @@ export class VehicleComponent implements OnInit {
 
   onSearchVehicle(searchValue: any) {
     this.searchedVehicle = [];
-    // console.log(this.cardsDetails);
-    for (let cardDetail of this.cardsDetails) {
-      if (cardDetail.vehicleModel.toLowerCase().includes(searchValue.toLowerCase())) {
-        this.searchedVehicle.push(cardDetail);
+    console.log(searchValue);
+    for (let vehicle of this.totalVehicles) {
+      if (
+        vehicle.vehicleModel.toLowerCase().includes(searchValue.toLowerCase())
+      ) {
+        this.searchedVehicle.push(vehicle);
       }
     }
+  }
+
+  openEditTransactionDialog(item: any) {
+    console.log('item+>>', item);
+    const dialogRef = this.dialog.open(VehicleCardComponent, {
+      height: '550px',
+      width: '550px',
+      data: item,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`dialog closed with result:`, result);
+      if (result) {
+        for (let item of this.totalVehicles) {
+          if (item.id == result.id) {
+            (item.name = result.name),
+              (item.isActive = result.isActive),
+              (item.locality = result.locality),
+              (item.vehicleNumber = result.vehicleNumber),
+              (item.vehicleModel = result.vehicleModel),
+              (item.vehicleOwner = result.vehicleOwner),
+              (item.transactionId = result.transactionId),
+              (item.createdDate = result.createdDate),
+              (item.createdTime = result.createdTime),
+              (item.rate = result.rate);
+          }
+        }
+        this.searchedVehicle = this.totalVehicles;
+      }
+    });
+  }
+
+  openDeleteTransactionDialog(item: any) { }
+  
+  exportTable() {
+    const element = document.getElementById('vehicle-table');
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+    
+    // Add a row with the customer name
+    // XLSX.utils.sheet_add_aoa(ws, [[`Customer Name:- ${this.customerDetails.name}`]], { origin: 'A1' });
+    
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    this.fileName = `Vehicles-Report.xlsx`
+    
+    XLSX.writeFile(wb, this.fileName);
   }
 }

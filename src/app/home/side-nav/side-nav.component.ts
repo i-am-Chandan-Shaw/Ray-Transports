@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class SideNavComponent implements OnInit {
   constructor(private router: Router) {}
   public opened: boolean = false;
-  public currentRoute='/'
+  public currentRoute = '/';
   public sideNavItem: any[] = [
     {
       id: 0,
@@ -47,16 +47,27 @@ export class SideNavComponent implements OnInit {
       routePath: 'home/settings',
     },
   ];
-  public selectedTab= this.sideNavItem[0];
+  public selectedTab = this.sideNavItem[0];
   ngOnInit(): void {
-    
-    
+    if (this.selectedTab.routePath !== this.router.url.slice(1)) {
+      let temp = this.sideNavItem.filter(
+        (item) => item.routePath == this.router.url.slice(1)
+      );
+      for (let item of this.sideNavItem) {
+        if (item.id == temp[0].id) {
+          item.isSelected = true;
+          temp[0].isSelected = true;
+        } else {
+          item.isSelected = false;
+        }
+      }
+      this.selectedTab = temp[0];
+    }
   }
 
   public toggleSidenav() {
     this.opened = !this.opened;
   }
-
 
   onSeleted(selectedItem: any) {
     for (let navItem of this.sideNavItem) {

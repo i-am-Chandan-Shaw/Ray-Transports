@@ -12,7 +12,7 @@
                         <th class="w30p text-left">Assigned Date</th>
                         <th class="w10p text-center">Status</th>
                         <th class="w10p text-right">Rate</th>
-                        <th class="w20p text-right">Options</th>
+                        <th class="w20p text-center">Options</th>
                     </tr>
                 </thead>
             </table>
@@ -23,13 +23,16 @@
                             <td class="w20p text-left">{{vehicle.vehicleNumber}}</td>
                             <td class="w30p text-left"> {{vehicle.createdDate}} </td>
                             <td class="w10p text-center">
-                                <div class="status-icon active" [autoPlacement]="true" [tooltip]="vehicle.isActive?'Active':'Stopped'" [theme]="'light'"
-                                    placement="top">
-                                    <span >{{vehicle.isActive?'A':'S'}}</span>
+                                <div class="status-icon" [ngClass]="vehicle.isActive ? 'active':'inactive'" [autoPlacement]="true"
+                                    [tooltip]="vehicle.isActive?'Running':'Stopped'" [theme]="'light'" placement="top">
+                                    <span>{{vehicle.isActive?'R':'S'}}</span>
                                 </div>
                             </td>
                             <td class="w10p text-right"> {{vehicle.rate}} </td>
-                            <td class="w20p text-right"><mat-icon [tooltip]="'Stop Vehicle'" color="warn" (click)="onStatusClicked(vehicle,vehicle.transactionId)">block</mat-icon></td>
+                            <td class="w20p text-center"><mat-icon *ngIf="vehicle.isActive" [tooltip]="'Stop Vehicle'" color="warn"
+                                    (click)="onStatusClicked(vehicle,vehicle.transactionId)">block</mat-icon>
+                                    <span *ngIf="!vehicle.isActive" [tooltip]="'Stopped'">Stopped</span>
+                                </td>
                         </tr>
                     </tbody>
                 </table>

@@ -47,31 +47,34 @@
         <div class="overview-section p15">
             <label for="">Total 3 entries</label>
             <div class="card mt10">
-                <div class="card-details" *ngIf="!showCardLoader" >
+                <div class="card-details" *ngIf="!showCardLoader">
                     <div class="amount">{{'₹'+totalGaveAmount}}</div>
-                    <label>You Gave</label>
+                    <label>Due</label>
                 </div>
-                <ngx-skeleton-loader *ngIf="showCardLoader" class="card-details" style="border: transparent;"  count="1" appearance="line" [theme]="{ 
+                <ngx-skeleton-loader *ngIf="showCardLoader" class="card-details" style="border: transparent;" count="1"
+                    appearance="line" [theme]="{ 
                     'height': '67px',
                     'width':'100%',
                     'margin':'0'
                   }"></ngx-skeleton-loader>
-                <div class="card-details" *ngIf="!showCardLoader" >
+                <div class="card-details" *ngIf="!showCardLoader">
                     <div class="amount">{{'₹'+totalGotAmount}}</div>
-                    <label>You Got</label>
+                    <label>Received</label>
 
                 </div>
-                <ngx-skeleton-loader *ngIf="showCardLoader"  class="card-details" style="border: transparent;" count="1" appearance="line" [theme]="{ 
+                <ngx-skeleton-loader *ngIf="showCardLoader" class="card-details" style="border: transparent;" count="1"
+                    appearance="line" [theme]="{ 
                     'height': '68px',
                     'width':'100%',
                     'margin':'0'
                   }"></ngx-skeleton-loader>
-                <div class="card-details" *ngIf="!showCardLoader" >
+                <div class="card-details" *ngIf="!showCardLoader">
                     <div class="amount">{{'₹'+netBalance}}</div>
                     <label>Net Balance</label>
 
                 </div>
-                <ngx-skeleton-loader *ngIf="showCardLoader"  class="card-details" style="border: transparent;"  count="1" appearance="line" [theme]="{ 
+                <ngx-skeleton-loader *ngIf="showCardLoader" class="card-details" style="border: transparent;" count="1"
+                    appearance="line" [theme]="{ 
                     'height': '67px',
                     'width':'100%',
                     'margin':'0'
@@ -89,8 +92,8 @@
                                 <th class="w8p text-left">Customer Name</th>
                                 <th class="w10p text-left">Description</th>
                                 <th class="w7p text-left">Added By</th>
-                                <th class="text-center w4p">You Gave</th>
-                                <th class="text-center w4p">You Got</th>
+                                <th class="text-center w4p">Due</th>
+                                <th class="text-center w4p">Received</th>
                                 <!-- <th class="w4p text-right">Options</th> -->
                             </tr>
                         </thead>

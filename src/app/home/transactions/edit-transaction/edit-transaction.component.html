@@ -7,7 +7,7 @@
         <div class="input-form-container">
             <div class="input-fields">
                 <label for="customerName">Customer Name: </label>
-                <mat-form-field appearance="outline" >
+                <mat-form-field appearance="outline">
                     <input matInput formControlName="customerName" name="customerName" autocomplete="off"
                         placeholder="Enter Customer Name">
                     <mat-error *ngIf="gf['customerName'].invalid">**Customer Name is Required</mat-error>
@@ -16,7 +16,8 @@
             <div class="input-fields">
                 <label for="addedBy">Added by</label>
                 <mat-form-field appearance="outline">
-                    <input matInput name="addedBy" formControlName="addedBy"  autocomplete="off" placeholder="Enter Value">
+                    <input matInput name="addedBy" formControlName="addedBy" autocomplete="off"
+                        placeholder="Enter Value">
                     <mat-error *ngIf="gf['addedBy'].invalid">**Added by Required</mat-error>
                 </mat-form-field>
 
@@ -24,19 +25,19 @@
             </div>
             <div class="t-container">
                 <div class="input-fields w45p">
-                    <label for="youGave">You Gave</label>
+                    <label for="youGave">Due</label>
                     <mat-form-field class="" appearance="outline">
-                        <input matInput formControlName="youGave"  name="youGave" autocomplete="off"
+                        <input matInput formControlName="youGave" name="youGave" autocomplete="off"
                             placeholder="Enter Value.">
-                        <mat-error *ngIf="gf['youGave'].invalid">**You Gave is Required</mat-error>
+                        <mat-error *ngIf="gf['youGave'].invalid">**Due is Required</mat-error>
                     </mat-form-field>
                 </div>
                 <div class="input-fields w45p">
-                    <label for="youGot">You Got</label>
+                    <label for="youGot">Received</label>
                     <mat-form-field class="" appearance="outline">
-                        <input matInput formControlName="youGot"  name="youGot" autocomplete="off"
+                        <input matInput formControlName="youGot" name="youGot" autocomplete="off"
                             placeholder="Enter Value.">
-                        <mat-error *ngIf="gf['youGot'].invalid">**You Got is Required</mat-error>
+                        <mat-error *ngIf="gf['youGot'].invalid">**Received is Required</mat-error>
                     </mat-form-field>
                 </div>
             </div>
@@ -44,17 +45,16 @@
             <div class="input-fields">
                 <label for="description">Description</label>
                 <mat-form-field class="" appearance="outline">
-                    <input matInput formControlName="description"  name="description" autocomplete="off"
+                    <input matInput formControlName="description" name="description" autocomplete="off"
                         placeholder="Enter description.">
                     <mat-error *ngIf="gf['description'].invalid">**Description is Required</mat-error>
                 </mat-form-field>
             </div>
 
             <div class="action-btn">
-                <button mat-stroked-button class=""
-                (click)="closeDialog()" >Cancel</button>
-            <button mat-raised-button class="" color="primary" (click)="editTransaction()"
-                [disabled]="!editTransactionForm.valid ">Save</button>
+                <button mat-stroked-button class="" (click)="closeDialog()">Cancel</button>
+                <button mat-raised-button class="" color="primary" (click)="editTransaction()"
+                    [disabled]="!editTransactionForm.valid ">Save</button>
             </div>
 
         </div>

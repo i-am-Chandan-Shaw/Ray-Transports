@@ -35,7 +35,7 @@ export class ReportsComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize() {
     this.screenHeight = window.innerHeight;
-    this.pageSize = Math.floor((this.screenHeight - 450) / 32);
+    this.pageSize = Math.floor((this.screenHeight - 450) / 27);
   }
 
   ngOnInit(): void {

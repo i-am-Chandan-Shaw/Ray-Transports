@@ -36,7 +36,8 @@
                 <!-- Filter -->
                 <div class="filter-section">
                     <div class="custom-input-field">
-                        <input #searchNameLocality type="text" placeholder="Name and Locality" (keyup)="onSearchNameLocality(searchNameLocality.value)" >
+                        <input #searchNameLocality type="text" placeholder="Name and Locality"
+                            (keyup)="onSearchNameLocality(searchNameLocality.value)">
                         <mat-icon>search</mat-icon>
                     </div>
                     <div class="dropdown">
@@ -70,7 +71,8 @@
                     <perfect-scrollbar class="table-body">
                         <table *ngIf="!showLoader">
                             <tbody>
-                                <tr *ngFor="let customer of searchedCustomerData" (click)="setCustomerDetails(customer)">
+                                <tr *ngFor="let customer of searchedCustomerData"
+                                    (click)="setCustomerDetails(customer)">
                                     <td class="name-column">
                                         <div>
                                             <div class="customer-name">{{customer.name}}</div>
@@ -79,8 +81,8 @@
                                     </td>
                                     <td class="status-column w18p">
                                         <div class="status-icon active" *ngIf="customer.isActive" [autoPlacement]="true"
-                                            tooltip="Active" [theme]="'light'" placement="top">
-                                            <span>A</span>
+                                            tooltip="Running" [theme]="'light'" placement="top">
+                                            <span>R</span>
                                         </div>
                                         <div class="status-icon inactive" *ngIf="!customer.isActive"
                                             [autoPlacement]="true" tooltip="Stopped" [theme]="'light'" placement="top">
@@ -116,7 +118,8 @@
     <mat-divider [vertical]="true"></mat-divider>
     <div class="details-section" #customerDetails *ngIf="customerData !=null">
         <app-customer-details (customerDetailsUpdated)="updatedTable()" [vehicleNumberOptions]="vehicleNumberOptions"
-            (closeDeatilsSection)="closeDetailsSection($event)" [customerDetails]="customerData" (customerDetailsUpdated)="updatedTable()"
+            (closeDeatilsSection)="closeDetailsSection($event)" [customerDetails]="customerData"
+            (customerDetailsUpdated)="updatedTable()"
             [customerDetailsSize]="this.customerDetailsSize"></app-customer-details>
 
     </div>
