@@ -72,6 +72,19 @@
 .table-body {
   height: calc(100vh - 450px);
   position: relative;
+  th {
+    font-size: var(--fnt-small);
+  }
+  td {
+    font-size: var(--fnt-small);
+  }
+
+  .show-on-hover {
+    visibility: hidden;
+  }
+  tr:hover .show-on-hover {
+    visibility: visible;
+  }
 }
 ::ng-deep .mat-mdc-paginator-page-size {
   display: none !important;

@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Inject, Input, Output, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Inject, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { DatepickerDropdownPositionX, MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { SharedService } from 'src/app/shared/sevices/shared.service';
+
 
 @Component({
   selector: 'app-add-transaction',
@@ -9,13 +10,15 @@ import { SharedService } from 'src/app/shared/sevices/shared.service';
   styleUrls: ['./add-transaction.component.scss'],
 })
 export class AddTransactionComponent {
+  @ViewChild('amountInput') amountInput!: ElementRef;
   color = '';
   amount = '';
   description = '';
   selectedDate: any;
   addNewEntry:any
   today:Date=new Date()
-
+  autoFocus = true
+  
   constructor(
     private services: SharedService,
     private _bottomSheetRef: MatBottomSheetRef<AddTransactionComponent>,
@@ -29,6 +32,12 @@ export class AddTransactionComponent {
     }
     if (this.data.transactionType == 'onYouGotClicked') {
       this.color = '#379237';
+    }
+  }
+
+  ngAfterViewInit() {
+    if (this.autoFocus) {
+      this.amountInput.nativeElement.focus()
     }
   }
   // ngOnChanges(changes: SimpleChanges) {

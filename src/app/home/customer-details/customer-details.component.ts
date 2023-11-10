@@ -33,7 +33,7 @@ export class CustomerDetailsComponent {
     new EventEmitter<boolean>();
 
   @ViewChild('sidenav') sidenav!: MatSidenav;
-  fileName: any = 'Customer-Report.xlsx';
+  fileName: any;
 
   public selectedOption?: In_options;
   public menuHasBackdrop = false;
@@ -174,12 +174,17 @@ export class CustomerDetailsComponent {
   }
 
   exportTable() {
-    let element = document.getElementById('customer-table');
+    const element = document.getElementById('customer-table');
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
-
+    
+    // Add a row with the customer name
+    XLSX.utils.sheet_add_aoa(ws, [[`Customer Name:- ${this.customerDetails.name}`]], { origin: 'A1' });
+    
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
 
+    this.fileName = `${this.customerDetails.name}-Report.xlsx`
+    
     XLSX.writeFile(wb, this.fileName);
   }
 }

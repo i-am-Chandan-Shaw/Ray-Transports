@@ -1,24 +1,77 @@
-
-    <div class="vehicle-cards">
-        <ng-container >
-            <div class="card pt10 pb10 p15" [ngClass]="data.isActive ? 'active-border' : 'stopped-border'">
-                <div class="label">
-                    <div>Name:</div>
-                    <div>Locality:</div>
-                    <div>Vehicle Name:</div>
-                    <div>Vehicle Number:</div>
-                    <div>Vehicle Owner</div>
-                    <div>Status</div>
-                </div>
-                <div class="details marginauto pl15 ">
-    
-                    <div>{{data.name? data.name :'---'}}</div>
-                    <div>{{data.locality? data.locality :'---'}}</div>
-                    <div>{{data.vehicleModel? data.vehicleModel :'---'}}</div>
-                    <div>{{data.vehicleNumber? data.vehicleNumber :'---'}}</div>
-                    <div>{{data.vehicleOwner? data.vehicleOwner :'---'}}</div>
-                    <div [ngClass]="data.isActive ? 'active' : 'stopped'">{{data.isActive ? 'Active' : 'Stopped'}}</div>
-                </div>
+<div class="edit-vehicle-wrapper">
+    <mat-toolbar class="header" color="primary">
+        <span>Edit Vehicle Details</span>
+        <mat-icon (click)="closeDialog()" class="mr0">close</mat-icon>
+    </mat-toolbar>
+    <form [formGroup]="editVehicleForm">
+        <div class="input-form-container">
+            <div class="input-fields">
+                <label for="customerName">Name</label>
+                <mat-form-field appearance="outline">
+                    <input matInput formControlName="name" name="customerName" autocomplete="off"
+                        placeholder="Enter Customer Name">
+                    <mat-error *ngIf="gf['name'].invalid">**Name is Required</mat-error>
+                </mat-form-field>
             </div>
-        </ng-container>
-    </div>
+
+            <div class="input-fields">
+                <label for="vehicleModel">Vehicle Name</label>
+                <mat-form-field class="" appearance="outline">
+                    <input matInput formControlName="vehicleModel" name="vehicleModel" autocomplete="off"
+                        placeholder="Enter vehicle name.">
+                    <mat-error *ngIf="gf['vehicleModel'].invalid">**Vehicle Name is Required</mat-error>
+                </mat-form-field>
+            </div>
+            
+            <div class="t-container">
+                <div class="input-fields w45p">
+                    <label for="">Locality</label>
+                    <app-auto-complete class="" [providedOption]="this.providedLocalityOption[0]?this.providedLocalityOption[0]:[]"  [options]="localityOptions"
+                        (selectedOptions)="onSelectedOption($event,'locality')" (inputValue)="autoCompleteOutputValue($event,'locality')" [placeholder]="'Locality Name'" ></app-auto-complete>
+                        <mat-error class="invalid" *ngIf="!checkAutoCompleteValueForLocality">**locality is Required</mat-error>
+                </div>
+                <div class="input-fields w45p">
+                    <label for="">Locality</label>
+                    <app-auto-complete class="" [providedOption]="providedStatusOption"  [options]="vehicleStatusOptions"
+                        (selectedOptions)="onSelectedOption($event,'status')" (inputValue)="autoCompleteOutputValue($event,'status')" [placeholder]="'Locality Name'" ></app-auto-complete>
+                        <mat-error class="invalid" *ngIf="!checkAutoCompleteValueForStatus">**Vehicle Status is Required</mat-error>
+                </div>
+                <!-- <div class="input-fields w45p">
+                    <label for="status">Status</label>
+                    <mat-form-field class="" appearance="outline">
+                        <input matInput formControlName="isActive" name="status" autocomplete="off"
+                            placeholder="Enter status.">
+                        <mat-error *ngIf="gf['isActive'].invalid">**Vehicle Status is Required</mat-error>
+                    </mat-form-field>
+                </div> -->
+            </div>
+
+            <div class="input-fields">
+                <label for="vehicleOwner">Vehicle Owner</label>
+                <mat-form-field class="" appearance="outline">
+                    <input matInput formControlName="vehicleOwner" name="vehicleOwner" autocomplete="off"
+                        placeholder="Enter vehicle owner.">
+                    <mat-error *ngIf="gf['vehicleOwner'].invalid">**Vehicle Owner is Required</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="input-fields">
+                <label for="vehicleNumber">Vehicle Number</label>
+                <mat-form-field class="" appearance="outline">
+                    <input matInput formControlName="vehicleNumber" name="vehicleNumber" autocomplete="off"
+                        placeholder="Enter vehicle number.">
+                    <mat-error *ngIf="gf['vehicleNumber'].invalid">**Vehicle Number is Required</mat-error>
+                </mat-form-field>
+            </div>
+
+            
+
+            <div class="action-btn">
+                <button mat-stroked-button class="" (click)="closeDialog()">Cancel</button>
+                <button mat-raised-button class="" color="primary" (click)="editVehicleDetails()"
+                    [disabled]="!editVehicleForm.valid || !checkAutoCompleteValueForLocality || !checkAutoCompleteValueForStatus">Save</button>
+            </div>
+
+        </div>
+    </form>
+</div>

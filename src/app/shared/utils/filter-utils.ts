@@ -7,7 +7,7 @@ export const filterList = [
   },
   {
     id: 1,
-    name: 'Active',
+    name: 'Running',
     value: '2',
     isSelected: false,
   },
@@ -144,12 +144,12 @@ export const statusList = [
   },
   {
     id: 1,
-    name: 'Active',
+    name: 'Running',
     value: '1',
   },
   {
     id: 2,
-    name: 'Inactive',
+    name: 'Stopped',
     value: '2',
   },
 ];
@@ -236,5 +236,18 @@ export const locality = [
     id: 6,
     displayName: 'Chandani',
     value: 'chandani',
+  },
+];
+
+export const vehicleStatus = [
+  {
+    id: 1,
+    displayName: 'Running',
+    value: 'running',
+  },
+  {
+    id: 2,
+    displayName: 'Stopped',
+    value: 'stopped',
   },
 ];
