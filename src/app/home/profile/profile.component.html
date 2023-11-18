@@ -1,0 +1,20 @@
+<div class="profile-container">
+    <div class="profile" >
+        <!-- <label for="profileImage">Profile Image:</label> -->
+        <div *ngIf="!profileImage" class="drop-container d-flex justify-center align-center" (dragover)="onDragOver($event)"
+            (dragleave)="onDragLeave($event)" (drop)="onDrop($event)" (click)="img.click()">
+            <p>Drag and drop or Click to add img</p>
+            <input #img style="display: none;" class="w100p" type="file" id="profileImage" accept="image/*"
+                (change)="onFileSelected($event)">
+
+        </div>
+        <div *ngIf="profileImage" class="uploaded-image">
+            <img [src]="profileImage" alt="Profile Image">
+
+            <div class="overlay" (click)="profileImage=''">
+               <div class="overlay-content">Click to remove the img</div>
+            </div>
+        </div>
+
+    </div>
+</div>

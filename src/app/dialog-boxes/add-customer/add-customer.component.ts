@@ -26,7 +26,8 @@ export class AddCustomerComponent implements OnInit {
     this.addCustomerForm = this.fb.group({
       name:['',[Validators.required,Validators.pattern(/^[a-zA-Z ]{2,30}$/)]],
       locality:['',Validators.required],
-      phone:['',[Validators.required,Validators.min(1000000000), Validators.max(9999999999)]]
+      phone: ['', [Validators.required, Validators.min(1000000000), Validators.max(9999999999)]],
+      aadharNumber:['',[Validators.required]]
     })
     this.filteredOptions = this.addCustomerForm.get('locality')?.valueChanges.pipe(
       startWith(''),
