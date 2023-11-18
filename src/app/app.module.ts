@@ -8,8 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { SideNavComponent } from './home/side-nav/side-nav.component';
 import { DashboardComponent } from './home/dashboard/dashboard.component';
 import { AddCustomerComponent } from './dialog-boxes/add-customer/add-customer.component';
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar'; 
- 
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { TooltipModule } from 'ng2-tooltip-directive';
 import { HttpClientModule } from '@angular/common/http';
 import { DateToDaysPipe } from './shared/pipes/date-to-days.pipe';
@@ -31,6 +30,7 @@ import { AddVehicleComponent } from './dialog-boxes/add-vehicle/add-vehicle.comp
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { EditTransactionComponent } from './home/transactions/edit-transaction/edit-transaction.component';
 import { ModelComponent } from './shared/component/model/model.component';
+import { ProfileComponent } from './home/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -57,9 +57,17 @@ import { ModelComponent } from './shared/component/model/model.component';
     AddVehicleComponent,
     EditTransactionComponent,
     ModelComponent,
+    ProfileComponent
   ],
   imports: [
-    NgxSkeletonLoaderModule.forRoot({ animation: 'pulse', loadingText: 'This item is actually loading...' }),
+    NgxSkeletonLoaderModule.forRoot({
+      animation: 'pulse',
+      loadingText: 'This item is actually loading...',
+      theme: {
+        'background-color': '#e9e9e9',
+        extendsFromRoot: true,
+      },
+    }),
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -67,9 +75,9 @@ import { ModelComponent } from './shared/component/model/model.component';
     MaterialModule,
     ReactiveFormsModule,
     PerfectScrollbarModule,
-    TooltipModule
+    TooltipModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

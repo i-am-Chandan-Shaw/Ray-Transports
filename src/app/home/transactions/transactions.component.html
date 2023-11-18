@@ -1,29 +1,53 @@
 <div class="transaction-wrapper">
-  <mat-toolbar class="header-section">
+  <mat-toolbar class="space-between">
     <span class="header-text">Transactions Dasboard</span>
+    <div class="download-btn">
+      <button class="report-btn" mat-stroked-button color="primary" (click)="exportTable()">
+        <span>Report</span><mat-icon>download</mat-icon>
+      </button>
+    </div>
   </mat-toolbar>
   <mat-divider></mat-divider>
   <div class="fliter mb15">
     <div class="dropdown align-center">
       <label for="">User</label>
-      <app-auto-complete class="mt8 mb8" (inputValue)="autoCompleteInputValue($event)"
+      <app-auto-complete (inputValue)="autoCompleteInputValue($event)"
         (selectedOptions)="onSelectUserInputValue($event)" [options]="userList"
         [placeholder]="'Customer Name'"></app-auto-complete>
     </div>
     <div class="dropdown align-center">
       <label for="">Filter By</label>
-      <app-dropdown-component [placeholder]="'Filter By'" [optionList]="filterList"></app-dropdown-component>
+      <app-dropdown-component [placeholder]="'Filter By'" [optionList]="filterList" (valueSelected)="selectedFilterBy($event)"></app-dropdown-component>
     </div>
 
     <div class="dropdown align-center">
       <label for="">Added By</label>
       <app-dropdown-component [selectMultipleValue]="true" [placeholder]="'Added By'"
-        [optionList]="addedBy"></app-dropdown-component>
+        [optionList]="addedBy" (sendMultipleValue)="selectedMultipleValue($event)"></app-dropdown-component>
     </div>
+
+    <div class="dropdown align-center">
+      <label>Period</label>
+      <app-dropdown-component [optionList]="periodList"
+        (valueSelected)="selectedPeriod($event)"></app-dropdown-component>
+    </div>
+
+    <div class="dropdown align-center date" [ngStyle]="enableCalender?{'visibility': 'visible'}:{'visibility': 'hidden'}">
+      <label for="">Start/End Date</label>
+      <mat-form-field class="datepicker">
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate placeholder="MM/DD/YYYY" (dateChange)="selectedStartDate($event)">
+          <input matEndDate placeholder="MM/DD/YYYY" (dateChange)="selectedEndDate($event)">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+    </div>
+
   </div>
   <div class="transaction-table">
     <div class="customer-table simple-table">
-      <div class="main-table">
+      <div class="main-table" id="transaction-table">
         <table class="table-header">
           <thead class="border-left">
             <tr>

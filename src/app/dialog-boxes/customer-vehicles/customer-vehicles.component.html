@@ -29,8 +29,9 @@
                                 </div>
                             </td>
                             <td class="w10p text-right"> {{vehicle.rate}} </td>
-                            <td class="w20p text-center"><mat-icon *ngIf="vehicle.isActive" [tooltip]="'Stop Vehicle'" color="warn"
-                                    (click)="onStatusClicked(vehicle,vehicle.transactionId)">block</mat-icon>
+                            <td class="w20p text-center">
+                                <button mat-stroked-button color="primary" *ngIf="vehicle.isActive" [tooltip]="'Stop Vehicle'" 
+                                    (click)="onStatusClicked(vehicle,vehicle.transactionId)">Stop</button>
                                     <span *ngIf="!vehicle.isActive" [tooltip]="'Stopped'">Stopped</span>
                                 </td>
                         </tr>

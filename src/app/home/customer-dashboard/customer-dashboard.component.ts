@@ -117,7 +117,7 @@ export class CustomerDashboardComponent {
   public addCustomer() {
     const dialogRef = this.dialog.open(AddCustomerComponent, {
       autoFocus: false,
-      height: '450px',
+      // height: '450px',
       width: '350px',
       disableClose: true,
     });

@@ -1,10 +1,11 @@
 import { Component, HostListener, Inject, OnInit } from '@angular/core';
-import { filterList1, sortOption } from 'src/app/shared/utils/filter-utils';
+import { filterList1, periodList, sortOption } from 'src/app/shared/utils/filter-utils';
 import { filter } from 'src/app/shared/interface/filter-interface';
 import { SharedService } from 'src/app/shared/sevices/shared.service';
 import { MatDialog } from '@angular/material/dialog';
 import { EditTransactionComponent } from './edit-transaction/edit-transaction.component';
 import { ModelComponent } from 'src/app/shared/component/model/model.component';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-transactions',
@@ -13,10 +14,12 @@ import { ModelComponent } from 'src/app/shared/component/model/model.component';
 })
 export class TransactionsComponent implements OnInit {
   constructor(private services: SharedService, public dialog: MatDialog) {}
-
+  enableCalender: boolean = false;
   public userList: any[] = [];
+  periodList = periodList;
   public filterList: filter[] = filterList1;
   public myMath = Math;
+  fileName: any = 'Transactions-Report.xlsx';
   pageSize = 10;
   pageIndex = 0;
   totalLength!: number;
@@ -180,5 +183,62 @@ export class TransactionsComponent implements OnInit {
     dialogRef.afterClosed().subscribe((res) => {
       console.log('res=>', res);
     });
+  }
+
+  selectedFilterBy(e: any) {
+    console.log(e)
+  }
+
+  selectedMultipleValue(e: any) {
+    console.log(e)
+  }
+
+  selectedPeriod(e: any) {
+    console.log(e)
+    // this.reportForm.patchValue({ period: e });
+    if (e.name == 'Custom') {
+      this.enableCalender = true;
+      // this.gf['startDate'].enable();
+      // this.gf['endDate'].enable();
+    } else {
+      this.enableCalender = false;
+      // this.gf['startDate'].disable();
+      // this.gf['endDate'].disable();
+      // this.reportForm.patchValue({ startDate: null, endDate: null });
+      // this.filterList();
+    }
+  }
+
+  exportTable() {
+    let element = document.getElementById('transaction-table');
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    XLSX.writeFile(wb, this.fileName);
+  }
+
+  selectedStartDate(e: any) {
+    console.log(e)
+    let temp = this.getFormatterDate(e.value)
+    // this.reportForm.patchValue({ startDate: temp});
+  }
+  selectedEndDate(e: any) {
+    console.log(e)
+    let temp = this.getFormatterDate(e.value)
+    // this.reportForm.patchValue({ endDate: temp });
+    // this.filterList();
+  }
+
+  
+  getFormatterDate(originalDateString: any) {
+    const originalDate = new Date(originalDateString);
+    const year = originalDate.getFullYear();
+    const month = String(originalDate.getMonth() + 1).padStart(2, '0');
+    const day = String(originalDate.getDate()).padStart(2, '0');
+
+    const formattedDate = `${year}-${month}-${day}`;
+    return formattedDate;
   }
 }
