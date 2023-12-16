@@ -39,13 +39,13 @@ export class SideNavComponent implements OnInit {
     //   isSelected: false,
     //   routePath: 'home/reports',
     // },
-    // {
-    //   id: 4,
-    //   displayName: 'Settings',
-    //   iconName: 'settings',
-    //   isSelected: false,
-    //   routePath: 'home/settings',
-    // },
+    {
+      id: 4,
+      displayName: 'Settings',
+      iconName: 'settings',
+      isSelected: false,
+      routePath: 'home/settings',
+    },
   ];
   public selectedTab = this.sideNavItem[0];
   ngOnInit(): void {

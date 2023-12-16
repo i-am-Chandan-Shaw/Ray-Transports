@@ -9,6 +9,11 @@ export class SharedService {
 
   private apiString = `https://raytransports.com/raytransports/`;
 
+  public login(user:any) {
+    const api = this.apiString + `login.php`;
+    return this.http.post(api,user)
+  }
+
   public getAllCustomer() {
     const api = this.apiString + `getCustomer.php`;
     return this.http.get(api);
