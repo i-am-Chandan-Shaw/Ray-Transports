@@ -10,7 +10,7 @@ import { DashboardComponent } from './home/dashboard/dashboard.component';
 import { AddCustomerComponent } from './dialog-boxes/add-customer/add-customer.component';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { TooltipModule } from 'ng2-tooltip-directive';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { DateToDaysPipe } from './shared/pipes/date-to-days.pipe';
 import { CustomerDetailsComponent } from './home/customer-details/customer-details.component';
 import { LoginComponent } from './login/login.component';
@@ -31,6 +31,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { EditTransactionComponent } from './home/transactions/edit-transaction/edit-transaction.component';
 import { ModelComponent } from './shared/component/model/model.component';
 import { ProfileComponent } from './home/profile/profile.component';
+import { AppInterceptor } from './appInterceptor/app.interceptor';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,7 @@ import { ProfileComponent } from './home/profile/profile.component';
     PerfectScrollbarModule,
     TooltipModule,
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
