@@ -32,6 +32,7 @@ import { EditTransactionComponent } from './home/transactions/edit-transaction/e
 import { ModelComponent } from './shared/component/model/model.component';
 import { ProfileComponent } from './home/profile/profile.component';
 import { AppInterceptor } from './appInterceptor/app.interceptor';
+import { ErrorInterceptor } from './appInterceptor/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,7 @@ import { AppInterceptor } from './appInterceptor/app.interceptor';
     PerfectScrollbarModule,
     TooltipModule,
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true }],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true },{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
