@@ -1,5 +1,9 @@
 import { Component, HostListener, Inject, OnInit } from '@angular/core';
-import { filterList1, periodList, sortOption } from 'src/app/shared/utils/filter-utils';
+import {
+  filterList1,
+  periodList,
+  sortOption,
+} from 'src/app/shared/utils/filter-utils';
 import { filter } from 'src/app/shared/interface/filter-interface';
 import { SharedService } from 'src/app/shared/sevices/shared.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -25,6 +29,8 @@ export class TransactionsComponent implements OnInit {
   totalLength!: number;
   addedBy: filter[] = [];
   showLoader: boolean = false;
+  startDate: any;
+  endDate: any;
 
   transactionDetails: any = [];
   transactionDetailsList: any[] = [];
@@ -126,7 +132,7 @@ export class TransactionsComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((updatedTransaction) => {
       console.log('up', updatedTransaction);
-      if(updatedTransaction){
+      if (updatedTransaction) {
         for (let transaction of this.transactionDetails) {
           if (transaction.transactionId == updatedTransaction.transactionId) {
             transaction.customerName = updatedTransaction.customerName;
@@ -145,7 +151,6 @@ export class TransactionsComponent implements OnInit {
   }
 
   public openDeleteTransactionDialog(selectedTransaction: any) {
-
     const dialogRef = this.dialog.open(ModelComponent, {
       disableClose: true,
       autoFocus: false,
@@ -159,20 +164,20 @@ export class TransactionsComponent implements OnInit {
         this.transactionDetails = this.transactionDetails.filter((arr: any) => {
           return arr.transactionId != selectedTransaction.transactionId;
         });
-        this.services.onDeleteTransaction(selectedTransaction.transactionId).subscribe({
-          next:(res)=>{
-            console.log('delete_response',res)
-          }
-        })
-        this.totalLength = this.totalLength - 1
-        this.openSuccessDialog()
+        this.services
+          .onDeleteTransaction(selectedTransaction.transactionId)
+          .subscribe({
+            next: (res) => {
+              console.log('delete_response', res);
+            },
+          });
+        this.totalLength = this.totalLength - 1;
+        this.openSuccessDialog();
       }
     });
-
-    
   }
 
-  openSuccessDialog(){
+  openSuccessDialog() {
     const dialogRef = this.dialog.open(ModelComponent, {
       disableClose: true,
       autoFocus: false,
@@ -186,15 +191,16 @@ export class TransactionsComponent implements OnInit {
   }
 
   selectedFilterBy(e: any) {
-    console.log(e)
+    console.log(e);
   }
 
   selectedMultipleValue(e: any) {
-    console.log(e)
+    console.log(e);
   }
 
   selectedPeriod(e: any) {
-    console.log(e)
+    console.log(e);
+
     // this.reportForm.patchValue({ period: e });
     if (e.name == 'Custom') {
       this.enableCalender = true;
@@ -206,7 +212,21 @@ export class TransactionsComponent implements OnInit {
       // this.gf['endDate'].disable();
       // this.reportForm.patchValue({ startDate: null, endDate: null });
       // this.filterList();
+      this.callTransactionApi(e.id);
     }
+  }
+
+  callTransactionApi(period: any) {
+    this.showLoader = true;
+    this.services.getAllTransactionDetailsByDate(period).subscribe((res) => {
+      this.transactionDetails = res;
+      this.totalLength = this.transactionDetails.totalCount;
+      this.transactionDetails = this.transactionDetails.data;
+      this.transactionDetailsList = JSON.parse(
+        JSON.stringify(this.transactionDetails)
+      );
+      this.showLoader = false;
+    });
   }
 
   exportTable() {
@@ -220,18 +240,22 @@ export class TransactionsComponent implements OnInit {
   }
 
   selectedStartDate(e: any) {
-    console.log(e)
-    let temp = this.getFormatterDate(e.value)
+    console.log(e);
+    let temp = this.getFormatterDate(e.value);
+    console.log(temp);
+    this.startDate = temp
     // this.reportForm.patchValue({ startDate: temp});
   }
   selectedEndDate(e: any) {
-    console.log(e)
-    let temp = this.getFormatterDate(e.value)
+    console.log(e);
+    let temp = this.getFormatterDate(e.value);
+    console.log(temp);
+    this.endDate = temp
+    this.callTransactionApi(`startDate=${this.startDate}?endDate=${this.endDate}`);
     // this.reportForm.patchValue({ endDate: temp });
     // this.filterList();
   }
 
-  
   getFormatterDate(originalDateString: any) {
     const originalDate = new Date(originalDateString);
     const year = originalDate.getFullYear();

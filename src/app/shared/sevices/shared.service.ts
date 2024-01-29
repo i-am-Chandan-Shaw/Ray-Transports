@@ -74,6 +74,10 @@ export class SharedService {
     const api = this.apiString + `getTransactions.php`;
     return this.http.get(api);
   }
+  public getAllTransactionDetailsByDate(dateFilter:any) {
+    const api = this.apiString + `getTransactions.php?${dateFilter}`;
+    return this.http.get(api);
+  }
 
   public getAllTransactionDetailsPagination(pageSize:number,page:number) {
     const api = this.apiString + `getTransactions.php?pageSize=${pageSize}&page=${page}`;
