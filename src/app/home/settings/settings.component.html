@@ -1,4 +1,4 @@
-<p>settings works!</p>
+<!-- <p>settings works!</p>
 <div style="background: #ff0001; padding: 10px">
   <ngx-skeleton-loader
     count="5"
@@ -11,6 +11,23 @@
   ></ngx-skeleton-loader>
 </div>
 
-{{ user.name }}
+{{ user.name }} -->
 
-<button (click)="LogoutUser()">Logout</button>
+<div class="setting-wrapper ">
+  <mat-toolbar class="space-between">
+    <span class="header-text">Setting</span>
+  </mat-toolbar>
+  <mat-divider></mat-divider>
+
+  <section class="container">
+    <app-profile [profilePic]="picture"></app-profile>
+    <div class="user-container">
+      <label><b>Name:</b> {{ user.name }}</label>
+      <label><b>Email:</b> {{ user.email }}</label>
+      <label><b>Admin Account</b></label>
+      <button mat-stroked-button color="primary" (click)="LogoutUser()">Logout</button>
+    </div>
+  </section>
+</div>
+
+
