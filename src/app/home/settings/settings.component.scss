@@ -1,0 +1,21 @@
+.setting-wrapper {
+    height: 100vh;
+    
+
+    .container{
+        height: 70vh;
+        margin: auto;
+        width: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 50px;
+
+        .user-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+    }
+}

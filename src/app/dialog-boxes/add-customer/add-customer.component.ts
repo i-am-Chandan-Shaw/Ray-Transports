@@ -24,9 +24,10 @@ export class AddCustomerComponent implements OnInit {
 
   ngOnInit(): void {
     this.addCustomerForm = this.fb.group({
+      picture:[''],
       name:['',[Validators.required,Validators.pattern(/^[a-zA-Z ]{2,30}$/)]],
       locality:['',Validators.required],
-      phone: ['', [Validators.required, Validators.min(1000000000), Validators.max(9999999999)]],
+      phone: ['', [ Validators.min(1000000000), Validators.max(9999999999), Validators.pattern("^[0-9]*$")]],
       aadharNumber:['',[Validators.required]]
     })
     this.filteredOptions = this.addCustomerForm.get('locality')?.valueChanges.pipe(
@@ -43,6 +44,9 @@ export class AddCustomerComponent implements OnInit {
     const filterValue = value.toLowerCase();
 
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+  profilePic(e: any) {
+    this.gf['picture'].patchValue(e)
   }
 
   public addCustomer() {

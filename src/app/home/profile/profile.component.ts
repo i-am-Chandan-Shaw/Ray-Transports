@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -7,10 +7,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent {
-  profileImage: any;
+  @Input() profilePic!: string
+  @Output() selectedProfilePicture: EventEmitter<string> = new EventEmitter<string>();
 
+  profileImage: any;
   constructor() {}
-  ngOnInit() {}
+  ngOnInit() {
+    this.profileImage = this.profilePic
+  }
 
   onSubmit() {}
 
@@ -40,6 +44,7 @@ export class ProfileComponent {
     const reader = new FileReader();
     reader.onload = (e:any) => {
       this.profileImage = e.target.result;
+      this.selectedProfilePicture.emit(this.profileImage)
     };
     reader.readAsDataURL(file);
   }
