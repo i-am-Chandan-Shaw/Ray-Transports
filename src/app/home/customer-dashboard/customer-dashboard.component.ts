@@ -120,6 +120,7 @@ export class CustomerDashboardComponent {
       // height: '450px',
       width: '350px',
       disableClose: true,
+      panelClass: 'my-custom-dialog-class'
     });
 
     dialogRef.afterClosed().subscribe((result) => {

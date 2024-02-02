@@ -105,6 +105,7 @@ export class CustomerDetailsComponent {
       height: '550px',
       width: '650px',
       data: this.customerDetails,
+      panelClass: 'my-custom-dialog-class'
     });
   }
   onSelectedOption(option: In_options) {

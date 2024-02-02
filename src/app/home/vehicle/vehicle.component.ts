@@ -29,6 +29,7 @@ export class VehicleComponent implements OnInit {
       height: '450px',
       width: '350px',
       disableClose: true,
+      panelClass: 'my-custom-dialog-class'
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -96,6 +97,7 @@ export class VehicleComponent implements OnInit {
       height: '550px',
       width: '550px',
       data: item,
+      panelClass: 'my-custom-dialog-class'
     });
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`dialog closed with result:`, result);
