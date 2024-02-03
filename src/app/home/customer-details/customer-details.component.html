@@ -119,26 +119,26 @@
                     <label for="">Vehicle Number</label>
                   </div>
                   <div class="input-container">
-                    <div class="custom-input-field mt10">
-                      <input
-                        matInput
-                        type="text"
-                        [(ngModel)]="vehicleRate"
-                        name="vehicleRate"
-                        required
-                        autocomplete="off"
-                        placeholder="Enter vehicle rate"
-                        type="number"
-                      />
-                    </div>
-                    <app-auto-complete
-                      class="auto-complete"
-                      (selectedOptions)="onSelectedOption($event)"
-                      [options]="vehicleNumberOptions"
-                      [providedOption]="vehicleNumberOptions[0]"
-                      [placeholder]="'Vehicle Name'"
-                      (inputValue)="onChangeInput($event)"
-                    ></app-auto-complete>
+                    <form [formGroup]="vehicleForm">
+                      <div class="custom-input-field mt10">
+                        <input
+                          matInput
+                          type="text"
+                          formControlName="amount"
+                          required
+                          autocomplete="off"
+                          placeholder="Enter vehicle rate"
+                          type="number"
+                        />
+                      </div>
+                      <app-auto-complete
+                        class="auto-complete"
+                        (selectedOptions)="onSelectedOption($event)"
+                        [options]="vehicleNumberOptions"
+                        [placeholder]="'Vehicle Name'"
+                        (inputValue)="onChangeInput($event)"
+                      ></app-auto-complete>
+                    </form>
                   </div>
                 </div>
                 <div class="footer">
@@ -146,11 +146,11 @@
                     class="btn-primary mr10"
                     style="width: 80px"
                     [ngStyle]="
-                      vehicleRate == undefined || vehicleRate == ''
-                        ? { opacity: '0.5', cursor: 'not-allowed' }
-                        : {}
-                    "
-                    [disabled]="vehicleRate == undefined || vehicleRate == '' || selectedOption == undefined"
+                    vehicleForm.invalid
+                      ? { opacity: '0.5'}
+                      : {}
+                  "
+                    [disabled]="vehicleForm.invalid"
                     (click)="onAddVehicleToCustomer()"
                   >
                     Add
@@ -250,7 +250,3 @@
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>
-
-<!-- <ng-template #HtmlContent>
-    <p>Hello i'm a <strong>bold</strong> text!</p>
-  </ng-template> -->

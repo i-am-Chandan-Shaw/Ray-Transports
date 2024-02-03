@@ -6,7 +6,7 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import { map, startWith } from 'rxjs/operators';
@@ -35,46 +35,38 @@ export class CustomerDetailsComponent {
   @ViewChild('sidenav') sidenav!: MatSidenav;
   fileName: any;
 
-  public selectedOption?: In_options;
   public menuHasBackdrop = false;
   public opened: boolean = false;
   public myMath = Math;
   public customerTransactions: any = [];
   public customerVehicles: any = [];
-  prop: any;
   @Input() vehicleNumberOptions: any;
-  public vehicleRate: any;
+
   showLoader: boolean = false;
+  vehicleForm!: FormGroup;
 
   constructor(
     private _bottomSheet: MatBottomSheet,
     private services: SharedService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit() {
-    setTimeout(() => {
-      this.prop = this.customerDetailsSize;
-    }, 300);
-    this.selectedOption = this.vehicleNumberOptions[0];
+    this.vehicleForm = this.fb.group({
+      customerId: [parseInt(this.customerDetails.id)],
+      amount: ['', Validators.required],
+      vehicleId: ['', Validators.required],
+    });
+  }
+  get gf() {
+    return this.vehicleForm.controls;
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['customerDetails'] && changes['customerDetails'].currentValue) {
       this.getIndividualTransaction(this.customerDetails);
     }
-  }
-
-  form = new FormGroup({
-    rate: new FormControl('', [Validators.required]),
-    vehicleNumber: new FormControl('', [Validators.required]),
-  });
-
-  get rate(): any {
-    return this.form.get('rate');
-  }
-  get vehicleNumber(): any {
-    return this.form.get('vehicleNumber');
   }
 
   public detailsUpdated(data: any) {
@@ -115,7 +107,8 @@ export class CustomerDetailsComponent {
     });
   }
   onSelectedOption(option: In_options) {
-    this.selectedOption = option;
+    console.log(option);
+    this.gf['vehicleId'].patchValue(option.id);
   }
 
   closeSideNav() {
@@ -159,11 +152,7 @@ export class CustomerDetailsComponent {
     }
   }
   onAddVehicleToCustomer() {
-    let payload = {
-      customerId: parseInt(this.customerDetails.id),
-      vehicleId: this.selectedOption?.id,
-      amount: parseInt(this.vehicleRate),
-    };
+    let payload = this.vehicleForm.value;
 
     this.services.addVehicleToCustomer(payload).subscribe({
       next: (res) => {
@@ -178,10 +167,9 @@ export class CustomerDetailsComponent {
   }
 
   onChangeInput(e: any) {
-    console.log(e)
-    if (e == '') {
-      this.selectedOption = undefined;
-    }
+    console.log(e);
+
+    this.gf['vehicleId'].patchValue(e);
   }
   onDeleteCustomer(customerId: any) {
     this.services.onDeleteCustomer(customerId).subscribe((res) => {});
