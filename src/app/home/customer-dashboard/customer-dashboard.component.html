@@ -1,126 +1,160 @@
 <div class="dashboard-container">
-    <div class="list-section" [ngClass]="{'w100p':customerData==null}">
-        <div class="header-section">
-            <mat-toolbar>
-                <span class="header-text">Dashboard</span>
-                <button (click)="addCustomer()" class="btn-primary">Add Customer</button>
-            </mat-toolbar>
-            <mat-divider></mat-divider>
-            <!-- Account Summary -->
-            <mat-toolbar class="overview-section">
-                <div class="overview-container">
-                    <div class="account-summary">
-                        <span>You'll Give: </span>
-                        <div>
-                            <div class="amount give">
-                                <span>{{youWillGive}}</span>
-                                <mat-icon color="warn">trending_up</mat-icon>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="account-summary">
-                        <span>You'll Get: </span>
-                        <div>
-                            <div class="amount get">
-                                <span>{{youWillGet}}</span>
-                                <mat-icon>trending_down</mat-icon>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- <button class="report-btn" mat-stroked-button color="primary">
+  <div class="list-section" [ngClass]="{ w100p: customerData == null }">
+    <div class="header-section">
+      <mat-toolbar>
+        <span class="header-text">Dashboard</span>
+        <button (click)="addCustomer()" class="btn-primary">
+          Add Customer
+        </button>
+      </mat-toolbar>
+      <mat-divider></mat-divider>
+      <!-- Account Summary -->
+      <mat-toolbar class="overview-section">
+        <div class="overview-container">
+          <div class="account-summary">
+            <span>Received </span>
+            <div>
+              <div class="amount give">
+                <span>{{ youWillGive }}</span>
+                <mat-icon color="warn">trending_up</mat-icon>
+              </div>
+            </div>
+          </div>
+          <div class="account-summary">
+            <span>Due: </span>
+            <div>
+              <div class="amount get">
+                <span>{{ youWillGet }}</span>
+                <mat-icon>trending_down</mat-icon>
+              </div>
+            </div>
+          </div>
+          <!-- <button class="report-btn" mat-stroked-button color="primary">
                         <span>Report</span><mat-icon>summarize</mat-icon>
                     </button> -->
-                </div>
-                <!-- Filter -->
-                <div class="filter-section">
-                    <div class="custom-input-field">
-                        <input #searchNameLocality type="text" placeholder="Name and Locality"
-                            (keyup)="onSearchNameLocality(searchNameLocality.value)">
-                        <mat-icon>search</mat-icon>
-                    </div>
-                    <div class="dropdown">
-                        <app-dropdown-component [optionList]="filterList" [placeholder]="'Filter By'"
-                            [selectMultipleValue]="true"
-                            (sendMultipleValue)="filterCustomer($event)"></app-dropdown-component>
-                    </div>
-                    <div class="dropdown">
-                        <app-dropdown-component [optionList]="sortOption" [placeholder]="'Sort By'"
-                            [selectMultipleValue]="selectMultipleValue"
-                            (valueSelected)="sortCustomer($event)"></app-dropdown-component>
-                    </div>
-
-                </div>
-            </mat-toolbar>
-
-            <mat-divider></mat-divider>
         </div>
-        <div class="body-section">
-            <div class="customer-table simple-table">
-                <div class="main-table">
-                    <table class="table-header">
-                        <thead class="border-left">
-                            <tr>
-                                <th class="text-left">Name</th>
-                                <th class="text-center w18p">Status</th>
-                                <th class="text-right w20p">Amount</th>
-                            </tr>
-                        </thead>
-                    </table>
-                    <perfect-scrollbar class="table-body">
-                        <table *ngIf="!showLoader">
-                            <tbody>
-                                <tr *ngFor="let customer of searchedCustomerData"
-                                    (click)="setCustomerDetails(customer)">
-                                    <td class="name-column">
-                                        <div>
-                                            <div class="customer-name">{{customer.name}}</div>
-                                            <div class="locality">{{customer.address}}</div>
-                                        </div>
-                                    </td>
-                                    <td class="status-column w18p">
-                                        <div class="status-icon active" *ngIf="customer.isActive" [autoPlacement]="true"
-                                            tooltip="Running" [theme]="'light'" placement="top">
-                                            <span>R</span>
-                                        </div>
-                                        <div class="status-icon inactive" *ngIf="!customer.isActive"
-                                            [autoPlacement]="true" tooltip="Stopped" [theme]="'light'" placement="top">
-                                            <span>S</span>
-                                        </div>
-                                    </td>
-                                    <td class="amount-column text-right w20p">
-                                        <div class="amount">
-                                            <span class="rupee-symbol">₹ </span>
-                                            <span>{{myMath.abs(customer.amount)}}</span>
-                                        </div>
-                                        <div class="amount-desc"
-                                            [ngClass]="{'color-green':customer.amount<0, 'color-red':customer.amount>0}">
-                                            <span *ngIf="customer.amount>0">You will give</span>
-                                            <span *ngIf="customer.amount<0">You will get</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <ngx-skeleton-loader *ngIf="showLoader" count="8" appearance="line" [theme]="{ 
-                            'height': '47px',
-                            'width':'100%',
-                            'margin':'0'
-                          }"></ngx-skeleton-loader>
-
-                    </perfect-scrollbar>
-                </div>
-
-            </div>
+        <!-- Filter -->
+        <div class="filter-section">
+          <div class="custom-input-field">
+            <input
+              #searchNameLocality
+              type="text"
+              placeholder="Name and Locality"
+              (keyup)="onSearchNameLocality(searchNameLocality.value)"
+            />
+            <mat-icon>search</mat-icon>
+          </div>
+          <div class="dropdown">
+            <app-dropdown-component
+              [optionList]="filterList"
+              [placeholder]="'Filter By'"
+              [selectMultipleValue]="true"
+              (sendMultipleValue)="filterCustomer($event)"
+            ></app-dropdown-component>
+          </div>
+          <div class="dropdown">
+            <app-dropdown-component
+              [optionList]="sortOption"
+              [placeholder]="'Sort By'"
+              [selectMultipleValue]="selectMultipleValue"
+              (valueSelected)="sortCustomer($event)"
+            ></app-dropdown-component>
+          </div>
         </div>
-    </div>
-    <mat-divider [vertical]="true"></mat-divider>
-    <div class="details-section" #customerDetails *ngIf="customerData !=null">
-        <app-customer-details (customerDetailsUpdated)="updatedTable()" [vehicleNumberOptions]="vehicleNumberOptions"
-            (closeDeatilsSection)="closeDetailsSection($event)" [customerDetails]="customerData"
-            (customerDetailsUpdated)="updatedTable()"
-            [customerDetailsSize]="this.customerDetailsSize"></app-customer-details>
+      </mat-toolbar>
 
+      <mat-divider></mat-divider>
     </div>
+    <div class="body-section">
+      <div class="customer-table simple-table">
+        <div class="main-table">
+          <table class="table-header">
+            <thead class="border-left">
+              <tr>
+                <th class="text-left">Name</th>
+                <th class="text-center w18p">Status</th>
+                <th class="text-right w20p">Amount</th>
+              </tr>
+            </thead>
+          </table>
+          <perfect-scrollbar class="table-body">
+            <table *ngIf="!showLoader">
+              <tbody>
+                <tr
+                  *ngFor="let customer of searchedCustomerData"
+                  (click)="setCustomerDetails(customer)"
+                >
+                  <td class="name-column">
+                    <div>
+                      <div class="customer-name">{{ customer.name }}</div>
+                      <div class="locality">{{ customer.address }}</div>
+                    </div>
+                  </td>
+                  <td class="status-column w18p">
+                    <div
+                      class="status-icon active"
+                      *ngIf="customer.isActive"
+                      [autoPlacement]="true"
+                      tooltip="Running"
+                      [theme]="'light'"
+                      placement="top"
+                    >
+                      <span>R</span>
+                    </div>
+                    <div
+                      class="status-icon inactive"
+                      *ngIf="!customer.isActive"
+                      [autoPlacement]="true"
+                      tooltip="Stopped"
+                      [theme]="'light'"
+                      placement="top"
+                    >
+                      <span>S</span>
+                    </div>
+                  </td>
+                  <td class="amount-column text-right w20p">
+                    <div class="amount">
+                      <span class="rupee-symbol">₹ </span>
+                      <span>{{ myMath.abs(customer.amount) }}</span>
+                    </div>
+                    <div
+                      class="amount-desc"
+                      [ngClass]="{
+                        'color-green': customer.amount < 0,
+                        'color-red': customer.amount > 0
+                      }"
+                    >
+                      <span *ngIf="customer.amount > 0">You will give</span>
+                      <span *ngIf="customer.amount < 0">You will get</span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <ngx-skeleton-loader
+              *ngIf="showLoader"
+              count="8"
+              appearance="line"
+              [theme]="{
+                height: '47px',
+                width: '100%',
+                margin: '0'
+              }"
+            ></ngx-skeleton-loader>
+          </perfect-scrollbar>
+        </div>
+      </div>
+    </div>
+  </div>
+  <mat-divider [vertical]="true"></mat-divider>
+  <div class="details-section" #customerDetails *ngIf="customerData != null">
+    <app-customer-details
+      (customerDetailsUpdated)="updatedTable()"
+      [vehicleNumberOptions]="vehicleNumberOptions"
+      (closeDeatilsSection)="closeDetailsSection($event)"
+      [customerDetails]="customerData"
+      (customerDetailsUpdated)="updatedTable()"
+      [customerDetailsSize]="this.customerDetailsSize"
+    ></app-customer-details>
+  </div>
 </div>

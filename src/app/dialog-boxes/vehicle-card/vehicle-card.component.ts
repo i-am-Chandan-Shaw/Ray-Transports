@@ -36,11 +36,11 @@ export class VehicleCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.providedLocalityOption = this.localityOptions.filter(
+    this.providedLocalityOption = this.data?.locality? this.localityOptions.filter(
       (item) =>
         item?.displayName.toLocaleLowerCase() ==
         this.data.locality.toLocaleLowerCase()
-    );
+    ): ""
     this.providedStatusOption = this.data.isActive
       ? this.vehicleStatusOptions[0]
       : this.vehicleStatusOptions[1];

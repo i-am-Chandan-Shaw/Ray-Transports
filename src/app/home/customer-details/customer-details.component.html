@@ -1,158 +1,253 @@
 <!-- header-section  -->
 
 <div class="wrapper">
-    <mat-sidenav-container class="example-container">
-        <mat-sidenav #sidenav position="end" mode="over" [(opened)]="opened">
-            <app-edit-customer (detailsUpdated)="detailsUpdated($event)" [customerDetails]="customerDetails"
-                (closeEditNav)="closeSideNav()"></app-edit-customer>
-        </mat-sidenav>
-        <mat-sidenav-content>
-            <div class="customer-details-section">
-                <div class="header">
-                    <div class="left-container">
-                        <div class="customer-name">
-                            <div class="customer-name-icon">{{customerDetails.name[0]}}</div>
-                            <div class="customer-details">
-                                <div class="customer-name">{{customerDetails.name}}</div>
-                                <div class="customer-phone-number">{{customerDetails.phone}}</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="right-container">
-                        <div class="download-report">
-                            <button class="report-btn" mat-stroked-button color="primary" (click)="exportTable()">
-                                <span>Report</span><mat-icon>summarize</mat-icon>
-                            </button>
-                        </div>
-                        <div class="more-button">
-                            <button mat-icon-button [matMenuTriggerFor]="customerMenu" color="primary"
-                                aria-label="Example icon button with a home icon">
-                                <mat-icon>more_vert</mat-icon>
-
-                            </button>
-                            <mat-menu #customerMenu="matMenu">
-                                <button mat-menu-item (click)="sidenav.toggle()">Edit<mat-icon
-                                        class="icon-16">edit</mat-icon> </button>
-                                <button mat-menu-item (click)="onDeleteCustomer(customerDetails.id)">Delete<mat-icon
-                                        class="icon-16">delete</mat-icon> </button>
-                            </mat-menu>
-                            <mat-icon color="primary" (click)="closeSection()" class="mr0">close</mat-icon>
-                        </div>
-
-                    </div>
+  <mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav position="end" mode="over" [(opened)]="opened">
+      <app-edit-customer
+        (detailsUpdated)="detailsUpdated($event)"
+        [customerDetails]="customerDetails"
+        (closeEditNav)="closeSideNav()"
+      ></app-edit-customer>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div class="customer-details-section">
+        <div class="header">
+          <div class="left-container">
+            <div class="customer-name">
+              <div class="customer-name-icon">
+                {{ customerDetails.name[0] }}
+              </div>
+              <div class="customer-details">
+                <div class="customer-name">{{ customerDetails.name }}</div>
+                <div class="customer-phone-number">
+                  {{ customerDetails.phone }}
                 </div>
-                <mat-divider></mat-divider>
-                <!-- Net Balance Section  -->
-                <div class="sub-header">
-                    <div class="net-balance">
-                        <div class="header">NET BALANCE:</div>
-                        <div class="amount-section"
-                            ngClass="{customerDetails.netAmount > 0 ?'amount-gave':'amount-got}">
-                            {{customerDetails.amount < 0 ?"You'll Get:" : "You'll Give:" }} <span class="symbol"> ₹
-                                </span><span class="amount">{{myMath.abs(customerDetails.amount)}}</span>
-                        </div>
-                    </div>
-                    <div class="align-center">
-                        <button color="primary" class="mr10" mat-icon-button
-                            (click)="openVehicleDialog()"><mat-icon>local_shipping</mat-icon></button>
-
-                        <button class="btn-primary" [matMenuTriggerFor]="addVehicle"
-                            (click)="menuHasBackdrop = true">Add Vehicle</button>
-                        <mat-menu #addVehicle="matMenu" class="mt5" xPosition="before" [hasBackdrop]="menuHasBackdrop"
-                            (closed)="menuHasBackdrop = false">
-                            <div class="add-vehicle-container">
-                                <mat-toolbar (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
-                                    Add New Vehicle
-                                </mat-toolbar>
-                                <div class="main-container" (click)="$event.stopPropagation()"
-                                    (keydown)="$event.stopPropagation()">
-                                    <div class="input-container mr5">
-                                        <label for="" class="mb10 mt10">Rate</label>
-                                        <label for="">Vehicle Number</label>
-                                    </div>
-                                    <div class="input-container">
-
-                                        <div class="custom-input-field mt10">
-                                            <input matInput type="text" [(ngModel)]='vehicleRate' name="vehicleRate"
-                                                required autocomplete="off" placeholder="Enter vehicle rate"
-                                                type="number">
-                                        </div>
-                                        <app-auto-complete class="auto-complete"
-                                            (selectedOptions)="onSelectedOption($event)"
-                                            [options]="vehicleNumberOptions" [providedOption]="vehicleNumberOptions[0]"
-                                            [placeholder]="'Vehicle Name'"></app-auto-complete>
-                                    </div>
-                                </div>
-                                <div class="footer">
-                                    <button class="btn-primary mr10" style="width:80px"
-                                        [ngStyle]="vehicleRate==undefined || vehicleRate=='' ? {'opacity': '0.5', 'cursor': 'not-allowed'}:{}"
-                                        [disabled]="vehicleRate==undefined || vehicleRate==''"
-                                        (click)="onAddVehicleToCustomer()">Add</button>
-                                    <button class="btn-secondary" style="width:80px">Cancel</button>
-                                </div>
-                            </div>
-                        </mat-menu>
-                    </div>
-                </div>
-                <mat-divider></mat-divider>
-
-                <div class="customer-table simple-table transaction-table">
-                    <div class="main-table" id="customer-table">
-                        <table class="table-header">
-                            <thead class="border-left">
-                                <tr>
-                                    <th class="text-left">Entries</th>
-                                    <th class="text-center w16p">Due</th>
-                                    <th class="text-center w16p">Received</th>
-                                </tr>
-                            </thead>
-                        </table>
-                        <perfect-scrollbar class="table-body">
-                            <table *ngIf="!showLoader">
-                                <tbody>
-                                    <tr *ngFor="let item of customerTransactions">
-                                        <td>
-                                            <div class="transaction-metadata">
-                                                <div class="date-time">
-                                                    <span class="date">{{item.date}}</span> • <span
-                                                        class="time">{{item.createdTime?item.createdTime:'12:00
-                                                        R.M'}}</span>
-                                                </div>
-                                                <div class="amount">Balance: <span
-                                                        class="balance">{{item.balance?item.balance:'200'}}</span></div>
-                                            </div>
-                                            <div class="transaction-details">
-                                                {{item.description? item.description:'System generated transaction'}}
-                                            </div>
-                                        </td>
-                                        <td class="w16p amount-gave"> {{item.amount<0? myMath.abs(item.amount)
-                                                :'-'}}</td>
-                                        <td class="w16p amount-got"> {{item.amount>0? item.amount :'-'}} </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <ngx-skeleton-loader *ngIf="showLoader" count="8" appearance="line" [theme]="{ 
-                                'height': '67px',
-                                'width':'100%',
-                                'margin':'0'
-                              }"></ngx-skeleton-loader>
-
-                        </perfect-scrollbar>
-                    </div>
-
-                </div>
-
-                <mat-divider></mat-divider>
-                <div class="initiate-transaction-section">
-                    <button mat-raised-button color="warn" (click)="initiateTransaction('gave')">Due</button>
-                    <button mat-raised-button class="success" (click)="initiateTransaction('got')">Received</button>
-                </div>
+              </div>
             </div>
+          </div>
+          <div class="right-container">
+            <div class="download-report">
+              <button
+                class="report-btn"
+                mat-stroked-button
+                color="primary"
+                (click)="exportTable()"
+              >
+                <span>Report</span><mat-icon>summarize</mat-icon>
+              </button>
+            </div>
+            <div class="more-button">
+              <button
+                mat-icon-button
+                [matMenuTriggerFor]="customerMenu"
+                color="primary"
+                aria-label="Example icon button with a home icon"
+              >
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #customerMenu="matMenu">
+                <button mat-menu-item (click)="sidenav.toggle()">
+                  Edit<mat-icon class="icon-16">edit</mat-icon>
+                </button>
+                <button
+                  mat-menu-item
+                  (click)="onDeleteCustomer(customerDetails.id)"
+                >
+                  Delete<mat-icon class="icon-16">delete</mat-icon>
+                </button>
+              </mat-menu>
+              <mat-icon color="primary" (click)="closeSection()" class="mr0"
+                >close</mat-icon
+              >
+            </div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+        <!-- Net Balance Section  -->
+        <div class="sub-header">
+          <div class="net-balance">
+            <div class="header">NET BALANCE:</div>
+            <div
+              class="amount-section"
+              ngClass="{customerDetails.netAmount > 0 ?'amount-gave':'amount-got}"
+            >
+              {{ customerDetails.amount < 0 ? "Due:" : "Received" }}
+              <span class="symbol"> ₹ </span
+              ><span class="amount">{{
+                myMath.abs(customerDetails.amount)
+              }}</span>
+            </div>
+          </div>
+          <div class="align-center">
+            <button
+              color="primary"
+              class="mr10"
+              mat-icon-button
+              (click)="openVehicleDialog()"
+            >
+              <mat-icon>local_shipping</mat-icon>
+            </button>
 
-        </mat-sidenav-content>
-    </mat-sidenav-container>
+            <button
+              class="btn-primary"
+              [matMenuTriggerFor]="addVehicle"
+              (click)="menuHasBackdrop = true"
+            >
+              Add Vehicle
+            </button>
+            <mat-menu
+              #addVehicle="matMenu"
+              class="mt5"
+              xPosition="before"
+              [hasBackdrop]="menuHasBackdrop"
+              (closed)="menuHasBackdrop = false"
+            >
+              <div class="add-vehicle-container">
+                <mat-toolbar
+                  (click)="$event.stopPropagation()"
+                  (keydown)="$event.stopPropagation()"
+                >
+                  Add New Vehicle
+                </mat-toolbar>
+                <div
+                  class="main-container"
+                  (click)="$event.stopPropagation()"
+                  (keydown)="$event.stopPropagation()"
+                >
+                  <div class="input-container mr5">
+                    <label for="" class="mb10 mt10">Rate</label>
+                    <label for="">Vehicle Number</label>
+                  </div>
+                  <div class="input-container">
+                    <div class="custom-input-field mt10">
+                      <input
+                        matInput
+                        type="text"
+                        [(ngModel)]="vehicleRate"
+                        name="vehicleRate"
+                        required
+                        autocomplete="off"
+                        placeholder="Enter vehicle rate"
+                        type="number"
+                      />
+                    </div>
+                    <app-auto-complete
+                      class="auto-complete"
+                      (selectedOptions)="onSelectedOption($event)"
+                      [options]="vehicleNumberOptions"
+                      [providedOption]="vehicleNumberOptions[0]"
+                      [placeholder]="'Vehicle Name'"
+                    ></app-auto-complete>
+                  </div>
+                </div>
+                <div class="footer">
+                  <button
+                    class="btn-primary mr10"
+                    style="width: 80px"
+                    [ngStyle]="
+                      vehicleRate == undefined || vehicleRate == ''
+                        ? { opacity: '0.5', cursor: 'not-allowed' }
+                        : {}
+                    "
+                    [disabled]="vehicleRate == undefined || vehicleRate == ''"
+                    (click)="onAddVehicleToCustomer()"
+                  >
+                    Add
+                  </button>
+                  <button class="btn-secondary" style="width: 80px">
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </mat-menu>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
 
+        <div class="customer-table simple-table transaction-table">
+          <div class="main-table" id="customer-table">
+            <table class="table-header">
+              <thead class="border-left">
+                <tr>
+                  <th class="text-left">Entries</th>
+                  <th class="text-center w16p">Due</th>
+                  <th class="text-center w16p">Received</th>
+                </tr>
+              </thead>
+            </table>
+            <perfect-scrollbar class="table-body">
+              <table *ngIf="!showLoader">
+                <tbody>
+                  <tr *ngFor="let item of customerTransactions">
+                    <td>
+                      <div class="transaction-metadata">
+                        <div class="date-time">
+                          <span class="date">{{ item.date }}</span> •
+                          <span class="time">{{
+                            item.createdTime
+                              ? item.createdTime
+                              : "12:00
+                                                        R.M"
+                          }}</span>
+                        </div>
+                        <div class="amount">
+                          Balance:
+                          <span class="balance">{{
+                            item.balance ? item.balance : "200"
+                          }}</span>
+                        </div>
+                      </div>
+                      <div class="transaction-details">
+                        {{
+                          item.description
+                            ? item.description
+                            : "System generated transaction"
+                        }}
+                      </div>
+                    </td>
+                    <td class="w16p amount-gave">
+                      {{ item.amount < 0 ? myMath.abs(item.amount) : "-" }}
+                    </td>
+                    <td class="w16p amount-got">
+                      {{ item.amount > 0 ? item.amount : "-" }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <ngx-skeleton-loader
+                *ngIf="showLoader"
+                count="8"
+                appearance="line"
+                [theme]="{
+                  height: '67px',
+                  width: '100%',
+                  margin: '0'
+                }"
+              ></ngx-skeleton-loader>
+            </perfect-scrollbar>
+          </div>
+        </div>
 
+        <mat-divider></mat-divider>
+        <div class="initiate-transaction-section">
+          <button
+            mat-raised-button
+            color="warn"
+            (click)="initiateTransaction('gave')"
+          >
+            Due
+          </button>
+          <button
+            mat-raised-button
+            class="success"
+            (click)="initiateTransaction('got')"
+          >
+            Received
+          </button>
+        </div>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>
 
 <!-- <ng-template #HtmlContent>

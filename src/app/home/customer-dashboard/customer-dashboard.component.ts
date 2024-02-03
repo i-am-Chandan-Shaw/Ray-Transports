@@ -52,6 +52,29 @@ export class CustomerDashboardComponent {
         this.allCustomerData = res;
         this.searchedCustomerData = this.allCustomerData;
         console.log(this.searchedCustomerData);
+        this.services.createdCustomer.subscribe({
+          next: (res) => {
+            if (res) {
+              console.log(res)
+            let newCustomer = this.allCustomerData.filter((data: any) => data.name == res.name)
+            console.log("newCustomer==", newCustomer)
+              let payload = {
+                customerId: parseInt(newCustomer[0].id),
+                vehicleId: res.vehicleId,
+                amount: parseInt(res.rate),
+              };
+          
+              this.services.addVehicleToCustomer(payload).subscribe({
+                next: (res) => {
+                  console.log(res);
+                },
+                error: (err) => {
+                  console.log(err);
+                },
+              });
+            }
+            
+        },})
         let count = 0;
 
         // YouWillGive
@@ -116,6 +139,7 @@ export class CustomerDashboardComponent {
 
   public addCustomer() {
     const dialogRef = this.dialog.open(AddCustomerComponent, {
+      data:this.vehicleNumberOptions,
       autoFocus: false,
       // height: '450px',
       width: '350px',

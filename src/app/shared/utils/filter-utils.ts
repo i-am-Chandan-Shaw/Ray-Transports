@@ -19,13 +19,13 @@ export const filterList = [
   },
   {
     id: 3,
-    name: "You'll Get",
+    name: 'Due',
     value: '4',
     isSelected: false,
   },
   {
     id: 4,
-    name: "You'll Give",
+    name: 'Received',
     value: '5',
     isSelected: false,
   },
@@ -46,13 +46,13 @@ export const filterList1 = [
   },
   {
     id: 1,
-    name: "You'll Get",
+    name: 'Due',
     value: '4',
     isSelected: false,
   },
   {
     id: 2,
-    name: "You'll Give",
+    name: 'Received',
     value: '5',
     isSelected: false,
   },

@@ -17,7 +17,7 @@ export class VehicleComponent implements OnInit {
   showLoader: boolean = false;
 
   public statusList = statusList;
-  fileName:any
+  fileName: any;
   constructor(private services: SharedService, private dialog: MatDialog) {}
   ngOnInit(): void {
     this.getAllVehicle();
@@ -29,12 +29,14 @@ export class VehicleComponent implements OnInit {
       height: '450px',
       width: '350px',
       disableClose: true,
-      panelClass: 'my-custom-dialog-class'
+      panelClass: 'my-custom-dialog-class',
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      // console.log(`dialog closed with result: ${result}`);
-      this.getAllVehicle();
+      console.log(`dialog closed with result: ${result}`);
+      if (result) {
+        this.getAllVehicle();
+      }
     });
   }
 
@@ -97,7 +99,7 @@ export class VehicleComponent implements OnInit {
       height: '550px',
       width: '550px',
       data: item,
-      panelClass: 'my-custom-dialog-class'
+      panelClass: 'my-custom-dialog-class',
     });
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`dialog closed with result:`, result);
@@ -121,20 +123,24 @@ export class VehicleComponent implements OnInit {
     });
   }
 
-  openDeleteTransactionDialog(item: any) { }
-  
+  handleDeleteVehicle(item: any) {
+    this.searchedVehicle = this.searchedVehicle.filter(
+      (vehicle: any) => vehicle.id != item.id
+    );
+  }
+
   exportTable() {
     const element = document.getElementById('vehicle-table');
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
-    
+
     // Add a row with the customer name
     // XLSX.utils.sheet_add_aoa(ws, [[`Customer Name:- ${this.customerDetails.name}`]], { origin: 'A1' });
-    
+
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
 
-    this.fileName = `Vehicles-Report.xlsx`
-    
+    this.fileName = `Vehicles-Report.xlsx`;
+
     XLSX.writeFile(wb, this.fileName);
   }
 }
