@@ -137,6 +137,7 @@
                       [options]="vehicleNumberOptions"
                       [providedOption]="vehicleNumberOptions[0]"
                       [placeholder]="'Vehicle Name'"
+                      (inputValue)="onChangeInput($event)"
                     ></app-auto-complete>
                   </div>
                 </div>
@@ -149,7 +150,7 @@
                         ? { opacity: '0.5', cursor: 'not-allowed' }
                         : {}
                     "
-                    [disabled]="vehicleRate == undefined || vehicleRate == ''"
+                    [disabled]="vehicleRate == undefined || vehicleRate == '' || selectedOption == undefined"
                     (click)="onAddVehicleToCustomer()"
                   >
                     Add

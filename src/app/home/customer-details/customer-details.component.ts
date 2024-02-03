@@ -42,9 +42,9 @@ export class CustomerDetailsComponent {
   public customerTransactions: any = [];
   public customerVehicles: any = [];
   prop: any;
-  @Input()vehicleNumberOptions: any;
+  @Input() vehicleNumberOptions: any;
   public vehicleRate: any;
-  showLoader:boolean = false
+  showLoader: boolean = false;
 
   constructor(
     private _bottomSheet: MatBottomSheet,
@@ -56,7 +56,7 @@ export class CustomerDetailsComponent {
     setTimeout(() => {
       this.prop = this.customerDetailsSize;
     }, 300);
-    this.selectedOption = this.vehicleNumberOptions[0]
+    this.selectedOption = this.vehicleNumberOptions[0];
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -83,7 +83,7 @@ export class CustomerDetailsComponent {
   }
 
   private getIndividualTransaction(customer: any) {
-    this.showLoader = true
+    this.showLoader = true;
     this.services.getIndividualTransaction(customer.id).subscribe({
       next: (res: any) => {
         if (res) {
@@ -91,7 +91,7 @@ export class CustomerDetailsComponent {
         } else {
           this.customerTransactions = [];
         }
-        this.showLoader = false
+        this.showLoader = false;
       },
       error: (err) => {
         console.log(err);
@@ -105,7 +105,13 @@ export class CustomerDetailsComponent {
       height: '550px',
       width: '650px',
       data: this.customerDetails,
-      panelClass: 'my-custom-dialog-class'
+      panelClass: 'my-custom-dialog-class',
+      disableClose: true,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.getIndividualTransaction(this.customerDetails);
+      }
     });
   }
   onSelectedOption(option: In_options) {
@@ -161,12 +167,21 @@ export class CustomerDetailsComponent {
 
     this.services.addVehicleToCustomer(payload).subscribe({
       next: (res) => {
-        // console.log(res);
+        if (res) {
+          this.getIndividualTransaction(this.customerDetails);
+        }
       },
       error: (err) => {
         console.log(err);
       },
     });
+  }
+
+  onChangeInput(e: any) {
+    console.log(e)
+    if (e == '') {
+      this.selectedOption = undefined;
+    }
   }
   onDeleteCustomer(customerId: any) {
     this.services.onDeleteCustomer(customerId).subscribe((res) => {});
@@ -177,15 +192,19 @@ export class CustomerDetailsComponent {
   exportTable() {
     const element = document.getElementById('customer-table');
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
-    
+
     // Add a row with the customer name
-    XLSX.utils.sheet_add_aoa(ws, [[`Customer Name:- ${this.customerDetails.name}`]], { origin: 'A1' });
-    
+    XLSX.utils.sheet_add_aoa(
+      ws,
+      [[`Customer Name:- ${this.customerDetails.name}`]],
+      { origin: 'A1' }
+    );
+
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
 
-    this.fileName = `${this.customerDetails.name}-Report.xlsx`
-    
+    this.fileName = `${this.customerDetails.name}-Report.xlsx`;
+
     XLSX.writeFile(wb, this.fileName);
   }
 }
