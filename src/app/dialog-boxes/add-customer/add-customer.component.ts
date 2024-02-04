@@ -95,17 +95,15 @@ export class AddCustomerComponent implements OnInit {
     console.log(this.addCustomerForm);
     let payLoad = this.addCustomerForm.value;
     payLoad.phone = payLoad.phone.toString();
-    let selectedVehicle = this.data.filter(
-      (data: any) => data.displayName == payLoad.vehicleNumber
-    );
+
     this.services.addCustomer(JSON.stringify(payLoad)).subscribe({
-      next: (res) => {
+      next: (res: any) => {
         if (res) {
           console.log(res);
           this.services.createdCustomer.next({
-            name: payLoad.name,
-            vehicleId: selectedVehicle[0].id,
-            rate: payLoad.vehicleRate,
+            customerId: res.customerId,
+            vehicleId: res.vehicleId,
+            amount: res.vehicleRate,
           });
         }
       },

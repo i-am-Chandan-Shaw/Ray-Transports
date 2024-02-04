@@ -6,15 +6,16 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class SharedService {
-  createdCustomer: BehaviorSubject<any> = new BehaviorSubject<any>(null)
-  
+  createdCustomer: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  callVehicleApi: BehaviorSubject<any> = new BehaviorSubject<any>(false);
+
   constructor(private http: HttpClient) {}
 
   private apiString = `https://raytransports.com/raytransports/`;
 
-  public login(user:any) {
+  public login(user: any) {
     const api = this.apiString + `login.php`;
-    return this.http.post(api,user)
+    return this.http.post(api, user);
   }
 
   public getAllCustomer() {
@@ -32,29 +33,47 @@ export class SharedService {
     return this.http.get(api);
   }
 
-  public getTransactionReportsPagination(pageNo?:any,pageSize?:any) {
-    const api = this.apiString + `getTransactionsReport.php?pageSize=${pageSize}&page=${pageNo}`;
+  public getTransactionReportsPagination(pageNo?: any, pageSize?: any) {
+    const api =
+      this.apiString +
+      `getTransactionsReport.php?pageSize=${pageSize}&page=${pageNo}`;
     return this.http.get(api);
   }
 
-  public getTransactionReportsFilterPagination(pageNo?:any,pageSize?:any,dateFilter?:any) {
-    const api = this.apiString + `getTransactionsReport.php?pageSize=${pageSize}&page=${pageNo}&dateFilter=${dateFilter}`;
+  public getTransactionReportsFilterPagination(
+    pageNo?: any,
+    pageSize?: any,
+    dateFilter?: any
+  ) {
+    const api =
+      this.apiString +
+      `getTransactionsReport.php?pageSize=${pageSize}&page=${pageNo}&dateFilter=${dateFilter}`;
     return this.http.get(api);
   }
 
-  public getTransactionReportsFilterDatePagination(pageNo?:any,pageSize?:any,dateFilter?:any,startDate?:any,endDate?:any) {
-    const api = this.apiString + `getTransactionsReport.php?pageSize=${pageSize}&page=${pageNo}&dateFilter=${dateFilter}&startDate=${startDate}&endDate=${endDate}`;
+  public getTransactionReportsFilterDatePagination(
+    pageNo?: any,
+    pageSize?: any,
+    dateFilter?: any,
+    startDate?: any,
+    endDate?: any
+  ) {
+    const api =
+      this.apiString +
+      `getTransactionsReport.php?pageSize=${pageSize}&page=${pageNo}&dateFilter=${dateFilter}&startDate=${startDate}&endDate=${endDate}`;
     return this.http.get(api);
   }
-
 
   public getIndividualTransaction(customerId: number) {
-    const api = this.apiString + `getTransactions.php?customerId=${customerId}&pageSize=1000&page=0`;
+    const api =
+      this.apiString +
+      `getTransactions.php?customerId=${customerId}&pageSize=1000&page=0`;
     return this.http.get(api);
   }
 
-  public getTransactionByCustomerName(customerName:string){
-    const api = this.apiString + `getTransactions.php?customerName=${customerName}`;
+  public getTransactionByCustomerName(customerName: string) {
+    const api =
+      this.apiString + `getTransactions.php?customerName=${customerName}`;
     return this.http.get(api);
   }
 
@@ -77,13 +96,14 @@ export class SharedService {
     const api = this.apiString + `getTransactions.php`;
     return this.http.get(api);
   }
-  public getAllTransactionDetailsByDate(dateFilter:any) {
+  public getAllTransactionDetailsByDate(dateFilter: any) {
     const api = this.apiString + `getTransactions.php?${dateFilter}`;
     return this.http.get(api);
   }
 
-  public getAllTransactionDetailsPagination(pageSize:number,page:number) {
-    const api = this.apiString + `getTransactions.php?pageSize=${pageSize}&page=${page}`;
+  public getAllTransactionDetailsPagination(pageSize: number, page: number) {
+    const api =
+      this.apiString + `getTransactions.php?pageSize=${pageSize}&page=${page}`;
     return this.http.get(api);
   }
 
