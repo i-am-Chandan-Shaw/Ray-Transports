@@ -3,15 +3,17 @@
         <span>Add New Customer</span>
         <mat-icon mat-dialog-close class="mr0">close</mat-icon>
     </mat-toolbar>
-    <div class="d-flex justify-center mt20"><app-profile (selectedProfilePicture)="profilePic($event)"></app-profile></div>
+    <div class="d-flex justify-center mt10 mb10">
+        <app-profile (selectedProfilePicture)="profilePic($event)"></app-profile>
+    </div>
     <form [formGroup]="addCustomerForm">
-        <perfect-scrollbar>
-        <div class="input-form-container">
-            <div class="input-fields">
-                <label for="firstName">Name: </label>
-                <mat-form-field appearance="outline" class="mr10">
-                    <input matInput name="firstName" formControlName="name" autocomplete="off"
-                        placeholder="Enter customer name" >
+        <perfect-scrollbar class="form">
+            <div class="input-form-container">
+                <div class="input-fields">
+                    <!-- <label for="firstName">Name: </label> -->
+                    <mat-form-field appearance="outline" class="mr10">
+                        <input matInput name="firstName" formControlName="name" autocomplete="off"
+                            placeholder="Name*" />
                         <mat-error *ngIf="gf['name'].hasError('pattern') && gf['name'].value">
                             Name should not contain numbers or special characters.
                         </mat-error>
@@ -21,66 +23,104 @@
                         <mat-error *ngIf="gf['name'].hasError('required')">
                             You must enter a value.
                         </mat-error>
-                </mat-form-field>
-            </div>
-            <div class="input-fields">
-                <label for="firstName">Aadhar Number: </label>
-                <mat-form-field appearance="outline" class="mr10">
-                    <input matInput name="aadharNumber" formControlName="aadharNumber" autocomplete="off"
-                        placeholder="Enter aadhar number" minlength="12" maxlength="12">
+                    </mat-form-field>
+                </div>
+                <div class="input-fields">
+                    <!-- <label for="firstName">Aadhar Number: </label> -->
+                    <mat-form-field appearance="outline" class="mr10">
+                        <input matInput name="aadharNumber" formControlName="aadharNumber" autocomplete="off"
+                            placeholder="Aadhar Number" minlength="12" maxlength="12" />
                         <mat-error *ngIf="gf['aadharNumber'].hasError('minlength')">
                             Aadhar should be of 12 digits.
                         </mat-error>
                         <mat-error *ngIf="gf['aadharNumber'].hasError('required')">
                             You must enter a value.
                         </mat-error>
-                </mat-form-field>
-            </div>
-            <div class="input-fields">
-                <label for="locality">Locality: </label>
-                <mat-form-field appearance="outline" class="mr10">
-                    <input matInput name="locality"  formControlName="locality" placeholder="Enter locality"
-                        [matAutocomplete]="auto">
+                    </mat-form-field>
+                </div>
+                <div class="input-fields">
+                    <mat-form-field appearance="outline" class="mr10">
+                        <input matInput name="locality" formControlName="locality" placeholder="Locality*"
+                            [matAutocomplete]="locality" />
                         <mat-error *ngIf="gf['locality'].hasError('pattern')">
                             Not a valid locality name
                         </mat-error>
                         <mat-error *ngIf="gf['locality'].touched && !gf['locality'].value">
-                            You must enter a value
+                            Locality is required
                         </mat-error>
-                </mat-form-field>
-                <mat-autocomplete #auto="matAutocomplete">
-                    <perfect-scrollbar>
-                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                            {{option}}
-                        </mat-option>
-                    </perfect-scrollbar>
-                </mat-autocomplete>
+                    </mat-form-field>
+                    <mat-autocomplete #locality="matAutocomplete">
+                        <perfect-scrollbar>
+                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                {{ option }}
+                            </mat-option>
+                        </perfect-scrollbar>
+                    </mat-autocomplete>
+                </div>
 
-            </div>
-            <div class="input-fields">
-                <label for="phoneNo">Phone: </label>
+                <div class="input-fields">
+                    <mat-form-field appearance="outline" class="mr10">
+                        <input matInput name="vehicleNumber" formControlName="vehicleNumber"
+                            placeholder="Vehicle Number*" [matAutocomplete]="vehicleNumber" />
+
+                        <mat-error *ngIf="gf['vehicleNumber'].touched && !gf['vehicleNumber'].value">
+                            Vehicle Number is required
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-autocomplete #vehicleNumber="matAutocomplete">
+                        <perfect-scrollbar>
+                          <mat-option *ngFor="let option of vehicleRateOptions | async" [value]="option.displayName">
+                            {{option.displayName}}
+                          </mat-option>
+                        </perfect-scrollbar>
+                      </mat-autocomplete>
+                </div>
+                <div class="input-fields">
+                    <!-- <label for="phoneNo">Phone: </label> -->
+                    <mat-form-field class="w97p" appearance="outline">
+                        <input matInput #input name="phoneNo" minlength="10" maxlength="10" autocomplete="off"
+                            placeholder="Phone" formControlName="phone" />
+                        <mat-error *ngIf="gf['phone'].hasError('required')">
+                            Phone Number is important.
+                        </mat-error>
+                        <mat-error *ngIf="
+                gf['phone'].hasError('min') && !gf['phone'].hasError('pattern')
+              ">
+                            Phone number should be at least 10 characters.
+                        </mat-error>
+                        <mat-error *ngIf="gf['phone'].hasError('max')">
+                            Phone number should not exceed 10 characters.
+                        </mat-error>
+                        <mat-error *ngIf="gf['phone'].hasError('pattern')">
+                            Phone number should contain only numbers.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <!-- <div class="input-fields">
+
                 <mat-form-field class="w97p" appearance="outline">
-                    <input matInput #input name="phoneNo" minlength="10" maxlength="10" autocomplete="off" placeholder="Enter phone no." formControlName="phone">
-                    <mat-error *ngIf="gf['phone'].hasError('required')">
-                        You must enter a value.
-                    </mat-error>
-                    <mat-error *ngIf="gf['phone'].hasError('min') && !gf['phone'].hasError('pattern')">
-                        Phone number should be at least 10 characters.
-                    </mat-error>
-                    <mat-error *ngIf="gf['phone'].hasError('max')">
-                        Phone number should not exceed 10 characters.
-                    </mat-error>
-                    <mat-error *ngIf="gf['phone'].hasError('pattern')">
-                        Phone number should contain only numbers.
+                    <input matInput #input name="vehicleNumber" autocomplete="off" placeholder="Vehicle Number*" formControlName="vehicleNumber">
+                    <mat-error *ngIf="gf['vehicleNumber'].hasError('required')">
+                        Please enter vehicle number.
                     </mat-error>
                 </mat-form-field>
+            </div> -->
+
+                <div class="input-fields">
+                    <mat-form-field class="w97p" appearance="outline">
+                        <input matInput #input name="vehicleRate" maxlength="10" autocomplete="off"
+                            placeholder="Vehicle Rate*" formControlName="vehicleRate" />
+                        <mat-error *ngIf="gf['vehicleRate'].hasError('required')">
+                            Please enter vehicle rate.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <button mat-raised-button class="w97p" color="primary" (click)="addCustomer()" [mat-dialog-close]="true"
+                    [disabled]="addCustomerForm.invalid">
+                    Add Customer
+                </button>
             </div>
-
-
-            <button mat-raised-button class="w97p"  color="primary" (click)="addCustomer()"
-                [mat-dialog-close]="true" [disabled]="addCustomerForm.invalid" >Add Customer</button>
-
-        </div>
-    </perfect-scrollbar>
+        </perfect-scrollbar>
     </form>
 </div>

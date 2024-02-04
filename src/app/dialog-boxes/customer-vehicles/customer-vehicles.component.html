@@ -1,7 +1,7 @@
 <div class="customer-vehicle-wrapper">
     <mat-toolbar class="header" color="primary">
         <span>Added Vehicles</span>
-        <mat-icon mat-dialog-close class="mr0">close</mat-icon>
+        <mat-icon [mat-dialog-close]="true" class="mr0">close</mat-icon>
     </mat-toolbar>
     <div class="customer-table simple-table user-vehicle-table">
         <div class="main-table">
@@ -30,9 +30,9 @@
                             </td>
                             <td class="w10p text-right"> {{vehicle.rate}} </td>
                             <td class="w20p text-center">
-                                <button mat-stroked-button color="primary" *ngIf="vehicle.isActive" [tooltip]="'Stop Vehicle'" 
+                                <button mat-stroked-button color="primary" *ngIf="vehicle.isActive" 
                                     (click)="onStatusClicked(vehicle,vehicle.transactionId)">Stop</button>
-                                    <span *ngIf="!vehicle.isActive" [tooltip]="'Stopped'">Stopped</span>
+                                    <span *ngIf="!vehicle.isActive">Stopped</span>
                                 </td>
                         </tr>
                     </tbody>

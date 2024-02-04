@@ -26,9 +26,12 @@ export class VehicleCardComponent implements OnInit {
   ) {
     console.log('data', data);
     this.editVehicleForm = this.fb.group({
-      name: [data.name, Validators.required],
+      name: [{ value: data.name, disabled: true }, Validators.required],
       locality: [data.locality, Validators.required],
-      vehicleModel: [data.vehicleModel, Validators.required],
+      vehicleModel: [
+        { value: data.vehicleModel, disabled: true },
+        Validators.required,
+      ],
       vehicleNumber: [data.vehicleNumber, Validators.required],
       vehicleOwner: [data.vehicleOwner, Validators.required],
       status: [data.isActive ? 'Running' : 'Stopped', Validators.required],
@@ -36,11 +39,13 @@ export class VehicleCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.providedLocalityOption = this.localityOptions.filter(
-      (item) =>
-        item?.displayName.toLocaleLowerCase() ==
-        this.data.locality.toLocaleLowerCase()
-    );
+    this.providedLocalityOption = this.data?.locality
+      ? this.localityOptions.filter(
+          (item) =>
+            item?.displayName.toLocaleLowerCase() ==
+            this.data.locality.toLocaleLowerCase()
+        )
+      : '';
     this.providedStatusOption = this.data.isActive
       ? this.vehicleStatusOptions[0]
       : this.vehicleStatusOptions[1];
@@ -114,20 +119,18 @@ export class VehicleCardComponent implements OnInit {
 
   editVehicleDetails() {
     let newRecord = {
-      id:this.data.id,
-      name:this.editVehicleForm.value.name,
-      isActive:this.editVehicleForm.value.status == 'Running'? true : false,
-      locality:this.editVehicleForm.value.locality,
-      vehicleNumber:this.editVehicleForm.value.vehicleNumber,
+      id: this.data.id,
+      name: this.editVehicleForm.value.name,
+      isActive: this.editVehicleForm.value.status == 'Running' ? true : false,
+      locality: this.editVehicleForm.value.locality,
+      vehicleNumber: this.editVehicleForm.value.vehicleNumber,
       vehicleModel: this.editVehicleForm.value.vehicleModel,
       vehicleOwner: this.editVehicleForm.value.vehicleOwner,
-      transactionId:this.data.transactionId,
+      transactionId: this.data.transactionId,
       createdDate: this.data.createdDate,
-      createdTime:this.data.createdTime,
-      rate: this.data.rate
-  }
+      createdTime: this.data.createdTime,
+      rate: this.data.rate,
+    };
     this.dialogRef.close(newRecord);
   }
 }
-
-

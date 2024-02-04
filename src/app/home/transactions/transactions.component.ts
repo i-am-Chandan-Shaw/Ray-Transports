@@ -129,6 +129,7 @@ export class TransactionsComponent implements OnInit {
       height: '450px',
       width: '450px',
       data: selectedTransaction,
+      panelClass: 'my-custom-dialog-class'
     });
     dialogRef.afterClosed().subscribe((updatedTransaction) => {
       console.log('up', updatedTransaction);
@@ -157,6 +158,7 @@ export class TransactionsComponent implements OnInit {
       height: '200px',
       width: '250px',
       data: { status: 'delete' },
+      panelClass: 'my-custom-dialog-class'
     });
     dialogRef.afterClosed().subscribe((res) => {
       console.log('res=>', res);
@@ -184,6 +186,7 @@ export class TransactionsComponent implements OnInit {
       height: '200px',
       width: '250px',
       data: { status: 'success' },
+      panelClass: 'my-custom-dialog-class'
     });
     dialogRef.afterClosed().subscribe((res) => {
       console.log('res=>', res);

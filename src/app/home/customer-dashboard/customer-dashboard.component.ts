@@ -1,17 +1,24 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SharedService } from 'src/app/shared/sevices/shared.service';
 import { AddCustomerComponent } from 'src/app/dialog-boxes/add-customer/add-customer.component';
 import { filterList, sortOption } from 'src/app/shared/utils/filter-utils';
 import { filter } from 'src/app/shared/interface/filter-interface';
 import { CustomerVehiclesComponent } from 'src/app/dialog-boxes/customer-vehicles/customer-vehicles.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-customer-dashboard',
   templateUrl: './customer-dashboard.component.html',
   styleUrls: ['./customer-dashboard.component.scss'],
 })
-export class CustomerDashboardComponent {
+export class CustomerDashboardComponent implements OnInit, OnDestroy {
   @ViewChild('customerDetails') customerDetails!: ElementRef;
   public filterList: filter[] = filterList;
   public sortOption: filter[] = sortOption;
@@ -22,31 +29,44 @@ export class CustomerDashboardComponent {
   searchedCustomerData: any = null;
   youWillGet: any;
   youWillGive: any;
-  vehicleNumberOptions:any= []
-  showLoader:boolean = false
+  vehicleNumberOptions: any = [];
+  showLoader: boolean = false;
+  private subscriptions: Subscription[] = [];
 
   constructor(public dialog: MatDialog, private services: SharedService) {}
 
   public allCustomerData: any = [];
 
   ngOnInit(): void {
-    this.getVehicle()
-    this.getAllCustomer();
+    this.initialApiCalls();
+
     setTimeout(() => {
       if (this.customerDetails) {
         this.customerDetailsSize =
           this.customerDetails.nativeElement.getBoundingClientRect();
       }
     }, 0);
+    this.subscriptions.push(
+      this.services.callVehicleApi.subscribe((res: boolean) => {
+        if (res) {
+          this.initialApiCalls();
+          this.services.callVehicleApi.next(false);
+        }
+      })
+    );
   }
-  ngAfterViewInit() {}
+
+  initialApiCalls() {
+    this.getVehicle();
+    this.getAllCustomer();
+  }
 
   public updatedTable() {
     this.ngOnInit();
   }
 
   private getAllCustomer() {
-    this.showLoader = true
+    this.showLoader = true;
     this.services.getAllCustomer().subscribe({
       next: (res) => {
         this.allCustomerData = res;
@@ -73,7 +93,7 @@ export class CustomerDashboardComponent {
           //  console.log('count', count);
         }
         this.youWillGet = count;
-        this.showLoader = false
+        this.showLoader = false;
       },
       error: (err) => {
         console.log(err);
@@ -86,13 +106,13 @@ export class CustomerDashboardComponent {
   }
 
   public filterCustomer(filter: any) {
-    this.showLoader = true
+    this.showLoader = true;
 
     this.services.filterCustomers(filter).subscribe({
       next: (res) => {
         this.allCustomerData = res;
         this.searchedCustomerData = this.allCustomerData;
-        this.showLoader = false
+        this.showLoader = false;
       },
       error: (err) => {
         console.log(err);
@@ -101,12 +121,12 @@ export class CustomerDashboardComponent {
   }
 
   public sortCustomer(filter: any) {
-    this.showLoader = true
+    this.showLoader = true;
     this.services.sortCustomer(filter.value).subscribe({
       next: (res) => {
         this.allCustomerData = res;
         this.searchedCustomerData = this.allCustomerData;
-        this.showLoader = false
+        this.showLoader = false;
       },
       error: (err) => {
         console.log(err);
@@ -116,21 +136,36 @@ export class CustomerDashboardComponent {
 
   public addCustomer() {
     const dialogRef = this.dialog.open(AddCustomerComponent, {
+      data: this.vehicleNumberOptions,
       autoFocus: false,
       // height: '450px',
       width: '350px',
       disableClose: true,
+      panelClass: 'my-custom-dialog-class',
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.getAllCustomer();
+        this.services.createdCustomer.subscribe((resOfPostCustomer) => {
+          if (resOfPostCustomer) {
+            console.log(resOfPostCustomer);
+
+            this.services.addVehicleToCustomer(resOfPostCustomer).subscribe({
+              next: (res) => {
+                console.log(res);
+                this.initialApiCalls();
+              },
+              error: (err) => {
+                console.log(err);
+              },
+            });
+          }
+        });
       }
     });
   }
 
-  public onValueSelected(value: any) {
-  }
+  public onValueSelected(value: any) {}
 
   public closeDetailsSection(e: boolean) {
     if (e) this.customerData = null;
@@ -149,11 +184,19 @@ export class CustomerDashboardComponent {
     }
   }
 
-  getVehicle(){
-    this.services.filterVehicle('2').subscribe(res=>{
-      for(let item of res){
-        this.vehicleNumberOptions.push({id:item?.id,displayName:item?.vehicleNumber,value:item?.id})
+  getVehicle() {
+    this.services.filterVehicle('2').subscribe((res) => {
+      for (let item of res) {
+        this.vehicleNumberOptions.push({
+          id: item?.id,
+          displayName: item?.vehicleNumber,
+          value: item?.id,
+        });
       }
-    })
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 }

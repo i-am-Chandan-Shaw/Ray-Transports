@@ -1,18 +1,19 @@
 .main-contianer{
     height: 100%;
     // border: 1px solid red;
-    form{
+    .form{
+        height: 400px;
         .input-form-container {
             padding: 15px;
             // margin-top: 10px;
             display: flex;
             flex-direction: column;
-        
+
             .input-fields {
                 display: flex;
                 flex-direction: column;
                 // margin-bottom: 10px;
-                height: 81px;
+                height: 65px;
         
                 label {
                     margin-bottom: 10px;
