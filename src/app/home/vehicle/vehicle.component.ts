@@ -134,7 +134,7 @@ export class VehicleComponent implements OnInit {
   }
 
   handleDeleteVehicle(item: any) {
-    this.services.onDeleteVehicle('1').subscribe((res) => {
+    this.services.onDeleteVehicle(item.id).subscribe((res) => {
       console.log(res);
       if (res) {
         this.getAllVehicle();
