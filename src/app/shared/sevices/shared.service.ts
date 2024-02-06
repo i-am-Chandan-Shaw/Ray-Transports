@@ -91,6 +91,10 @@ export class SharedService {
     const api = this.apiString + `getVehicle.php?customerId=${customerId}`;
     return this.http.get(api);
   }
+  public onDeleteVehicle(id: string) {
+    const api = this.apiString + `deleteVehicle.php?id=` + id;
+    return this.http.delete(api);
+  }
 
   public getAllTransactionDetails() {
     const api = this.apiString + `getTransactions.php`;
