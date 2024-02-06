@@ -27,11 +27,8 @@ export class VehicleCardComponent implements OnInit {
     console.log('data', data);
     this.editVehicleForm = this.fb.group({
       name: [{ value: data.name, disabled: true }, Validators.required],
-      locality: [data.locality, Validators.required],
-      vehicleModel: [
-        { value: data.vehicleModel, disabled: true },
-        Validators.required,
-      ],
+      locality: [data.locality],
+      vehicleModel: [data.vehicleModel, Validators.required],
       vehicleNumber: [data.vehicleNumber, Validators.required],
       vehicleOwner: [data.vehicleOwner, Validators.required],
       status: [data.isActive ? 'Running' : 'Stopped', Validators.required],
