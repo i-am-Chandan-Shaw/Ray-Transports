@@ -1,15 +1,27 @@
-<div class="autocomplete nopadding">
+<div class="autocomplete nopadding" [formGroup]="autoCompleteForm">
     <mat-form-field appearance="outline" class="mr10">
-        <input matInput [placeholder]="placeholder" [matAutocomplete]="auto" [formControl]="myControl"
-            (keyup)="onInput($event)" [value]="providedOption">
+      <input
+        matInput
+        [placeholder]="placeholder"
+        [matAutocomplete]="auto"
+        formControlName="autoCompleteInput"
+        (keyup)="onInput($event)"
+        [value]="providedOption"
+      />
     </mat-form-field>
     <mat-autocomplete class="height-of-auocomplete" #auto="matAutocomplete">
-        <perfect-scrollbar>
-            <ng-container>
-                <mat-option *ngFor="let option of filteredOptions | async" [value]="option.displayName">
-                    <div class="option" (click)="onSelectedOptions(option)">{{option.displayName}}</div>
-                </mat-option>
-            </ng-container>
-        </perfect-scrollbar>
+      <perfect-scrollbar>
+        <ng-container>
+          <mat-option
+            *ngFor="let option of filteredOptions | async"
+            [value]="option.displayName"
+          >
+            <div class="option" (click)="onSelectedOptions(option)">
+              {{ option.displayName }}
+            </div>
+          </mat-option>
+        </ng-container>
+      </perfect-scrollbar>
     </mat-autocomplete>
-</div>
+  </div>
+  

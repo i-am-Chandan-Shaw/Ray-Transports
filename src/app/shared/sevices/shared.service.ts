@@ -82,6 +82,11 @@ export class SharedService {
     return this.http.patch(api, payload);
   }
 
+  public updateVehicle(payload: any) {
+    const api = this.apiString + `updateVehicle.php?`;
+    return this.http.patch(api, payload);
+  }
+
   public onDeleteTransaction(id: string) {
     const api = this.apiString + `deleteTransaction.php?id=` + id;
     return this.http.delete(api);

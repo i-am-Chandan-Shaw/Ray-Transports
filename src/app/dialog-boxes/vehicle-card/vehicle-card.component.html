@@ -27,14 +27,14 @@
                 <div class="input-fields w45p">
                     <label for="">Locality</label>
                     <app-auto-complete class="" [providedOption]="this.providedLocalityOption[0]?this.providedLocalityOption[0]:[]"  [options]="localityOptions"
-                        (selectedOptions)="onSelectedOption($event,'locality')" (inputValue)="autoCompleteOutputValue($event,'locality')" [placeholder]="'Locality Name'" ></app-auto-complete>
-                        <mat-error class="invalid" *ngIf="!checkAutoCompleteValueForLocality">**locality is Required</mat-error>
+                        (selectedOptions)="onSelectedOption($event,'locality')" (inputValue)="autoCompleteOutputValue($event,'locality')" [placeholder]="'Locality Name'" [isDisabled]="true"></app-auto-complete>
+                        <!-- <mat-error class="invalid" *ngIf="!checkAutoCompleteValueForLocality">**locality is Required</mat-error> -->
                 </div>
                 <div class="input-fields w45p">
                     <label for="">Locality</label>
                     <app-auto-complete class="" [providedOption]="providedStatusOption"  [options]="vehicleStatusOptions"
-                        (selectedOptions)="onSelectedOption($event,'status')" (inputValue)="autoCompleteOutputValue($event,'status')" [placeholder]="'Locality Name'" ></app-auto-complete>
-                        <mat-error class="invalid" *ngIf="!checkAutoCompleteValueForStatus">**Vehicle Status is Required</mat-error>
+                        (selectedOptions)="onSelectedOption($event,'status')" (inputValue)="autoCompleteOutputValue($event,'status')" [placeholder]="'Locality Name'" [isDisabled]="true"></app-auto-complete>
+                        <!-- <mat-error class="invalid" *ngIf="!checkAutoCompleteValueForStatus">**Vehicle Status is Required</mat-error> -->
                 </div>
                 <!-- <div class="input-fields w45p">
                     <label for="status">Status</label>
@@ -69,7 +69,7 @@
             <div class="action-btn">
                 <button mat-stroked-button class="" (click)="closeDialog()">Cancel</button>
                 <button mat-raised-button class="" color="primary" (click)="editVehicleDetails()"
-                    [disabled]="!editVehicleForm.valid || !checkAutoCompleteValueForLocality || !checkAutoCompleteValueForStatus">Save</button>
+                    [disabled]="!editVehicleForm.valid">Save</button>
             </div>
 
         </div>

@@ -106,42 +106,40 @@ export class VehicleComponent implements OnInit {
       if (result) {
         for (let item of this.totalVehicles) {
           if (item.id == result.id) {
-            (item.name = result.name),
-              (item.isActive = result.isActive),
-              (item.locality = result.locality),
-              (item.vehicleNumber = result.vehicleNumber),
-              (item.vehicleModel = result.vehicleModel),
-              (item.vehicleOwner = result.vehicleOwner),
-              (item.transactionId = result.transactionId),
-              (item.createdDate = result.createdDate),
-              (item.createdTime = result.createdTime),
-              (item.rate = result.rate);
+            if (
+              item.vehicleNumber !== result.vehicleNumber ||
+              item.vehicleModel !== result.vehicleModel ||
+              item.vehicleOwner !== result.vehicleOwner
+            ) {
+              let payload = {
+                id:item.id,
+                vehiclenumber: result.vehicleNumber,
+                vehiclemodel: result.vehicleModel,
+                vehicleowner: result.vehicleOwner,
+              };
+
+              this.services.updateVehicle(payload ).subscribe((res) => {
+                if (res) {
+                  this.getAllVehicle();
+                }
+              });
+            } else {
+              item = { ...result };
+            }
           }
         }
         this.searchedVehicle = this.totalVehicles;
-        if (result.isActive == false) {
-          this.services.stopIndividualVehicle(result.vehicleModal,result.transactionId).subscribe({
-            next: (res) => {
-              if (res) {
-                this.ngOnInit();
-              }
-            },
-            error: (err) => {
-              console.log(err);
-            },
-          });
-        }
       }
     });
   }
 
   handleDeleteVehicle(item: any) {
-    this.services.onDeleteVehicle("1").subscribe((res) => {
-      console.log(res)
+    this.services.onDeleteVehicle('1').subscribe((res) => {
+      console.log(res);
       if (res) {
         this.getAllVehicle();
       }
-    })
+    });
   }
 
   exportTable() {
