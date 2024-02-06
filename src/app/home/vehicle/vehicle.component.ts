@@ -119,14 +119,29 @@ export class VehicleComponent implements OnInit {
           }
         }
         this.searchedVehicle = this.totalVehicles;
+        if (result.isActive == false) {
+          this.services.stopIndividualVehicle(result.vehicleModal,result.transactionId).subscribe({
+            next: (res) => {
+              if (res) {
+                this.ngOnInit();
+              }
+            },
+            error: (err) => {
+              console.log(err);
+            },
+          });
+        }
       }
     });
   }
 
   handleDeleteVehicle(item: any) {
-    this.searchedVehicle = this.searchedVehicle.filter(
-      (vehicle: any) => vehicle.id != item.id
-    );
+    this.services.onDeleteVehicle("1").subscribe((res) => {
+      console.log(res)
+      if (res) {
+        this.getAllVehicle();
+      }
+    })
   }
 
   exportTable() {

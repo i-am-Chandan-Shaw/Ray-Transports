@@ -69,31 +69,33 @@ export class CustomerDashboardComponent implements OnInit, OnDestroy {
     this.showLoader = true;
     this.services.getAllCustomer().subscribe({
       next: (res) => {
-        this.allCustomerData = res;
-        this.searchedCustomerData = this.allCustomerData;
-        console.log(this.searchedCustomerData);
-        let count = 0;
+        if (res) {
+          this.allCustomerData = res;
+          this.searchedCustomerData = this.allCustomerData;
+          console.log(this.searchedCustomerData);
+          let count = 0;
 
-        // YouWillGive
-        for (let item of this.searchedCustomerData) {
-          if (item.amount != null && item.amount.includes('-')) {
-            // console.log('item=', item);
-            count = count + parseInt(item.amount);
+          // YouWillGive
+          for (let item of this.searchedCustomerData) {
+            if (item.amount != null && item.amount.includes('-')) {
+              // console.log('item=', item);
+              count = count + parseInt(item.amount);
+            }
+            // console.log('count',count)
           }
-          // console.log('count',count)
-        }
-        this.youWillGive = count;
+          this.youWillGive = count;
 
-        count = 0;
-        for (let item of this.searchedCustomerData) {
-          if (item.amount != null && !item.amount.includes('-')) {
-            //  console.log('item=', item);
-            count = count + parseInt(item.amount);
+          count = 0;
+          for (let item of this.searchedCustomerData) {
+            if (item.amount != null && !item.amount.includes('-')) {
+              //  console.log('item=', item);
+              count = count + parseInt(item.amount);
+            }
+            //  console.log('count', count);
           }
-          //  console.log('count', count);
+          this.youWillGet = count;
+          this.showLoader = false;
         }
-        this.youWillGet = count;
-        this.showLoader = false;
       },
       error: (err) => {
         console.log(err);
@@ -110,9 +112,11 @@ export class CustomerDashboardComponent implements OnInit, OnDestroy {
 
     this.services.filterCustomers(filter).subscribe({
       next: (res) => {
-        this.allCustomerData = res;
-        this.searchedCustomerData = this.allCustomerData;
-        this.showLoader = false;
+        if (res) {
+          this.allCustomerData = res;
+          this.searchedCustomerData = this.allCustomerData;
+          this.showLoader = false;
+        }
       },
       error: (err) => {
         console.log(err);
@@ -124,9 +128,11 @@ export class CustomerDashboardComponent implements OnInit, OnDestroy {
     this.showLoader = true;
     this.services.sortCustomer(filter.value).subscribe({
       next: (res) => {
-        this.allCustomerData = res;
-        this.searchedCustomerData = this.allCustomerData;
-        this.showLoader = false;
+        if (res) {
+          this.allCustomerData = res;
+          this.searchedCustomerData = this.allCustomerData;
+          this.showLoader = false;
+        }
       },
       error: (err) => {
         console.log(err);
@@ -153,7 +159,9 @@ export class CustomerDashboardComponent implements OnInit, OnDestroy {
             this.services.addVehicleToCustomer(resOfPostCustomer).subscribe({
               next: (res) => {
                 console.log(res);
-                this.initialApiCalls();
+                if (res) {
+                  this.initialApiCalls();
+                }
               },
               error: (err) => {
                 console.log(err);
@@ -186,12 +194,14 @@ export class CustomerDashboardComponent implements OnInit, OnDestroy {
 
   getVehicle() {
     this.services.filterVehicle('2').subscribe((res) => {
-      for (let item of res) {
-        this.vehicleNumberOptions.push({
-          id: item?.id,
-          displayName: item?.vehicleNumber,
-          value: item?.id,
-        });
+      if (res) {
+        for (let item of res) {
+          this.vehicleNumberOptions.push({
+            id: item?.id,
+            displayName: item?.vehicleNumber,
+            value: item?.id,
+          });
+        }
       }
     });
   }
