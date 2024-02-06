@@ -27,8 +27,8 @@ export class CustomerDashboardComponent implements OnInit, OnDestroy {
   selectMultipleValue: boolean = false;
   public myMath = Math;
   searchedCustomerData: any = null;
-  youWillGet: any;
-  youWillGive: any;
+  received: any;
+  due: any;
   vehicleNumberOptions: any = [];
   showLoader: boolean = false;
   private subscriptions: Subscription[] = [];
@@ -75,7 +75,7 @@ export class CustomerDashboardComponent implements OnInit, OnDestroy {
           console.log(this.searchedCustomerData);
           let count = 0;
 
-          // YouWillGive
+          // due
           for (let item of this.searchedCustomerData) {
             if (item.amount != null && item.amount.includes('-')) {
               // console.log('item=', item);
@@ -83,7 +83,7 @@ export class CustomerDashboardComponent implements OnInit, OnDestroy {
             }
             // console.log('count',count)
           }
-          this.youWillGive = count;
+          this.due = count;
 
           count = 0;
           for (let item of this.searchedCustomerData) {
@@ -93,7 +93,7 @@ export class CustomerDashboardComponent implements OnInit, OnDestroy {
             }
             //  console.log('count', count);
           }
-          this.youWillGet = count;
+          this.received = count;
           this.showLoader = false;
         }
       },
