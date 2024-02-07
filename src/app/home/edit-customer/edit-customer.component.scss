@@ -1,104 +1,139 @@
 .edit-customer-wrapper {
-    .header{
-        height: 64px;
-    }
-    .header-text{
-        font-size: var(--fnt-large);
-        font-weight: var(--fnt-semibold);
-    }
-    .close-sidenav{
-      font-size: 25px;
-      font-weight: var(--fnt-bold);
-      color: var(--stroked-color);
-      cursor: pointer;
-    }
-    .close-sidenav:hover{
-      color: var(--fnt-secondary-color);
-      
-    }
-  form{
-    height: calc(100% - 67px);
-    .container {
-      font-size: var(--fnt-medium);
-      color: #000;
-      height: calc(100% - 85px);
-      .custom{
-        margin-bottom: 25px;
-      }
-    }
+  .header {
+    height: 64px;
   }
-    .party-btn {
+
+  .header-text {
+    font-size: var(--fnt-large);
+    font-weight: var(--fnt-semibold);
+  }
+
+  .close-sidenav {
+    font-size: 25px;
+    font-weight: var(--fnt-bold);
+    color: var(--stroked-color);
+    cursor: pointer;
+  }
+
+  .close-sidenav:hover {
+    color: var(--fnt-secondary-color);
+
+  }
+
+  .form {
+    height: 400px;
+
+    .input-form-container {
+      padding: 15px;
+      // margin-top: 10px;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-    
-  
-      button {
-        width: 48%;
-        color: #fff;
+      flex-direction: column;
+
+      .input-fields {
+        display: flex;
+        flex-direction: column;
+        // margin-bottom: 10px;
+        height: 65px;
+
+        label {
+          margin-bottom: 10px;
+        }
       }
-  
-      .reset {
-        background-color: var(--btn-secondary);
-        color: #000000;
+
+      .w97p {
+        width: 97% !important;
       }
-  
-      ::ng-deep .success {
-        background: var(--success-color);
-        color: #fff;
+
+
+      .mr0 {
+        margin-right: 0;
+      }
+
+
+      mat-icon {
+        cursor: pointer;
       }
     }
   }
 
-  .invalid{
-    font-size: var(--fnt-small);
-    color:red;
-    float:right;
-    margin-top: -5px;
+  .party-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+
+    button {
+      width: 48%;
+      color: #fff;
+    }
+
+    .reset {
+      background-color: var(--btn-secondary);
+      color: #000000;
+    }
+
+    ::ng-deep .success {
+      background: var(--success-color);
+      color: #fff;
+    }
+  }
+}
+
+.invalid {
+  font-size: var(--fnt-small);
+  color: red;
+  float: right;
+  margin-top: -5px;
+}
+
+:host {
+  .custom-input-field {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    justify-content: start;
+    border-radius: 5px;
+    padding: 4px 8px;
+    border: 1px solid rgba($color: #000000, $alpha: 0.38);
+    background-color: #fff;
+    height: 22px;
+    margin: 8px 0;
+
+    input {
+      border: 0;
+      outline: 0;
+      font-size: var(--fnt-regular);
+      padding-left: 6px;
+      width: 100%;
+    }
+
+    input::placeholder {
+      opacity: 0.5;
+      font-weight: var(--fnt);
+    }
+
+    input:focus {
+      border-color: #3f51b5;
+    }
   }
 
-  :host {
-    .custom-input-field {
-      display: flex;
-      align-items: center;
-      flex-direction: row-reverse;
-      justify-content: start;
-      border-radius: 5px;
-      padding: 4px 8px;
-      border: 1px solid rgba($color: #000000, $alpha: 0.38);
-      background-color: #fff;
-      height: 22px;
-      margin: 8px 0;
-  
-      input {
-        border: 0;
-        outline: 0;
-        font-size: var(--fnt-regular);
-        padding-left: 6px;
-        width: 100%;
-      }
-  
-      input::placeholder {
-        opacity: 0.5;
-        font-weight: var(--fnt);
-      }
-  
-      input:focus {
-        border-color: #3f51b5;
-      }
-    }
-    .custom-input-field.autocomplete{
-      padding: 4px 0;
-    }
-  
+  .custom-input-field.autocomplete {
+    padding: 4px 0;
   }
 
-  :host {
-    ::ng-deep .mat-drawer.mat-drawer-end {
-      width: 60%;
-    }
+}
+
+:host {
+  ::ng-deep .mat-drawer.mat-drawer-end {
+    width: 60%;
   }
-  
-  ::ng-deep .cdk-overlay-pane:not(.mat-mdc-autocomplete-panel-above) .mdc-menu-surface.mat-mdc-autocomplete-panel.height-of-auocomplete {
-    max-height: 100%;
-  }
+}
+
+::ng-deep .cdk-overlay-pane:not(.mat-mdc-autocomplete-panel-above) .mdc-menu-surface.mat-mdc-autocomplete-panel.height-of-auocomplete {
+  max-height: 100%;
+}
+
+::ng-deep .mat-mdc-form-field-error-wrapper {
+  padding: 0 !important;
+  text-align: right !important;
+}
