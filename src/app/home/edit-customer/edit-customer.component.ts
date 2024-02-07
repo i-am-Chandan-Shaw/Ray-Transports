@@ -6,17 +6,11 @@ import {
   OnInit,
   Output,
   SimpleChanges,
-  ViewChild,
 } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable, map, startWith } from 'rxjs';
 import { In_options } from 'src/app/shared/interface/In_options';
 import { SharedService } from 'src/app/shared/sevices/shared.service';
-import { locality } from 'src/app/shared/utils/filter-utils';
 @Component({
   selector: 'app-edit-customer',
   templateUrl: './edit-customer.component.html',
@@ -24,78 +18,99 @@ import { locality } from 'src/app/shared/utils/filter-utils';
 })
 export class EditCustomerComponent implements OnInit, OnChanges {
   @Input('customerDetails') customerDetails?: any;
-
   @Output('closeEditNav') closeEditNav = new EventEmitter<boolean>();
   @Output('detailsUpdated') detailsUpdated = new EventEmitter<any>();
 
-  checkAutoCompleteValue!: boolean;
+  filteredOptions: Observable<string[]> | undefined;
+  editForm!: FormGroup;
 
-  editForm = this.fb.group({
-    customerName: ['', Validators.required],
-    phoneNo: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
-    address: ['', Validators.required],
-  });
+  options: string[] = [
+    'Shibpur',
+    'Esplanade',
+    'Sarkar Bazar',
+    'Salkia',
+    'central',
+  ];
 
-  public options: In_options[] = locality;
-  public selectedOption?: In_options;
-  public customerDetailsCopy!: any;
-  providedOption:any
-
-  constructor(private services: SharedService, private fb: FormBuilder) {}
-  ngOnInit(): void {
-    this.providedOption = this.options.filter(item=>item?.displayName.toLocaleLowerCase() == this.customerDetails?.address.toLocaleLowerCase())
-    if (this.editForm.value && this.editForm.value.address) {
-      this.checkAutoCompleteValue = true;
-    }
-  }
-
-  onSelectedOption(option: In_options) {
-    this.editForm.patchValue({ address: option.displayName });
-    // console.log('editForm',this.editForm.value);
+  constructor(private services: SharedService, private fb: FormBuilder) {
+    this.initializeEditForm();
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['customerDetails'].currentValue != undefined) {
       if (changes['customerDetails'].currentValue) {
-        this.customerDetailsCopy = JSON.parse(
-          JSON.stringify(this.customerDetails)
-        );
+        console.log(this.customerDetails);
         this.editForm.patchValue({
-          customerName: this.customerDetailsCopy.name,
-          phoneNo: this.customerDetailsCopy.phone,
-          address: this.customerDetailsCopy.address,
+          ...this.customerDetails,
         });
       }
     }
   }
-  autoCompleteOutputValue(e: any) {
-    // this.checkAutoCompleteValue = e
-    if (this.editForm.value && this.editForm.value.address !== '') {
-      this.checkAutoCompleteValue = false;
-    }
-    for (let option of this.options) {
-      let temp = option.value?.toLowerCase();
-      let tempInput = e.value?.toLowerCase();
-      if (temp == tempInput) {
-        this.checkAutoCompleteValue = true;
-        break;
-      } else {
-        this.checkAutoCompleteValue = false;
-      }
-    }
+
+  ngOnInit(): void {
+    console.log(this.customerDetails);
+
+    this.filteredOptions = this.editForm.get('address')?.valueChanges.pipe(
+      startWith(''),
+      map((value) => this._filteraddress(value || ''))
+    );
+  }
+  
+  initializeEditForm() {
+    this.editForm = this.fb.group({
+      picture: [
+        this.customerDetails?.picture ? this.customerDetails?.picture : '',
+      ],
+      name: [
+        this.customerDetails?.name ? this.customerDetails?.name : '',
+        [Validators.required, Validators.pattern(/^[a-zA-Z ]{2,30}$/)],
+      ],
+      address: [
+        this.customerDetails?.address ? this.customerDetails?.address : '',
+        Validators.required,
+      ],
+      phone: [
+        this.customerDetails?.phone ? this.customerDetails?.phone : '',
+        [
+          Validators.min(1000000000),
+          Validators.max(9999999999),
+          Validators.pattern('^[0-9]*$'),
+        ],
+      ],
+      aadharNumber: [
+        this.customerDetails?.aadhar ? this.customerDetails?.aadhar : '',
+      ],
+    });
+  }
+
+  private _filteraddress(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter((option: any) =>
+      option.toLowerCase().includes(filterValue)
+    );
+  }
+
+  get gf() {
+    return this.editForm.controls;
+  }
+
+
+  profilePic(e: any) {
+    this.gf['picture'].patchValue(e);
   }
 
   public updateCustomer() {
-    this.customerDetailsCopy.name = this.editForm.value.customerName;
-    this.customerDetailsCopy.address = this.editForm.value.address;
-    this.customerDetailsCopy.phone = this.editForm.value.phoneNo;
+    console.log(this.editForm.value);
 
     this.services
-      .updateCustomer(this.customerDetailsCopy, this.customerDetails.id)
+      .updateCustomer(this.editForm.value, this.customerDetails.id)
       .subscribe({
         next: (res) => {
-          this.detailsUpdated.emit(this.customerDetailsCopy);
-          this.closeEditNav.emit(true);
+          if (res) {
+            this.detailsUpdated.emit(this.editForm.value);
+            this.closeSideNav();
+          }
         },
         error: (err) => {
           console.log(err);
@@ -107,12 +122,7 @@ export class EditCustomerComponent implements OnInit, OnChanges {
     this.closeEditNav.emit(true);
   }
 
-  onResetForm(){
-    
-    this.editForm.reset()
-    this.customerDetails = null
-    this.ngOnInit()
+  onResetForm() {
+    this.editForm.reset();
   }
 }
-
-

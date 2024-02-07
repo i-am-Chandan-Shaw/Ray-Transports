@@ -1,39 +1,136 @@
 <div class="edit-customer-wrapper">
-    <div class="header align-center pl20 pr20">
-        <span class="close-sidenav" (click)="closeSideNav()">&lt;</span>
-        <div class="header-text ml15">Edit Customer Details</div>
-    </div>
-    <mat-divider></mat-divider>
-    <form [formGroup]="editForm">
-        <div class="container p20">
-            <div class="custom party-name">
-                <label for="name">Customer Name</label>
-                <div class="custom-input-field " >
-                    <input type="text"  name="name" placeholder="Enter Name" formControlName="customerName" >
-                </div>
-                <span class="invalid" *ngIf="editForm.get('customerName')?.errors && editForm.get('customerName')?.touched">**Please provide customer name</span>
-                
-            </div>
-            <div class="custom phone-no">
-                <label for="phone">Phone No</label>
-                <div class="custom-input-field">
-                    <input  type="number" name="phoneNo" formControlName="phoneNo"  placeholder="Enter Phone No" >
-                </div>
-                <span class="invalid" *ngIf="editForm.get('phoneNo')?.errors && editForm.get('phoneNo')?.touched">**Please provide Phone Number</span>
-            </div>
-
-            <div class="custom locality">
-                <label for="">Locality</label>
-                <!-- <input style="display: none;" type="text" value="selectedOption?.displayName"> -->
-                <app-auto-complete class="custom-input-field autocomplete" [providedOption]="this.providedOption[0]?this.providedOption[0]:[]"  [options]="options"
-                    (selectedOptions)="onSelectedOption($event)" (inputValue)="autoCompleteOutputValue($event)" [placeholder]="'Locality Name'" ></app-auto-complete>
-                    <span class="invalid" *ngIf="!checkAutoCompleteValue" >**Please provide Locality Name from the options</span>
-            </div>
+  <div class="header align-center pl20 pr20">
+    <span class="close-sidenav" (click)="closeSideNav()">&lt;</span>
+    <div class="header-text ml15">Edit Customer Details</div>
+  </div>
+  <div class="d-flex justify-center mt10 mb10">
+    <app-profile (selectedProfilePicture)="profilePic($event)"></app-profile>
+  </div>
+  <mat-divider></mat-divider>
+  <form [formGroup]="editForm">
+    <perfect-scrollbar class="form">
+      <div class="input-form-container">
+        <div class="input-fields">
+          <!-- <label for="firstName">Name: </label> -->
+          <mat-form-field appearance="outline" class="mr10">
+            <input
+              matInput
+              name="firstName"
+              formControlName="name"
+              autocomplete="off"
+              placeholder="Name*"
+            />
+            <mat-error
+              *ngIf="gf['name'].hasError('pattern') && gf['name'].value"
+            >
+              Name should not contain numbers or special characters.
+            </mat-error>
+            <mat-error *ngIf="gf['name'].hasError('minlength')">
+              Name should be greater than 1 character.
+            </mat-error>
+            <mat-error
+              *ngIf="gf['name'].touched && gf['name'].hasError('required')"
+            >
+              You must enter a value.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="input-fields">
+          <!-- <label for="firstName">Aadhar Number: </label> -->
+          <mat-form-field appearance="outline" class="mr10">
+            <input
+              matInput
+              name="aadharNumber"
+              formControlName="aadharNumber"
+              autocomplete="off"
+              placeholder="Aadhar Number"
+              minlength="12"
+              maxlength="12"
+            />
+            <mat-error *ngIf="gf['aadharNumber'].hasError('minlength')">
+              Aadhar should be of 12 digits.
+            </mat-error>
+            <mat-error *ngIf="gf['aadharNumber'].hasError('required')">
+              You must enter a value.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="input-fields">
+          <mat-form-field appearance="outline" class="mr10">
+            <input
+              matInput
+              name="address"
+              formControlName="address"
+              placeholder="address*"
+              [matAutocomplete]="address"
+            />
+            <mat-error *ngIf="gf['address'].hasError('pattern')">
+              Not a valid Locality name
+            </mat-error>
+            <mat-error *ngIf="gf['address'].touched && !gf['address'].value">
+              Locality is required
+            </mat-error>
+          </mat-form-field>
+          <mat-autocomplete #address="matAutocomplete">
+            <perfect-scrollbar>
+              <mat-option
+                *ngFor="let option of filteredOptions | async"
+                [value]="option"
+              >
+                {{ option }}
+              </mat-option>
+            </perfect-scrollbar>
+          </mat-autocomplete>
+        </div>
+        <div class="input-fields">
+          <!-- <label for="phoneNo">Phone: </label> -->
+          <mat-form-field class="w97p" appearance="outline">
+            <input
+              matInput
+              #input
+              name="phoneNo"
+              minlength="10"
+              maxlength="10"
+              autocomplete="off"
+              placeholder="Phone"
+              formControlName="phone"
+            />
+            <mat-error *ngIf="gf['phone'].hasError('required')">
+              Phone Number is important.
+            </mat-error>
+            <mat-error
+              *ngIf="
+                gf['phone'].hasError('min') && !gf['phone'].hasError('pattern')
+              "
+            >
+              Phone number should be at least 10 characters.
+            </mat-error>
+            <mat-error *ngIf="gf['phone'].hasError('max')">
+              Phone number should not exceed 10 characters.
+            </mat-error>
+            <mat-error *ngIf="gf['phone'].hasError('pattern')">
+              Phone number should contain only numbers.
+            </mat-error>
+          </mat-form-field>
         </div>
         <div class="party-btn pl20 pr20">
-            <button mat-raised-button color="primary" [disabled]="editForm.invalid || !checkAutoCompleteValue" (click)="updateCustomer()">Update</button>
-            <button mat-raised-button class="success reset" (click)="onResetForm()">Reset</button>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="updateCustomer()"
+            [disabled]="editForm.invalid"
+          >
+            Update
+          </button>
+          <button
+            mat-raised-button
+            class="success reset"
+            (click)="onResetForm()"
+          >
+            Reset
+          </button>
         </div>
-
-    </form>
+      </div>
+    </perfect-scrollbar>
+  </form>
 </div>
