@@ -4,7 +4,7 @@
     <div class="header-text ml15">Edit Customer Details</div>
   </div>
   <div class="d-flex justify-center mt10 mb10">
-    <app-profile (selectedProfilePicture)="profilePic($event)"></app-profile>
+    <app-profile [profilePic]="gf['picture'].value" (selectedProfilePicture)="profilePic($event)"></app-profile>
   </div>
   <mat-divider></mat-divider>
   <form [formGroup]="editForm">

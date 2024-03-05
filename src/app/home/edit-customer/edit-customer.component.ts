@@ -103,8 +103,13 @@ export class EditCustomerComponent implements OnInit, OnChanges {
   public updateCustomer() {
     console.log(this.editForm.value);
 
+    let payload = {
+      ...this.editForm.value,
+      id: parseInt(this.customerDetails.id)
+    }
+
     this.services
-      .updateCustomer(this.editForm.value, this.customerDetails.id)
+      .updateCustomer(payload)
       .subscribe({
         next: (res) => {
           if (res) {

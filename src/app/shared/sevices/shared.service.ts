@@ -131,8 +131,8 @@ export class SharedService {
     return this.http.post(api, payload);
   }
 
-  public updateCustomer(payload: any, id: number) {
-    const api = this.apiString + `updateCustomer.php?id=` + id;
+  public updateCustomer(payload: any) {
+    const api = this.apiString + `updateCustomer.php`;
     return this.http.patch(api, payload);
   }
 
