@@ -1,19 +1,25 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit, OnChanges {
   @Input() profilePic!: string
   @Output() selectedProfilePicture: EventEmitter<string> = new EventEmitter<string>();
 
   profileImage: any;
-  constructor() {}
+  constructor() { }
+  
   ngOnInit() {
     this.profileImage = this.profilePic
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['profilePic']) {
+      this.profileImage = this.profilePic;
+    }
   }
 
   onSubmit() {}
