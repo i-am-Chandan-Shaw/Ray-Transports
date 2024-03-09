@@ -2,100 +2,155 @@
   <mat-toolbar class="space-between">
     <span class="header-text">Transactions Dashboard</span>
     <div class="download-btn">
-      <button class="report-btn" mat-stroked-button color="primary" (click)="exportTable()">
+      <button
+        class="report-btn"
+        mat-stroked-button
+        color="primary"
+        (click)="exportTable()"
+      >
         <span>Report</span><mat-icon>download</mat-icon>
       </button>
     </div>
   </mat-toolbar>
   <mat-divider></mat-divider>
   <div class="fliter mb15">
-    <div class="dropdown align-center">
+    <div class="dropdown align-center mr10">
       <label for="">User</label>
-      <app-auto-complete (inputValue)="autoCompleteInputValue($event)"
-        (selectedOptions)="onSelectUserInputValue($event)" [options]="userList"
-        [placeholder]="'Customer Name'"></app-auto-complete>
+      <app-auto-complete
+        (inputValue)="autoCompleteInputValue($event)"
+        (selectedOptions)="onSelectUserInputValue($event)"
+        [options]="userList"
+        [placeholder]="'Customer Name'"
+      ></app-auto-complete>
     </div>
-    <div class="dropdown align-center">
+    <!-- <div class="dropdown align-center">
       <label for="">Filter By</label>
       <app-dropdown-component [placeholder]="'Filter By'" [optionList]="filterList" (valueSelected)="selectedFilterBy($event)"></app-dropdown-component>
-    </div>
+    </div> -->
 
-    <div class="dropdown align-center">
+    <!-- <div class="dropdown align-center">
       <label for="">Added By</label>
       <app-dropdown-component [selectMultipleValue]="true" [placeholder]="'Added By'"
         [optionList]="addedBy" (sendMultipleValue)="selectedMultipleValue($event)"></app-dropdown-component>
-    </div>
+    </div> -->
 
-    <div class="dropdown align-center">
+    <div class="dropdown align-center mr10">
       <label>Period</label>
-      <app-dropdown-component [optionList]="periodList"
-        (valueSelected)="selectedPeriod($event)"></app-dropdown-component>
+      <app-dropdown-component
+        [optionList]="periodList"
+        (valueSelected)="selectedPeriod($event)"
+      ></app-dropdown-component>
     </div>
 
-    <div class="dropdown align-center date" [ngStyle]="enableCalender?{'visibility': 'visible'}:{'visibility': 'hidden'}">
+    <div
+      class="dropdown align-center date"
+      [ngStyle]="
+        enableCalender ? { visibility: 'visible' } : { visibility: 'hidden' }
+      "
+    >
       <label for="">Start/End Date</label>
       <mat-form-field class="datepicker">
         <mat-date-range-input [rangePicker]="picker">
-          <input matStartDate placeholder="MM/DD/YYYY" (dateChange)="selectedStartDate($event)">
-          <input matEndDate placeholder="MM/DD/YYYY" (dateChange)="selectedEndDate($event)">
+          <input
+            matStartDate
+            placeholder="MM/DD/YYYY"
+            (dateChange)="selectedStartDate($event)"
+          />
+          <input
+            matEndDate
+            placeholder="MM/DD/YYYY"
+            (dateChange)="selectedEndDate($event)"
+          />
         </mat-date-range-input>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
       </mat-form-field>
     </div>
-
   </div>
-  <div class="transaction-table">
-    <div class="customer-table simple-table">
-      <div class="main-table" id="transaction-table">
-        <table class="table-header">
-          <thead class="border-left">
-            <tr>
-              <th class="w5p text-left">Date</th>
-              <th class="w8p text-left">Customer Name</th>
-              <th class="w10p text-left">Description</th>
-              <th class="w7p text-left">Added By</th>
-              <th class="text-center w4p">Due</th>
-              <th class="text-center w4p">Received</th>
-              <th class="w4p text-right">Options</th>
-            </tr>
-          </thead>
-        </table>
-        <perfect-scrollbar class="table-body">
-          <table *ngIf="!showLoader">
-            <tbody>
-              <tr *ngFor="let item of transactionDetails">
-                <td class="w5p text-left">{{ item.date }}</td>
-                <td class="w8p text-left">{{ item.customerName }}</td>
-                <td class="w10p text-left">{{ item.description }}</td>
-                <td class="w7p text-left">{{ item.addedBy }}</td>
-                <td class="w4p text-center amount-gave">
-                  {{ item.amount < 0 ? myMath.abs(item.amount) : "-" }} </td>
-                <td class="w4p text-center amount-got">
-                  {{ item.amount > 0 ? item.amount : "-" }}
-                </td>
-                <td class="w4p text-right">
-                  <div class="show-on-hover">
-                    <mat-icon class="icon-16 mr10" [autoPlacement]="true" tooltip="Edit transaction" [theme]="'light'"
-                      placement="top" (click)="openEditTransactionDialog(item)">edit</mat-icon>
-                    <mat-icon class="icon-16" [autoPlacement]="true" tooltip="Delete transaction" [theme]="'light'"
-                      placement="top" (click)="openDeleteTransactionDialog(item)">delete</mat-icon>
-                  </div>
-                </td>
+  <mat-divider></mat-divider>
+  <perfect-scrollbar class="perfect-scrollbar">
+    <div class="transaction-table">
+      <div class="customer-table simple-table">
+        <div class="main-table" id="transaction-table">
+          <table class="table-header">
+            <thead class="border-left">
+              <tr>
+                <th class="w5p text-left">Date</th>
+                <th class="w8p text-left">Customer Name</th>
+                <th class="w10p text-left">Description</th>
+                <th class="w7p text-left">Added By</th>
+                <th class="text-center w4p">Due</th>
+                <th class="text-center w4p">Received</th>
+                <th class="w4p text-right">Options</th>
               </tr>
-            </tbody>
+            </thead>
           </table>
-          <ngx-skeleton-loader *ngIf="showLoader" count="8" appearance="line" [theme]="{ 
-            'height': '30px',
-            'width':'100%',
-            'margin':'0'
-          }"></ngx-skeleton-loader>
-        </perfect-scrollbar>
-        <mat-paginator *ngIf="transactionDetails.length" #paginator class="demo-paginator"
-          (page)="handlePageEvent($event)" [length]="this.totalLength" [pageSize]="pageSize"
-          [showFirstLastButtons]="false" aria-label="Select page">
-        </mat-paginator>
+          <perfect-scrollbar class="table-body">
+            <table *ngIf="!showLoader">
+              <tbody>
+                <tr *ngFor="let item of transactionDetails">
+                  <td class="w5p text-left">{{ item.date }}</td>
+                  <td class="w8p text-left">{{ item.customerName }}</td>
+                  <td class="w10p text-left">{{ item.description }}</td>
+                  <td class="w7p text-left">{{ item.addedBy }}</td>
+                  <td class="w4p text-center amount-gave">
+                    {{ item.amount < 0 ? myMath.abs(item.amount) : "-" }}
+                  </td>
+                  <td class="w4p text-center amount-got">
+                    {{ item.amount > 0 ? item.amount : "-" }}
+                  </td>
+                  <td class="w4p text-right">
+                    <div class="show-on-hover">
+                      <mat-icon
+                        class="icon-16 mr10"
+                        [autoPlacement]="true"
+                        tooltip="Edit transaction"
+                        [theme]="'light'"
+                        placement="top"
+                        (click)="openEditTransactionDialog(item)"
+                        >edit</mat-icon
+                      >
+                      <mat-icon
+                        class="icon-16"
+                        [autoPlacement]="true"
+                        tooltip="Delete transaction"
+                        [theme]="'light'"
+                        placement="top"
+                        (click)="openDeleteTransactionDialog(item)"
+                        >delete</mat-icon
+                      >
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <ngx-skeleton-loader
+              *ngIf="showLoader"
+              count="8"
+              appearance="line"
+              [theme]="{
+                height: '30px',
+                width: '100%',
+                margin: '0'
+              }"
+            ></ngx-skeleton-loader>
+          </perfect-scrollbar>
+          <mat-paginator
+            *ngIf="transactionDetails.length"
+            #paginator
+            class="demo-paginator"
+            (page)="handlePageEvent($event)"
+            [length]="this.totalLength"
+            [pageSize]="pageSize"
+            [showFirstLastButtons]="false"
+            aria-label="Select page"
+          >
+          </mat-paginator>
+        </div>
       </div>
     </div>
-  </div>
+  </perfect-scrollbar>
 </div>
