@@ -85,5 +85,9 @@
       height: 31px;
       width: 100%;
     }
+    ::ng-deep mat-form-field.mat-form-field-disabled{
+      background-color: rgba(0,0,0,0.12) !important;
+      border-radius: 5px !important;
+    }
   }
   

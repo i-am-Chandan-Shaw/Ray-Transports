@@ -26,7 +26,7 @@
                 <label for="phoneNo">Vehicle Number</label>
                 <mat-form-field class="w97p" appearance="outline">
                     <input matInput formControlName="vehicleNo"  name="vehicleNo" autocomplete="off"
-                        placeholder="Enter Vehicle Number.">
+                        placeholder="Enter Vehicle Number." oninput="this.value = this.value.toUpperCase()">
                     <mat-error *ngIf="vehicleNo.invalid">**Vehicle Number Required</mat-error>
                 </mat-form-field>
             </div>
