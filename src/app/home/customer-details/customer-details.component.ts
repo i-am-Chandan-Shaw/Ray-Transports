@@ -168,8 +168,7 @@ export class CustomerDetailsComponent {
 
   onChangeInput(e: any) {
     console.log(e);
-
-    this.gf['vehicleId'].patchValue(e);
+    if(e == "") this.gf['vehicleId'].patchValue(e);
   }
   onDeleteCustomer(customerId: any) {
     this.services.onDeleteCustomer(customerId).subscribe((res) => {});

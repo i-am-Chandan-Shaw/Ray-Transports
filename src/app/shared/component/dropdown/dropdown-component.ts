@@ -24,7 +24,8 @@ export class DropdownComponent {
     }
 
     let stringValueArray = temp.map((t) => t.toString());
-
-    this.sendMultipleValue.emit(stringValueArray);
+    if (stringValueArray.length) {
+      this.sendMultipleValue.emit(stringValueArray);
+    }
   }
 }

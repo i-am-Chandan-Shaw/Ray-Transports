@@ -145,11 +145,7 @@
                   <button
                     class="btn-primary mr10"
                     style="width: 80px"
-                    [ngStyle]="
-                    vehicleForm.invalid
-                      ? { opacity: '0.5'}
-                      : {}
-                  "
+                    [ngStyle]="vehicleForm.invalid ? { opacity: '0.5' } : {}"
                     [disabled]="vehicleForm.invalid"
                     (click)="onAddVehicleToCustomer()"
                   >
@@ -191,11 +187,9 @@
                                                         R.M"
                           }}</span>
                         </div>
-                        <div class="amount">
+                        <div class="amount" *ngIf="item.balance">
                           Balance:
-                          <span class="balance">{{
-                            item.balance ? item.balance : "200"
-                          }}</span>
+                          <span class="balance">{{ item.balance }}</span>
                         </div>
                       </div>
                       <div class="transaction-details">
